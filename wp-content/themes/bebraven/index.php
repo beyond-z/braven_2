@@ -36,18 +36,20 @@ get_header(); ?>
 			if ( $home_query->have_posts() ) {
 				while ( $home_query->have_posts() ) {
 					$home_query->the_post();
+					$component_format = (wp_get_post_terms($post->ID, 'format')) ? wp_get_post_terms($post->ID, 'format')[0]->slug : '';
 					?>
-					
-					<?php 
-					$format = (wp_get_post_terms($post->ID, 'format')) ? wp_get_post_terms($post->ID, 'format')[0]->slug : '';
-					echo $format;
-					?>
-					
-					<?php if (has_post_thumbnail()) the_post_thumbnail('headshot'); ?>
-					<h2><?php the_title(); ?></h2>
-					<?php the_content(); ?>
-					
-					
+					<section class="component <?php echo $post->post_name . ' ' . $component_format;?>">
+						<?php 
+						if (has_post_thumbnail()) {
+							$thumbsize = ('half-left' == $component_format || 'half-right' == $component_format) ? 'half' : $component_format;
+							the_post_thumbnail($thumbsize);
+						}
+						?>
+						<div class="component-content">
+							<h2 class="component-heading"><?php the_title(); ?></h2>
+							<?php the_content(); ?>
+						</div>
+					</section>
 					<?php 
 				}
 				/* Restore original Post Data */

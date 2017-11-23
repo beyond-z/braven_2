@@ -44,9 +44,9 @@ function bz_setup() {
 	 */
 	add_theme_support( 'post-thumbnails' );
 
-	add_image_size( 'bz-featured-image', 2000, 1200, true );
-	add_image_size( 'story', 1000, 1000, true );
-	add_image_size( 'headshot', 372, 330, true );
+	add_image_size( 'marquee', 2000, 1200, true );
+	add_image_size( 'half', 1000, 1000, true );
+	add_image_size( 'headshot', 400, 400, true );
 
 	// Set the default content width.
 
@@ -265,10 +265,12 @@ function bz_get_id_by_slug($page_slug) {
 } 
 
 /**
- * Add a custom formats selector, e.g. for the different home page components:
+ * Add a custom formats selector, e.g. for the different home page components
+ * and populate some initial values.
+ * Then convert the dashboard UI from checklist to radiobutton.
  */
 
-// create a new taxonomy called 'format'
+// create and register a new taxonomy called 'format'
 function bz_define_custom_post_formats_taxonomies() {
 	// Add new taxonomy, make it hierarchical (like categories)
 	$labels = array(
@@ -282,7 +284,7 @@ function bz_define_custom_post_formats_taxonomies() {
 		'update_item'       => __( 'Update Format', 'bz' ),
 		'add_new_item'      => __( 'Add New Format', 'bz' ),
 		'new_item_name'     => __( 'New Format Name', 'bz' ),
-		'menu_name'         => __( 'Format', 'bz' ),
+		'menu_name'         => __( 'Formats', 'bz' ),
 	);
 
 	$args = array(
@@ -352,4 +354,188 @@ function bz_convert_formats_taxonomy_to_radio_checklist( $args ) {
     return $args;
 }
 
+/**
+ * Add a taxonomy for bio types, e.g. board member, team member, etc.
+ * and populate some initial values
+ */
+
+// Create and register a new taxonomy called 'biotype':
+function bz_define_biotypes() {
+	$labels = array(
+		'name'              => _x( 'Bio Types', 'taxonomy general name', 'bz' ),
+		'singular_name'     => _x( 'Bio Type', 'taxonomy singular name', 'bz' ),
+		'search_items'      => __( 'Search Bio Types', 'bz' ),
+		'all_items'         => __( 'All Bio Types', 'bz' ),
+		'parent_item'       => __( 'Parent Item', 'bz' ),
+		'parent_item_colon' => __( 'Parent Item:', 'bz' ),
+		'edit_item'         => __( 'Edit Bio Type', 'bz' ),
+		'update_item'       => __( 'Update Bio Type', 'bz' ),
+		'add_new_item'      => __( 'Add New Bio Type', 'bz' ),
+		'new_item_name'     => __( 'New Bio Type Name', 'bz' ),
+		'menu_name'         => __( 'Bio Types', 'bz' ),
+	);
+
+	$args = array(
+		'hierarchical'      => false,
+		'labels'            => $labels,
+		'show_ui'           => true,
+		'show_admin_column' => true,
+		'query_var'         => true,
+		'rewrite'           => array( 'slug' => 'biotype' ),
+		'public' 			=> true,
+		'show_in_nav_menus' => true,
+		'show_tagcloud' 	=> false,
+	);
+	register_taxonomy( 'biotype', array( 'bio' ), $args );
+}
+add_action( 'init', 'bz_define_biotypes', 0 );
+
+// programmatically create a few format terms
+	
+function bz_populate_biotypes() { 
+	$biotypes_to_create = array(
+		'board' => 'Board Member',
+		'staff' => 'Staff Member',
+		'fellow' => 'Featured Fellow',
+		'paf' => 'Featured PAF',
+		'volunteer' => 'Featured Volunteer'
+	);
+	foreach($biotypes_to_create as $slug => $title) {
+		wp_insert_term(
+			$title,
+			'biotype',
+			array(
+			  'description'	=> '',
+			  'slug' 		=> $slug
+			)
+		);
+	}
+}
+add_action( 'init', 'bz_populate_biotypes' );
+
 add_filter( 'wp_terms_checklist_args', 'bz_convert_formats_taxonomy_to_radio_checklist' );
+
+/**
+ * Generate custom post types
+ */
+ 
+// Bios - for team members, board members, fellows, etc.
+function bz_create_bio_cpt() {
+
+	$labels = array(
+		'name' => __( 'Bios', 'Post Type General Name', 'bz' ),
+		'singular_name' => __( 'Bio', 'Post Type Singular Name', 'bz' ),
+		'menu_name' => __( 'Bios', 'bz' ),
+		'name_admin_bar' => __( 'Bio', 'bz' ),
+		'archives' => __( 'Bio Archives', 'bz' ),
+		'attributes' => __( 'Bio Attributes', 'bz' ),
+		'parent_item_colon' => __( 'Parent Bio:', 'bz' ),
+		'all_items' => __( 'All Bios', 'bz' ),
+		'add_new_item' => __( 'Add New Bio', 'bz' ),
+		'add_new' => __( 'Add New', 'bz' ),
+		'new_item' => __( 'New Bio', 'bz' ),
+		'edit_item' => __( 'Edit Bio', 'bz' ),
+		'update_item' => __( 'Update Bio', 'bz' ),
+		'view_item' => __( 'View Bio', 'bz' ),
+		'view_items' => __( 'View Bios', 'bz' ),
+		'search_items' => __( 'Search Bio', 'bz' ),
+		'not_found' => __( 'Not found', 'bz' ),
+		'not_found_in_trash' => __( 'Not found in Trash', 'bz' ),
+		'featured_image' => __( 'Featured Image', 'bz' ),
+		'set_featured_image' => __( 'Set featured image', 'bz' ),
+		'remove_featured_image' => __( 'Remove featured image', 'bz' ),
+		'use_featured_image' => __( 'Use as featured image', 'bz' ),
+		'insert_into_item' => __( 'Insert into Bio', 'bz' ),
+		'uploaded_to_this_item' => __( 'Uploaded to this Bio', 'bz' ),
+		'items_list' => __( 'Bios list', 'bz' ),
+		'items_list_navigation' => __( 'Bios list navigation', 'bz' ),
+		'filter_items_list' => __( 'Filter Bios list', 'bz' ),
+	);
+	$args = array(
+		'label' => __( 'Bio', 'bz' ),
+		'description' => __( '', 'bz' ),
+		'labels' => $labels,
+		'menu_icon' => 'dashicons-admin-users',
+		'supports' => array('title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'page-attributes', 'custom-fields', ),
+		'taxonomies' => array('biotype', 'category', 'post_tag'),
+		'public' => true,
+		'show_ui' => true,
+		'show_in_menu' => true,
+		'menu_position' => 5,
+		'show_in_admin_bar' => true,
+		'show_in_nav_menus' => true,
+		'can_export' => true,
+		'has_archive' => true,
+		'hierarchical' => false,
+		'exclude_from_search' => false,
+		'show_in_rest' => true,
+		'publicly_queryable' => true,
+		'capability_type' => 'post',
+	);
+	register_post_type( 'bio', $args );
+
+}
+add_action( 'init', 'bz_create_bio_cpt', 0 );
+
+/**
+ * Make a shortcode that embeds bios lists into pages
+ */
+ 
+// Create Shortcode include-bios
+// Use the shortcode: [include-bios biotype="staff" category=""]
+function create_includebios_shortcode($atts) {
+	
+	// Attributes
+	$atts = shortcode_atts(
+		array(
+			'biotype' => 'staff',
+			'category' => '',
+		),
+		$atts,
+		'include-bios'
+	);
+	// Attributes in var
+	$biotype = $atts['biotype'];
+	$category = $atts['category'];
+	echo $biotype. ' ' . $category;
+	// Query Arguments
+	$args = array(
+		'post_type' => array('bio'),
+		'post_status' => array('publish'),
+		'posts_per_page' => -1, // no limit
+		'nopaging' => true,
+		'order' => 'ASC',
+		'orderby' => 'menu_order',
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'biotype',
+				'field' => 'slug',
+				'terms' => array($biotype),
+			),
+		),
+		//'category_name' => '$category',
+	);
+
+	// The Query
+	$bios = new WP_Query( $args );
+	// The Loop
+	if ( $bios->have_posts() ) { 
+		?>
+		<div class="mosaic bios <?php echo $biotype . ' ' . $category;?>">
+			<?php
+			while ( $bios->have_posts() ) {
+				$bios->the_post();
+				include 'single-bio.php';
+			}
+			?>
+		</div>
+		<?php
+	} else {
+		// None found
+	}
+	/* Restore original Post Data */
+	wp_reset_postdata();
+	
+	
+}
+add_shortcode( 'include-bios', 'create_includebios_shortcode' );

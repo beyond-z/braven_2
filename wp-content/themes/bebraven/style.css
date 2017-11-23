@@ -383,6 +383,7 @@ h4:first-child,
 h5:first-child,
 h6:first-child {
 	padding-top: 0;
+	margin-top: 0;
 }
 
 h1 {
@@ -1005,21 +1006,183 @@ body {
 	display: block;
 }
 
+.component {
+	position: relative;
+	overflow: hidden;
+	/* Prevent stupid Firefox from adding spaces between elements as if they were text: */
+	line-height: 0;
+}
+
+.component * {
+	line-height: 1.15;
+}
+
+.component img {
+	height: auto;
+}
+
+/*--------------------------------------------------------------
+13.1 Home Page
+--------------------------------------------------------------*/
+
+.marquee img {
+	width: 100%;
+}
+
+.marquee .component-content {
+	position: absolute;
+	bottom: 5vw;
+	left: 5vw;
+}
+
+.marquee .component-heading {
+	margin: 0;
+	color: #FFF;
+}
+
+.half-left,
+.half-right {
+	background: #f3f3f3;
+}
+
+.half-left img,
+.half-right img,
+.half-left .component-content,
+.half-right .component-content {
+	width: 50%;
+	height: ((100vw - 100%)/2);
+}
+
+.half-left .component-content,
+.half-right .component-content {
+	padding: 5vw;
+}
+
+.half-right img {
+	position: relative;
+	left: 50%;
+}
+
+.half-right .component-content {
+	position: absolute;
+	left: 0;
+	top: 0;
+	text-align: right;
+}
+
+.half-left .component-content {
+	float: right;
+}
+
+/*--------------------------------------------------------------
+13.2 Mosaics and bios
+--------------------------------------------------------------*/
+.mosaic {
+	margin-right: auto;
+	margin-left: auto;
+	position: relative;
+	text-align: center;
+}
+
+.mosaic-element {
+	position: relative;
+	display: inline-block;
+	margin: 2vw;
+}
+
+.bios {
+	width: 90%;
+}
+
+.bio {
+	width: 20vw;
+}
+
+.element-img {
+	width: 20vw;
+	height: 20vw;
+	overflow: hidden;
+	background: #F3F3F3;
+}
+
+.element-img img {
+	width: 100%;
+}
+
+.bio .element-content {
+	opacity: 0.03;
+	padding: 2vw;
+	text-align: left;
+	position: absolute;
+	overflow: hidden;
+	width: 44vw;
+	height: 44vw;
+	background: #6FE0DA;
+	z-index: 99;
+	left: 0;
+	top: 0;
+}
+
+.bio:nth-child(3n+0) .element-content {
+	left: auto;
+	right: 0;
+}
+
+.bio:nth-last-child(1) .element-content,
+.bio:nth-last-child(2) .element-content,
+.bio:nth-last-child(3) .element-content {
+	top: auto;
+	bottom: 0;
+}
 
 /*--------------------------------------------------------------
 98.0 Media Queries
 --------------------------------------------------------------*/
 
 /* Phone */
-@media screen (max-width: 599px) { 
+@media screen and (max-width: 599px) { 
+
+.marquee {
+	height: 100vw;
+	width: auto;
+	position: relative;
+}
+.marquee img {
+	width: 200vw;
+	height: auto;
+	position: relative;
+	right: 100vw;
+}
+
+.half-left img,
+.half-right img,
+.half-left .component-content,
+.half-right .component-content {
+	width: 100%;
+	height: auto;
+}
+
+.half-right img {
+	left: initial;
+}
+
+.half-right .component-content {
+	position: relative;
+	text-align: inherit;
+}
+
+.half-left .component-content {
+	float: none;
+}
+	
 
 }
 /* Tablet portrait: */
-@media screen (min-width: 600px) and (max-width:1200px) {
+@media screen and (min-width: 600px) and (max-width:1200px) {
 
 }
 /* Tablet landscape: */
-@media screen (min-width: 900px) and (max-width:1200px) {
+@media screen and (min-width: 900px) and (max-width:1200px) {
 
 }
 
