@@ -76,7 +76,8 @@ function bz_setup() {
 	 * This theme styles the visual editor to resemble the theme style,
 	 * specifically font, colors, and column width.
  	 */
-	add_editor_style( array( 'assets/css/editor-style.css', bz_fonts_url() ) );
+	if ( function_exists('bz_fonts_url') )
+		add_editor_style( array( 'assets/css/editor-style.css', bz_fonts_url() ) );
 
 }
 add_action( 'after_setup_theme', 'bz_setup' );
@@ -85,56 +86,6 @@ add_action( 'after_setup_theme', 'bz_setup' );
  * Hide the admin bar on the user-facing end 
  */
 add_filter('show_admin_bar', '__return_false');
-
-/**
- * Register custom fonts.
- */
-function bz_fonts_url() {
-	$fonts_url = '';
-
-	/*
-	 * Translators: If there are characters in your language that are not
-	 * supported by Libre Franklin, translate this to 'off'. Do not translate
-	 * into your own language.
-	 */
-	$libre_franklin = _x( 'on', 'Libre Franklin font: on or off', 'bz' );
-
-	if ( 'off' !== $libre_franklin ) {
-		$font_families = array();
-
-		$font_families[] = 'Libre Franklin:300,300i,400,400i,600,600i,800,800i';
-
-		$query_args = array(
-			'family' => urlencode( implode( '|', $font_families ) ),
-			'subset' => urlencode( 'latin,latin-ext' ),
-		);
-
-		$fonts_url = add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
-	}
-
-	return esc_url_raw( $fonts_url );
-}
-
-/**
- * Add preconnect for Google Fonts.
- *
- * @since Twenty Seventeen 1.0
- *
- * @param array  $urls           URLs to print for resource hints.
- * @param string $relation_type  The relation type the URLs are printed.
- * @return array $urls           URLs to print for resource hints.
- */
-function bz_resource_hints( $urls, $relation_type ) {
-	if ( wp_style_is( 'bz-fonts', 'queue' ) && 'preconnect' === $relation_type ) {
-		$urls[] = array(
-			'href' => 'https://fonts.gstatic.com',
-			'crossorigin',
-		);
-	}
-
-	return $urls;
-}
-add_filter( 'wp_resource_hints', 'bz_resource_hints', 10, 2 );
 
 /**
  * Register widget area.
@@ -224,7 +175,8 @@ add_action( 'wp_head', 'bz_pingback_header' );
  */
 function bz_scripts() {
 	// Add custom fonts, used in the main stylesheet.
-	wp_enqueue_style( 'bz-fonts', bz_fonts_url(), array(), null );
+	if ( function_exists('bz_fonts_url') )
+		wp_enqueue_style( 'bz-fonts', bz_fonts_url(), array(), null );
 
 	// Theme stylesheet.
 	wp_enqueue_style( 'bz-style', get_stylesheet_uri() );
@@ -317,6 +269,7 @@ function bz_populate_custom_formats() {
 		'half-left' => 'Pic and Story',
 		'half-right' => 'Story and Pic',
 		'centered' => 'Centered',
+		'mosaic-three' => '3-wide Mosaic',
 	);
 	foreach($formats_to_create as $slug => $title) {
 		wp_insert_term(

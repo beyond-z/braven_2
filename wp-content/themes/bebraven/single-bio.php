@@ -5,6 +5,7 @@
  */
 
 global $placeholder;
+global $post;
 
 ?>
 <div class="mosaic-element bio <?php echo ($placeholder) ? $placeholder : ' hover-hint'; ?>">
@@ -14,12 +15,16 @@ global $placeholder;
 			$thumbatts = array(
 				'title' => get_the_title(),
 			);
-			the_post_thumbnail('headshot', $thumbatts );
+			$thumb = get_the_post_thumbnail($post->ID, 'headshot', $thumbatts);
+			echo $thumb;
 		} 
 		?>
 	</div>
 	<div class="element-content hover-toggle">
-		<h3><?php the_title();?></h3>
+		<?php echo $thumb; ?>
+		<div class="element-header">
+			<h3><?php the_title();?></h3>
+		</div>
 		<?php the_content();?>
 	</div>
 </div>
