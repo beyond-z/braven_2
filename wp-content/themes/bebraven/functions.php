@@ -527,8 +527,6 @@ function create_includebios_shortcode($atts) {
 		<div class="mosaic bios <?php echo $biotype . ' ' . $category;?>">
 			<?php
 
-			print("<pre>".print_r($bios->posts,true)."</pre>");
-
 			while ( $bios->have_posts() ) {
 				$bios->the_post();
 				include 'single-bio.php';

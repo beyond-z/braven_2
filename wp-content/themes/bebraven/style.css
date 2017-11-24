@@ -942,6 +942,7 @@ body {
 
 .element-img img {
 	width: 100%;
+	z-index: 99;
 }
 
 .bio .element-content {
@@ -953,9 +954,13 @@ body {
 	width: 44vw;
 	height: 44vw;
 	background: #6FE0DA;
-	z-index: 99;
+	z-index: 98;
 	left: 0;
 	top: 0;
+}
+
+.bio.reveal .element-content {
+	display: block;
 }
 
 .bio:nth-child(3n+0) .element-content {

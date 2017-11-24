@@ -9,7 +9,7 @@ $('document').ready(function(){
 
 	$('.hover-hint').click(function(e){
 		e.preventDefault();
-		$(this).children('hover-toggle').toggle();
+		$(this).toggleClass('reveal');
 	});
 
 });
