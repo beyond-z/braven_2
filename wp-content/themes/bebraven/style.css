@@ -924,13 +924,13 @@ body {
 13.1 Header and Breadcrumbs
 --------------------------------------------------------------*/
 
+#masthead {
+	position: relative;
+}
+
 .marquee img {
 	width: 100%;
 	height: auto;
-}
-
-.marquee h2:after {
-	display: none;
 }
 
 .marquee-title {
@@ -940,6 +940,15 @@ body {
 	left: 5vw;
 	margin: 0;
 	color: #FFF;
+}
+
+.caption-meta {
+	display: block;
+}
+
+.caption {
+	color: #3BE7DD;
+	text-transform: uppercase;
 }
 
 #breadcrumbs li {
@@ -955,6 +964,17 @@ body {
 
 #breadcrumbs li:last-child:after {
 	content: '';
+}
+
+.logo {
+	position: absolute;
+	left: 5vw;
+	z-index: 999;
+}
+
+.logo img {
+	width: 16vw;
+	height: auto;
 }
 /*--------------------------------------------------------------
 13.2 Home Page

@@ -28,6 +28,10 @@
 
 	<header id="masthead" class="site-header" role="banner">
 
+		<a class="logo" href="<?php echo get_home_url();?>">
+			<img src="<?php echo get_template_directory_uri();?>/images/braven-logo.png" />
+		</a>
+		
 		<?php if ( has_nav_menu( 'top' ) ) : ?>
 			<div class="navigation-top">
 				<div class="wrap">
@@ -35,32 +39,40 @@
 				</div><!-- .wrap -->
 			</div><!-- .navigation-top -->
 		<?php endif; ?>
-
-	</header><!-- #masthead -->
-
-	<?php
-
-	// Get page components based on the top-level page containing them:
-	global $container_ID;
-	if ( is_home() || is_front_page() ) {
-		$container_ID = bz_get_id_by_slug('home-container');
-	} else {
-		$container_ID = $post->ID;
-	}
-
-	if ( has_post_thumbnail($container_ID) ) {
-		?>
-		<section class="component marquee">
-			<?php echo get_the_post_thumbnail( $container_ID, 'marquee' ); ?>
-			<div class="component-content">
-				<h1 class="marquee-title">
-					<?php echo apply_filters( 'the_content', get_the_excerpt($container_ID) ); ?>
-				</h1>			
-			</div>
-		</section>
 		<?php
-	}
-	?>
 
+		// Get page components based on the top-level page containing them:
+		global $container_ID;
+		if ( is_home() || is_front_page() ) {
+			$container_ID = bz_get_id_by_slug('home-container');
+		} else {
+			$container_ID = $post->ID;
+		}
+
+		if ( has_post_thumbnail($container_ID) ) {
+			?>
+			<section class="component marquee">
+				<?php echo get_the_post_thumbnail( $container_ID, 'marquee' ); ?>
+
+				
+				<div class="marquee-title">
+					<h1>
+						<?php echo apply_filters( 'the_content', get_the_excerpt($container_ID) ); ?>
+					</h1>
+					<div>
+						<span class="caption-meta">
+							<?php echo __('[Real Futures, Real Fellows]');?>
+						</span>
+						<span class="caption">
+							<?php echo get_the_post_thumbnail_caption( $container_ID );?>
+						</span>
+							
+					</div>			
+				</div>
+			</section>
+			<?php
+		}
+		?>
+	</header><!-- #masthead -->
 	<div class="site-content-contain">
 		<div id="content" class="site-content">
