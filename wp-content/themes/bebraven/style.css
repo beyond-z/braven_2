@@ -863,7 +863,59 @@ a:active {
 12.0 Navigation
 --------------------------------------------------------------*/
 
+#masthead nav {
+	position: absolute;
+	top: 2vw;
+	right: 5vw;
+	z-index: 999;
+	font-stretch: condensed;
+}
 
+#masthead a {
+	color: #FFF;
+}
+
+#masthead a:hover {
+	color:#3BE7DD;
+}
+
+#masthead .menu {
+	text-align: right;
+	margin-bottom: 0.75em;
+}
+
+.menu li {
+	text-align: left;
+}
+
+#masthead .menu > li {
+	display: inline;
+	position: relative;
+	margin-left: 1em;
+}
+
+#masthead .sub-menu {
+	display: none;
+	position: absolute;
+	min-width: 12.5vw;
+	left: 0;
+	padding-top: 0.75em;
+	list-style: none;
+	margin-left: 0;
+}
+
+#masthead .sub-menu li {
+	margin-bottom: 0.75em;
+}
+
+#masthead .menu li:hover .sub-menu {
+	display: block;
+}
+
+#menu-secondary-menu {
+	font-size: 0.8em;
+	text-transform: uppercase;
+}
 
 /*--------------------------------------------------------------
 13.0 Layout
@@ -949,6 +1001,11 @@ body {
 .caption {
 	color: #3BE7DD;
 	text-transform: uppercase;
+}
+
+#breadcrumbs {
+	margin-left: 5vw;
+	margin-top: 1.5em;
 }
 
 #breadcrumbs li {
