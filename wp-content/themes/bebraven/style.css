@@ -28,8 +28,9 @@ Tags:
 11.0 SVGs Fallbacks
 12.0 Navigation
 13.0 Layout
-   13.1 Home Page
-   13.2 Mosaic/Bios
+	13.1 Header and Breadcrumbs
+	13.2 Home Page
+	13.3 Mosaic/Bios
 98.0 Media Queries
 99.0 Print
 --------------------------------------------------------------*/
@@ -356,24 +357,32 @@ template {
 --------------------------------------------------------------*/
 
 @font-face {
-    font-family: DINAlternate;
+    font-family: DIN;
     font-weight: bolder;
     font-style: normal;
-    src: url("fonts/DINAlternateBold.otf") format("opentype");
+    src: url("fonts/DINBold.otf") format("opentype");
 }
 
 @font-face {
-    font-family: DINAlternate;
+    font-family: DIN;
     font-weight: bold;
     font-style: normal;
-    src: url("fonts/DINAlternateMedium.otf") format("opentype");
+    src: url("fonts/DINMedium.otf") format("opentype");
 }
 
 @font-face {
-    font-family: DINAlternate;
+    font-family: DIN;
     font-weight: normal;
     font-style: normal;
-    src: url("fonts/DINAlternateRegular.otf") format("opentype");
+    src: url("fonts/DINRegular.otf") format("opentype");
+}
+
+@font-face {
+    font-family: DIN;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: condensed;
+    src: url("fonts/DINCondensedBold.otf") format("opentype");
 }
 
 body,
@@ -381,7 +390,7 @@ button,
 input,
 select,
 textarea {
-	font-family: DINAlternate, "Trade Gothic MT", Oswald, sans-serif;
+	font-family: DIN, "Trade Gothic MT", Oswald, sans-serif;
 	font-weight: normal;
 }
 
@@ -409,6 +418,10 @@ h1,
 h2 {
 	text-transform: uppercase;
 	clear: both;
+}
+
+h1 {
+	font-stretch: condensed;
 }
 
 h2 {
@@ -908,27 +921,44 @@ body {
 }
 
 /*--------------------------------------------------------------
-13.1 Home Page
+13.1 Header and Breadcrumbs
 --------------------------------------------------------------*/
 
 .marquee img {
 	width: 100%;
+	height: auto;
 }
 
 .marquee h2:after {
 	display: none;
 }
 
-.marquee .component-content {
+.marquee-title {
+	width: 60vw;
 	position: absolute;
 	bottom: 5vw;
 	left: 5vw;
-}
-
-.marquee .component-heading {
 	margin: 0;
 	color: #FFF;
 }
+
+#breadcrumbs li {
+	font-stretch: condensed;
+	display: inline-block;
+	margin-right: 0.25em;
+}
+
+#breadcrumbs li:after {
+	content:'/';
+	margin-left: 0.25em;
+}
+
+#breadcrumbs li:last-child:after {
+	content: '';
+}
+/*--------------------------------------------------------------
+13.2 Home Page
+--------------------------------------------------------------*/
 
 .half-left,
 .half-right {
@@ -978,7 +1008,7 @@ body {
 }
 
 /*--------------------------------------------------------------
-13.2 Mosaics and bios
+13.3 Mosaics and bios
 --------------------------------------------------------------*/
 
 .mosaic {
@@ -1001,7 +1031,8 @@ body {
 }
 
 .mosaic-three .component-heading {
-	padding: 2vw;
+	margin-left: 2vw;
+	margin-right: 2vw;
 }
 
 .bio {
