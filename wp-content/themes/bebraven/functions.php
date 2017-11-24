@@ -243,8 +243,8 @@ function bz_scripts() {
 	wp_enqueue_script( 'html5', get_theme_file_uri( '/assets/js/html5.js' ), array(), '3.7.3' );
 	wp_script_add_data( 'html5', 'conditional', 'lt IE 9' );
 
-	// Load global js (requires jQuery)
-	wp_enqueue_script( 'bz-global', get_theme_file_uri( '/assets/js/global.js' ), array( 'jquery' ), '1.0', true );
+	// Load custom functions js (requires jQuery)
+	wp_enqueue_script( 'bz-js-functions', get_theme_file_uri( '/functions.js' ), array( 'jquery' ), '1.0', true );
 
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -497,7 +497,6 @@ function create_includebios_shortcode($atts) {
 	// Attributes in var
 	$biotype = $atts['biotype'];
 	$category = $atts['category'];
-	echo $biotype. ' ' . $category;
 	// Query Arguments
 	$args = array(
 		'post_type' => array('bio'),
@@ -513,8 +512,12 @@ function create_includebios_shortcode($atts) {
 				'terms' => array($biotype),
 			),
 		),
-		//'category_name' => '$category',
+		'category_name' => $category,
 	);
+
+	if (!empty($category)) {
+		//$args['category_name'] = $category;
+	}
 
 	// The Query
 	$bios = new WP_Query( $args );
@@ -523,10 +526,22 @@ function create_includebios_shortcode($atts) {
 		?>
 		<div class="mosaic bios <?php echo $biotype . ' ' . $category;?>">
 			<?php
+
+			print("<pre>".print_r($bios->posts,true)."</pre>");
+
 			while ( $bios->have_posts() ) {
 				$bios->the_post();
 				include 'single-bio.php';
 			}
+
+			// add placeholder bios until the total divides by 3:
+			$totalbios = count($bios->posts);
+			$missing = 3 - ($totalbios % 3);
+			for ($i = 0; $i < $missing; $i++) {
+				$placeholder = 'placeholder';
+				include 'single-bio.php';
+			}
+			
 			?>
 		</div>
 		<?php
