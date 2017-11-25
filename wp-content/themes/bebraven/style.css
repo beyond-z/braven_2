@@ -29,7 +29,7 @@ Tags:
 12.0 Navigation
 13.0 Layout
 	13.1 Header and Breadcrumbs
-	13.2 Home Page
+	13.2 Component Formats
 	13.3 Mosaic/Bios
 98.0 Media Queries
 99.0 Print
@@ -787,6 +787,13 @@ a:active {
 	background: #FFF;
 }
 
+.component li a {
+	font-weight: inherit;
+	padding: inherit;
+	background: none;
+	text-transform: inherit;
+}
+
 .hover-hint:hover {
 	cursor: pointer;
 }
@@ -871,11 +878,17 @@ a:active {
 	font-stretch: condensed;
 }
 
-#masthead a {
+#masthead a,
+#masthead .current_page_item > a:hover,
+#masthead .current-menu-ancestor > a:hover,
+#masthead .current-page-parent > a:hover {
 	color: #FFF;
 }
 
-#masthead a:hover {
+#masthead a:hover,
+#masthead .current_page_item > a,
+#masthead .current-menu-ancestor > a,
+#masthead .current-page-parent > a {
 	color:#3BE7DD;
 }
 
@@ -994,6 +1007,22 @@ body {
 	color: #FFF;
 }
 
+.marquee.centered {
+	margin: 0 auto;
+}
+
+.centered .marquee-title {
+	width: 90vw;
+	left: calc( 50% - 45vw );
+	top: 45%;
+}
+
+.centered .marquee-title div {
+	position: absolute;
+	text-align: left;
+	bottom: 0;
+}
+
 .caption-meta {
 	display: block;
 }
@@ -1034,8 +1063,29 @@ body {
 	height: auto;
 }
 /*--------------------------------------------------------------
-13.2 Home Page
+13.2 Component Formats
 --------------------------------------------------------------*/
+
+.default,
+.centered {
+	margin: 1.5em 5vw;
+}
+
+.centered,
+.boxes {
+	text-align: center;
+}
+
+.centered .component-content {
+	width: 70vw;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.centered h2:after,
+.boxes h2:after {
+	left: calc( 50% - 6vw );
+}
 
 .half-left,
 .half-right {
@@ -1072,16 +1122,17 @@ body {
 	text-align: right;
 }
 
+.half-right .component-content ul {
+	list-style: none;
+}
+
 .half-left .component-content {
 	float: right;
 }
 
-.centered {
-	text-align: center;
-}
-
-.centered h2:after {
-	left: calc( 50% - 6vw );
+.boxes {
+	margin: 1.5em 0;
+	width: 100%;
 }
 
 /*--------------------------------------------------------------
@@ -1187,6 +1238,29 @@ body {
     opacity: 1;
 }
 
+
+.boxes .mosaic {
+	text-align: justify-all;
+	justify-content: all;
+}
+
+.boxes .mosaic-element {
+	background: #F3F3F3;
+	width: 28vw;
+	height: 20vw;
+}
+
+.box {
+	display: table;
+	height: 100%;
+	width: 100%;
+}
+
+.box-content {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
 /*--------------------------------------------------------------
 98.0 Media Queries
 --------------------------------------------------------------*/

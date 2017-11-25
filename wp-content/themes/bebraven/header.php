@@ -54,8 +54,11 @@
 		}
 
 		if ( has_post_thumbnail($container_ID) ) {
+
+			// get the format so we can control where the h1 is positioned
+			$marquee_format = (wp_get_post_terms($post->ID, 'format')) ? wp_get_post_terms($post->ID, 'format')[0]->slug : '';
 			?>
-			<section class="component marquee">
+			<section class="component marquee <?php echo $marquee_format; ?>">
 				<?php echo get_the_post_thumbnail( $container_ID, 'marquee' ); ?>
 
 				

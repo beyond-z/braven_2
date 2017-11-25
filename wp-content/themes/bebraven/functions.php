@@ -270,11 +270,12 @@ add_action( 'init', 'bz_define_custom_post_formats_taxonomies', 0 );
 	
 function bz_populate_custom_formats() { 
 	$formats_to_create = array(
-		'marquee' => 'Marquee',
+		'default' => 'Default (full)',
 		'half-left' => 'Pic and Story',
 		'half-right' => 'Story and Pic',
 		'centered' => 'Centered',
 		'mosaic-three' => '3-wide Mosaic',
+		'boxes' => 'Boxes (e.g. for donors)',
 	);
 	foreach($formats_to_create as $slug => $title) {
 		wp_insert_term(
@@ -288,6 +289,24 @@ function bz_populate_custom_formats() {
 	}
 }
 add_action( 'init', 'bz_populate_custom_formats' );
+
+// make sure there's a default Format type and that it's chosen if they didn't choose one
+function bz_default_format_term( $post_id, $post ) {
+    if ( 'publish' === $post->post_status ) {
+        $defaults = array(
+            'format' => 'default'
+            );
+        $taxonomies = get_object_taxonomies( $post->post_type );
+        foreach ( (array) $taxonomies as $taxonomy ) {
+            $terms = wp_get_post_terms( $post_id, $taxonomy );
+            if ( empty( $terms ) && array_key_exists( $taxonomy, $defaults ) ) {
+                wp_set_object_terms( $post_id, $defaults[$taxonomy], $taxonomy );
+            }
+        }
+    }
+}
+add_action( 'save_post', 'bz_default_format_term', 100, 2 );
+
 
 // replace checkboxes for the format taxonomy with radio buttons and a custom meta box
 function bz_convert_formats_taxonomy_to_radio_checklist( $args ) {
@@ -348,7 +367,7 @@ function bz_define_biotypes() {
 }
 add_action( 'init', 'bz_define_biotypes', 0 );
 
-// programmatically create a few format terms
+// programmatically create a few bio types
 	
 function bz_populate_biotypes() { 
 	$biotypes_to_create = array(

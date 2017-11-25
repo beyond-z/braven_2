@@ -56,6 +56,12 @@ get_header();
 						<div class="component-content">
 							<h2 class="component-heading"><?php the_title(); ?></h2>
 							<?php the_content(); ?>
+
+							<?php
+							if ( 'boxes' == $component_format ) {
+								include 'boxes.php';
+							}
+							?>
 						</div>
 					</section>
 					<?php 
