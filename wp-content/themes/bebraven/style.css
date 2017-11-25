@@ -1083,7 +1083,8 @@ body {
 }
 
 .centered h2:after,
-.boxes h2:after {
+.boxes h2:after,
+.picbkg h2:after {
 	left: calc( 50% - 6vw );
 }
 
@@ -1133,6 +1134,22 @@ body {
 .boxes {
 	margin: 1.5em 0;
 	width: 100%;
+}
+
+.picbkg img {
+	width: 100%;
+	height: auto;
+	filter: grayscale(30%) brightness(70%);
+}
+
+.picbkg .component-content {
+	text-align: center;
+	width: 90vw;
+	position: absolute;
+	margin: 0;
+	color: #FFF;
+	left: calc( 50% - 45vw );
+	top: 30%;
 }
 
 /*--------------------------------------------------------------
@@ -1287,6 +1304,8 @@ body {
 	width: 20vw;
 	margin: 1vw;
 }
+
+
 /*--------------------------------------------------------------
 98.0 Media Queries
 --------------------------------------------------------------*/

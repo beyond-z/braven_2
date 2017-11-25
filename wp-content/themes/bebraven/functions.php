@@ -277,6 +277,7 @@ function bz_populate_custom_formats() {
 		'centered' => 'Centered',
 		'mosaic-three' => '3-wide Mosaic',
 		'boxes' => 'Boxes (e.g. for donors)',
+		'picbkg' => 'Picture Background',
 	);
 	foreach($formats_to_create as $slug => $title) {
 		wp_insert_term(
