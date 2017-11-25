@@ -47,6 +47,7 @@ function bz_setup() {
 	add_image_size( 'marquee', 2000, 1200, true );
 	add_image_size( 'half', 1000, 1000, true );
 	add_image_size( 'headshot', 400, 400, true );
+	add_image_size( 'logo', 400, 400, false );
 
 	// Set the default content width.
 

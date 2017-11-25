@@ -1142,6 +1142,7 @@ body {
 .mosaic {
 	margin-right: auto;
 	margin-left: auto;
+	width: 100%;
 	position: relative;
 	text-align: center;
 }
@@ -1149,7 +1150,7 @@ body {
 .mosaic-element {
 	position: relative;
 	display: inline-block;
-	margin: 2vw;
+	margin: 1vw;
 }
 
 .mosaic-three {
@@ -1250,6 +1251,10 @@ body {
 	height: 20vw;
 }
 
+.million-plus .mosaic-element {
+	width: 88vw;
+}
+
 .box {
 	display: table;
 	height: 100%;
@@ -1260,6 +1265,27 @@ body {
 	display: table-cell;
 	vertical-align: middle;
 	text-align: center;
+	overflow: hidden;
+}
+
+.box-content img {
+	width: 25vw;
+	height: auto;
+}
+
+.boxes ul {
+	list-style: none;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	align-content: flex-start;
+}
+
+.boxes li {
+	width: 20vw;
+	margin: 1vw;
 }
 /*--------------------------------------------------------------
 98.0 Media Queries
