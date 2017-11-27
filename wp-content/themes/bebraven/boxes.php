@@ -22,16 +22,8 @@ if ( $boxes_query->have_posts() ) {
 			while ( $boxes_query->have_posts() ) {
 				$boxes_query->the_post();
 
-				// Decide whether to display a logo or just the title of the post:
-				$box_content = (has_post_thumbnail()) ? get_the_post_thumbnail($post->ID, 'logo') : get_the_title();
+				include 'single-box.php';
 
-				?>
-					<div class="mosaic-element">
-						<div class="box">
-							<div class="box-content"><?php echo $box_content; ?></div>
-						</div>
-					</div>
-				<?php
 			} // while
 		?>
 	</div>

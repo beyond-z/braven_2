@@ -457,12 +457,12 @@ function bz_create_bio_cpt() {
 add_action( 'init', 'bz_create_bio_cpt', 0 );
 
 /**
- * Make a shortcode that embeds bios lists into pages
+ * Make shortcodes to embed inline templates/functionality into a page's content
  */
  
 // Create Shortcode include-bios
-// Use the shortcode: [include-bios biotype="staff" category=""]
-function create_includebios_shortcode($atts) {
+// Use the shortcode in a post like so: [include-bios biotype="staff" category="chicago"]
+function bz_create_includebios_shortcode($atts) {
 	
 	// Attributes
 	$atts = shortcode_atts(
@@ -523,7 +523,61 @@ function create_includebios_shortcode($atts) {
 	
 	
 }
-add_shortcode( 'include-bios', 'create_includebios_shortcode' );
+add_shortcode( 'include-bios', 'bz_create_includebios_shortcode' );
+
+// Create Shortcode to include sub page as boxes
+// Use the shortcode in a post like so: [include-subpages-as-boxes]
+function bz_create_includestats_shortcode($atts) {
+	
+	// pass $post data for function's internal use:
+	global $post;
+
+	// Attributes
+	$atts = shortcode_atts(
+		array(),
+		$atts,
+		'include-subpages-as-boxes'
+	);
+	
+	// Query Arguments
+	$args = array(
+		'post_parent' => $post->ID,
+		'post_type' => array('page'),
+		'post_status' => array('publish'),
+		'posts_per_page' => -1, // no limit
+		'nopaging' => true,
+		'order' => 'ASC',
+		'orderby' => 'menu_order',
+	);
+
+	// The Query
+	$subboxes = new WP_Query( $args );
+
+	// Loop through results
+	if ( $subboxes->have_posts() ) { 
+		?>
+		<div class="mosaic boxes sub-boxes">
+			<?php
+
+			while ( $subboxes->have_posts() ) {
+				$subboxes->the_post();
+				include 'single-box.php';
+			}
+			
+			?>
+		</div>
+		<?php
+	} else {
+		// None found
+	}
+	// Restore original Post Data
+	wp_reset_postdata();
+	
+	
+}
+add_shortcode( 'include-subpages-as-boxes', 'bz_create_includestats_shortcode' );
+
+
 
 /*
  * Breadcrumbs

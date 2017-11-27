@@ -441,6 +441,12 @@ h2:after {
 	background: #EB3B46;
 }
 
+
+.bio .element-content,
+.box-text {
+	font-size: 0.9em;
+}
+
 .entry-title {
 
 }
@@ -1181,6 +1187,11 @@ body {
 	position: relative;
 	display: inline-block;
 	margin: 1vw;
+	height: 20vw;
+}
+
+.mosaic-element:not(.bio) {
+	overflow: hidden;
 }
 
 .mosaic-three {
@@ -1215,17 +1226,17 @@ body {
 	text-align: left;
 	position: absolute;
 	overflow: hidden;
-	width: 44.5vw;
-	height: 44vw;
+	width: 42vw;
+	height: 42vw;
 	background: #6FE0DA;
 	z-index: 98;
 	padding: 4vw;
 	left: 0;
-	top: 0;
+	bottom: 0;
 }
 
 .element-content img {
-	width: 18vw;
+	width: 16vw;
 	height: auto;
 }
 
@@ -1233,9 +1244,16 @@ body {
 	display: inline-block;
 	width: 15vw;
 	margin-left: 2vw;
+	font-size: 1.5em;
 }
 
-.element-content h3 {
+.element-text {
+	height: 16vw;
+	overflow: hidden;
+}
+
+.element-content h3,
+.box-content h3 {
 	margin: 0;
 	display: inline-block;
 }
@@ -1249,11 +1267,11 @@ body {
 	right: 0;
 }
 
-.bio:nth-last-child(1) .element-content,
-.bio:nth-last-child(2) .element-content,
-.bio:nth-last-child(3) .element-content {
-	top: auto;
-	bottom: 0;
+.bio:nth-child(1) .element-content,
+.bio:nth-child(2) .element-content,
+.bio:nth-child(3) .element-content {
+	top: 0;
+	bottom: auto;
 }
 
 .bio.hover-hint:after {
@@ -1271,8 +1289,8 @@ body {
 
 
 .boxes .mosaic {
+	text-align: center;
 	text-align: justify-all;
-	justify-content: all;
 }
 
 .boxes .mosaic-element {
@@ -1289,6 +1307,7 @@ body {
 	display: table;
 	height: 100%;
 	width: 100%;
+	overflow: hidden;
 }
 
 .box-content {
@@ -1318,6 +1337,19 @@ body {
 	margin: 1vw;
 }
 
+.sub-boxes .box {
+	background: #6FE0DA;
+	padding: 2vw;
+}
+
+.sub-boxes .box-content {
+	vertical-align: top;
+}
+
+.sub-boxes h3 {
+	color: #FFF;
+	font-size: 3.5em;
+}
 
 /*--------------------------------------------------------------
 98.0 Media Queries
@@ -1387,11 +1419,11 @@ h2 {
 
 
 h3 {
-	margin: 0 0 0.5em;
+	margin-bottom: 0.5em;
 }
 
 p {
-	margin: 0 0 1em;
+	margin-bottom: 1em;
 }
 
 }

@@ -25,6 +25,8 @@ global $post;
 		<div class="element-header">
 			<h3><?php the_title();?></h3>
 		</div>
-		<?php the_content();?>
+		<div class="element-text">
+			<?php the_content();?>
+		</div>
 	</div>
 </div>
