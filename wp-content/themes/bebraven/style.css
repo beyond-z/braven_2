@@ -392,6 +392,7 @@ select,
 textarea {
 	font-family: DIN, "Trade Gothic MT", Oswald, sans-serif;
 	font-weight: normal;
+	font-size: 1.7vw;
 }
 
 h1,
@@ -421,6 +422,7 @@ h2 {
 }
 
 h1 {
+	font-size: 2.25em;
 	font-stretch: condensed;
 }
 
@@ -1066,14 +1068,24 @@ body {
 13.2 Component Formats
 --------------------------------------------------------------*/
 
-.default,
-.centered {
+.default:not(.marquee),
+.centered:not(.marquee) {
 	margin: 1.5em 5vw;
+}
+
+.mosaic-three {
+	margin-top: 1.5em;
+	margin-bottom: 1.5em;
+	text-align: center;
 }
 
 .centered,
 .boxes {
 	text-align: center;
+}
+
+.bios {
+	margin-bottom: 3em;
 }
 
 .centered .component-content {
@@ -1084,7 +1096,8 @@ body {
 
 .centered h2:after,
 .boxes h2:after,
-.picbkg h2:after {
+.picbkg h2:after,
+.mosaic-three h2:after {
 	left: calc( 50% - 6vw );
 }
 
@@ -1098,7 +1111,7 @@ body {
 .half-left .component-content,
 .half-right .component-content {
 	width: 50%;
-	height: ((100vw - 100%)/2);
+	height: 50vw;
 }
 
 .half-left .component-content,
@@ -1313,6 +1326,14 @@ body {
 /* Phone */
 @media screen and (max-width: 599px) { 
 
+body,
+button,
+input,
+select,
+textarea {
+	font-size: 16px;
+}
+
 .marquee {
 	height: 100vw;
 	width: auto;
@@ -1349,9 +1370,32 @@ body {
 
 }
 /* Tablet portrait: */
-@media screen and (min-width: 600px) and (max-width:1200px) {
+@media screen and (min-width: 600px) and (max-width:900px) {
+
+body,
+button,
+input,
+select,
+textarea {
+	font-size: 14px;
+}
+
+h2 {
+	font-size: 18px;
+	margin-bottom: 1.5em;
+}
+
+
+h3 {
+	margin: 0 0 0.5em;
+}
+
+p {
+	margin: 0 0 1em;
+}
 
 }
+
 /* Tablet landscape: */
 @media screen and (min-width: 900px) and (max-width:1200px) {
 

@@ -511,14 +511,6 @@ function create_includebios_shortcode($atts) {
 				$bios->the_post();
 				include 'single-bio.php';
 			}
-
-			// add placeholder bios until the total divides by 3:
-			$totalbios = count($bios->posts);
-			$missing = 3 - ($totalbios % 3);
-			for ($i = 0; $i < $missing; $i++) {
-				$placeholder = 'placeholder';
-				include 'single-bio.php';
-			}
 			
 			?>
 		</div>
