@@ -5,7 +5,7 @@
  */
 
 
-$args = array(
+$boxesargs = array(
 	'post_type' => 'page',
 	'post_parent' => $post->ID, 
 	'post_status' => 'publish',
@@ -13,7 +13,7 @@ $args = array(
 	'order' => 'ASC',
 );
 
-$boxes_query = new WP_Query( $args );
+$boxes_query = new WP_Query( $boxesargs );
 
 if ( $boxes_query->have_posts() ) {
 	?>

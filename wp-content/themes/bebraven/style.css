@@ -1074,9 +1074,21 @@ body {
 13.2 Component Formats
 --------------------------------------------------------------*/
 
-.default:not(.marquee),
-.centered:not(.marquee) {
-	margin: 1.5em 5vw;
+.component {
+	margin-top: 1.5em;
+	margin-bottom: 1.5em;
+}
+
+.marquee,
+.half-left,
+.half-right {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.default:not(.marquee) {
+	margin-right: 5vw;
+	margin-left: 5vw
 }
 
 .mosaic-three {
@@ -1086,7 +1098,8 @@ body {
 }
 
 .centered,
-.boxes {
+.boxes,
+.full {
 	text-align: center;
 }
 
@@ -1094,7 +1107,8 @@ body {
 	margin-bottom: 3em;
 }
 
-.centered .component-content {
+.centered h2,
+.centered .force-margins {
 	width: 70vw;
 	margin-left: auto;
 	margin-right: auto;
@@ -1103,7 +1117,8 @@ body {
 .centered h2:after,
 .boxes h2:after,
 .picbkg h2:after,
-.mosaic-three h2:after {
+.mosaic-three h2:after,
+.full h2:after {
 	left: calc( 50% - 6vw );
 }
 
@@ -1295,11 +1310,11 @@ body {
 
 .boxes .mosaic-element {
 	background: #F3F3F3;
-	width: 28vw;
+	width: 32vw;
 }
 
 .million-plus .mosaic-element {
-	width: 88vw;
+	width: calc( 93% + 4vw )
 }
 
 .box {
@@ -1336,17 +1351,19 @@ body {
 	margin: 1vw;
 }
 
-.sub-boxes {
+.sub-boxes,
+.selected-posts {
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: right;
-	align-items: center;
+	align-items: justify;
 	align-content: stretch;
-	justify-content: center;
+	justify-content: space-between;
 }
 
 .sub-boxes .mosaic-element {
-	height: 25vw;
+	height: 30vw;
+	margin: 0;
 }
 
 .sub-boxes .box {
@@ -1354,14 +1371,15 @@ body {
 	padding: 2vw;
 }
 
-.sub-boxes .box-content {
+.sub-boxes .box-content,
+.selected-posts .box-content {
 	vertical-align: top;
 }
 
 .sub-boxes h3 {
 	font-stretch: condensed;
 	color: #FFF;
-	font-size: 8vw;
+	font-size: 10vw;
 	margin-bottom: 0;
 }
 
@@ -1378,6 +1396,17 @@ body {
 	bottom: 1vw;
 	width: 14vw;
 	left: calc( 50% - 7vw );
+}
+
+.selected-posts .mosaic-element {
+	width: calc( 86vw / 3 );
+	margin: 0;
+	padding-right: 2vw;
+	background: none;
+}
+
+.selected-posts .box-content {
+	text-align: left;
 }
 
 /*--------------------------------------------------------------

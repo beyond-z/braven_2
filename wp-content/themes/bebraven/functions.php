@@ -271,13 +271,14 @@ add_action( 'init', 'bz_define_custom_post_formats_taxonomies', 0 );
 	
 function bz_populate_custom_formats() { 
 	$formats_to_create = array(
-		'default' => 'Default (full)',
+		'default' => 'Default',
 		'half-left' => 'Pic and Story',
 		'half-right' => 'Story and Pic',
 		'centered' => 'Centered',
 		'mosaic-three' => '3-wide Mosaic',
 		'boxes' => 'Boxes (e.g. for donors)',
 		'picbkg' => 'Picture Background',
+		'full' => 'Full (no margin or header)',
 	);
 	foreach($formats_to_create as $slug => $title) {
 		wp_insert_term(
@@ -499,10 +500,6 @@ function bz_create_includebios_shortcode($atts) {
 		'category_name' => $category,
 	);
 
-	if (!empty($category)) {
-		//$args['category_name'] = $category;
-	}
-
 	// The Query
 	$bios = new WP_Query( $args );
 
@@ -537,7 +534,7 @@ add_shortcode( 'include-bios', 'bz_create_includebios_shortcode' );
 
 // Create Shortcode to include sub page as boxes
 // Use the shortcode in a post like so: [include-subpages-as-boxes]
-function bz_create_includestats_shortcode($atts, $content = null) {
+function bz_create_includesubpages_shortcode($atts, $content = null) {
 	
 	// pass $post data for function's internal use:
 	global $post;
@@ -553,7 +550,7 @@ function bz_create_includestats_shortcode($atts, $content = null) {
 	ob_start();
 
 	// Query Arguments
-	$args = array(
+	$spargs = array(
 		'post_parent' => $post->ID,
 		'post_type' => array('page'),
 		'post_status' => array('publish'),
@@ -564,11 +561,10 @@ function bz_create_includestats_shortcode($atts, $content = null) {
 	);
 
 	// The Query
-	$subboxes = new WP_Query( $args );
+	$subboxes = new WP_Query( $spargs );
 
 	// Loop through results
 	if ( $subboxes->have_posts() ) { 
-
 		?>
 		<div class="mosaic boxes sub-boxes">
 			<?php
@@ -588,13 +584,80 @@ function bz_create_includestats_shortcode($atts, $content = null) {
 	wp_reset_postdata();
 
 	// Now return the buffer:
-    $result = ob_get_contents(); // get everything in to $result variable
+    $result = ob_get_contents(); // get everything into $result variable
     ob_end_clean();
     return $result;
 	
 }
 
-add_shortcode( 'include-subpages-as-boxes', 'bz_create_includestats_shortcode' );
+add_shortcode( 'include-subpages-as-boxes', 'bz_create_includesubpages_shortcode' );
+
+
+// Create Shortcode to include posts from the blog by category
+// Use the shortcode in a post like so: [include-posts category="whatever,something"]
+function bz_create_includeposts_shortcode($atts, $content = null) {
+	
+	// pass $post data for function's internal use:
+	global $post;
+
+	// Attributes
+	$atts = shortcode_atts(
+		array(
+			'category' => '',
+		),
+		$atts,
+		'include-posts'
+	);
+	
+	$category = $atts['category'];
+
+	// Query Arguments
+	$pargs = array(
+		'post_type' => array('post'),
+		'post_status' => array('publish'),
+		'posts_per_page' => 3, 
+		'nopaging' => false,
+		'paged' => 0,
+		'order' => 'DESC',
+		'orderby' => 'date',
+		'category_name' => $category,
+		/*'tax_query' => array(
+			array(
+				'taxonomy' => 'biotype',
+				'field' => 'slug',
+				'terms' => array($biotype),
+			),
+		),*/
+		
+	);
+
+	// The Query
+	$ps = new WP_Query( $pargs );
+
+	// Loop through results
+	if ( $ps->have_posts() ) { 
+		?>
+		<div class="mosaic boxes selected-posts">
+			<?php
+
+			while ( $ps->have_posts() ) {
+				$ps->the_post();
+				include 'single-box.php';
+			}
+			
+			?>
+		</div>
+		<?php
+	} else {
+		// None found
+	}
+	// Restore original Post Data
+	wp_reset_postdata();
+	
+}
+
+add_shortcode( 'include-posts', 'bz_create_includeposts_shortcode' );
+
 
 
 
