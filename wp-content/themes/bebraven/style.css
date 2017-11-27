@@ -1296,7 +1296,6 @@ body {
 .boxes .mosaic-element {
 	background: #F3F3F3;
 	width: 28vw;
-	height: 20vw;
 }
 
 .million-plus .mosaic-element {
@@ -1337,6 +1336,19 @@ body {
 	margin: 1vw;
 }
 
+.sub-boxes {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: right;
+	align-items: center;
+	align-content: stretch;
+	justify-content: center;
+}
+
+.sub-boxes .mosaic-element {
+	height: 25vw;
+}
+
 .sub-boxes .box {
 	background: #6FE0DA;
 	padding: 2vw;
@@ -1347,8 +1359,25 @@ body {
 }
 
 .sub-boxes h3 {
+	font-stretch: condensed;
 	color: #FFF;
-	font-size: 3.5em;
+	font-size: 8vw;
+	margin-bottom: 0;
+}
+
+.sub-boxes .box-content {
+	position: relative;
+}
+
+.sub-boxes .box-text :first-child {
+	margin-top: 0;
+}
+
+.sub-boxes .box-text a {
+	position: absolute;
+	bottom: 1vw;
+	width: 14vw;
+	left: calc( 50% - 7vw );
 }
 
 /*--------------------------------------------------------------

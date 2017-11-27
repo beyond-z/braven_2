@@ -473,9 +473,14 @@ function bz_create_includebios_shortcode($atts) {
 		$atts,
 		'include-bios'
 	);
+
 	// Attributes in var
 	$biotype = $atts['biotype'];
 	$category = $atts['category'];
+
+	//buffer this stuff so it doesn't just print it all on top:
+	ob_start();
+
 	// Query Arguments
 	$args = array(
 		'post_type' => array('bio'),
@@ -520,14 +525,19 @@ function bz_create_includebios_shortcode($atts) {
 	}
 	// Restore original Post Data
 	wp_reset_postdata();
-	
+
+	// Now return the buffer:
+    $result = ob_get_contents(); // get everything in to $result variable
+    ob_end_clean();
+    return $result;
 	
 }
+
 add_shortcode( 'include-bios', 'bz_create_includebios_shortcode' );
 
 // Create Shortcode to include sub page as boxes
 // Use the shortcode in a post like so: [include-subpages-as-boxes]
-function bz_create_includestats_shortcode($atts) {
+function bz_create_includestats_shortcode($atts, $content = null) {
 	
 	// pass $post data for function's internal use:
 	global $post;
@@ -539,6 +549,9 @@ function bz_create_includestats_shortcode($atts) {
 		'include-subpages-as-boxes'
 	);
 	
+	//buffer the following stuff so it doesn't just print it all on top:
+	ob_start();
+
 	// Query Arguments
 	$args = array(
 		'post_parent' => $post->ID,
@@ -555,6 +568,7 @@ function bz_create_includestats_shortcode($atts) {
 
 	// Loop through results
 	if ( $subboxes->have_posts() ) { 
+
 		?>
 		<div class="mosaic boxes sub-boxes">
 			<?php
@@ -572,9 +586,14 @@ function bz_create_includestats_shortcode($atts) {
 	}
 	// Restore original Post Data
 	wp_reset_postdata();
-	
+
+	// Now return the buffer:
+    $result = ob_get_contents(); // get everything in to $result variable
+    ob_end_clean();
+    return $result;
 	
 }
+
 add_shortcode( 'include-subpages-as-boxes', 'bz_create_includestats_shortcode' );
 
 
