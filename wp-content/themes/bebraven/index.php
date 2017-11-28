@@ -38,6 +38,8 @@ get_header();
 
 			// Loop through the returned components:
 			if ( $components_query->have_posts() ) {
+				
+				// loop:
 				while ( $components_query->have_posts() ) {
 					$components_query->the_post();
 					$component_format = (wp_get_post_terms($post->ID, 'format')) ? wp_get_post_terms($post->ID, 'format')[0]->slug : '';

@@ -565,11 +565,18 @@ function bz_create_includesubpages_shortcode($atts, $content = null) {
 
 	// Loop through results
 	if ( $subboxes->have_posts() ) { 
+
+		// figure out if there would be any leftovers if we divide by 3:
+		$max = count($subboxes->posts);
+		$rounddown = $max - ($max % 3);
+		$counter = 0;
 		?>
 		<div class="mosaic boxes sub-boxes">
 			<?php
 
 			while ( $subboxes->have_posts() ) {
+				// pass the leftover modulo:
+				$leftover = ($counter++ >= $rounddown) ? 'leftover-'.($counter - $rounddown) : '';
 				$subboxes->the_post();
 				include 'single-box.php';
 			}
@@ -636,6 +643,7 @@ function bz_create_includeposts_shortcode($atts, $content = null) {
 
 	// Loop through results
 	if ( $ps->have_posts() ) { 
+
 		?>
 		<div class="mosaic boxes selected-posts">
 			<?php

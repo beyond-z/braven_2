@@ -1191,18 +1191,18 @@ body {
 --------------------------------------------------------------*/
 
 .mosaic {
-	margin-right: auto;
-	margin-left: auto;
-	width: 100%;
-	position: relative;
-	text-align: center;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	align-items: flex-start;
+	align-content: stretch;
+	justify-content: space-between;
 }
 
 .mosaic-element {
 	position: relative;
-	display: inline-block;
-	margin: 1vw;
 	height: 20vw;
+	margin-bottom: 2vw;
 }
 
 .mosaic-element:not(.bio) {
@@ -1222,6 +1222,11 @@ body {
 
 .bio {
 	width: 20vw;
+}
+
+.bios {
+	width: calc( 20vw * 3 + 4vw );
+	margin: 0 auto;
 }
 
 .element-img {
@@ -1302,19 +1307,19 @@ body {
     opacity: 1;
 }
 
-
-.boxes .mosaic {
-	text-align: center;
-	text-align: justify-all;
-}
-
 .boxes .mosaic-element {
 	background: #F3F3F3;
 	width: 32vw;
 }
 
 .million-plus .mosaic-element {
-	width: calc( 93% + 4vw )
+	width: calc( (32vw * 3) + 4vw )
+}
+
+.boxes .leftover {
+	position: relative;
+	left: -34vw;
+	right: auto;
 }
 
 .box {
@@ -1351,19 +1356,8 @@ body {
 	margin: 1vw;
 }
 
-.sub-boxes,
-.selected-posts {
-	display: flex;
-	flex-wrap: wrap;
-	flex-direction: right;
-	align-items: justify;
-	align-content: stretch;
-	justify-content: space-between;
-}
-
 .sub-boxes .mosaic-element {
 	height: 30vw;
-	margin: 0;
 }
 
 .sub-boxes .box {
@@ -1399,9 +1393,8 @@ body {
 }
 
 .selected-posts .mosaic-element {
-	width: calc( 86vw / 3 );
-	margin: 0;
-	padding-right: 2vw;
+	width: calc( 75vw / 3 );
+	height: initial;
 	background: none;
 }
 
