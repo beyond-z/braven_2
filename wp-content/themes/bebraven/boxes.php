@@ -16,8 +16,14 @@ $boxesargs = array(
 $boxes_query = new WP_Query( $boxesargs );
 
 if ( $boxes_query->have_posts() ) {
+
+
+	// We use three colums but flex box leaves ugly gaps when used with space-between, so let's indicate when there are fewer than 3 items on the last row.
+	$leftover = count($boxes_query->posts) % 3;
+	$leftover_class = ($leftover) ? 'leftover-'.$leftover : '';
+
 	?>
-	<div class="mosaic">
+	<div class="mosaic <?php echo $leftover_class;?>">
 		<?php
 			while ( $boxes_query->have_posts() ) {
 				$boxes_query->the_post();

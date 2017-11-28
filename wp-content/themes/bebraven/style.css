@@ -1316,12 +1316,6 @@ body {
 	width: calc( (32vw * 3) + 4vw )
 }
 
-.boxes .leftover {
-	position: relative;
-	left: -34vw;
-	right: auto;
-}
-
 .box {
 	display: table;
 	height: 100%;
@@ -1401,6 +1395,25 @@ body {
 .selected-posts .box-content {
 	text-align: left;
 }
+
+/*.leftover-2 .mosaic-element:last-child {
+	position: relative;
+	right: 33.5vw;
+}*/
+
+.leftover-2 .mosaic-element:last-child,
+.leftover-2 .mosaic-element:nth-last-child(2) {
+	flex-grow: calc(1.40);
+}
+
+.leftover-2 .mosaic-element:last-child {
+	margin-left: 0.75vw;
+}
+
+.leftover-2 .mosaic-element:nth-last-child(2) {
+	margin-right: 0.75vw;
+}
+
 
 /*--------------------------------------------------------------
 98.0 Media Queries

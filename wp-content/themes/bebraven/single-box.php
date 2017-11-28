@@ -5,7 +5,6 @@
  */
 
 global $post;
-global $leftover;
 
 
 $post_title = get_the_title();
@@ -14,7 +13,7 @@ $post_title = get_the_title();
 $box_content = (has_post_thumbnail() && 'post' != $post->post_type) ? get_the_post_thumbnail($post->ID, 'logo', array ('title' => $post_title) ) : '<h3>'.$post_title.'</h3>';
 
 ?>
-<div class="mosaic-element <?php echo $leftover; ?>">
+<div class="mosaic-element">
 	<div class="box">
 		<div class="box-content">
 			<?php 
