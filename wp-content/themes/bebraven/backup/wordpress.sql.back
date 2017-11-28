@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 25, 2017 at 05:17 PM
+-- Generation Time: Nov 27, 2017 at 07:29 PM
 -- Server version: 5.7.20-0ubuntu0.16.04.1
 -- PHP Version: 7.0.22-0ubuntu0.16.04.1
 
@@ -211,25 +211,25 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (105, 'widget_tag_cloud', 'a:1:{s:12:"_multiwidget";i:1;}', 'yes'),
 (106, 'widget_nav_menu', 'a:1:{s:12:"_multiwidget";i:1;}', 'yes'),
 (107, 'widget_custom_html', 'a:1:{s:12:"_multiwidget";i:1;}', 'yes'),
-(108, 'cron', 'a:5:{i:1511679576;a:3:{s:16:"wp_version_check";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:10:"twicedaily";s:4:"args";a:0:{}s:8:"interval";i:43200;}}s:17:"wp_update_plugins";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:10:"twicedaily";s:4:"args";a:0:{}s:8:"interval";i:43200;}}s:16:"wp_update_themes";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:10:"twicedaily";s:4:"args";a:0:{}s:8:"interval";i:43200;}}}i:1511715034;a:1:{s:30:"wp_scheduled_auto_draft_delete";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:5:"daily";s:4:"args";a:0:{}s:8:"interval";i:86400;}}}i:1511722800;a:1:{s:19:"wp_scheduled_delete";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:5:"daily";s:4:"args";a:0:{}s:8:"interval";i:86400;}}}i:1511726090;a:1:{s:25:"delete_expired_transients";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:5:"daily";s:4:"args";a:0:{}s:8:"interval";i:86400;}}}s:7:"version";i:2;}', 'yes'),
+(108, 'cron', 'a:5:{i:1511852376;a:3:{s:16:"wp_version_check";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:10:"twicedaily";s:4:"args";a:0:{}s:8:"interval";i:43200;}}s:17:"wp_update_plugins";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:10:"twicedaily";s:4:"args";a:0:{}s:8:"interval";i:43200;}}s:16:"wp_update_themes";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:10:"twicedaily";s:4:"args";a:0:{}s:8:"interval";i:43200;}}}i:1511887834;a:1:{s:30:"wp_scheduled_auto_draft_delete";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:5:"daily";s:4:"args";a:0:{}s:8:"interval";i:86400;}}}i:1511895600;a:1:{s:19:"wp_scheduled_delete";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:5:"daily";s:4:"args";a:0:{}s:8:"interval";i:86400;}}}i:1511898890;a:1:{s:25:"delete_expired_transients";a:1:{s:32:"40cd750bba9870f18aada2478b24840a";a:3:{s:8:"schedule";s:5:"daily";s:4:"args";a:0:{}s:8:"interval";i:86400;}}}s:7:"version";i:2;}', 'yes'),
 (109, 'theme_mods_twentyseventeen', 'a:2:{s:18:"custom_css_post_id";i:-1;s:16:"sidebars_widgets";a:2:{s:4:"time";i:1511364792;s:4:"data";a:4:{s:19:"wp_inactive_widgets";a:0:{}s:9:"sidebar-1";a:6:{i:0;s:8:"search-2";i:1;s:14:"recent-posts-2";i:2;s:17:"recent-comments-2";i:3;s:10:"archives-2";i:4;s:12:"categories-2";i:5;s:6:"meta-2";}s:9:"sidebar-2";a:0:{}s:9:"sidebar-3";a:0:{}}}}', 'yes'),
 (124, 'can_compress_scripts', '0', 'no'),
 (139, 'WPLANG', '', 'yes'),
 (148, 'widget_media_gallery', 'a:1:{s:12:"_multiwidget";i:1;}', 'yes'),
-(150, '_site_transient_update_core', 'O:8:"stdClass":4:{s:7:"updates";a:1:{i:0;O:8:"stdClass":10:{s:8:"response";s:6:"latest";s:8:"download";s:57:"https://downloads.wordpress.org/release/wordpress-4.9.zip";s:6:"locale";s:5:"en_US";s:8:"packages";O:8:"stdClass":5:{s:4:"full";s:57:"https://downloads.wordpress.org/release/wordpress-4.9.zip";s:10:"no_content";s:68:"https://downloads.wordpress.org/release/wordpress-4.9-no-content.zip";s:11:"new_bundled";s:69:"https://downloads.wordpress.org/release/wordpress-4.9-new-bundled.zip";s:7:"partial";b:0;s:8:"rollback";b:0;}s:7:"current";s:3:"4.9";s:7:"version";s:3:"4.9";s:11:"php_version";s:5:"5.2.4";s:13:"mysql_version";s:3:"5.0";s:11:"new_bundled";s:3:"4.7";s:15:"partial_version";s:0:"";}}s:12:"last_checked";i:1511637772;s:15:"version_checked";s:3:"4.9";s:12:"translations";a:0:{}}', 'no'),
+(150, '_site_transient_update_core', 'O:8:"stdClass":4:{s:7:"updates";a:1:{i:0;O:8:"stdClass":10:{s:8:"response";s:6:"latest";s:8:"download";s:57:"https://downloads.wordpress.org/release/wordpress-4.9.zip";s:6:"locale";s:5:"en_US";s:8:"packages";O:8:"stdClass":5:{s:4:"full";s:57:"https://downloads.wordpress.org/release/wordpress-4.9.zip";s:10:"no_content";s:68:"https://downloads.wordpress.org/release/wordpress-4.9-no-content.zip";s:11:"new_bundled";s:69:"https://downloads.wordpress.org/release/wordpress-4.9-new-bundled.zip";s:7:"partial";b:0;s:8:"rollback";b:0;}s:7:"current";s:3:"4.9";s:7:"version";s:3:"4.9";s:11:"php_version";s:5:"5.2.4";s:13:"mysql_version";s:3:"5.0";s:11:"new_bundled";s:3:"4.7";s:15:"partial_version";s:0:"";}}s:12:"last_checked";i:1511809201;s:15:"version_checked";s:3:"4.9";s:12:"translations";a:0:{}}', 'no'),
 (154, 'recently_activated', 'a:0:{}', 'yes'),
 (161, '_site_transient_timeout_browser_c46c46488c45b6b6d1e0d03b3efd04ac', '1511969565', 'no'),
 (162, '_site_transient_browser_c46c46488c45b6b6d1e0d03b3efd04ac', 'a:10:{s:4:"name";s:7:"Firefox";s:7:"version";s:4:"57.0";s:8:"platform";s:5:"Linux";s:10:"update_url";s:24:"https://www.firefox.com/";s:7:"img_src";s:44:"http://s.w.org/images/browsers/firefox.png?1";s:11:"img_src_ssl";s:45:"https://s.w.org/images/browsers/firefox.png?1";s:15:"current_version";s:2:"56";s:7:"upgrade";b:0;s:8:"insecure";b:0;s:6:"mobile";b:0;}', 'no'),
 (176, 'current_theme', 'BeBraven2018', 'yes'),
 (177, 'theme_mods_bebraven', 'a:3:{i:0;b:0;s:18:"nav_menu_locations";a:2:{s:11:"top-primary";i:2;s:13:"top-secondary";i:3;}s:18:"custom_css_post_id";i:-1;}', 'yes'),
 (178, 'theme_switched', '', 'yes'),
-(181, '_site_transient_update_themes', 'O:8:"stdClass":4:{s:12:"last_checked";i:1511637775;s:7:"checked";a:1:{s:8:"bebraven";s:1:"1";}s:8:"response";a:0:{}s:12:"translations";a:0:{}}', 'no'),
-(233, '_site_transient_update_plugins', 'O:8:"stdClass":4:{s:12:"last_checked";i:1511637774;s:8:"response";a:0:{}s:12:"translations";a:0:{}s:9:"no_update";a:3:{s:19:"akismet/akismet.php";O:8:"stdClass":9:{s:2:"id";s:21:"w.org/plugins/akismet";s:4:"slug";s:7:"akismet";s:6:"plugin";s:19:"akismet/akismet.php";s:11:"new_version";s:5:"4.0.1";s:3:"url";s:38:"https://wordpress.org/plugins/akismet/";s:7:"package";s:56:"https://downloads.wordpress.org/plugin/akismet.4.0.1.zip";s:5:"icons";a:3:{s:2:"1x";s:59:"https://ps.w.org/akismet/assets/icon-128x128.png?rev=969272";s:2:"2x";s:59:"https://ps.w.org/akismet/assets/icon-256x256.png?rev=969272";s:7:"default";s:59:"https://ps.w.org/akismet/assets/icon-256x256.png?rev=969272";}s:7:"banners";a:2:{s:2:"1x";s:61:"https://ps.w.org/akismet/assets/banner-772x250.jpg?rev=479904";s:7:"default";s:61:"https://ps.w.org/akismet/assets/banner-772x250.jpg?rev=479904";}s:11:"banners_rtl";a:0:{}}s:47:"regenerate-thumbnails/regenerate-thumbnails.php";O:8:"stdClass":9:{s:2:"id";s:35:"w.org/plugins/regenerate-thumbnails";s:4:"slug";s:21:"regenerate-thumbnails";s:6:"plugin";s:47:"regenerate-thumbnails/regenerate-thumbnails.php";s:11:"new_version";s:5:"2.3.1";s:3:"url";s:52:"https://wordpress.org/plugins/regenerate-thumbnails/";s:7:"package";s:64:"https://downloads.wordpress.org/plugin/regenerate-thumbnails.zip";s:5:"icons";a:2:{s:2:"1x";s:74:"https://ps.w.org/regenerate-thumbnails/assets/icon-128x128.png?rev=1753390";s:7:"default";s:74:"https://ps.w.org/regenerate-thumbnails/assets/icon-128x128.png?rev=1753390";}s:7:"banners";a:3:{s:2:"2x";s:77:"https://ps.w.org/regenerate-thumbnails/assets/banner-1544x500.jpg?rev=1753390";s:2:"1x";s:76:"https://ps.w.org/regenerate-thumbnails/assets/banner-772x250.jpg?rev=1753390";s:7:"default";s:77:"https://ps.w.org/regenerate-thumbnails/assets/banner-1544x500.jpg?rev=1753390";}s:11:"banners_rtl";a:0:{}}s:41:"wordpress-importer/wordpress-importer.php";O:8:"stdClass":9:{s:2:"id";s:32:"w.org/plugins/wordpress-importer";s:4:"slug";s:18:"wordpress-importer";s:6:"plugin";s:41:"wordpress-importer/wordpress-importer.php";s:11:"new_version";s:5:"0.6.3";s:3:"url";s:49:"https://wordpress.org/plugins/wordpress-importer/";s:7:"package";s:67:"https://downloads.wordpress.org/plugin/wordpress-importer.0.6.3.zip";s:5:"icons";a:0:{}s:7:"banners";a:2:{s:2:"1x";s:72:"https://ps.w.org/wordpress-importer/assets/banner-772x250.png?rev=547654";s:7:"default";s:72:"https://ps.w.org/wordpress-importer/assets/banner-772x250.png?rev=547654";}s:11:"banners_rtl";a:0:{}}}}', 'no'),
+(181, '_site_transient_update_themes', 'O:8:"stdClass":4:{s:12:"last_checked";i:1511809204;s:7:"checked";a:1:{s:8:"bebraven";s:1:"1";}s:8:"response";a:0:{}s:12:"translations";a:0:{}}', 'no'),
+(233, '_site_transient_update_plugins', 'O:8:"stdClass":4:{s:12:"last_checked";i:1511809203;s:8:"response";a:0:{}s:12:"translations";a:0:{}s:9:"no_update";a:3:{s:19:"akismet/akismet.php";O:8:"stdClass":9:{s:2:"id";s:21:"w.org/plugins/akismet";s:4:"slug";s:7:"akismet";s:6:"plugin";s:19:"akismet/akismet.php";s:11:"new_version";s:5:"4.0.1";s:3:"url";s:38:"https://wordpress.org/plugins/akismet/";s:7:"package";s:56:"https://downloads.wordpress.org/plugin/akismet.4.0.1.zip";s:5:"icons";a:3:{s:2:"1x";s:59:"https://ps.w.org/akismet/assets/icon-128x128.png?rev=969272";s:2:"2x";s:59:"https://ps.w.org/akismet/assets/icon-256x256.png?rev=969272";s:7:"default";s:59:"https://ps.w.org/akismet/assets/icon-256x256.png?rev=969272";}s:7:"banners";a:2:{s:2:"1x";s:61:"https://ps.w.org/akismet/assets/banner-772x250.jpg?rev=479904";s:7:"default";s:61:"https://ps.w.org/akismet/assets/banner-772x250.jpg?rev=479904";}s:11:"banners_rtl";a:0:{}}s:47:"regenerate-thumbnails/regenerate-thumbnails.php";O:8:"stdClass":9:{s:2:"id";s:35:"w.org/plugins/regenerate-thumbnails";s:4:"slug";s:21:"regenerate-thumbnails";s:6:"plugin";s:47:"regenerate-thumbnails/regenerate-thumbnails.php";s:11:"new_version";s:5:"2.3.1";s:3:"url";s:52:"https://wordpress.org/plugins/regenerate-thumbnails/";s:7:"package";s:64:"https://downloads.wordpress.org/plugin/regenerate-thumbnails.zip";s:5:"icons";a:2:{s:2:"1x";s:74:"https://ps.w.org/regenerate-thumbnails/assets/icon-128x128.png?rev=1753390";s:7:"default";s:74:"https://ps.w.org/regenerate-thumbnails/assets/icon-128x128.png?rev=1753390";}s:7:"banners";a:3:{s:2:"2x";s:77:"https://ps.w.org/regenerate-thumbnails/assets/banner-1544x500.jpg?rev=1753390";s:2:"1x";s:76:"https://ps.w.org/regenerate-thumbnails/assets/banner-772x250.jpg?rev=1753390";s:7:"default";s:77:"https://ps.w.org/regenerate-thumbnails/assets/banner-1544x500.jpg?rev=1753390";}s:11:"banners_rtl";a:0:{}}s:41:"wordpress-importer/wordpress-importer.php";O:8:"stdClass":9:{s:2:"id";s:32:"w.org/plugins/wordpress-importer";s:4:"slug";s:18:"wordpress-importer";s:6:"plugin";s:41:"wordpress-importer/wordpress-importer.php";s:11:"new_version";s:5:"0.6.3";s:3:"url";s:49:"https://wordpress.org/plugins/wordpress-importer/";s:7:"package";s:67:"https://downloads.wordpress.org/plugin/wordpress-importer.0.6.3.zip";s:5:"icons";a:0:{}s:7:"banners";a:2:{s:2:"1x";s:72:"https://ps.w.org/wordpress-importer/assets/banner-772x250.png?rev=547654";s:7:"default";s:72:"https://ps.w.org/wordpress-importer/assets/banner-772x250.png?rev=547654";}s:11:"banners_rtl";a:0:{}}}}', 'no'),
 (243, 'category_children', 'a:4:{i:15;a:3:{i:0;i:16;i:1;i:18;i:2;i:24;}i:16;a:1:{i:0;i:22;}i:18;a:1:{i:0;i:23;}i:24;a:1:{i:0;i:25;}}', 'yes'),
 (263, 'nav_menu_options', 'a:2:{i:0;b:0;s:8:"auto_add";a:0:{}}', 'yes'),
-(284, '_transient_timeout_files_60157c15734abb01fe4270e87eb683517ac1e382a7b9603d6446eac', '1511649705', 'no'),
-(285, '_transient_files_60157c15734abb01fe4270e87eb683517ac1e382a7b9603d6446eac', 'a:16:{s:9:"boxes.php";s:50:"/var/www/html/wp-content/themes/bebraven/boxes.php";s:17:"fonts/DINBold.otf";s:58:"/var/www/html/wp-content/themes/bebraven/fonts/DINBold.otf";s:26:"fonts/DINCondensedBold.otf";s:67:"/var/www/html/wp-content/themes/bebraven/fonts/DINCondensedBold.otf";s:19:"fonts/DINMedium.otf";s:60:"/var/www/html/wp-content/themes/bebraven/fonts/DINMedium.otf";s:20:"fonts/DINRegular.otf";s:61:"/var/www/html/wp-content/themes/bebraven/fonts/DINRegular.otf";s:10:"footer.php";s:51:"/var/www/html/wp-content/themes/bebraven/footer.php";s:12:"functions.js";s:53:"/var/www/html/wp-content/themes/bebraven/functions.js";s:13:"functions.php";s:54:"/var/www/html/wp-content/themes/bebraven/functions.php";s:10:"header.php";s:51:"/var/www/html/wp-content/themes/bebraven/header.php";s:22:"images/braven-logo.png";s:63:"/var/www/html/wp-content/themes/bebraven/images/braven-logo.png";s:9:"index.php";s:50:"/var/www/html/wp-content/themes/bebraven/index.php";s:13:"page.php.nope";s:54:"/var/www/html/wp-content/themes/bebraven/page.php.nope";s:11:"sidebar.php";s:52:"/var/www/html/wp-content/themes/bebraven/sidebar.php";s:14:"single-bio.php";s:55:"/var/www/html/wp-content/themes/bebraven/single-bio.php";s:10:"single.php";s:51:"/var/www/html/wp-content/themes/bebraven/single.php";s:9:"style.css";s:50:"/var/www/html/wp-content/themes/bebraven/style.css";}', 'no'),
-(286, 'format_children', 'a:0:{}', 'yes');
+(318, 'format_children', 'a:0:{}', 'yes'),
+(321, '_transient_timeout_files_60157c15734abb01fe4270e87eb683517ac1e382a7b9603d6446eac', '1511829142', 'no'),
+(322, '_transient_files_60157c15734abb01fe4270e87eb683517ac1e382a7b9603d6446eac', 'a:18:{s:25:"backup/wordpress.sql.back";s:66:"/var/www/html/wp-content/themes/bebraven/backup/wordpress.sql.back";s:9:"boxes.php";s:50:"/var/www/html/wp-content/themes/bebraven/boxes.php";s:17:"fonts/DINBold.otf";s:58:"/var/www/html/wp-content/themes/bebraven/fonts/DINBold.otf";s:26:"fonts/DINCondensedBold.otf";s:67:"/var/www/html/wp-content/themes/bebraven/fonts/DINCondensedBold.otf";s:19:"fonts/DINMedium.otf";s:60:"/var/www/html/wp-content/themes/bebraven/fonts/DINMedium.otf";s:20:"fonts/DINRegular.otf";s:61:"/var/www/html/wp-content/themes/bebraven/fonts/DINRegular.otf";s:10:"footer.php";s:51:"/var/www/html/wp-content/themes/bebraven/footer.php";s:12:"functions.js";s:53:"/var/www/html/wp-content/themes/bebraven/functions.js";s:13:"functions.php";s:54:"/var/www/html/wp-content/themes/bebraven/functions.php";s:10:"header.php";s:51:"/var/www/html/wp-content/themes/bebraven/header.php";s:22:"images/braven-logo.png";s:63:"/var/www/html/wp-content/themes/bebraven/images/braven-logo.png";s:9:"index.php";s:50:"/var/www/html/wp-content/themes/bebraven/index.php";s:13:"page.php.nope";s:54:"/var/www/html/wp-content/themes/bebraven/page.php.nope";s:11:"sidebar.php";s:52:"/var/www/html/wp-content/themes/bebraven/sidebar.php";s:14:"single-bio.php";s:55:"/var/www/html/wp-content/themes/bebraven/single-bio.php";s:14:"single-box.php";s:55:"/var/www/html/wp-content/themes/bebraven/single-box.php";s:10:"single.php";s:51:"/var/www/html/wp-content/themes/bebraven/single.php";s:9:"style.css";s:50:"/var/www/html/wp-content/themes/bebraven/style.css";}', 'no');
 
 -- --------------------------------------------------------
 
@@ -305,9 +305,9 @@ INSERT INTO `wp_postmeta` (`meta_id`, `post_id`, `meta_key`, `meta_value`) VALUE
 (56, 25, '_edit_lock', '1511369196:1'),
 (57, 14, '_edit_lock', '1511383658:1'),
 (58, 82, '_edit_last', '1'),
-(59, 82, '_edit_lock', '1511556525:1'),
+(59, 82, '_edit_lock', '1511818998:1'),
 (60, 84, '_edit_last', '1'),
-(61, 84, '_edit_lock', '1511383521:1'),
+(61, 84, '_edit_lock', '1511822041:1'),
 (62, 86, '_edit_last', '1'),
 (63, 86, '_edit_lock', '1511627391:1'),
 (64, 86, 'story', 'right'),
@@ -326,9 +326,9 @@ INSERT INTO `wp_postmeta` (`meta_id`, `post_id`, `meta_key`, `meta_value`) VALUE
 (77, 95, '_edit_lock', '1511383667:1'),
 (78, 95, '_thumbnail_id', '91'),
 (79, 97, '_edit_last', '1'),
-(80, 97, '_edit_lock', '1511383668:1'),
+(80, 97, '_edit_lock', '1511823206:1'),
 (81, 99, '_edit_last', '1'),
-(82, 99, '_edit_lock', '1511627549:1'),
+(82, 99, '_edit_lock', '1511828493:1'),
 (83, 101, '_edit_last', '1'),
 (84, 101, '_edit_lock', '1511449617:1'),
 (85, 103, '_edit_last', '1'),
@@ -417,7 +417,7 @@ INSERT INTO `wp_postmeta` (`meta_id`, `post_id`, `meta_key`, `meta_value`) VALUE
 (168, 154, '_wp_attachment_metadata', 'a:5:{s:5:"width";i:128;s:6:"height";i:128;s:4:"file";s:14:"2017/11/34.jpg";s:5:"sizes";a:0:{}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}'),
 (169, 153, '_thumbnail_id', '154'),
 (170, 156, '_edit_last', '1'),
-(171, 156, '_edit_lock', '1511451058:1'),
+(171, 156, '_edit_lock', '1511825403:1'),
 (172, 157, '_wp_attached_file', '2017/11/35.jpg'),
 (173, 157, '_wp_attachment_metadata', 'a:5:{s:5:"width";i:128;s:6:"height";i:128;s:4:"file";s:14:"2017/11/35.jpg";s:5:"sizes";a:0:{}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}'),
 (174, 156, '_thumbnail_id', '157'),
@@ -564,19 +564,19 @@ INSERT INTO `wp_postmeta` (`meta_id`, `post_id`, `meta_key`, `meta_value`) VALUE
 (330, 200, '_menu_item_xfn', ''),
 (331, 200, '_menu_item_url', ''),
 (332, 210, '_edit_last', '1'),
-(333, 210, '_edit_lock', '1511625296:1'),
+(333, 210, '_edit_lock', '1511824444:1'),
 (334, 213, '_edit_last', '1'),
 (335, 213, '_edit_lock', '1511645962:1'),
 (336, 214, '_wp_attached_file', '2017/11/about-01.jpg'),
 (337, 214, '_wp_attachment_metadata', 'a:5:{s:5:"width";i:1000;s:6:"height";i:1000;s:4:"file";s:20:"2017/11/about-01.jpg";s:5:"sizes";a:4:{s:9:"thumbnail";a:4:{s:4:"file";s:20:"about-01-150x150.jpg";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";}s:6:"medium";a:4:{s:4:"file";s:20:"about-01-300x300.jpg";s:5:"width";i:300;s:6:"height";i:300;s:9:"mime-type";s:10:"image/jpeg";}s:12:"medium_large";a:4:{s:4:"file";s:20:"about-01-768x768.jpg";s:5:"width";i:768;s:6:"height";i:768;s:9:"mime-type";s:10:"image/jpeg";}s:8:"headshot";a:4:{s:4:"file";s:20:"about-01-400x400.jpg";s:5:"width";i:400;s:6:"height";i:400;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}'),
 (338, 213, '_thumbnail_id', '214'),
 (339, 216, '_edit_last', '1'),
-(340, 216, '_edit_lock', '1511645963:1'),
+(340, 216, '_edit_lock', '1511797817:1'),
 (341, 217, '_wp_attached_file', '2017/11/about-02.jpg'),
 (342, 217, '_wp_attachment_metadata', 'a:5:{s:5:"width";i:1000;s:6:"height";i:1000;s:4:"file";s:20:"2017/11/about-02.jpg";s:5:"sizes";a:4:{s:9:"thumbnail";a:4:{s:4:"file";s:20:"about-02-150x150.jpg";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";}s:6:"medium";a:4:{s:4:"file";s:20:"about-02-300x300.jpg";s:5:"width";i:300;s:6:"height";i:300;s:9:"mime-type";s:10:"image/jpeg";}s:12:"medium_large";a:4:{s:4:"file";s:20:"about-02-768x768.jpg";s:5:"width";i:768;s:6:"height";i:768;s:9:"mime-type";s:10:"image/jpeg";}s:8:"headshot";a:4:{s:4:"file";s:20:"about-02-400x400.jpg";s:5:"width";i:400;s:6:"height";i:400;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}'),
 (343, 216, '_thumbnail_id', '217'),
 (344, 219, '_edit_last', '1'),
-(345, 219, '_edit_lock', '1511624909:1'),
+(345, 219, '_edit_lock', '1511824514:1'),
 (346, 18, '_edit_lock', '1511625496:1'),
 (347, 18, '_wp_trash_meta_status', 'publish'),
 (348, 18, '_wp_trash_meta_time', '1511625696'),
@@ -633,10 +633,10 @@ INSERT INTO `wp_postmeta` (`meta_id`, `post_id`, `meta_key`, `meta_value`) VALUE
 (399, 265, '_edit_lock', '1511628760:1'),
 (400, 268, '_edit_last', '1'),
 (401, 268, '_edit_lock', '1511628845:1'),
-(402, 56, '_edit_lock', '1511629850:1'),
+(402, 56, '_edit_lock', '1511824793:1'),
 (403, 56, '_thumbnail_id', '174'),
 (404, 273, '_edit_last', '1'),
-(405, 273, '_edit_lock', '1511637734:1'),
+(405, 273, '_edit_lock', '1511825391:1'),
 (406, 276, '_edit_last', '1'),
 (407, 276, '_edit_lock', '1511637801:1'),
 (408, 278, '_edit_last', '1'),
@@ -644,11 +644,35 @@ INSERT INTO `wp_postmeta` (`meta_id`, `post_id`, `meta_key`, `meta_value`) VALUE
 (410, 280, '_edit_last', '1'),
 (411, 280, '_edit_lock', '1511637874:1'),
 (412, 282, '_edit_last', '1'),
-(413, 282, '_edit_lock', '1511647714:1'),
+(413, 282, '_edit_lock', '1511648181:1'),
 (414, 282, '_thumbnail_id', '284'),
 (415, 284, '_wp_attached_file', '2017/11/temp-picpkg.jpg');
 INSERT INTO `wp_postmeta` (`meta_id`, `post_id`, `meta_key`, `meta_value`) VALUES
-(416, 284, '_wp_attachment_metadata', 'a:5:{s:5:"width";i:2000;s:6:"height";i:750;s:4:"file";s:23:"2017/11/temp-picpkg.jpg";s:5:"sizes";a:8:{s:9:"thumbnail";a:4:{s:4:"file";s:23:"temp-picpkg-150x150.jpg";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";}s:6:"medium";a:4:{s:4:"file";s:23:"temp-picpkg-300x113.jpg";s:5:"width";i:300;s:6:"height";i:113;s:9:"mime-type";s:10:"image/jpeg";}s:12:"medium_large";a:4:{s:4:"file";s:23:"temp-picpkg-768x288.jpg";s:5:"width";i:768;s:6:"height";i:288;s:9:"mime-type";s:10:"image/jpeg";}s:5:"large";a:4:{s:4:"file";s:24:"temp-picpkg-1024x384.jpg";s:5:"width";i:1024;s:6:"height";i:384;s:9:"mime-type";s:10:"image/jpeg";}s:7:"marquee";a:4:{s:4:"file";s:24:"temp-picpkg-2000x750.jpg";s:5:"width";i:2000;s:6:"height";i:750;s:9:"mime-type";s:10:"image/jpeg";}s:4:"half";a:4:{s:4:"file";s:24:"temp-picpkg-1000x750.jpg";s:5:"width";i:1000;s:6:"height";i:750;s:9:"mime-type";s:10:"image/jpeg";}s:8:"headshot";a:4:{s:4:"file";s:23:"temp-picpkg-400x400.jpg";s:5:"width";i:400;s:6:"height";i:400;s:9:"mime-type";s:10:"image/jpeg";}s:4:"logo";a:4:{s:4:"file";s:23:"temp-picpkg-400x150.jpg";s:5:"width";i:400;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}');
+(416, 284, '_wp_attachment_metadata', 'a:5:{s:5:"width";i:2000;s:6:"height";i:750;s:4:"file";s:23:"2017/11/temp-picpkg.jpg";s:5:"sizes";a:8:{s:9:"thumbnail";a:4:{s:4:"file";s:23:"temp-picpkg-150x150.jpg";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";}s:6:"medium";a:4:{s:4:"file";s:23:"temp-picpkg-300x113.jpg";s:5:"width";i:300;s:6:"height";i:113;s:9:"mime-type";s:10:"image/jpeg";}s:12:"medium_large";a:4:{s:4:"file";s:23:"temp-picpkg-768x288.jpg";s:5:"width";i:768;s:6:"height";i:288;s:9:"mime-type";s:10:"image/jpeg";}s:5:"large";a:4:{s:4:"file";s:24:"temp-picpkg-1024x384.jpg";s:5:"width";i:1024;s:6:"height";i:384;s:9:"mime-type";s:10:"image/jpeg";}s:7:"marquee";a:4:{s:4:"file";s:24:"temp-picpkg-2000x750.jpg";s:5:"width";i:2000;s:6:"height";i:750;s:9:"mime-type";s:10:"image/jpeg";}s:4:"half";a:4:{s:4:"file";s:24:"temp-picpkg-1000x750.jpg";s:5:"width";i:1000;s:6:"height";i:750;s:9:"mime-type";s:10:"image/jpeg";}s:8:"headshot";a:4:{s:4:"file";s:23:"temp-picpkg-400x400.jpg";s:5:"width";i:400;s:6:"height";i:400;s:9:"mime-type";s:10:"image/jpeg";}s:4:"logo";a:4:{s:4:"file";s:23:"temp-picpkg-400x150.jpg";s:5:"width";i:400;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}'),
+(417, 286, '_edit_last', '1'),
+(418, 286, '_edit_lock', '1511818163:1'),
+(419, 288, '_edit_last', '1'),
+(420, 288, '_edit_lock', '1511818563:1'),
+(421, 290, '_edit_last', '1'),
+(422, 290, '_edit_lock', '1511818561:1'),
+(423, 311, '_edit_last', '1'),
+(424, 311, '_edit_lock', '1511820882:1'),
+(425, 311, '_thumbnail_id', '160'),
+(430, 313, '_edit_last', '1'),
+(431, 313, '_edit_lock', '1511820904:1'),
+(434, 315, '_edit_last', '1'),
+(435, 315, '_edit_lock', '1511821159:1'),
+(438, 319, '_edit_last', '1'),
+(439, 319, '_edit_lock', '1511821875:1'),
+(440, 330, '_edit_last', '1'),
+(441, 330, '_edit_lock', '1511826181:1'),
+(442, 331, '_wp_attached_file', '2017/11/30.jpg'),
+(443, 331, '_wp_attachment_metadata', 'a:5:{s:5:"width";i:128;s:6:"height";i:128;s:4:"file";s:14:"2017/11/30.jpg";s:5:"sizes";a:0:{}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}'),
+(444, 330, '_thumbnail_id', '331'),
+(445, 334, '_edit_last', '1'),
+(446, 334, '_edit_lock', '1511828500:1'),
+(447, 336, '_edit_last', '1'),
+(448, 336, '_edit_lock', '1511826239:1');
 
 -- --------------------------------------------------------
 
@@ -725,9 +749,9 @@ INSERT INTO `wp_posts` (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post
 (79, 1, '2017-11-22 11:37:07', '2017-11-22 16:37:07', '', 'Coach and Volunteer', '', 'inherit', 'closed', 'closed', '', '25-revision-v1', '', '', '2017-11-22 11:37:07', '2017-11-22 16:37:07', '', 25, 'http://bebraven.org/2017/11/22/25-revision-v1/', 0, 'revision', '', 0),
 (80, 1, '2017-11-22 11:37:12', '2017-11-22 16:37:12', '<h3>Braven Accelerator</h3>\r\nA one-semester credit-bearing course\r\n\r\n<a href="#">Learn more</a>\r\n<h3>Post-Accelerator</h3>\r\nOngoing support until graduation\r\n\r\n<a href="#">Learn more</a>', 'Sign up for an experience that has the potential to accelerate your professional trajectory', '', 'inherit', 'closed', 'closed', '', '14-revision-v1', '', '', '2017-11-22 11:37:12', '2017-11-22 16:37:12', '', 14, 'http://bebraven.org/2017/11/22/14-revision-v1/', 0, 'revision', '', 0),
 (81, 1, '2017-11-22 11:49:29', '2017-11-22 16:49:29', '', '<p>Leaders emerging from everywhere,<br />empowered to excel anywhere.</p><p>That\'s a Braven future.</p>', '', 'inherit', 'closed', 'closed', '', '7-revision-v1', '', '', '2017-11-22 11:49:29', '2017-11-22 16:49:29', '', 7, 'http://bebraven.org/2017/11/22/7-revision-v1/', 0, 'revision', '', 0),
-(82, 1, '2017-11-22 11:51:41', '2017-11-22 16:51:41', '[include-bios biotype="staff" category="product"]', '<small>Life changing? Yes.</small><br />Meet Braven Fellows', '', 'publish', 'closed', 'closed', '', 'life-changing-yes-meet-braven-fellows', '', '', '2017-11-24 14:31:33', '2017-11-24 19:31:33', '', 6, 'http://bebraven.org/?page_id=82', 40, 'page', '', 0),
+(82, 1, '2017-11-22 11:51:41', '2017-11-22 16:51:41', '[include-bios biotype="fellow" category=""]', '<small>Life changing? Yes.</small><br />Meet Braven Fellows', '', 'publish', 'closed', 'closed', '', 'life-changing-yes-meet-braven-fellows', '', '', '2017-11-27 16:38:47', '2017-11-27 21:38:47', '', 6, 'http://bebraven.org/?page_id=82', 40, 'page', '', 0),
 (83, 1, '2017-11-22 11:51:41', '2017-11-22 16:51:41', '', '<small>Life changing? Yes.</small><br />Meet Braven Fellows', '', 'inherit', 'closed', 'closed', '', '82-revision-v1', '', '', '2017-11-22 11:51:41', '2017-11-22 16:51:41', '', 82, 'http://bebraven.org/2017/11/22/82-revision-v1/', 0, 'revision', '', 0),
-(84, 1, '2017-11-22 11:52:07', '2017-11-22 16:52:07', 'The Braven Nation consists of individuals, institutions, and companies invested in your future.', 'A network of supporters fueling our work', '', 'publish', 'closed', 'closed', '', 'a-network-of-supporters-fueling-our-work', '', '', '2017-11-22 14:10:04', '2017-11-22 19:10:04', '', 6, 'http://bebraven.org/?page_id=84', 50, 'page', '', 0),
+(84, 1, '2017-11-22 11:52:07', '2017-11-22 16:52:07', 'The Braven Nation consists of individuals, institutions, and companies invested in your future.', 'A network of supporters fueling our work', '', 'publish', 'closed', 'closed', '', 'a-network-of-supporters-fueling-our-work', '', '', '2017-11-27 17:34:01', '2017-11-27 22:34:01', '', 6, 'http://bebraven.org/?page_id=84', 50, 'page', '', 0),
 (85, 1, '2017-11-22 11:52:07', '2017-11-22 16:52:07', '', 'A network of supporters fueling our work', '', 'inherit', 'closed', 'closed', '', '84-revision-v1', '', '', '2017-11-22 11:52:07', '2017-11-22 16:52:07', '', 84, 'http://bebraven.org/2017/11/22/84-revision-v1/', 0, 'revision', '', 0),
 (86, 1, '2017-11-22 11:52:35', '2017-11-22 16:52:35', 'Our partners sponsor events, provide workspace and internships, and encourage their employees to volunteer.', 'Employer Partners', '', 'publish', 'closed', 'closed', '', 'employer-partners-ref', '', '', '2017-11-25 11:02:11', '2017-11-25 16:02:11', '', 6, 'http://bebraven.org/?page_id=86', 60, 'page', '', 0),
 (87, 1, '2017-11-22 11:52:35', '2017-11-22 16:52:35', '', 'Employer Partners', '', 'inherit', 'closed', 'closed', '', '86-revision-v1', '', '', '2017-11-22 11:52:35', '2017-11-22 16:52:35', '', 86, 'http://bebraven.org/2017/11/22/86-revision-v1/', 0, 'revision', '', 0),
@@ -740,9 +764,9 @@ INSERT INTO `wp_posts` (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post
 (94, 1, '2017-11-22 12:52:12', '2017-11-22 17:52:12', 'Our partners sponsor events, provide workspace and internships, and encourage their employees to volunteer.', 'Employer Partners', '', 'inherit', 'closed', 'closed', '', '86-revision-v1', '', '', '2017-11-22 12:52:12', '2017-11-22 17:52:12', '', 86, 'http://bebraven.org/2017/11/22/86-revision-v1/', 0, 'revision', '', 0),
 (95, 1, '2017-11-22 12:54:48', '2017-11-22 17:54:48', 'Numerous volunteers provide supprt such as mock interviews and professional mentorship.\r\n\r\n<a href="http://bebraven.org/volunteer/">Support our fellows</a>\r\n\r\n<a href="http://bebraven.org/become-a-fellow/">Become a fellow</a>', 'Volunteer', '', 'publish', 'closed', 'closed', '', 'volunteer-ref', '', '', '2017-11-22 14:10:15', '2017-11-22 19:10:16', '', 6, 'http://bebraven.org/?page_id=95', 80, 'page', '', 0),
 (96, 1, '2017-11-22 12:54:48', '2017-11-22 17:54:48', 'Numerous volunteers provide supprt such as mock interviews and professional mentorship.\r\n\r\n<a href="http://bebraven.org/volunteer/">Support our fellows</a>\r\n\r\n<a href="http://bebraven.org/become-a-fellow/">Become a fellow</a>', 'Volunteer', '', 'inherit', 'closed', 'closed', '', '95-revision-v1', '', '', '2017-11-22 12:54:48', '2017-11-22 17:54:48', '', 95, 'http://bebraven.org/2017/11/22/95-revision-v1/', 0, 'revision', '', 0),
-(97, 1, '2017-11-22 12:55:47', '2017-11-22 17:55:47', 'Lorem ipsum dolor sit amet.\r\n\r\n<a href="http://bebraven.org/about-us/">Read our story</a>', 'Why Braven?', '', 'publish', 'closed', 'closed', '', 'why-braven', '', '', '2017-11-22 14:10:27', '2017-11-22 19:10:27', '', 6, 'http://bebraven.org/?page_id=97', 90, 'page', '', 0),
+(97, 1, '2017-11-22 12:55:47', '2017-11-22 17:55:47', '<div class="force-margins">Lorem ipsum dolor sit amet.\r\n\r\n<a href="http://bebraven.org/about-us/">Read our story</a></div>\r\n\r\n[include-subpages-as-boxes]', 'Why Braven?', '', 'publish', 'closed', 'closed', '', 'why-braven', '', '', '2017-11-27 17:51:18', '2017-11-27 22:51:18', '', 6, 'http://bebraven.org/?page_id=97', 90, 'page', '', 0),
 (98, 1, '2017-11-22 12:55:47', '2017-11-22 17:55:47', 'Lorem ipsum dolor sit amet.\r\n\r\n<a href="http://bebraven.org/about-us/">Read our story</a>', 'Why Braven?', '', 'inherit', 'closed', 'closed', '', '97-revision-v1', '', '', '2017-11-22 12:55:47', '2017-11-22 17:55:47', '', 97, 'http://bebraven.org/2017/11/22/97-revision-v1/', 0, 'revision', '', 0),
-(99, 1, '2017-11-22 13:15:34', '2017-11-22 18:15:34', '', 'What\'s Trending', '', 'publish', 'closed', 'closed', '', 'whats-trending', '', '', '2017-11-25 11:32:29', '2017-11-25 16:32:29', '', 6, 'http://bebraven.org/?page_id=99', 100, 'page', '', 0),
+(99, 1, '2017-11-22 13:15:34', '2017-11-22 18:15:34', '[include-posts]', 'What\'s Trending', '', 'publish', 'closed', 'closed', '', 'whats-trending', '', '', '2017-11-27 19:21:33', '2017-11-28 00:21:33', '', 6, 'http://bebraven.org/?page_id=99', 100, 'page', '', 0),
 (100, 1, '2017-11-22 13:15:34', '2017-11-22 18:15:34', '', 'What\'s Trending', '', 'inherit', 'closed', 'closed', '', '99-revision-v1', '', '', '2017-11-22 13:15:34', '2017-11-22 18:15:34', '', 99, 'http://bebraven.org/2017/11/22/99-revision-v1/', 0, 'revision', '', 0),
 (101, 1, '2017-11-23 10:01:36', '2017-11-23 15:01:36', 'Aimée was inspired to found this innovative nonprofit based on deep passion and belief that our next generation of leaders will emerge from everywhere. Her experiences being from an underrepresented background in the professional workforce, and many of her closest friends and family members, made her determined to ensure the doors of economic opportunity were not quietly shut on some of our nation’s hardest working and most promising young people. Aimée spent the majority of her career at Teach For America. She held various senior leadership roles, including leading the organization’s groundbreaking work around its human capital and diversity efforts. Earlier in her career, Aimée taught sixth grade; led the Breakthrough/Summerbridge New Orleans site and worked for the national organization. She is a Fellow of the fourth class of the Pahara-Aspen Education Fellowship, a member of the Aspen Global Leadership Network, a Braddock Scholar, a Draper Richards Foundation Entrepreneur, and a Camelback Ventures Fellow. A graduate of Mt. Holyoke College, Aimée resides in Chicago with her husband, three children, and playful Boxer dog. Aimée enjoys scuba diving, traveling, and dancing her heart out in her living room with her family on Dance Friday’s. In addition to our blog, you can engage with her about our work @eubanksdavis.', 'Aimée Eubanks Davis', 'Founder & CEO', 'publish', 'closed', 'closed', '', 'aimee-eubanks-davis', '', '', '2017-11-23 10:09:19', '2017-11-23 15:09:19', '', 0, 'http://bebraven.org/?post_type=bio&#038;p=101', 0, 'bio', '', 0),
 (102, 1, '2017-11-23 10:01:36', '2017-11-23 15:01:36', 'Aimée was inspired to found this innovative nonprofit based on deep passion and belief that our next generation of leaders will emerge from everywhere. Her experiences being from an underrepresented background in the professional workforce, and many of her closest friends and family members, made her determined to ensure the doors of economic opportunity were not quietly shut on some of our nation’s hardest working and most promising young people. Aimée spent the majority of her career at Teach For America. She held various senior leadership roles, including leading the organization’s groundbreaking work around its human capital and diversity efforts. Earlier in her career, Aimée taught sixth grade; led the Breakthrough/Summerbridge New Orleans site and worked for the national organization. She is a Fellow of the fourth class of the Pahara-Aspen Education Fellowship, a member of the Aspen Global Leadership Network, a Braddock Scholar, a Draper Richards Foundation Entrepreneur, and a Camelback Ventures Fellow. A graduate of Mt. Holyoke College, Aimée resides in Chicago with her husband, three children, and playful Boxer dog. Aimée enjoys scuba diving, traveling, and dancing her heart out in her living room with her family on Dance Friday’s. In addition to our blog, you can engage with her about our work @eubanksdavis.', 'Aimée Eubanks Davis', 'Founder & CEO', 'inherit', 'closed', 'closed', '', '101-revision-v1', '', '', '2017-11-23 10:01:36', '2017-11-23 15:01:36', '', 101, 'http://bebraven.org/2017/11/23/101-revision-v1/', 0, 'revision', '', 0),
@@ -854,16 +878,16 @@ INSERT INTO `wp_posts` (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post
 (207, 1, '2017-11-25 10:34:49', '2017-11-25 15:34:49', '', 'The Team', '', 'inherit', 'closed', 'closed', '', '54-revision-v1', '', '', '2017-11-25 10:34:49', '2017-11-25 15:34:49', '', 54, 'http://bebraven.org/2017/11/25/54-revision-v1/', 0, 'revision', '', 0),
 (208, 1, '2017-11-25 10:34:49', '2017-11-25 15:34:49', '', 'Model and Impact', '', 'inherit', 'closed', 'closed', '', '52-revision-v1', '', '', '2017-11-25 10:34:49', '2017-11-25 15:34:49', '', 52, 'http://bebraven.org/2017/11/25/52-revision-v1/', 0, 'revision', '', 0),
 (209, 1, '2017-11-25 10:34:49', '2017-11-25 15:34:49', '', 'Contact Us', '', 'inherit', 'closed', 'closed', '', '66-revision-v1', '', '', '2017-11-25 10:34:49', '2017-11-25 15:34:49', '', 66, 'http://bebraven.org/2017/11/25/66-revision-v1/', 0, 'revision', '', 0),
-(210, 1, '2017-11-25 10:36:27', '2017-11-25 15:36:27', 'In 2013, CEO &amp; Founder Aimée Eubanks Davis launched Braven, having identified the education-to-employment gap faced by some of our most promising young leaders.\r\n\r\nDuring our first two years we piloted several programs in both the K-12 and higher education spaces. We had great success with college students, and decided that we should focus our programming on solving the education-to-employment gap in higher education. With a clear vision of impact we:\r\n<ul>\r\n 	<li>Initially, launched our current college program with our founding university partner San José State University.</li>\r\n 	<li>Brought Braven to the east coast in 2015 with a partnership with Rutgers University-Newark, the most diverse college in the United States.</li>\r\n 	<li>Will now serve over 1000 fellows and bring Braven to our founder’s hometown of Chicago in a unique partnership with National Louis University.</li>\r\n</ul>\r\n<a href="http://bebraven.org/model-and-impact/">Learn more</a>', 'A Path to Impact', '', 'publish', 'closed', 'closed', '', 'path-to-impact', '', '', '2017-11-25 10:57:00', '2017-11-25 15:57:00', '', 29, 'http://bebraven.org/?page_id=210', 10, 'page', '', 0),
+(210, 1, '2017-11-25 10:36:27', '2017-11-25 15:36:27', 'In 2013, CEO &amp; Founder Aimée Eubanks Davis launched Braven, having identified the education-to-employment gap faced by some of our most promising young leaders.\r\n\r\nDuring our first two years we piloted several programs in both the K-12 and higher education spaces. We had great success with college students, and decided that we should focus our programming on solving the education-to-employment gap in higher education. With a clear vision of impact we:\r\n<ul>\r\n 	<li>Initially, launched our current college program with our founding university partner San José State University.</li>\r\n 	<li>Brought Braven to the east coast in 2015 with a partnership with Rutgers University-Newark, the most diverse college in the United States.</li>\r\n 	<li>Will now serve over 1000 fellows and bring Braven to our founder’s hometown of Chicago in a unique partnership with National Louis University.</li>\r\n</ul>\r\n<a href="http://bebraven.org/model-and-impact/">Learn more</a>', 'A Path to Impact', '', 'publish', 'closed', 'closed', '', 'path-to-impact', '', '', '2017-11-27 18:14:04', '2017-11-27 23:14:04', '', 29, 'http://bebraven.org/?page_id=210', 10, 'page', '', 0),
 (211, 1, '2017-11-25 10:36:27', '2017-11-25 15:36:27', 'Lorem ipsum dolor.\r\n<a href="http://bebraven.org/model-and-impact/">Learn more</a>', 'Path to Impact', '', 'inherit', 'closed', 'closed', '', '210-revision-v1', '', '', '2017-11-25 10:36:27', '2017-11-25 15:36:27', '', 210, 'http://bebraven.org/2017/11/25/210-revision-v1/', 0, 'revision', '', 0),
 (212, 1, '2017-11-25 10:36:58', '2017-11-25 15:36:58', 'Lorem ipsum dolor.\r\n<ul>\r\n 	<li>Initially blah blah</li>\r\n 	<li>Then we blah</li>\r\n</ul>\r\n<a href="http://bebraven.org/model-and-impact/">Learn more</a>', 'Path to Impact', '', 'inherit', 'closed', 'closed', '', '210-revision-v1', '', '', '2017-11-25 10:36:58', '2017-11-25 15:36:58', '', 210, 'http://bebraven.org/2017/11/25/210-revision-v1/', 0, 'revision', '', 0),
 (213, 1, '2017-11-25 10:40:08', '2017-11-25 15:40:08', 'Working across the country, many members of our team were the first in their families to go to college, are the sons and daughters of immigrants, and/or come from underrepresented backgrounds in the professional workforce. Amongst our team there are also people from the most privileged backgrounds. We are in this work together. We believe that if we go together, we will go further.\r\n\r\n<a href="http://bebraven.org/the-team/">Our team</a>\r\n<h4>Visit our regions</h4>\r\n<a href="http://bebraven.org/bay-area/">Bay Area</a> <a href="http://bebraven.org/newark/">Newark</a> <a href="http://bebraven.org/chicago/">Chicago</a>', 'Teamwork', '', 'publish', 'closed', 'closed', '', 'teamwork', '', '', '2017-11-25 10:57:57', '2017-11-25 15:57:57', '', 29, 'http://bebraven.org/?page_id=213', 20, 'page', '', 0),
 (214, 1, '2017-11-25 10:40:03', '2017-11-25 15:40:03', '', 'about-01', '', 'inherit', 'open', 'closed', '', 'about-01', '', '', '2017-11-25 10:40:03', '2017-11-25 15:40:03', '', 213, 'http://bebraven.org/wp-content/uploads/2017/11/about-01.jpg', 0, 'attachment', 'image/jpeg', 0),
 (215, 1, '2017-11-25 10:40:08', '2017-11-25 15:40:08', 'Working across blah lorem ipsum\r\n\r\n<a href="http://bebraven.org/the-team/">Our team</a>\r\n<h4>Visit our regions</h4>\r\n<a href="http://bebraven.org/bay-area/">Bay Area</a> <a href="http://bebraven.org/newark/">Newark</a> <a href="http://bebraven.org/chicago/">Chicago</a>', 'Teamwork', '', 'inherit', 'closed', 'closed', '', '213-revision-v1', '', '', '2017-11-25 10:40:08', '2017-11-25 15:40:08', '', 213, 'http://bebraven.org/2017/11/25/213-revision-v1/', 0, 'revision', '', 0),
-(216, 1, '2017-11-25 10:42:31', '2017-11-25 15:42:31', 'A key to our early success is our unique partnership model with Universities and Employer Partners. Together, we are able to implement innovative and experiential career education into the undergraduate experience for low-income and first-generation college students and build a workforce as diverse as our future demands.\r\n<h4>University Partners:</h4>\r\n<ul>\r\n 	<li><a href="http://bebraven.org/chicago/">National Louis University</a></li>\r\n 	<li><a href="http://bebraven.org/newark/">Rutgers University-Newark</a></li>\r\n 	<li><a href="http://bebraven.org/bay-area/">San José State University</a></li>\r\n</ul>\r\n<a href="http://bebraven.org/employer-partners/">Become an Employer Partner</a>\r\n\r\n&nbsp;\r\n\r\nWe are also grateful for the many supporters, from volunteers to donors, who share our vision and make our work possible.\r\n\r\n<a href="http://bebraven.org/our-supporters/">Current Supporters</a>', 'Partnerships at Work', '', 'publish', 'closed', 'closed', '', 'partnerships-at-work', '', '', '2017-11-25 11:02:00', '2017-11-25 16:02:00', '', 29, 'http://bebraven.org/?page_id=216', 30, 'page', '', 0),
+(216, 1, '2017-11-25 10:42:31', '2017-11-25 15:42:31', 'A key to our early success is our unique partnership model with Universities and Employer Partners. Together, we are able to implement innovative and experiential career education into the undergraduate experience for low-income and first-generation college students and build a workforce as diverse as our future demands.\r\n<h4>University Partners:</h4>\r\n<ul>\r\n 	<li><a href="http://bebraven.org/chicago/">National Louis University</a></li>\r\n 	<li><a href="http://bebraven.org/newark/">Rutgers University-Newark</a></li>\r\n 	<li><a href="http://bebraven.org/bay-area/">San José State University</a></li>\r\n</ul>\r\n<a href="http://bebraven.org/employer-partners/">Become an Employer Partner</a>\r\n\r\nWe are also grateful for the many supporters, from volunteers to donors, who share our vision and make our work possible.\r\n\r\n<a href="http://bebraven.org/our-supporters/">Current Supporters</a>', 'Partnerships at Work', '', 'publish', 'closed', 'closed', '', 'partnerships-at-work', '', '', '2017-11-27 10:42:30', '2017-11-27 15:42:30', '', 29, 'http://bebraven.org/?page_id=216', 30, 'page', '', 0),
 (217, 1, '2017-11-25 10:42:27', '2017-11-25 15:42:27', '', 'about-02', '', 'inherit', 'open', 'closed', '', 'about-02', '', '', '2017-11-25 10:42:27', '2017-11-25 15:42:27', '', 216, 'http://bebraven.org/wp-content/uploads/2017/11/about-02.jpg', 0, 'attachment', 'image/jpeg', 0),
 (218, 1, '2017-11-25 10:42:31', '2017-11-25 15:42:31', 'A key to our early success lorem ipsum dolor sit amet.\r\n\r\nCurrent Partners\r\n\r\nBecome an Employer Partner\r\n\r\n&nbsp;\r\n\r\nWe are also greatful for the many supporters.\r\n\r\n<a href="http://bebraven.org/our-supporters/">Current Supporters</a>', 'Partnerships at Work', '', 'inherit', 'closed', 'closed', '', '216-revision-v1', '', '', '2017-11-25 10:42:31', '2017-11-25 15:42:31', '', 216, 'http://bebraven.org/2017/11/25/216-revision-v1/', 0, 'revision', '', 0),
-(219, 1, '2017-11-25 10:43:06', '2017-11-25 15:43:06', '', 'What it means to be Braven', '', 'publish', 'closed', 'closed', '', 'what-it-means-to-be-braven', '', '', '2017-11-25 10:50:47', '2017-11-25 15:50:47', '', 29, 'http://bebraven.org/?page_id=219', 40, 'page', '', 0),
+(219, 1, '2017-11-25 10:43:06', '2017-11-25 15:43:06', '', 'What it means to be Braven', '', 'publish', 'closed', 'closed', '', 'what-it-means-to-be-braven', '', '', '2017-11-27 18:15:14', '2017-11-27 23:15:14', '', 29, 'http://bebraven.org/?page_id=219', 40, 'page', '', 0),
 (220, 1, '2017-11-25 10:43:06', '2017-11-25 15:43:06', '', 'What it means to be Braven', '', 'inherit', 'closed', 'closed', '', '219-revision-v1', '', '', '2017-11-25 10:43:06', '2017-11-25 15:43:06', '', 219, 'http://bebraven.org/2017/11/25/219-revision-v1/', 0, 'revision', '', 0),
 (221, 1, '2017-11-25 10:57:00', '2017-11-25 15:57:00', 'In 2013, CEO &amp; Founder Aimée Eubanks Davis launched Braven, having identified the education-to-employment gap faced by some of our most promising young leaders.\r\n\r\nDuring our first two years we piloted several programs in both the K-12 and higher education spaces. We had great success with college students, and decided that we should focus our programming on solving the education-to-employment gap in higher education. With a clear vision of impact we:\r\n<ul>\r\n 	<li>Initially, launched our current college program with our founding university partner San José State University.</li>\r\n 	<li>Brought Braven to the east coast in 2015 with a partnership with Rutgers University-Newark, the most diverse college in the United States.</li>\r\n 	<li>Will now serve over 1000 fellows and bring Braven to our founder’s hometown of Chicago in a unique partnership with National Louis University.</li>\r\n</ul>\r\n<a href="http://bebraven.org/model-and-impact/">Learn more</a>', 'A Path to Impact', '', 'inherit', 'closed', 'closed', '', '210-revision-v1', '', '', '2017-11-25 10:57:00', '2017-11-25 15:57:00', '', 210, 'http://bebraven.org/2017/11/25/210-revision-v1/', 0, 'revision', '', 0),
 (222, 1, '2017-11-25 10:57:57', '2017-11-25 15:57:57', 'Working across the country, many members of our team were the first in their families to go to college, are the sons and daughters of immigrants, and/or come from underrepresented backgrounds in the professional workforce. Amongst our team there are also people from the most privileged backgrounds. We are in this work together. We believe that if we go together, we will go further.\r\n\r\n<a href="http://bebraven.org/the-team/">Our team</a>\r\n<h4>Visit our regions</h4>\r\n<a href="http://bebraven.org/bay-area/">Bay Area</a> <a href="http://bebraven.org/newark/">Newark</a> <a href="http://bebraven.org/chicago/">Chicago</a>', 'Teamwork', '', 'inherit', 'closed', 'closed', '', '213-revision-v1', '', '', '2017-11-25 10:57:57', '2017-11-25 15:57:57', '', 213, 'http://bebraven.org/2017/11/25/213-revision-v1/', 0, 'revision', '', 0),
@@ -918,7 +942,7 @@ INSERT INTO `wp_posts` (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post
 (270, 1, '2017-11-25 11:57:12', '2017-11-25 16:57:12', '', 'Our Supporters', 'Our generous supporters share our vision of a bold and diverse workforce', 'inherit', 'closed', 'closed', '', '56-revision-v1', '', '', '2017-11-25 11:57:12', '2017-11-25 16:57:12', '', 56, 'http://bebraven.org/2017/11/25/56-revision-v1/', 0, 'revision', '', 0),
 (271, 1, '2017-11-25 12:11:42', '2017-11-25 17:11:42', 'At Braven, we believe that it takes a village–a committed community of leaders from all sectors–to realize our vision of a diverse workforce that emerges from everywhere. We are grateful for the investments to sustain and grow our Braven Nation.', 'Our Supporters', 'Our generous supporters share our vision of a bold and diverse workforce', 'inherit', 'closed', 'closed', '', '56-revision-v1', '', '', '2017-11-25 12:11:42', '2017-11-25 17:11:42', '', 56, 'http://bebraven.org/2017/11/25/56-revision-v1/', 0, 'revision', '', 0),
 (272, 1, '2017-11-25 12:13:11', '2017-11-25 17:13:11', '', 'Our Supporters', 'Our generous supporters share our vision of a bold and diverse workforce', 'inherit', 'closed', 'closed', '', '56-revision-v1', '', '', '2017-11-25 12:13:11', '2017-11-25 17:13:11', '', 56, 'http://bebraven.org/2017/11/25/56-revision-v1/', 0, 'revision', '', 0),
-(273, 1, '2017-11-25 12:13:32', '2017-11-25 17:13:32', 'At Braven, we believe that it takes a village–a committed community of leaders from all sectors–to realize our vision of a diverse workforce that emerges from everywhere. We are grateful for the investments to sustain and grow our Braven Nation.', 'Our Supporters', '', 'publish', 'closed', 'closed', '', 'our-supporters-ref', '', '', '2017-11-25 12:13:42', '2017-11-25 17:13:42', '', 56, 'http://bebraven.org/?page_id=273', 0, 'page', '', 0),
+(273, 1, '2017-11-25 12:13:32', '2017-11-25 17:13:32', '<div class="force-margins">At Braven, we believe that it takes a village–a committed community of leaders from all sectors–to realize our vision of a diverse workforce that emerges from everywhere. We are grateful for the investments to sustain and grow our Braven Nation.</div>', 'Our Supporters', '', 'publish', 'closed', 'closed', '', 'our-supporters-ref', '', '', '2017-11-27 18:23:28', '2017-11-27 23:23:28', '', 56, 'http://bebraven.org/?page_id=273', 0, 'page', '', 0),
 (274, 1, '2017-11-25 12:13:32', '2017-11-25 17:13:32', 'At Braven, we believe that it takes a village–a committed community of leaders from all sectors–to realize our vision of a diverse workforce that emerges from everywhere. We are grateful for the investments to sustain and grow our Braven Nation.', 'Our Supporters', '', 'inherit', 'closed', 'closed', '', '273-revision-v1', '', '', '2017-11-25 12:13:32', '2017-11-25 17:13:32', '', 273, 'http://bebraven.org/2017/11/25/273-revision-v1/', 0, 'revision', '', 0),
 (275, 1, '2017-11-25 14:24:58', '2017-11-25 19:24:58', '', 'Chan Zuckerberg Initiative', '', 'inherit', 'closed', 'closed', '', '246-revision-v1', '', '', '2017-11-25 14:24:58', '2017-11-25 19:24:58', '', 246, 'http://bebraven.org/2017/11/25/246-revision-v1/', 0, 'revision', '', 0),
 (276, 1, '2017-11-25 14:25:40', '2017-11-25 19:25:40', '', 'Bloomberg Foundation', '', 'publish', 'closed', 'closed', '', 'bloomberg-foundation', '', '', '2017-11-25 14:25:40', '2017-11-25 19:25:40', '', 232, 'http://bebraven.org/?page_id=276', 0, 'page', '', 0),
@@ -929,7 +953,60 @@ INSERT INTO `wp_posts` (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post
 (281, 1, '2017-11-25 14:26:11', '2017-11-25 19:26:11', '', 'Stupski Foundation', '', 'inherit', 'closed', 'closed', '', '280-revision-v1', '', '', '2017-11-25 14:26:11', '2017-11-25 19:26:11', '', 280, 'http://bebraven.org/2017/11/25/280-revision-v1/', 0, 'revision', '', 0),
 (282, 1, '2017-11-25 14:27:53', '2017-11-25 19:27:53', 'Donate today to empower college students with the networks, skills, and know-how needed to accelerate into strong first jobs.\r\n\r\n<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=VFUYARJB2QRXC">Donate Now</a>', 'Donate', '', 'publish', 'closed', 'closed', '', 'donate', '', '', '2017-11-25 17:08:34', '2017-11-25 22:08:34', '', 56, 'http://bebraven.org/?page_id=282', 99999, 'page', '', 0),
 (283, 1, '2017-11-25 14:27:53', '2017-11-25 19:27:53', 'Donate today to empower college students with the networks, skills, and know-how needed to accelerate into strong first jobs.\r\n\r\n<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=VFUYARJB2QRXC">Donate Now</a>', 'Donate', '', 'inherit', 'closed', 'closed', '', '282-revision-v1', '', '', '2017-11-25 14:27:53', '2017-11-25 19:27:53', '', 282, 'http://bebraven.org/2017/11/25/282-revision-v1/', 0, 'revision', '', 0),
-(284, 1, '2017-11-25 17:08:29', '2017-11-25 22:08:29', '', 'temp-picpkg', '', 'inherit', 'open', 'closed', '', 'temp-picpkg', '', '', '2017-11-25 17:08:29', '2017-11-25 22:08:29', '', 282, 'http://bebraven.org/wp-content/uploads/2017/11/temp-picpkg.jpg', 0, 'attachment', 'image/jpeg', 0);
+(284, 1, '2017-11-25 17:08:29', '2017-11-25 22:08:29', '', 'temp-picpkg', '', 'inherit', 'open', 'closed', '', 'temp-picpkg', '', '', '2017-11-25 17:08:29', '2017-11-25 22:08:29', '', 282, 'http://bebraven.org/wp-content/uploads/2017/11/temp-picpkg.jpg', 0, 'attachment', 'image/jpeg', 0),
+(285, 1, '2017-11-27 10:42:30', '2017-11-27 15:42:30', 'A key to our early success is our unique partnership model with Universities and Employer Partners. Together, we are able to implement innovative and experiential career education into the undergraduate experience for low-income and first-generation college students and build a workforce as diverse as our future demands.\r\n<h4>University Partners:</h4>\r\n<ul>\r\n 	<li><a href="http://bebraven.org/chicago/">National Louis University</a></li>\r\n 	<li><a href="http://bebraven.org/newark/">Rutgers University-Newark</a></li>\r\n 	<li><a href="http://bebraven.org/bay-area/">San José State University</a></li>\r\n</ul>\r\n<a href="http://bebraven.org/employer-partners/">Become an Employer Partner</a>\r\n\r\nWe are also grateful for the many supporters, from volunteers to donors, who share our vision and make our work possible.\r\n\r\n<a href="http://bebraven.org/our-supporters/">Current Supporters</a>', 'Partnerships at Work', '', 'inherit', 'closed', 'closed', '', '216-revision-v1', '', '', '2017-11-27 10:42:30', '2017-11-27 15:42:30', '', 216, 'http://bebraven.org/2017/11/27/216-revision-v1/', 0, 'revision', '', 0),
+(286, 1, '2017-11-27 12:54:58', '2017-11-27 17:54:58', '97% of Fellows are persisitng in college.\r\n\r\n<a href="http://bebraven.org/model-and-impact/">Learn more</a>', '97%', '', 'publish', 'closed', 'closed', '', '97-2', '', '', '2017-11-27 16:52:52', '2017-11-27 21:52:52', '', 97, 'http://bebraven.org/?page_id=286', 0, 'page', '', 0),
+(287, 1, '2017-11-27 12:54:58', '2017-11-27 17:54:58', '97% of Fellows are persisitng in college.\r\n\r\n<a href="http://bebraven.org/model-and-impact/">Learn more</a>', '97%', '', 'inherit', 'closed', 'closed', '', '286-revision-v1', '', '', '2017-11-27 12:54:58', '2017-11-27 17:54:58', '', 286, 'http://bebraven.org/2017/11/27/286-revision-v1/', 0, 'revision', '', 0),
+(288, 1, '2017-11-27 12:55:59', '2017-11-27 17:55:59', 'Fellows are 1.8x likelier than their peers to secure strong internships.\r\n\r\n<a href="http://bebraven.org/model-and-impact/">Learn more</a>', '1.8x', '', 'publish', 'closed', 'closed', '', '1-8x', '', '', '2017-11-27 16:52:52', '2017-11-27 21:52:52', '', 97, 'http://bebraven.org/?page_id=288', 5, 'page', '', 0),
+(289, 1, '2017-11-27 12:55:59', '2017-11-27 17:55:59', 'Fellows are 1.8x more likely than their peers on campus to secure strong internships.\r\n\r\n<a href="http://bebraven.org/model-and-impact/">Learn more</a>', '1.8x', '', 'inherit', 'closed', 'closed', '', '288-revision-v1', '', '', '2017-11-27 12:55:59', '2017-11-27 17:55:59', '', 288, 'http://bebraven.org/2017/11/27/288-revision-v1/', 0, 'revision', '', 0),
+(290, 1, '2017-11-27 12:57:32', '2017-11-27 17:57:32', 'Braven Fellows increased their shot of securing a strong first job by 47% (compared with peers nationally).\r\n\r\n<a href="http://bebraven.org/model-and-impact/">Learn more</a>', '47%', '', 'publish', 'closed', 'closed', '', '47-2', '', '', '2017-11-27 16:52:52', '2017-11-27 21:52:52', '', 97, 'http://bebraven.org/?page_id=290', 15, 'page', '', 0),
+(291, 1, '2017-11-27 12:57:32', '2017-11-27 17:57:32', 'Braven Fellows increased their shot of securing a strong first job by 47% (compared with peers nationally).', '47%', '', 'inherit', 'closed', 'closed', '', '290-revision-v1', '', '', '2017-11-27 12:57:32', '2017-11-27 17:57:32', '', 290, 'http://bebraven.org/2017/11/27/290-revision-v1/', 0, 'revision', '', 0),
+(292, 1, '2017-11-27 12:58:11', '2017-11-27 17:58:11', 'Lorem ipsum dolor sit amet.\r\n\r\n<a href="http://bebraven.org/about-us/">Read our story</a>\r\n\r\n[include-subpages-as-boxes]', 'Why Braven?', '', 'inherit', 'closed', 'closed', '', '97-revision-v1', '', '', '2017-11-27 12:58:11', '2017-11-27 17:58:11', '', 97, 'http://bebraven.org/2017/11/27/97-revision-v1/', 0, 'revision', '', 0),
+(293, 1, '2017-11-27 13:54:24', '2017-11-27 18:54:24', 'Fellows are 1.8x likelier than their peers to secure strong internships.\r\n\r\n<a href="http://bebraven.org/model-and-impact/">Learn more</a>', '1.8x', '', 'inherit', 'closed', 'closed', '', '288-revision-v1', '', '', '2017-11-27 13:54:24', '2017-11-27 18:54:24', '', 288, 'http://bebraven.org/2017/11/27/288-revision-v1/', 0, 'revision', '', 0),
+(294, 1, '2017-11-27 13:55:42', '2017-11-27 18:55:42', 'Braven Fellows have 47% better chance of securing a strong first job vs. peers nationally', '47%', '', 'inherit', 'closed', 'closed', '', '290-autosave-v1', '', '', '2017-11-27 13:55:42', '2017-11-27 18:55:42', '', 290, 'http://bebraven.org/2017/11/27/290-autosave-v1/', 0, 'revision', '', 0),
+(295, 1, '2017-11-27 13:55:43', '2017-11-27 18:55:43', 'Braven Fellows have 47% better chance of securing a strong first job vs. peers nationally.', '47%', '', 'inherit', 'closed', 'closed', '', '290-revision-v1', '', '', '2017-11-27 13:55:43', '2017-11-27 18:55:43', '', 290, 'http://bebraven.org/2017/11/27/290-revision-v1/', 0, 'revision', '', 0),
+(296, 1, '2017-11-27 13:56:21', '2017-11-27 18:56:21', 'Braven Fellows increased their shot of securing a strong first job by 47% (compared with peers nationally).', '47%', '', 'inherit', 'closed', 'closed', '', '290-revision-v1', '', '', '2017-11-27 13:56:21', '2017-11-27 18:56:21', '', 290, 'http://bebraven.org/2017/11/27/290-revision-v1/', 0, 'revision', '', 0),
+(297, 1, '2017-11-27 13:56:46', '2017-11-27 18:56:46', 'Fellows are 1.8x likelier than their peers to secure strong internships.\n\n<a href="http://bebraven.org/model-and-impact/">Learn more</a>', '1.8x', '', 'inherit', 'closed', 'closed', '', '288-autosave-v1', '', '', '2017-11-27 13:56:46', '2017-11-27 18:56:46', '', 288, 'http://bebraven.org/2017/11/27/288-autosave-v1/', 0, 'revision', '', 0),
+(298, 1, '2017-11-27 13:56:53', '2017-11-27 18:56:53', 'Fellows are 1.8x likelier than their peers to secure strong internships.', '1.8x', '', 'inherit', 'closed', 'closed', '', '288-revision-v1', '', '', '2017-11-27 13:56:53', '2017-11-27 18:56:53', '', 288, 'http://bebraven.org/2017/11/27/288-revision-v1/', 0, 'revision', '', 0),
+(299, 1, '2017-11-27 13:56:58', '2017-11-27 18:56:58', '97% of Fellows are persisitng in college.', '97%', '', 'inherit', 'closed', 'closed', '', '286-revision-v1', '', '', '2017-11-27 13:56:58', '2017-11-27 18:56:58', '', 286, 'http://bebraven.org/2017/11/27/286-revision-v1/', 0, 'revision', '', 0),
+(300, 1, '2017-11-27 13:57:21', '2017-11-27 18:57:21', 'Lorem ipsum dolor sit amet.\r\n\r\n<a href="http://bebraven.org/about-us/">Read our story</a>\r\n\r\n[include-subpages-as-boxes]\r\n\r\n<a href="http://bebraven.org/model-and-impact/">Learn more about our impact</a>\r\n\r\n&nbsp;', 'Why Braven?', '', 'inherit', 'closed', 'closed', '', '97-revision-v1', '', '', '2017-11-27 13:57:21', '2017-11-27 18:57:21', '', 97, 'http://bebraven.org/2017/11/27/97-revision-v1/', 0, 'revision', '', 0),
+(301, 1, '2017-11-27 15:22:14', '2017-11-27 20:22:14', 'Lorem ipsum dolor sit amet.\r\n\r\n<a href="http://bebraven.org/about-us/">Read our story</a>\r\n\r\n[include-subpages-as-boxes][/include-subpages-as-boxes]\r\n\r\n<a href="http://bebraven.org/model-and-impact/">Learn more about our impact</a>\r\n\r\n&nbsp;', 'Why Braven?', '', 'inherit', 'closed', 'closed', '', '97-revision-v1', '', '', '2017-11-27 15:22:14', '2017-11-27 20:22:14', '', 97, 'http://bebraven.org/2017/11/27/97-revision-v1/', 0, 'revision', '', 0),
+(302, 1, '2017-11-27 15:22:31', '2017-11-27 20:22:31', 'Lorem ipsum dolor sit amet.\r\n\r\n<a href="http://bebraven.org/about-us/">Read our story</a>\r\n\r\n[include-subpages-as-boxes]x[/include-subpages-as-boxes]\r\n\r\n<a href="http://bebraven.org/model-and-impact/">Learn more about our impact</a>\r\n\r\n&nbsp;', 'Why Braven?', '', 'inherit', 'closed', 'closed', '', '97-revision-v1', '', '', '2017-11-27 15:22:31', '2017-11-27 20:22:31', '', 97, 'http://bebraven.org/2017/11/27/97-revision-v1/', 0, 'revision', '', 0),
+(303, 1, '2017-11-27 15:49:12', '2017-11-27 20:49:12', 'Lorem ipsum dolor sit amet.\r\n\r\n<a href="http://bebraven.org/about-us/">Read our story</a>\r\n\r\n[include-subpages-as-boxes]\r\n\r\n<a href="http://bebraven.org/model-and-impact/">Learn more about our impact</a>\r\n\r\n&nbsp;', 'Why Braven?', '', 'inherit', 'closed', 'closed', '', '97-revision-v1', '', '', '2017-11-27 15:49:12', '2017-11-27 20:49:12', '', 97, 'http://bebraven.org/2017/11/27/97-revision-v1/', 0, 'revision', '', 0),
+(304, 1, '2017-11-27 16:31:14', '2017-11-27 21:31:14', 'Lorem ipsum dolor sit amet.\n\n<a href="http://bebraven.org/about-us/">Read our story</a>\n\n[include-subpages-as-boxes]\n\n&nbsp;', 'Why Braven?', '', 'inherit', 'closed', 'closed', '', '97-autosave-v1', '', '', '2017-11-27 16:31:14', '2017-11-27 21:31:14', '', 97, 'http://bebraven.org/2017/11/27/97-autosave-v1/', 0, 'revision', '', 0),
+(305, 1, '2017-11-27 16:31:17', '2017-11-27 21:31:17', 'Lorem ipsum dolor sit amet.\r\n\r\n<a href="http://bebraven.org/about-us/">Read our story</a>\r\n\r\n[include-subpages-as-boxes]\r\n\r\n&nbsp;', 'Why Braven?', '', 'inherit', 'closed', 'closed', '', '97-revision-v1', '', '', '2017-11-27 16:31:17', '2017-11-27 21:31:17', '', 97, 'http://bebraven.org/2017/11/27/97-revision-v1/', 0, 'revision', '', 0),
+(306, 1, '2017-11-27 16:31:28', '2017-11-27 21:31:28', 'Fellows are 1.8x likelier than their peers to secure strong internships.\r\n\r\n<a href="http://bebraven.org/model-and-impact/">Learn more</a>', '1.8x', '', 'inherit', 'closed', 'closed', '', '288-revision-v1', '', '', '2017-11-27 16:31:28', '2017-11-27 21:31:28', '', 288, 'http://bebraven.org/2017/11/27/288-revision-v1/', 0, 'revision', '', 0),
+(307, 1, '2017-11-27 16:31:32', '2017-11-27 21:31:32', '97% of Fellows are persisitng in college.\r\n\r\n<a href="http://bebraven.org/model-and-impact/">Learn more</a>', '97%', '', 'inherit', 'closed', 'closed', '', '286-revision-v1', '', '', '2017-11-27 16:31:32', '2017-11-27 21:31:32', '', 286, 'http://bebraven.org/2017/11/27/286-revision-v1/', 0, 'revision', '', 0),
+(308, 1, '2017-11-27 16:32:00', '2017-11-27 21:32:00', 'Braven Fellows increased their shot of securing a strong first job by 47% (compared with peers nationally).\r\n\r\n<a href="http://bebraven.org/model-and-impact/">Learn more</a>', '47%', '', 'inherit', 'closed', 'closed', '', '290-revision-v1', '', '', '2017-11-27 16:32:00', '2017-11-27 21:32:00', '', 290, 'http://bebraven.org/2017/11/27/290-revision-v1/', 0, 'revision', '', 0),
+(309, 1, '2017-11-27 16:38:47', '2017-11-27 21:38:47', '[include-bios biotype="fellow" category=""]', '<small>Life changing? Yes.</small><br />Meet Braven Fellows', '', 'inherit', 'closed', 'closed', '', '82-revision-v1', '', '', '2017-11-27 16:38:47', '2017-11-27 21:38:47', '', 82, 'http://bebraven.org/2017/11/27/82-revision-v1/', 0, 'revision', '', 0),
+(310, 1, '2017-11-27 17:13:06', '2017-11-27 22:13:06', '[include-posts]', 'What\'s Trending', '', 'inherit', 'closed', 'closed', '', '99-revision-v1', '', '', '2017-11-27 17:13:06', '2017-11-27 22:13:06', '', 99, 'http://bebraven.org/2017/11/27/99-revision-v1/', 0, 'revision', '', 0),
+(311, 1, '2017-11-27 17:16:55', '2017-11-27 22:16:55', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Testing post', '', 'publish', 'open', 'open', '', 'testing-post', '', '', '2017-11-27 17:17:03', '2017-11-27 22:17:03', '', 0, 'http://bebraven.org/?p=311', 0, 'post', '', 0),
+(312, 1, '2017-11-27 17:16:55', '2017-11-27 22:16:55', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Testing post', '', 'inherit', 'closed', 'closed', '', '311-revision-v1', '', '', '2017-11-27 17:16:55', '2017-11-27 22:16:55', '', 311, 'http://bebraven.org/2017/11/27/311-revision-v1/', 0, 'revision', '', 0),
+(313, 1, '2017-11-27 17:17:26', '2017-11-27 22:17:26', 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Some other post', '', 'publish', 'open', 'open', '', 'some-other-post', '', '', '2017-11-27 17:17:26', '2017-11-27 22:17:26', '', 0, 'http://bebraven.org/?p=313', 0, 'post', '', 0),
+(314, 1, '2017-11-27 17:17:26', '2017-11-27 22:17:26', 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Some other post', '', 'inherit', 'closed', 'closed', '', '313-revision-v1', '', '', '2017-11-27 17:17:26', '2017-11-27 22:17:26', '', 313, 'http://bebraven.org/2017/11/27/313-revision-v1/', 0, 'revision', '', 0),
+(315, 1, '2017-11-27 17:17:40', '2017-11-27 22:17:40', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Yet another post', '', 'publish', 'open', 'open', '', 'yet-another-post', '', '', '2017-11-27 17:17:40', '2017-11-27 22:17:40', '', 0, 'http://bebraven.org/?p=315', 0, 'post', '', 0),
+(316, 1, '2017-11-27 17:17:40', '2017-11-27 22:17:40', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Yet another post', '', 'inherit', 'closed', 'closed', '', '315-revision-v1', '', '', '2017-11-27 17:17:40', '2017-11-27 22:17:40', '', 315, 'http://bebraven.org/2017/11/27/315-revision-v1/', 0, 'revision', '', 0),
+(317, 1, '2017-11-27 17:22:05', '2017-11-27 22:22:05', '[include-posts category=""]', 'What\'s Trending', '', 'inherit', 'closed', 'closed', '', '99-revision-v1', '', '', '2017-11-27 17:22:05', '2017-11-27 22:22:05', '', 99, 'http://bebraven.org/2017/11/27/99-revision-v1/', 0, 'revision', '', 0),
+(318, 1, '2017-11-27 17:32:37', '2017-11-27 22:32:37', '', 'What\'s Trending', '', 'inherit', 'closed', 'closed', '', '99-revision-v1', '', '', '2017-11-27 17:32:37', '2017-11-27 22:32:37', '', 99, 'http://bebraven.org/2017/11/27/99-revision-v1/', 0, 'revision', '', 0),
+(319, 1, '2017-11-27 17:32:56', '2017-11-27 22:32:56', '[include-posts category=""]', 'Featured posts for home page', '', 'publish', 'closed', 'closed', '', 'featured-posts-for-home-page', '', '', '2017-11-27 17:32:56', '2017-11-27 22:32:56', '', 0, 'http://bebraven.org/?page_id=319', 0, 'page', '', 0),
+(320, 1, '2017-11-27 17:32:56', '2017-11-27 22:32:56', '[include-posts category=""]', 'Featured posts for home page', '', 'inherit', 'closed', 'closed', '', '319-revision-v1', '', '', '2017-11-27 17:32:56', '2017-11-27 22:32:56', '', 319, 'http://bebraven.org/2017/11/27/319-revision-v1/', 0, 'revision', '', 0),
+(321, 1, '2017-11-27 17:50:14', '0000-00-00 00:00:00', '', 'Auto Draft', '', 'auto-draft', 'closed', 'closed', '', '', '', '', '2017-11-27 17:50:14', '0000-00-00 00:00:00', '', 0, 'http://bebraven.org/?page_id=321', 0, 'page', '', 0),
+(322, 1, '2017-11-27 17:50:33', '0000-00-00 00:00:00', '', 'Auto Draft', '', 'auto-draft', 'closed', 'closed', '', '', '', '', '2017-11-27 17:50:33', '0000-00-00 00:00:00', '', 0, 'http://bebraven.org/?page_id=322', 0, 'page', '', 0),
+(323, 1, '2017-11-27 17:51:18', '2017-11-27 22:51:18', '<div class="force-margins">Lorem ipsum dolor sit amet.\r\n\r\n<a href="http://bebraven.org/about-us/">Read our story</a></div>\r\n\r\n[include-subpages-as-boxes]', 'Why Braven?', '', 'inherit', 'closed', 'closed', '', '97-revision-v1', '', '', '2017-11-27 17:51:18', '2017-11-27 22:51:18', '', 97, 'http://bebraven.org/2017/11/27/97-revision-v1/', 0, 'revision', '', 0),
+(324, 1, '2017-11-27 17:56:05', '2017-11-27 22:56:05', '[include-posts category=""]', 'What\'s Trending', '', 'inherit', 'closed', 'closed', '', '99-revision-v1', '', '', '2017-11-27 17:56:05', '2017-11-27 22:56:05', '', 99, 'http://bebraven.org/2017/11/27/99-revision-v1/', 0, 'revision', '', 0),
+(325, 1, '2017-11-27 17:56:10', '2017-11-27 22:56:10', '[include-posts]', 'What\'s Trending', '', 'inherit', 'closed', 'closed', '', '99-revision-v1', '', '', '2017-11-27 17:56:10', '2017-11-27 22:56:10', '', 99, 'http://bebraven.org/2017/11/27/99-revision-v1/', 0, 'revision', '', 0),
+(326, 1, '2017-11-27 18:23:02', '2017-11-27 23:23:02', '<div class="forced-margin">At Braven, we believe that it takes a village–a committed community of leaders from all sectors–to realize our vision of a diverse workforce that emerges from everywhere. We are grateful for the investments to sustain and grow our Braven Nation.</div>', 'Our Supporters', '', 'inherit', 'closed', 'closed', '', '273-revision-v1', '', '', '2017-11-27 18:23:02', '2017-11-27 23:23:02', '', 273, 'http://bebraven.org/2017/11/27/273-revision-v1/', 0, 'revision', '', 0),
+(327, 1, '2017-11-27 18:23:27', '2017-11-27 23:23:27', '<div class="force-margins">At Braven, we believe that it takes a village–a committed community of leaders from all sectors–to realize our vision of a diverse workforce that emerges from everywhere. We are grateful for the investments to sustain and grow our Braven Nation.</div>', 'Our Supporters', '', 'inherit', 'closed', 'closed', '', '273-autosave-v1', '', '', '2017-11-27 18:23:27', '2017-11-27 23:23:27', '', 273, 'http://bebraven.org/2017/11/27/273-autosave-v1/', 0, 'revision', '', 0),
+(328, 1, '2017-11-27 18:23:28', '2017-11-27 23:23:28', '<div class="force-margins">At Braven, we believe that it takes a village–a committed community of leaders from all sectors–to realize our vision of a diverse workforce that emerges from everywhere. We are grateful for the investments to sustain and grow our Braven Nation.</div>', 'Our Supporters', '', 'inherit', 'closed', 'closed', '', '273-revision-v1', '', '', '2017-11-27 18:23:28', '2017-11-27 23:23:28', '', 273, 'http://bebraven.org/2017/11/27/273-revision-v1/', 0, 'revision', '', 0),
+(329, 1, '2017-11-27 18:32:28', '0000-00-00 00:00:00', '', 'Auto Draft', '', 'auto-draft', 'open', 'open', '', '', '', '', '2017-11-27 18:32:28', '0000-00-00 00:00:00', '', 0, 'http://bebraven.org/?p=329', 0, 'post', '', 0),
+(330, 1, '2017-11-27 18:33:27', '2017-11-27 23:33:27', 'This align-self property allows the default alignment (or the one specified by align-items) to be overridden for individual flex items. Refer to align-items explanation for flex container to understand the available values.', 'Jon Fakenam', '', 'publish', 'closed', 'closed', '', 'jon-fakenam', '', '', '2017-11-27 18:34:00', '2017-11-27 23:34:00', '', 0, 'http://bebraven.org/?post_type=bio&#038;p=330', 0, 'bio', '', 0),
+(331, 1, '2017-11-27 18:33:21', '2017-11-27 23:33:21', '', '30', '', 'inherit', 'open', 'closed', '', '30', '', '', '2017-11-27 18:33:21', '2017-11-27 23:33:21', '', 330, 'http://bebraven.org/wp-content/uploads/2017/11/30.jpg', 0, 'attachment', 'image/jpeg', 0),
+(332, 1, '2017-11-27 18:33:27', '2017-11-27 23:33:27', '', 'Jon Fakenam', '', 'inherit', 'closed', 'closed', '', '330-revision-v1', '', '', '2017-11-27 18:33:27', '2017-11-27 23:33:27', '', 330, 'http://bebraven.org/2017/11/27/330-revision-v1/', 0, 'revision', '', 0),
+(333, 1, '2017-11-27 18:34:00', '2017-11-27 23:34:00', 'This align-self property allows the default alignment (or the one specified by align-items) to be overridden for individual flex items. Refer to align-items explanation for flex container to understand the available values.', 'Jon Fakenam', '', 'inherit', 'closed', 'closed', '', '330-revision-v1', '', '', '2017-11-27 18:34:00', '2017-11-27 23:34:00', '', 330, 'http://bebraven.org/2017/11/27/330-revision-v1/', 0, 'revision', '', 0),
+(334, 1, '2017-11-27 18:45:46', '2017-11-27 23:45:46', 'sdfsdfsdf', 'OMG', '', 'draft', 'closed', 'closed', '', 'omg', '', '', '2017-11-27 19:21:40', '2017-11-28 00:21:40', '', 97, 'http://bebraven.org/?page_id=334', 888, 'page', '', 0),
+(335, 1, '2017-11-27 18:45:46', '2017-11-27 23:45:46', 'sdfsdfsdf', 'OMG', '', 'inherit', 'closed', 'closed', '', '334-revision-v1', '', '', '2017-11-27 18:45:46', '2017-11-27 23:45:46', '', 334, 'http://bebraven.org/2017/11/27/334-revision-v1/', 0, 'revision', '', 0),
+(336, 1, '2017-11-27 18:46:10', '2017-11-27 23:46:10', 'sdfsdfdsfdfds', 'LAST ODD', '', 'draft', 'closed', 'closed', '', 'last-odd', '', '', '2017-11-27 19:21:11', '2017-11-28 00:21:11', '', 97, 'http://bebraven.org/?page_id=336', 999, 'page', '', 0),
+(337, 1, '2017-11-27 18:46:10', '2017-11-27 23:46:10', 'sdfsdfdsfdfds', 'LAST ODD', '', 'inherit', 'closed', 'closed', '', '336-revision-v1', '', '', '2017-11-27 18:46:10', '2017-11-27 23:46:10', '', 336, 'http://bebraven.org/2017/11/27/336-revision-v1/', 0, 'revision', '', 0);
 
 -- --------------------------------------------------------
 
@@ -983,9 +1060,11 @@ INSERT INTO `wp_terms` (`term_id`, `name`, `slug`, `term_group`) VALUES
 (24, 'Chicago', 'chicago', 0),
 (25, 'NLU', 'nlu', 0),
 (26, '3-wide Mosaic', 'mosaic-three', 0),
-(27, 'Default (full)', 'default', 0),
 (28, 'Boxes (e.g. for donors)', 'boxes', 0),
-(29, 'Picture Background', 'picbkg', 0);
+(29, 'Picture Background', 'picbkg', 0),
+(35, 'Default', 'default', 0),
+(36, 'Full (no margin or header)', 'full', 0),
+(37, 'Default', 'default', 0);
 
 -- --------------------------------------------------------
 
@@ -1012,11 +1091,15 @@ INSERT INTO `wp_term_relationships` (`object_id`, `term_taxonomy_id`, `term_orde
 (56, 7, 0),
 (58, 27, 0),
 (82, 26, 0),
+(84, 27, 0),
+(84, 37, 0),
 (86, 8, 0),
 (90, 9, 0),
 (95, 8, 0),
 (97, 7, 0),
-(99, 27, 0),
+(97, 31, 0),
+(99, 33, 0),
+(99, 37, 0),
 (101, 10, 0),
 (101, 11, 0),
 (103, 11, 0),
@@ -1073,9 +1156,11 @@ INSERT INTO `wp_term_relationships` (`object_id`, `term_taxonomy_id`, `term_orde
 (199, 3, 0),
 (200, 2, 0),
 (210, 27, 0),
+(210, 37, 0),
 (213, 8, 0),
 (216, 9, 0),
 (219, 27, 0),
+(219, 37, 0),
 (228, 28, 0),
 (230, 28, 0),
 (232, 28, 0),
@@ -1097,7 +1182,17 @@ INSERT INTO `wp_term_relationships` (`object_id`, `term_taxonomy_id`, `term_orde
 (276, 27, 0),
 (278, 27, 0),
 (280, 27, 0),
-(282, 29, 0);
+(282, 29, 0),
+(286, 27, 0),
+(288, 27, 0),
+(290, 27, 0),
+(311, 16, 0),
+(311, 17, 0),
+(313, 17, 0),
+(315, 1, 0),
+(319, 36, 0),
+(330, 12, 0),
+(336, 37, 0);
 
 -- --------------------------------------------------------
 
@@ -1119,7 +1214,7 @@ CREATE TABLE `wp_term_taxonomy` (
 --
 
 INSERT INTO `wp_term_taxonomy` (`term_taxonomy_id`, `term_id`, `taxonomy`, `description`, `parent`, `count`) VALUES
-(1, 1, 'category', '', 0, 1),
+(1, 1, 'category', '', 0, 2),
 (2, 2, 'nav_menu', '', 0, 12),
 (3, 3, 'nav_menu', '', 0, 4),
 (7, 7, 'format', '', 0, 3),
@@ -1127,22 +1222,25 @@ INSERT INTO `wp_term_taxonomy` (`term_taxonomy_id`, `term_id`, `taxonomy`, `desc
 (9, 9, 'format', '', 0, 3),
 (10, 10, 'biotype', '', 0, 1),
 (11, 11, 'biotype', '', 0, 12),
-(12, 12, 'biotype', '', 0, 8),
+(12, 12, 'biotype', '', 0, 9),
 (13, 13, 'biotype', '', 0, 0),
 (14, 14, 'biotype', '', 0, 0),
 (15, 15, 'category', '', 0, 0),
-(16, 16, 'category', '', 15, 3),
-(17, 17, 'category', '', 0, 4),
+(16, 16, 'category', '', 15, 4),
+(17, 17, 'category', '', 0, 6),
 (18, 18, 'category', '', 15, 3),
 (21, 21, 'category', '', 0, 1),
 (22, 22, 'category', '', 16, 3),
 (23, 23, 'category', '', 18, 2),
-(24, 24, 'category', '', 15, 0),
 (25, 25, 'category', '', 24, 2),
 (26, 26, 'format', '', 0, 1),
-(27, 27, 'format', '', 0, 17),
+(27, 27, 'format', '', 0, 20),
 (28, 28, 'format', '', 0, 8),
-(29, 29, 'format', '', 0, 1);
+(29, 29, 'format', '', 0, 1),
+(31, 31, 'format', '', 0, 1),
+(33, 33, 'format', '', 0, 1),
+(36, 36, 'format', '', 0, 1),
+(37, 37, 'format', '', 0, 4);
 
 -- --------------------------------------------------------
 
@@ -1182,7 +1280,7 @@ INSERT INTO `wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALU
 (18, 1, 'closedpostboxes_page', 'a:0:{}'),
 (19, 1, 'metaboxhidden_page', 'a:3:{i:0;s:16:"commentstatusdiv";i:1;s:7:"slugdiv";i:2;s:9:"authordiv";}'),
 (20, 1, 'wp_user-settings', 'libraryContent=browse&editor=tinymce'),
-(21, 1, 'wp_user-settings-time', '1511624213'),
+(21, 1, 'wp_user-settings-time', '1511825636'),
 (22, 1, 'closedpostboxes_dashboard', 'a:0:{}'),
 (23, 1, 'metaboxhidden_dashboard', 'a:2:{i:0;s:21:"dashboard_quick_press";i:1;s:17:"dashboard_primary";}'),
 (24, 1, 'nav_menu_recently_edited', '2'),
@@ -1341,17 +1439,17 @@ ALTER TABLE `wp_links`
 -- AUTO_INCREMENT for table `wp_options`
 --
 ALTER TABLE `wp_options`
-  MODIFY `option_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=287;
+  MODIFY `option_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=323;
 --
 -- AUTO_INCREMENT for table `wp_postmeta`
 --
 ALTER TABLE `wp_postmeta`
-  MODIFY `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=417;
+  MODIFY `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=449;
 --
 -- AUTO_INCREMENT for table `wp_posts`
 --
 ALTER TABLE `wp_posts`
-  MODIFY `ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=285;
+  MODIFY `ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=338;
 --
 -- AUTO_INCREMENT for table `wp_termmeta`
 --
@@ -1361,12 +1459,12 @@ ALTER TABLE `wp_termmeta`
 -- AUTO_INCREMENT for table `wp_terms`
 --
 ALTER TABLE `wp_terms`
-  MODIFY `term_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `term_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 --
 -- AUTO_INCREMENT for table `wp_term_taxonomy`
 --
 ALTER TABLE `wp_term_taxonomy`
-  MODIFY `term_taxonomy_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `term_taxonomy_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 --
 -- AUTO_INCREMENT for table `wp_usermeta`
 --
