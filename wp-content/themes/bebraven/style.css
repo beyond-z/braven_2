@@ -940,6 +940,76 @@ a:active {
 }
 
 /*--------------------------------------------------------------
+12.1 Social nav
+--------------------------------------------------------------*/
+
+.social-nav ul {
+	list-style: none;
+	margin: 0;
+}
+
+.social-nav li {
+	margin: 0 0 14px;
+}
+
+.social-icon {
+	position: relative;
+	width: 28px;
+	height: 28px;
+	content: "";
+	overflow: hidden;
+	background-image: url('images/social-icons.png');
+	background-repeat: no-repeat;
+	content: "\A";
+	display: block;
+	transition: all 0.1s;
+}
+
+.social-icon:hover {
+	transform: scale(1.286, 1.286);
+}
+
+.social-icon.linkedin {
+	background-position: 0 -28px;
+}
+
+.social-icon.twitter {
+	background-position: 0 -56px;
+}
+
+.social-icon.snapchat {
+	background-position: 0 -84px;
+}
+
+.social-icon.facebook {
+	background-position: 0 -112px;
+}
+
+#masthead .social-nav {
+	position: absolute;
+	z-index: 9999;
+	right: 28px;
+	bottom: 28px;
+}
+
+#masthead .social-nav:after {
+	display: block;
+	content: "Let\0027s stay in touch";
+	color: #FFF;
+	transform-origin: top right;
+	transform: rotate(-90deg);
+	position: absolute;
+	top: calc(-10em - 14px);
+	right: 14px;
+	width: 10em;
+	font-stretch: condensed;
+	font-size: 16px;
+	margin: 0;
+	line-height: 0;
+
+}
+
+/*--------------------------------------------------------------
 13.0 Layout
 --------------------------------------------------------------*/
 
