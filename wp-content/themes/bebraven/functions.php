@@ -277,6 +277,7 @@ function bz_populate_custom_formats() {
 		'centered' => 'Centered',
 		'mosaic-three' => '3-wide Mosaic',
 		'boxes' => 'Boxes (e.g. for donors)',
+		'boxes-left' => 'Boxes with left-aligned heading',
 		'picbkg' => 'Picture Background',
 		'full' => 'Full (no margin or header)',
 	);

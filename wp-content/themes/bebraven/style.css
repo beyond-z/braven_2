@@ -430,7 +430,8 @@ h2 {
 	margin-bottom: 2em;
 }
 
-h2:after {
+h2:after,
+.boxes-left h3:after {
 	display: block;
 	position: absolute;
 	bottom: calc( -0.25vw - 1em );
@@ -802,11 +803,11 @@ a:active {
 	text-transform: inherit;
 }
 
-.hover-hint:hover {
+.has-content:hover {
 	cursor: pointer;
 }
 
-.hover-hint:after {
+.has-content:after {
 	position: absolute;
 	content: "...";
 	font-family: Arial, sans-serif;
@@ -1170,6 +1171,10 @@ body {
 	width: 100%;
 }
 
+.boxes-left h2 {
+	margin: 1.5em 5vw 2.5em;
+}
+
 .picbkg img {
 	width: 100%;
 	height: auto;
@@ -1396,16 +1401,12 @@ body {
 	text-align: left;
 }
 
-/*.leftover-2 .mosaic-element:last-child {
-	position: relative;
-	right: 33.5vw;
-}*/
-
 .leftover-2 .mosaic-element:last-child,
 .leftover-2 .mosaic-element:nth-last-child(2) {
-	flex-grow: calc(1.40);
+	width: calc(50% - 1vw);
+	flex-grow: auto;
 }
-
+/*
 .leftover-2 .mosaic-element:last-child {
 	margin-left: 0.75vw;
 }
@@ -1414,6 +1415,57 @@ body {
 	margin-right: 0.75vw;
 }
 
+.leftover-1 .mosaic-element:last-child {
+	left: 
+}
+*/
+
+.boxes-left * {
+	transition: all 0.4s;
+}
+
+.boxes-left .box-content {
+	padding: 2vw 3vw;
+}
+
+.boxes-left .sub-boxes .box-content {
+	vertical-align: middle;
+}
+
+.boxes-left .box:hover {
+	background: #EB3B46;
+}
+
+.boxes-left .box:hover * {
+	text-align: left;
+}
+
+.boxes-left .box-text {
+	display: none;
+}
+
+.boxes-left .box:hover .box-text {
+	display: block;
+}
+
+.boxes-left h3 {
+	position: relative;
+	text-transform: uppercase;
+	font-size: 2em;
+	margin-bottom: 0;
+}
+
+.boxes-left h3:after {
+	background: #6FE0DA;
+}
+
+.boxes-left .box:hover h3 {
+	margin-bottom: 1em;
+}
+
+.boxes-left .box:hover h3:after {
+	bottom: calc( -0.25vw - 0.5em );
+}
 
 /*--------------------------------------------------------------
 98.0 Media Queries
