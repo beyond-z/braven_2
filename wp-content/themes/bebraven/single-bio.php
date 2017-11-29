@@ -7,7 +7,7 @@
 global $post;
 
 ?>
-<div class="mosaic-element bio hover-hint">
+<div class="mosaic-element bio has-content">
 	<div class="element-img">
 		<?php 
 		if ( has_post_thumbnail() ) {

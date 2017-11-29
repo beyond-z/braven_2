@@ -32,7 +32,7 @@
 			<img src="<?php echo get_template_directory_uri();?>/images/braven-logo.png" />
 		</a>
 
-		<?php if ( has_nav_menu( 'top-primary' ) ) : ?>
+		<?php if ( has_nav_menu( 'top-primary' ) || has_nav_menu('top-secondary') ) : ?>
 			<nav class="navigation-top">
 				<div class="wrap">
 
@@ -43,6 +43,28 @@
 				</div><!-- .wrap -->
 			</nav><!-- .navigation-top -->
 		<?php endif; ?>
+
+		<?php // social nav menu: ?>
+		<div class="social-nav">
+			<ul>
+				<li>
+					<a href="#" title="Instagram"><div class="social-icon instagram">&nbsp;</div></a>
+				</li>
+				<li>
+					<a href="#" title="LinkedIn"><div class="social-icon linkedin">&nbsp;</div></a>
+				</li>
+				<li>
+					<a href="#" title="Twitter"><div class="social-icon twitter">&nbsp;</div></a>
+				</li>
+				<li>
+					<a href="#" title="Snapchat"><div class="social-icon snapchat">&nbsp;</div></a>
+				</li>
+				<li>
+					<a href="#" title="Facebook"><div class="social-icon facebook">&nbsp;</div></a>
+				</li>				
+			</ul>
+		</div>
+
 		<?php
 
 		// Get page components based on the top-level page containing them:
