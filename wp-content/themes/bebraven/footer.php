@@ -4,8 +4,6 @@
  *
  * Contains the closing of the #content div and all content after.
  *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- *
  * @package WordPress
  * @subpackage Twenty_Seventeen
  * @since 1.0
@@ -16,28 +14,30 @@
 
 		</div><!-- #content -->
 
-		<footer id="colophon" class="site-footer" role="contentinfo">
-			<div class="wrap">
+		<footer id="footer" class="site-footer">
+			<div id="footer-cta" class="wrap">
+				<?php // social nav menu:
+				include 'nav-social.php';
+				?>
+				<form id="footer-email-sign-up">
+					<label>Sign up for emails</label>
+					<input type="email" />
+				</form>
+			</div>
+			<div id="nav-area" class="wrap">
 				<?php
-				//get_template_part( 'template-parts/footer/footer', 'widgets' );
-
-				if ( has_nav_menu( 'social' ) ) : ?>
-					<nav class="social-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Footer Social Links Menu', 'bz' ); ?>">
-						<?php 
-							/*
-							wp_nav_menu( array(
-								'theme_location' => 'social',
-								'menu_class'     => 'social-links-menu',
-								'depth'          => 1,
-								'link_before'    => '<span class="screen-reader-text">',
-								'link_after'     => '</span>' . bz_get_svg( array( 'icon' => 'chain' ) ),
-							) );
-							*/
-						?>
+				if ( has_nav_menu( 'footer' ) ) { ?>
+					<nav class="footer-nav" role="navigation" aria-label="<?php esc_attr_e( 'Footer Menu', 'bz' ); ?>">
+						<?php wp_nav_menu( array( 'theme_location' => 'footer' ) ); ?>
 					</nav><!-- .social-navigation -->
-				<?php endif;
-
-				//get_template_part( 'template-parts/footer/site', 'info' );
+				<?php }
+				if ( has_nav_menu( 'legal' ) ) { ?>
+					<nav class="legal-info" role="navigation" aria-label="<?php esc_attr_e( 'Legal Info', 'bz' ); ?>">
+						<?php 
+						$copyright = '&copy;&nbsp;'. date("Y") . __('&nbsp;Braven, Inc. All rights reserved.', 'bz');
+						wp_nav_menu( array( 'theme_location' => 'legal', 'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s<li>'.$copyright.'</li></ul>' ) ); ?>
+					</nav><!-- .social-navigation -->
+				<?php }
 				?>
 			</div><!-- .wrap -->
 		</footer><!-- #colophon -->
