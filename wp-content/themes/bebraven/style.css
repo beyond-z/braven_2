@@ -1157,7 +1157,8 @@ body {
 	margin-bottom: 0;
 }
 
-.default:not(.marquee) {
+.default:not(.marquee),
+.boxes-left .force-margins {
 	margin-right: 5vw;
 	margin-left: 5vw
 }
@@ -1195,7 +1196,16 @@ body {
 
 .half-left,
 .half-right {
-	background: #f3f3f3;
+	background: #7C7C7C;
+}
+
+.half-left,
+.half-right,
+.half-left img,
+.half-right img,
+.half-left .component-content,
+.half-right .component-content {
+	height: 50vw;
 }
 
 .half-left img,
@@ -1203,11 +1213,11 @@ body {
 .half-left .component-content,
 .half-right .component-content {
 	width: 50%;
-	height: 50vw;
 }
 
 .half-left .component-content,
 .half-right .component-content {
+	background: #f3f3f3;
 	padding: 5vw;
 }
 

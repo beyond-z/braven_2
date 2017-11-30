@@ -50,8 +50,11 @@ get_header();
 					?>
 					<section class="component <?php echo $post->post_name . ' ' . $component_format;?>">
 						<?php 
+
+						// Define a thumbsize based on the post's format
+						$thumbsize = ('half-left' == $component_format || 'half-right' == $component_format) ? 'half' : $component_format;
+
 						if (has_post_thumbnail()) {
-							$thumbsize = ('half-left' == $component_format || 'half-right' == $component_format) ? 'half' : $component_format;
 							the_post_thumbnail($thumbsize);
 						}
 						?>
