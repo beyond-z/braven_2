@@ -252,7 +252,7 @@ function bz_populate_custom_formats() {
 		'half-left' => 'Pic and Story',
 		'half-right' => 'Story and Pic',
 		'centered' => 'Centered',
-		'boxes' => 'Boxes (e.g. for donors)',
+		'boxes' => 'Boxes with centered heading',
 		'boxes-left' => 'Boxes with left-aligned heading',
 		'picbkg' => 'Picture Background',
 		'full' => 'Full (no margin or header)',

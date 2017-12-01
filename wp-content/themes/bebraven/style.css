@@ -809,7 +809,8 @@ a:active {
 }
 
 .bio:after,
-.big-title .has-content:after {
+.big-title .has-content:after,
+.big-picture .has-content:after {
 	opacity: 0.5;
 	position: absolute;
 	content: "...";
@@ -828,12 +829,14 @@ a:active {
 }
 
 .bio:hover:after,
-.big-title .has-content:after {
+.big-title .has-content:after,
+.big-picture .has-content:after {
     opacity: 1;
 }
 
 
-.big-title .has-content:hover:after {
+.big-title .has-content:hover:after,
+.big-picture .has-content:hover:after {
 	opacity: 0;
 }
 
@@ -1519,40 +1522,59 @@ body {
 	background: #EB3B46;
 }
 
-.boxes-left .has-content:hover .box-content {
+.big-title .has-content:hover .box-content {
 	padding: 1vw;
 }
 
-.boxes-left .has-content:hover * {
+.big-title .has-content:hover * {
 	text-align: left;
 }
 
-.boxes-left .box-text {
+.big-title .box-text {
 	display: none;
 }
 
-.boxes-left .has-content:hover .box-text {
+.big-title .has-content:hover .box-text {
 	display: block;
 }
 
-.boxes-left h3 {
+.big-title h3 {
 	position: relative;
 	text-transform: uppercase;
 	font-size: 2em;
 	margin-bottom: 0;
 }
 
-.boxes-left h3:after {
+.big-title h3:after {
 	background: #6FE0DA;
 }
 
-.boxes-left .has-content:hover h3 {
+.big-title .has-content:hover h3 {
 	margin-bottom: 1em;
 	font-size: 1.5em;
 }
 
-.boxes-left .has-content:hover h3:after {
+.big-title .has-content:hover h3:after {
 	bottom: calc( -0.25vw - 0.5em );
+}
+
+.big-picture .box {
+	padding: 0;
+}
+
+.big-picture .box img {
+	width: 100%;
+	height: auto;
+}
+
+.big-picture .excerpt {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 32vw;
+	height: 20vw;
+	padding: 2vw;
+
 }
 
 /*--------------------------------------------------------------
