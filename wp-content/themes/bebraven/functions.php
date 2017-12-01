@@ -132,29 +132,6 @@ function bz_widgets_init() {
 add_action( 'widgets_init', 'bz_widgets_init' );
 
 /**
- * Replaces "[...]" (appended to automatically generated excerpts) with ... and
- * a 'Continue reading' link.
- *
- * @since Twenty Seventeen 1.0
- *
- * @param string $link Link to single post/page.
- * @return string 'Continue reading' link prepended with an ellipsis.
- */
-function bz_excerpt_more( $link ) {
-	if ( is_admin() ) {
-		return $link;
-	}
-
-	$link = sprintf( '<p class="link-more"><a href="%1$s" class="more-link">%2$s</a></p>',
-		esc_url( get_permalink( get_the_ID() ) ),
-		/* translators: %s: Name of current post */
-		sprintf( __( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'bz' ), get_the_title( get_the_ID() ) )
-	);
-	return ' &hellip; ' . $link;
-}
-add_filter( 'excerpt_more', 'bz_excerpt_more' );
-
-/**
  * Handles JavaScript detection.
  *
  * Adds a `js` class to the root `<html>` element when JavaScript is detected.
@@ -252,11 +229,11 @@ function bz_define_custom_post_formats_taxonomies() {
 		'show_admin_column' => true,
 		'query_var'         => true,
 		'rewrite'           => array( 'slug' => 'format' ),
-		// Block it to accidental editing from the dashboard:
+		// Block it to accidental editing from the dashboard by non-admins:
 		'capabilities' => array(
-			'manage_terms' => '',
-			'edit_terms' => '',
-			'delete_terms' => '',
+			'manage_terms' => 'manage_categories',
+			'edit_terms' => 'manage_categories',
+			'delete_terms' => 'manage_categories',
 			'assign_terms' => 'edit_posts'
 		),
 		'public' => true,
@@ -275,7 +252,6 @@ function bz_populate_custom_formats() {
 		'half-left' => 'Pic and Story',
 		'half-right' => 'Story and Pic',
 		'centered' => 'Centered',
-		'mosaic-three' => '3-wide Mosaic',
 		'boxes' => 'Boxes (e.g. for donors)',
 		'boxes-left' => 'Boxes with left-aligned heading',
 		'picbkg' => 'Picture Background',
@@ -463,7 +439,9 @@ add_action( 'init', 'bz_create_bio_cpt', 0 );
  */
  
 // Create Shortcode include-bios
-// Use the shortcode in a post like so: [include-bios biotype="staff" category="chicago"]
+// Use the shortcode in a post like so: 
+// [include-bios biotype="staff" category="product"] 
+// or [include-bios biotype="fellow" category="chicago"]
 function bz_create_includebios_shortcode($atts) {
 	
 	// Attributes
@@ -506,8 +484,13 @@ function bz_create_includebios_shortcode($atts) {
 
 	// Loop through results
 	if ( $bios->have_posts() ) { 
+		
+		// figure out if there would be any leftovers if we divide by 3:
+		$max = count($bios->posts);
+		$modulo = ($max % 3);
 		?>
-		<div class="mosaic bios <?php echo $biotype . ' ' . $category;?>">
+
+		<div data-bz-count="<?php echo $max; ?>" data-bz-leftover="<?php echo $modulo; ?>" class="mosaic bios <?php echo $biotype . ' ' . $category;?>">
 			<?php
 
 			while ( $bios->have_posts() ) {
@@ -534,7 +517,8 @@ function bz_create_includebios_shortcode($atts) {
 add_shortcode( 'include-bios', 'bz_create_includebios_shortcode' );
 
 // Create Shortcode to include sub page as boxes
-// Use the shortcode in a post like so: [include-subpages-as-boxes]
+// Use the shortcode in a post like so: 
+// [include-subpages-as-boxes class='some-class other-class']
 function bz_create_includesubpages_shortcode($atts, $content = null) {
 	
 	// pass $post data for function's internal use:
@@ -542,11 +526,15 @@ function bz_create_includesubpages_shortcode($atts, $content = null) {
 
 	// Attributes
 	$atts = shortcode_atts(
-		array(),
+		array(
+			'class' => '',
+		),
 		$atts,
 		'include-subpages-as-boxes'
 	);
 	
+	$boxes_class = $atts['class'];
+
 	//buffer the following stuff so it doesn't just print it all on top:
 	ob_start();
 
@@ -569,15 +557,13 @@ function bz_create_includesubpages_shortcode($atts, $content = null) {
 
 		// figure out if there would be any leftovers if we divide by 3:
 		$max = count($subboxes->posts);
-		$rounddown = $max - ($max % 3);
-		$counter = 0;
+		$modulo = $max % 3;
+
 		?>
-		<div class="mosaic boxes sub-boxes">
+		<div data-bz-count="<?php echo $max; ?>" data-bz-leftover="<?php echo $modulo; ?>" class="mosaic boxes sub-boxes <?php echo $boxes_class; ?>">
 			<?php
 
 			while ( $subboxes->have_posts() ) {
-				// pass the leftover modulo:
-				$leftover = ($counter++ >= $rounddown) ? 'leftover-'.($counter - $rounddown) : '';
 				$subboxes->the_post();
 				include 'single-box.php';
 			}
@@ -602,7 +588,8 @@ add_shortcode( 'include-subpages-as-boxes', 'bz_create_includesubpages_shortcode
 
 
 // Create Shortcode to include posts from the blog by category
-// Use the shortcode in a post like so: [include-posts category="whatever,something"]
+// Use the shortcode in a post like so: 
+// [include-posts category="whatever,something" class="some-class another-class"]
 function bz_create_includeposts_shortcode($atts, $content = null) {
 	
 	// pass $post data for function's internal use:
@@ -612,11 +599,13 @@ function bz_create_includeposts_shortcode($atts, $content = null) {
 	$atts = shortcode_atts(
 		array(
 			'category' => '',
+			'class' => '',
 		),
 		$atts,
 		'include-posts'
 	);
-	
+
+	$boxes_class = $atts['class'];	
 	$category = $atts['category'];
 
 	// Query Arguments
