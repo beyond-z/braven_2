@@ -514,17 +514,10 @@ big {
 	font-size: 125%;
 }
 
-blockquote {
-	quotes: "" "";
-}
-
+blockquote, 
 q {
 	quotes: "“" "”" "‘" "’";
-}
-
-blockquote:before,
-blockquote:after {
-	content: "";
+	position: relative;
 }
 
 :focus {
@@ -1188,7 +1181,8 @@ body {
 }
 
 .centered h2,
-.centered .force-margins {
+.centered .force-margins,
+.boxes .force-margins {
 	width: 70vw;
 	margin-left: auto;
 	margin-right: auto;
@@ -1279,6 +1273,32 @@ body {
 	top: 30%;
 }
 
+.picbkg blockquote {
+	font-size: 1.25em;
+	font-style: italic;
+}
+
+.picbkg blockquote:before,
+.picbkg blockquote:after {
+	font-family: "Times New Roman", "Times", serif;
+   	position: absolute;
+   	font-size: 5em;
+   	opacity: 0.6;
+   	line-height: 1;
+}
+
+.picbkg blockquote:before {
+    content: open-quote;
+    left: -0.6em;
+    top: 0;
+}
+
+.picbkg blockquote:after {
+    content: close-quote;
+   	right: -0.5em;
+   	bottom: 0;
+}
+
 /*--------------------------------------------------------------
 13.3 Mosaics and bios
 --------------------------------------------------------------*/
@@ -1297,6 +1317,11 @@ body {
 	height: 20vw;
 	width: 32vw;
 	margin-bottom: 2vw;
+}
+
+[data-bz-columns='4'] .mosaic-element {
+	width: 23.5vw;
+	height: 16vw;
 }
 
 .mosaic-element:not(.bio) {
@@ -1381,14 +1406,20 @@ body {
 	right: 0;
 }
 
-[data-bz-leftover='1']  .mosaic-element:last-child {
-	left: 33vw;
+.boxes[data-bz-leftover='1']  .mosaic-element:last-child {
+	width: calc( (32vw * 3) + 4vw );
+}
+.boxes[data-bz-leftover='2']  .mosaic-element:last-child,
+.boxes[data-bz-leftover='2']  .mosaic-element:nth-last-child(2) {
+	flex-grow: 1;
 }
 
-[data-bz-leftover='2']  .mosaic-element:last-child {
-	right: 33vw;
+
+.boxes[data-bz-leftover='2']  .mosaic-element:nth-last-child(2) {
+	margin-right: 2vw;
 }
 
+/*
 [data-bz-leftover='1'] .bio:last-child {
 	left: 22vw;
 }
@@ -1396,6 +1427,7 @@ body {
 [data-bz-leftover='2'] .bio:last-child {
 	right: 22vw;
 }
+*/
 
 .bio:nth-child(1) .element-content,
 .bio:nth-child(2) .element-content,
@@ -1408,8 +1440,8 @@ body {
 	background: #F3F3F3;
 }
 
-.million-plus .mosaic-element {
-	width: calc( (32vw * 3) + 4vw )
+.boxes[data-bz-columns='1']  .mosaic-element {
+	width: calc( (32vw * 3) + 4vw );
 }
 
 .box {
@@ -1455,7 +1487,7 @@ body {
 	margin: 1vw;
 }
 
-.sub-boxes .mosaic-element {
+.sub-boxes:not(.logos) .mosaic-element {
 	height: 30vw;
 }
 
@@ -1574,7 +1606,6 @@ body {
 	width: 32vw;
 	height: 20vw;
 	padding: 2vw;
-
 }
 
 /*--------------------------------------------------------------

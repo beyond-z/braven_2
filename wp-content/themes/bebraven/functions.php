@@ -518,7 +518,7 @@ add_shortcode( 'include-bios', 'bz_create_includebios_shortcode' );
 
 // Create Shortcode to include sub page as boxes
 // Use the shortcode in a post like so: 
-// [include-subpages-as-boxes class='some-class other-class']
+// [include-subpages-as-boxes class='some-class other-class' columns='3']
 function bz_create_includesubpages_shortcode($atts, $content = null) {
 	
 	// pass $post data for function's internal use:
@@ -528,12 +528,14 @@ function bz_create_includesubpages_shortcode($atts, $content = null) {
 	$atts = shortcode_atts(
 		array(
 			'class' => '',
+			'columns' => 3,
 		),
 		$atts,
 		'include-subpages-as-boxes'
 	);
 	
 	$boxes_class = $atts['class'];
+	$boxes_per_row = $atts['columns'];
 
 	//buffer the following stuff so it doesn't just print it all on top:
 	ob_start();
@@ -557,10 +559,10 @@ function bz_create_includesubpages_shortcode($atts, $content = null) {
 
 		// figure out if there would be any leftovers if we divide by 3:
 		$max = count($subboxes->posts);
-		$modulo = $max % 3;
+		$modulo = $max % $boxes_per_row;
 
 		?>
-		<div data-bz-count="<?php echo $max; ?>" data-bz-leftover="<?php echo $modulo; ?>" class="mosaic boxes sub-boxes <?php echo $boxes_class; ?>">
+		<div data-bz-columns="<?php echo $boxes_per_row; ?>" data-bz-leftover="<?php echo $modulo; ?>" class="mosaic boxes sub-boxes <?php echo $boxes_class; ?>">
 			<?php
 
 			while ( $subboxes->have_posts() ) {

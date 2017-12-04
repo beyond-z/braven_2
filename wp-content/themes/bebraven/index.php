@@ -59,7 +59,9 @@ get_header();
 						}
 						?>
 						<div class="component-content">
-							<h2 class="component-heading"><?php the_title(); ?></h2>
+							<?php if ( 'picbkg' != $component_format ) { ?>
+								<h2 class="component-heading"><?php the_title(); ?></h2>
+							<?php } ?>
 							<?php the_content(); ?>
 						</div>
 					</section>
