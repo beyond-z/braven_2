@@ -4,12 +4,6 @@
  *
  * This is the template that displays all of the <head> section and everything up until <div id="content">
  *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- *
- * @package WordPress
- * @subpackage Twenty_Seventeen
- * @since 1.0
- * @version 1.0
  */
 
 ?><!DOCTYPE html>
@@ -32,40 +26,23 @@
 			<img src="<?php echo get_template_directory_uri();?>/images/braven-logo.png" />
 		</a>
 
-		<?php if ( has_nav_menu( 'top-primary' ) || has_nav_menu('top-secondary') ) : ?>
+		<?php 
+		if ( has_nav_menu( 'top-primary' ) ) { 
+			?>
 			<nav class="navigation-top">
 				<div class="wrap">
 
 					<?php 
-					wp_nav_menu( array( 'theme_location' => 'top-secondary' ) );
+					if ( has_nav_menu( 'top-secondary' ) ) wp_nav_menu( array( 'theme_location' => 'top-secondary' ) );
 					wp_nav_menu( array( 'theme_location' => 'top-primary' ) );
 					?> 
 				</div><!-- .wrap -->
 			</nav><!-- .navigation-top -->
-		<?php endif; ?>
+			<?php 
+		}
 
-		<?php // social nav menu: ?>
-		<div class="social-nav">
-			<ul>
-				<li>
-					<a href="#" title="Instagram"><div class="social-icon instagram">&nbsp;</div></a>
-				</li>
-				<li>
-					<a href="#" title="LinkedIn"><div class="social-icon linkedin">&nbsp;</div></a>
-				</li>
-				<li>
-					<a href="#" title="Twitter"><div class="social-icon twitter">&nbsp;</div></a>
-				</li>
-				<li>
-					<a href="#" title="Snapchat"><div class="social-icon snapchat">&nbsp;</div></a>
-				</li>
-				<li>
-					<a href="#" title="Facebook"><div class="social-icon facebook">&nbsp;</div></a>
-				</li>				
-			</ul>
-		</div>
-
-		<?php
+		 // social nav menu:
+		include 'nav-social.php';
 
 		// Get page components based on the top-level page containing them:
 		global $container_ID;
