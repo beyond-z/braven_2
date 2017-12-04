@@ -7,7 +7,8 @@ $('document').ready(function(){
 
 	console.log('Custom theme functions running');
 
-	$('.hover-hint').click(function(e){
+	// some elements reveal stuff on click:
+	$('.bio').click(function(e){
 		e.preventDefault();
 		$(this).toggleClass('reveal');
 	});
