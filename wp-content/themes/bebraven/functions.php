@@ -53,10 +53,11 @@ function bz_setup() {
 
 	// Register navigation menu locations
 	register_nav_menus( array(
-		'top-primary'    => __( 'Top Main Menu', 'bz' ),
-		'top-secondary'    => __( 'Top Secondary Menu', 'bz' ),
-		'social' => __( 'Social Links Menu', 'bz' ),
-		'footer' => __( 'Footer Menu', 'bz' ),
+		'top-primary'    => __( 'Top Main Nav', 'bz' ),
+		'top-secondary'    => __( 'Top Secondary Nav', 'bz' ),
+		//'social' => __( 'Social Links Menu', 'bz' ),
+		'footer' => __( 'Footer Nav', 'bz' ),
+		'legal' => __( 'Legal and Copyright Nav', 'bz' ),
 	) );
 
 	/*

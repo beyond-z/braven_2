@@ -13,7 +13,7 @@ Tags:
 */
 
 /*--------------------------------------------------------------
->>> TABLE OF CONTENTS:
+  TABLE OF CONTENTS:
 ----------------------------------------------------------------
 1.0 Normalize
 2.0 Accessibility
@@ -31,6 +31,7 @@ Tags:
 	13.1 Header and Breadcrumbs
 	13.2 Component Formats
 	13.3 Mosaic/Bios
+97.0 Footer
 98.0 Media Queries
 99.0 Print
 --------------------------------------------------------------*/
@@ -556,8 +557,8 @@ textarea {
 	background: #fff;
 	background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0));
 	border: 1px solid #bbb;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
 	display: block;
 	padding: 0.7em;
 	width: 100%;
@@ -585,8 +586,8 @@ textarea:focus {
 
 select {
 	border: 1px solid #bbb;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
 	height: 3em;
 	max-width: 100%;
 }
@@ -868,12 +869,6 @@ a:active {
 	content: "\005E";
 }
 
-.no-svg .social-navigation a {
-	background: transparent;
-	color: #222;
-	height: auto;
-	width: auto;
-}
 */
 
 /*--------------------------------------------------------------
@@ -944,6 +939,11 @@ a:active {
 12.1 Social nav
 --------------------------------------------------------------*/
 
+.social-nav:before {
+	display: block;
+	content: "Let\0027s stay in touch";
+}
+
 .social-nav ul {
 	list-style: none;
 	margin: 0;
@@ -986,6 +986,14 @@ a:active {
 	background-position: 0 -112px;
 }
 
+#footer .snapchat {
+	background-position: 0 -140px;
+}
+
+#footer .linkedin {
+	background-position: 0 -168px;
+}
+
 #masthead .social-nav {
 	position: absolute;
 	z-index: 9999;
@@ -993,9 +1001,7 @@ a:active {
 	bottom: 28px;
 }
 
-#masthead .social-nav:after {
-	display: block;
-	content: "Let\0027s stay in touch";
+#masthead .social-nav:before {
 	color: #FFF;
 	transform-origin: top right;
 	transform: rotate(-90deg);
@@ -1609,6 +1615,89 @@ body {
 }
 
 /*--------------------------------------------------------------
+97.0 Footer
+--------------------------------------------------------------*/
+
+#footer {
+	background: #EB3B46;
+}
+
+#footer-cta {
+	background: #F3F3F3;
+	padding: 1em 5vw 0;
+}
+
+#footer-cta > *,
+#footer-email-sign-up > * {
+	display: inline-block;
+}
+
+#footer .social-nav ul {
+	display: inline-block;
+	margin-right: 28px
+}
+
+#footer .social-nav li {
+	display: inline-block;
+	margin-left: 9px;
+}
+
+#footer .social-nav:before,
+#footer-email-sign-up label {
+	display: inline-block;
+	font-size: 22px;
+	text-transform: uppercase;
+	position: relative;
+	bottom: 7px;
+}
+
+#footer-email-sign-up input {
+	width: 20vw;
+	margin-left: 14px;
+	height: 36px;
+	padding: 3px;
+	position: relative;
+	bottom: 7px;
+	border: 0;
+	border-radius: 0;
+}
+
+#footer {
+	padding-bottom: 15vw;
+}
+
+#footer nav {
+	font-stretch: condensed;
+	margin: 1.5em 5vw;
+}
+
+#footer nav ul {
+	list-style: none;
+	margin: 1.5em 0;
+}
+
+#footer nav li {
+	display: inline;
+	margin-right: 2vw;
+}
+
+#footer nav a,
+#footer nav a:active,
+#footer nav a:visited {
+	color: #FFF;
+}
+
+
+#footer nav a:hover {
+	color: #6FE0DA;
+}
+
+.legal-info {
+	font-size: 0.5em;
+	text-transform: uppercase;
+}
+
+/*--------------------------------------------------------------
 98.0 Media Queries
 --------------------------------------------------------------*/
 
@@ -1665,7 +1754,9 @@ body,
 button,
 input,
 select,
-textarea {
+textarea,
+#footer .social-nav:before,
+#footer-email-sign-up label  {
 	font-size: 14px;
 }
 
@@ -1687,6 +1778,11 @@ p {
 
 /* Tablet landscape: */
 @media screen and (min-width: 900px) and (max-width:1200px) {
+
+#footer .social-nav:before,
+#footer-email-sign-up label {
+	font-size: 1.8vw;
+}
 
 }
 
