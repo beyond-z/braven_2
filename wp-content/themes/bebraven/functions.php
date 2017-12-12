@@ -442,7 +442,9 @@ add_action( 'init', 'bz_create_bio_cpt', 0 );
 // Create Shortcode include-bios
 // Use the shortcode in a post like so: 
 // [include-bios biotype="staff" category="product"] 
-// or [include-bios biotype="fellow" category="chicago"]
+// or [include-bios biotype="fellow" category="chicago" limit="6"]
+// The 'limit' parameter controls how many results to show. -1 means no limit.
+
 function bz_create_includebios_shortcode($atts) {
 	
 	// Attributes
@@ -450,6 +452,7 @@ function bz_create_includebios_shortcode($atts) {
 		array(
 			'biotype' => 'staff',
 			'category' => '',
+			'limit' => -1 // no limit
 		),
 		$atts,
 		'include-bios'
@@ -458,6 +461,7 @@ function bz_create_includebios_shortcode($atts) {
 	// Attributes in var
 	$biotype = $atts['biotype'];
 	$category = $atts['category'];
+	$query_limit = $atts['limit'];
 
 	//buffer this stuff so it doesn't just print it all on top:
 	ob_start();
@@ -466,8 +470,8 @@ function bz_create_includebios_shortcode($atts) {
 	$args = array(
 		'post_type' => array('bio'),
 		'post_status' => array('publish'),
-		'posts_per_page' => -1, // no limit
-		'nopaging' => true,
+		'posts_per_page' => $query_limit,
+		'nopaging' => false,
 		'order' => 'ASC',
 		'orderby' => 'menu_order',
 		'tax_query' => array(
@@ -534,7 +538,7 @@ function bz_create_includesubpages_shortcode($atts, $content = null) {
 		$atts,
 		'include-subpages-as-boxes'
 	);
-	
+
 	$boxes_class = $atts['class'];
 	$boxes_per_row = $atts['columns'];
 
@@ -546,7 +550,6 @@ function bz_create_includesubpages_shortcode($atts, $content = null) {
 		'post_parent' => $post->ID,
 		'post_type' => array('page'),
 		'post_status' => array('publish'),
-		'posts_per_page' => -1, // no limit
 		'nopaging' => true,
 		'order' => 'ASC',
 		'orderby' => 'menu_order',
