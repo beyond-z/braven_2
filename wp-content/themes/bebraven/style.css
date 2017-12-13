@@ -380,6 +380,14 @@ template {
 
 @font-face {
     font-family: DIN;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: condensed;
+    src: url("fonts/DINCondensedRegular.otf") format("opentype");
+}
+
+@font-face {
+    font-family: DIN;
     font-weight: bold;
     font-style: normal;
     font-stretch: condensed;
@@ -425,6 +433,7 @@ h2 {
 h1 {
 	font-size: 2.25em;
 	font-stretch: condensed;
+	font-weight: bold;
 }
 
 h2 {
@@ -523,6 +532,39 @@ q {
 
 :focus {
 	outline: none;
+}
+
+.component-content ul {
+  list-style: none;
+}
+
+.component-content li {
+  padding-left: 0.75em; 
+  margin-bottom: 0.5em;
+  text-indent: -0.75em;
+}
+
+.component-content li::before {
+  content: "• ";
+  color: #00D8CB; /
+}
+
+.half-left .component-content ul,
+.half-right .component-content ul {
+	list-style: inherit;
+}
+
+.half-left .component-content li,
+.half-right .component-content li,
+ .staff .bio .excerpt li {
+  padding-left: inherit; 
+  text-indent: inherit;
+}
+
+.half-left .component-content li::before,
+.half-right .component-content li::before,
+.bio .excerpt li::before {
+	content: none;
 }
 
 /*--------------------------------------------------------------
@@ -881,6 +923,7 @@ a:active {
 	right: 5vw;
 	z-index: 999;
 	font-stretch: condensed;
+	font-weight: bold;
 }
 
 #masthead a,
@@ -1010,6 +1053,7 @@ a:active {
 	right: 14px;
 	width: 10em;
 	font-stretch: condensed;
+	font-weight: bold;
 	font-size: 16px;
 	margin: 0;
 	line-height: 0;
@@ -1125,6 +1169,7 @@ body {
 
 #breadcrumbs li {
 	font-stretch: condensed;
+	font-weight: bold;
 	display: inline-block;
 	margin-right: 0.25em;
 }
@@ -1380,8 +1425,15 @@ body {
 	bottom: 0;
 }
 
-.element-content img {
+.element-content-img {
 	width: 16vw;
+	height: 16vw;
+	overflow: hidden;
+	background: #F3F3F3;
+}
+
+.element-content-img img {
+	width: 100%;
 	height: auto;
 }
 
@@ -1405,6 +1457,21 @@ body {
 
 .bio.reveal .element-content {
 	display: block;
+	cursor: initial;
+}
+
+.close-this {
+	position: absolute;
+	font-size: 2vw;
+	right: 2vw;
+	top: 2vw;
+	cursor: pointer;
+	color: #EB3B46;
+	transition: color 0.25s;
+}
+
+.close-this:hover {
+	color: #FFF;
 }
 
 .bio:nth-child(3n+0) .element-content {
@@ -1420,26 +1487,81 @@ body {
 	flex-grow: 1;
 }
 
-
 .boxes[data-bz-leftover='2']  .mosaic-element:nth-last-child(2) {
 	margin-right: 2vw;
 }
 
-/*
-[data-bz-leftover='1'] .bio:last-child {
+
+.bios[data-bz-leftover='1'] .mosaic-element:last-child {
 	left: 22vw;
 }
 
-[data-bz-leftover='2'] .bio:last-child {
+.bios[data-bz-leftover='2'] .mosaic-element:last-child {
 	right: 22vw;
 }
-*/
 
 .bio:nth-child(1) .element-content,
 .bio:nth-child(2) .element-content,
 .bio:nth-child(3) .element-content {
 	top: 0;
 	bottom: auto;
+}
+
+.bio .element-header {
+	position: absolute;
+	top: 2vw;
+	left: 18vw;
+}
+
+.bio .element-content {
+	padding: 2vw;
+}
+
+.staff .bio .element-text,
+.board .bio .element-text {
+	height: 20vw;
+	margin-top: 2vw;
+	overflow-y: auto;
+}
+
+.staff .bio .element-text p:first-child,
+.board .bio .element-text p:first-child {
+	margin-top: 0;
+}
+
+.staff .bio h3,
+.board .bio h3 {
+	text-transform: uppercase;
+	line-height: 1;
+}
+
+.staff .bio h3:after,
+.board .bio h3:after {
+	display: none;
+}
+
+.fellow .excerpt {
+	display: none;
+}
+
+.staff .bio .excerpt,
+.board .bio .excerpt,
+.staff .bio .excerpt li,
+.board .bio .excerpt li {
+	font-stretch: condensed;
+	font-weight: normal;
+}
+
+.staff .bio .excerpt,
+.board .bio .excerpt {
+	font-size: 0.65em;
+	margin-top: 0.5em;
+}
+
+.staff .bio .excerpt li,
+.board .bio .excerpt li {
+	line-height: 1;
+	margin: 0;
 }
 
 .boxes .mosaic-element {
@@ -1668,6 +1790,7 @@ body {
 
 #footer nav {
 	font-stretch: condensed;
+	font-weight: bold;
 	margin: 1.5em 5vw;
 }
 
@@ -1693,7 +1816,8 @@ body {
 }
 
 .legal-info {
-	font-size: 0.5em;
+	font-size: 0.7em;
+	font-weight: normal;
 	text-transform: uppercase;
 }
 

@@ -23,7 +23,7 @@ $content = get_the_content();
 $has_more = ($content) ? 'has-content' : 'no-content';
 
 ?>
-<div class="mosaic-element <?php echo $has_more; ?>">
+<article class="mosaic-element <?php echo $has_more; ?>">
 	<div class="box">
 		<div class="box-content">
 			<?php 
@@ -44,4 +44,4 @@ $has_more = ($content) ? 'has-content' : 'no-content';
 			?>
 		</div>
 	</div>
-</div>
+</article>

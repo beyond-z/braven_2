@@ -442,7 +442,9 @@ add_action( 'init', 'bz_create_bio_cpt', 0 );
 // Create Shortcode include-bios
 // Use the shortcode in a post like so: 
 // [include-bios biotype="staff" category="product"] 
-// or [include-bios biotype="fellow" category="chicago"]
+// or [include-bios biotype="fellow" category="chicago" limit="6" class="" orderby="post_title"]
+// The 'limit' parameter controls how many results to show. -1 means no limit.
+
 function bz_create_includebios_shortcode($atts) {
 	
 	// Attributes
@@ -450,6 +452,9 @@ function bz_create_includebios_shortcode($atts) {
 		array(
 			'biotype' => 'staff',
 			'category' => '',
+			'class' => '',
+			'orderby' => 'menu_order',
+			'limit' => -1 // no limit
 		),
 		$atts,
 		'include-bios'
@@ -458,6 +463,9 @@ function bz_create_includebios_shortcode($atts) {
 	// Attributes in var
 	$biotype = $atts['biotype'];
 	$category = $atts['category'];
+	$class = $atts['class'];
+	$orderby = $atts['orderby'];
+	$query_limit = $atts['limit'];
 
 	//buffer this stuff so it doesn't just print it all on top:
 	ob_start();
@@ -466,10 +474,9 @@ function bz_create_includebios_shortcode($atts) {
 	$args = array(
 		'post_type' => array('bio'),
 		'post_status' => array('publish'),
-		'posts_per_page' => -1, // no limit
-		'nopaging' => true,
+		'posts_per_page' => $query_limit,
 		'order' => 'ASC',
-		'orderby' => 'menu_order',
+		'orderby' => $orderby,
 		'tax_query' => array(
 			array(
 				'taxonomy' => 'biotype',
@@ -491,7 +498,7 @@ function bz_create_includebios_shortcode($atts) {
 		$modulo = ($max % 3);
 		?>
 
-		<div data-bz-count="<?php echo $max; ?>" data-bz-leftover="<?php echo $modulo; ?>" class="mosaic bios <?php echo $biotype . ' ' . $category;?>">
+		<div data-bz-count="<?php echo $max; ?>" data-bz-leftover="<?php echo $modulo; ?>" class="mosaic bios <?php echo $class . ' ' . $biotype . ' ' . $category;?>">
 			<?php
 
 			while ( $bios->have_posts() ) {
@@ -534,7 +541,8 @@ function bz_create_includesubpages_shortcode($atts, $content = null) {
 		$atts,
 		'include-subpages-as-boxes'
 	);
-	
+
+	$category = "";
 	$boxes_class = $atts['class'];
 	$boxes_per_row = $atts['columns'];
 
@@ -546,7 +554,6 @@ function bz_create_includesubpages_shortcode($atts, $content = null) {
 		'post_parent' => $post->ID,
 		'post_type' => array('page'),
 		'post_status' => array('publish'),
-		'posts_per_page' => -1, // no limit
 		'nopaging' => true,
 		'order' => 'ASC',
 		'orderby' => 'menu_order',

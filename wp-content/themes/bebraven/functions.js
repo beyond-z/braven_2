@@ -8,9 +8,14 @@ $('document').ready(function(){
 	console.log('Custom theme functions running');
 
 	// some elements reveal stuff on click:
-	$('.bio').click(function(e){
-		e.preventDefault();
-		$(this).toggleClass('reveal');
+	$('.bio .element-img').click(function(e){
+		var containingBio = $(this).parents('.bio');
+		$('.reveal').not(containingBio).removeClass('reveal');
+		$(containingBio).addClass('reveal');
+	});
+
+	$('.close-this').click(function(e) {
+		$(this).parents('.bio').removeClass('reveal');
 	});
 
 });
