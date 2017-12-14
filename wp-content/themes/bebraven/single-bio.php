@@ -20,7 +20,9 @@ $thumb = '';
 			);
 			$thumb = get_the_post_thumbnail($post->ID, 'headshot', $thumbatts);
 			echo $thumb;
-		} 
+		} else {
+			echo '<div class="instead-of-img"><h3>'.$post->post_title.'</h3></div>';
+		}
 		?>
 	</div>
 	<div class="element-content hover-toggle">
