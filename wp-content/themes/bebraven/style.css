@@ -534,37 +534,19 @@ q {
 	outline: none;
 }
 
-.component-content ul {
+.default .component-content ul {
   list-style: none;
 }
 
-.component-content li {
+.default .component-content li {
   padding-left: 0.75em; 
   margin-bottom: 0.5em;
   text-indent: -0.75em;
 }
 
-.component-content li::before {
+.default .component-content li::before {
   content: "• ";
   color: #00D8CB; /
-}
-
-.half-left .component-content ul,
-.half-right .component-content ul {
-	list-style: inherit;
-}
-
-.half-left .component-content li,
-.half-right .component-content li,
- .staff .bio .excerpt li {
-  padding-left: inherit; 
-  text-indent: inherit;
-}
-
-.half-left .component-content li::before,
-.half-right .component-content li::before,
-.bio .excerpt li::before {
-	content: none;
 }
 
 /*--------------------------------------------------------------

@@ -257,6 +257,7 @@ function bz_populate_custom_formats() {
 		'boxes-left' => 'Boxes with left-aligned heading',
 		'picbkg' => 'Picture Background',
 		'full' => 'Full (no margin or header)',
+		'tab' => 'Tab on parent page',
 	);
 	foreach($formats_to_create as $slug => $title) {
 		wp_insert_term(
