@@ -27,6 +27,8 @@ Tags:
 10.0 Links
 11.0 SVGs Fallbacks
 12.0 Navigation
+	12.1 Social nav
+	12.2 Tabs nav
 13.0 Layout
 	13.1 Header and Breadcrumbs
 	13.2 Component Formats
@@ -1040,6 +1042,39 @@ a:active {
 	margin: 0;
 	line-height: 0;
 
+}
+
+/*--------------------------------------------------------------
+12.2 Tabs nav
+--------------------------------------------------------------*/
+
+#tabs-menu {
+	margin-left: 5vw;
+	display: flex;
+	width: 45vw;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+	margin-bottom: 1em;
+}
+
+#tabs-menu a {
+	flex-grow: 1;
+	display: block;
+	padding: 0.5em;
+	text-align: center;
+	background: #F3F3F3;
+	margin-right: 0.5em;
+	text-transform: uppercase;
+}
+
+#tabs-menu a:not(.active):hover {
+	background: #6FE0DA;
+}
+
+#tabs-menu .active {
+	background: #EB3B46;
+	color: #FFF;
+	cursor: default;
 }
 
 /*--------------------------------------------------------------
