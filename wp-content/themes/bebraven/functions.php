@@ -454,7 +454,7 @@ function bz_create_includebios_shortcode($atts) {
 			'biotype' => 'staff',
 			'category' => '',
 			'class' => '',
-			'orderby' => 'menu_order',
+			'orderby' => 'menu_order post_title',
 			'limit' => -1 // no limit
 		),
 		$atts,

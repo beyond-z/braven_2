@@ -40,6 +40,7 @@ get_header();
 				'post_parent' => $container_ID, 
 				'post_status' => 'publish',
 				'orderby' => 'menu_order',
+				'nopaging' => 'true',
 				'order' => 'ASC',
 			);
 			
@@ -73,6 +74,7 @@ get_header();
 							'post_parent' => $post->ID, 
 							'post_status' => 'publish',
 							'orderby' => 'menu_order',
+							'nopaging' => 'true',
 							'order' => 'ASC',
 						);
 			
