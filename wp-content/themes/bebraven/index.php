@@ -29,8 +29,8 @@ get_header();
 			 */
 
 			// Start building the parts of the page:
-			$tabs_menu = '<nav class="tabs_menu"><a href="#parent-tab">' . $post->post_title . '</a>';
-			$parent_content = '<div id="parent-tab" class="tab parent-tab">';
+			$tabs_menu = '<nav id="tabs-menu" class="tabs-menu"><a href="#parent-tab" class="active">' . $post->post_title . '</a>';
+			$parent_content = '';
 			$tabs_content = '';
 
 			global $container_ID; // $container_ID is defined in the header.php template 
@@ -59,8 +59,13 @@ get_header();
 					// If this sub-page is supposed to show up as a tab with its own components:
 					if ('tab' == $component_format) {
 
+						// start a buffer for this tab's content
+						ob_start();
+
 						$tabs_menu .= '<a href="#' . $post->post_name . '">' . $post->post_title . '</a>';
-						$tabs_content = '<div id="' . $post->post_name . '" class="tab sub-page-tab ' . $post->post_name . '">';
+
+
+						echo '<div id="' . $post->post_name . '" class="tab sub-page-tab ' . $post->post_name . '">';
 
 
 						$args = array(
@@ -82,14 +87,14 @@ get_header();
 							// and add that to the contant var 
 							// (via buffer so it doesn't print prematurely):
 
-							ob_start();
 							include('content.php');
-							echo ob_get_length();
-							$tabs_content .= ob_get_contents();
-							//ob_end_clean(); 
 						}
 
-						$tabs_content .= '</div>';
+						echo '</div>';
+
+
+						$tabs_content .= ob_get_clean();
+
 
 						/* Restore original Post Data */
 						wp_reset_postdata();
@@ -99,15 +104,22 @@ get_header();
 
 						ob_start();
 						include('content.php');
-						$parent_content .= ob_get_contents(); 
-						ob_end_clean(); 
+						$parent_content .= ob_get_clean(); 
 
 					}
 				} // end while
 
-				echo $tabs_menu . '</nav>';
-				echo $parent_content . '</div>';
-				echo $tabs_content;
+				if ($tabs_content) { 
+					
+					echo $tabs_menu . '</nav>';
+					?>
+					<div id="parent-tab" class="tab parent-tab">
+						<?php echo $parent_content;?>
+					</div>
+					<?php echo $tabs_content;
+				} else {
+					echo $parent_content;
+				}
 
 				/* Restore original Post Data */
 				wp_reset_postdata();
