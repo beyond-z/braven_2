@@ -1227,9 +1227,21 @@ body {
 }
 
 .default:not(.marquee),
-.boxes-left .force-margins {
+.boxes-left .force-margins,
+.boxes-left .component-content > p:first-of-type,
+.boxes-left .component-content > h3 {
 	margin-right: 5vw;
 	margin-left: 5vw
+}
+
+.boxes-left .component-content > h3 {
+	text-transform: uppercase;
+	margin-top: 2em;
+}
+
+.boxes-left .component-content > h3:after,
+.boxes-left .logos h3:after {
+	display: none;
 }
 
 .mosaic-three {
@@ -1610,14 +1622,20 @@ body {
 }
 
 .boxes h3,
-.boxes li {
+.boxes li,
+.boxes-left li {
 	font-size: 1.15em;
 	font-weight: bold;
 	margin-bottom: 0;
 	text-transform: uppercase;
 }
 
-.boxes ul {
+.boxes-left li {
+	background: #F3F3F3;
+}
+
+.boxes ul,
+.boxes-left ul {
 	list-style: none;
 	display: flex;
 	flex-direction: row;
@@ -1627,9 +1645,17 @@ body {
 	align-content: flex-start;
 }
 
-.boxes li {
+.boxes-left ul {
+	justify-content: left;
+	align-items: stretch;
+	margin-left: 5vw;
+}
+.boxes li,
+.boxes-left li {
 	width: 20vw;
 	margin: 1vw;
+	padding: 1vw;
+	text-align: center;
 }
 
 .sub-boxes:not(.logos) .mosaic-element {

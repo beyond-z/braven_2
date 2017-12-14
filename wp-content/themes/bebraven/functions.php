@@ -318,7 +318,8 @@ function bz_convert_formats_taxonomy_to_radio_checklist( $args ) {
  * and populate some initial values
  */
 
-// Create and register a new taxonomy called 'biotype':
+// Register Taxonomy Bio Type
+// Taxonomy Key: biotype:
 function bz_define_biotypes() {
 	$labels = array(
 		'name'              => _x( 'Bio Types', 'taxonomy general name', 'bz' ),
@@ -373,6 +374,43 @@ function bz_populate_biotypes() {
 add_action( 'init', 'bz_populate_biotypes' );
 
 add_filter( 'wp_terms_checklist_args', 'bz_convert_formats_taxonomy_to_radio_checklist' );
+
+// Register Taxonomy Donor/Partner Category
+// Taxonomy Key: donorpartnercategory
+function bz_create_donorpartnercategory_tax() {
+
+	$labels = array(
+		'name'              => _x( 'Donor/Partner Categories', 'taxonomy general name', 'bz' ),
+		'singular_name'     => _x( 'Donor/Partner Category', 'taxonomy singular name', 'bz' ),
+		'search_items'      => __( 'Search Donor/Partner Categories', 'bz' ),
+		'all_items'         => __( 'All Donor/Partner Categories', 'bz' ),
+		'parent_item'       => __( 'Parent Donor/Partner Category', 'bz' ),
+		'parent_item_colon' => __( 'Parent Donor/Partner Category:', 'bz' ),
+		'edit_item'         => __( 'Edit Donor/Partner Category', 'bz' ),
+		'update_item'       => __( 'Update Donor/Partner Category', 'bz' ),
+		'add_new_item'      => __( 'Add New Donor/Partner Category', 'bz' ),
+		'new_item_name'     => __( 'New Donor/Partner Category Name', 'bz' ),
+		'menu_name'         => __( 'Donor/Partner Category', 'bz' ),
+	);
+	$args = array(
+		'labels' => $labels,
+		'description' => __( '', 'bz' ),
+		'hierarchical' => true,
+		'public' => false,
+		'publicly_queryable' => false,
+		'show_ui' => true,
+		'show_in_menu' => true,
+		'show_in_nav_menus' => false,
+		'show_in_rest' => false,
+		'show_tagcloud' => false,
+		'show_in_quick_edit' => true,
+		'show_admin_column' => true,
+	);
+	register_taxonomy( 'donorpartnercategory', array('donororpartner', ), $args );
+
+}
+add_action( 'init', 'bz_create_donorpartnercategory_tax' );
+
 
 /**
  * Generate custom post types
@@ -435,6 +473,66 @@ function bz_create_bio_cpt() {
 
 }
 add_action( 'init', 'bz_create_bio_cpt', 0 );
+
+// Register Custom Post Type Donor or Partner
+// Post Type Key: donororpartner
+function bz_create_donororpartner_cpt() {
+
+	$labels = array(
+		'name' => __( 'Donors and Partners', 'Post Type General Name', 'bz' ),
+		'singular_name' => __( 'Donor or Partner', 'Post Type Singular Name', 'bz' ),
+		'menu_name' => __( 'Donors and Partners', 'bz' ),
+		'name_admin_bar' => __( 'Donor or Partner', 'bz' ),
+		'archives' => __( 'Donor or Partner Archives', 'bz' ),
+		'attributes' => __( 'Donor or Partner Attributes', 'bz' ),
+		'parent_item_colon' => __( 'Parent Donor or Partner:', 'bz' ),
+		'all_items' => __( 'All Donors and Partners', 'bz' ),
+		'add_new_item' => __( 'Add New Donor or Partner', 'bz' ),
+		'add_new' => __( 'Add New', 'bz' ),
+		'new_item' => __( 'New Donor or Partner', 'bz' ),
+		'edit_item' => __( 'Edit Donor or Partner', 'bz' ),
+		'update_item' => __( 'Update Donor or Partner', 'bz' ),
+		'view_item' => __( 'View Donor or Partner', 'bz' ),
+		'view_items' => __( 'View Donors and Partners', 'bz' ),
+		'search_items' => __( 'Search Donor or Partner', 'bz' ),
+		'not_found' => __( 'Not found', 'bz' ),
+		'not_found_in_trash' => __( 'Not found in Trash', 'bz' ),
+		'featured_image' => __( 'Featured Image', 'bz' ),
+		'set_featured_image' => __( 'Set featured image', 'bz' ),
+		'remove_featured_image' => __( 'Remove featured image', 'bz' ),
+		'use_featured_image' => __( 'Use as featured image', 'bz' ),
+		'insert_into_item' => __( 'Insert into Donor or Partner', 'bz' ),
+		'uploaded_to_this_item' => __( 'Uploaded to this Donor or Partner', 'bz' ),
+		'items_list' => __( 'Donors and Partners list', 'bz' ),
+		'items_list_navigation' => __( 'Donors and Partners list navigation', 'bz' ),
+		'filter_items_list' => __( 'Filter Donors and Partners list', 'bz' ),
+	);
+	$args = array(
+		'label' => __( 'Donor or Partner', 'bz' ),
+		'description' => __( '', 'bz' ),
+		'labels' => $labels,
+		'menu_icon' => 'dashicons-heart',
+		'supports' => array('title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'custom-fields', 'page-attributes', ),
+		'taxonomies' => array('donorpartnercategory', 'category', ),
+		'public' => true,
+		'show_ui' => true,
+		'show_in_menu' => true,
+		'menu_position' => 5,
+		'show_in_admin_bar' => true,
+		'show_in_nav_menus' => false,
+		'can_export' => true,
+		'has_archive' => false,
+		'hierarchical' => false,
+		'exclude_from_search' => true,
+		'show_in_rest' => true,
+		'publicly_queryable' => false,
+		'capability_type' => 'post',
+	);
+	register_post_type( 'donororpartner', $args );
+
+}
+add_action( 'init', 'bz_create_donororpartner_cpt', 0 );
+
 
 /**
  * Make shortcodes to embed inline templates/functionality into a page's content
@@ -525,7 +623,7 @@ function bz_create_includebios_shortcode($atts) {
 
 add_shortcode( 'include-bios', 'bz_create_includebios_shortcode' );
 
-// Create Shortcode to include sub page as boxes
+// Create Shortcode to include sub page or donors/partners as boxes
 // Use the shortcode in a post like so: 
 // [include-subpages-as-boxes class='some-class other-class' columns='3']
 function bz_create_includesubpages_shortcode($atts, $content = null) {
@@ -538,30 +636,56 @@ function bz_create_includesubpages_shortcode($atts, $content = null) {
 		array(
 			'class' => '',
 			'columns' => 3,
+			'type' => 'page',
+			'donorcats' => '',
+			'category' => '',
 		),
 		$atts,
 		'include-subpages-as-boxes'
 	);
 
-	$category = "";
+	$type = $atts['type'];
+	$category = $atts['category'];
 	$boxes_class = $atts['class'];
 	$boxes_per_row = $atts['columns'];
+	$donorcats = $atts['donorcats'];
+
+	$donor = ('donororpartner' == $atts['type']) ? 'donororpartner' : '';
+	if ($donor) {
+		$tax_query = array(
+			array(
+				'taxonomy' => 'donorpartnercategory',
+				'field' => 'slug',
+				'terms' => array($donorcats),
+			),
+		);
+		$parent = null;
+	} else {
+		$tax_query = null;
+		$parent = $post->ID;
+	}
+
+
 
 	//buffer the following stuff so it doesn't just print it all on top:
 	ob_start();
 
 	// Query Arguments
 	$spargs = array(
-		'post_parent' => $post->ID,
-		'post_type' => array('page'),
+		'post_parent' => $parent,
+		'post_type' => array($type),
 		'post_status' => array('publish'),
 		'nopaging' => true,
 		'order' => 'ASC',
-		'orderby' => 'menu_order',
+		'orderby' => 'menu_order post_title', 
+		'tax_query' => $tax_query,
+		'category_name' => $category,
 	);
 
 	// The Query
 	$subboxes = new WP_Query( $spargs );
+
+	//print_r($subboxes);
 
 	// Loop through results
 	if ( $subboxes->have_posts() ) { 
@@ -571,7 +695,7 @@ function bz_create_includesubpages_shortcode($atts, $content = null) {
 		$modulo = $max % $boxes_per_row;
 
 		?>
-		<div data-bz-columns="<?php echo $boxes_per_row; ?>" data-bz-leftover="<?php echo $modulo; ?>" class="mosaic boxes sub-boxes <?php echo $boxes_class; ?>">
+		<div data-bz-columns="<?php echo $boxes_per_row; ?>" data-bz-leftover="<?php echo $modulo; ?>" class="mosaic boxes sub-boxes <?php echo $boxes_class . ' ' . $donor; ?>">
 			<?php
 
 			while ( $subboxes->have_posts() ) {
