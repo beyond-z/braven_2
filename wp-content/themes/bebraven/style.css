@@ -819,7 +819,7 @@ a:active {
 
 .component li a {
 	font-weight: inherit;
-	padding: inherit;
+	padding: 0;
 	background: none;
 	text-transform: inherit;
 }
@@ -1228,6 +1228,7 @@ body {
 
 .default:not(.marquee),
 .boxes-left .force-margins,
+.boxes .component-content > p:first-of-type,
 .boxes-left .component-content > p:first-of-type,
 .boxes-left .component-content > h3 {
 	margin-right: 5vw;
@@ -1404,6 +1405,12 @@ body {
 	height: 16vw;
 }
 
+[data-bz-columns='5'] .mosaic-element {
+	width: 18vw;
+	height: 12vw;
+	font-size: 0.9em;
+}
+
 .mosaic-element:not(.bio) {
 	overflow: hidden;
 }
@@ -1508,15 +1515,15 @@ body {
 	right: 0;
 }
 
-.boxes[data-bz-leftover='1']  .mosaic-element:last-child {
+.boxes[data-bz-columns='3'][data-bz-leftover='1']  .mosaic-element:last-child {
 	width: calc( (32vw * 3) + 4vw );
 }
-.boxes[data-bz-leftover='2']  .mosaic-element:last-child,
-.boxes[data-bz-leftover='2']  .mosaic-element:nth-last-child(2) {
+.boxes[data-bz-columns='3'][data-bz-leftover='2']  .mosaic-element:last-child,
+.boxes[data-bz-columns='3'][data-bz-leftover='2']  .mosaic-element:nth-last-child(2) {
 	flex-grow: 1;
 }
 
-.boxes[data-bz-leftover='2']  .mosaic-element:nth-last-child(2) {
+.boxes[data-bz-columns='3'][data-bz-leftover='2']  .mosaic-element:nth-last-child(2) {
 	margin-right: 2vw;
 }
 
@@ -1558,14 +1565,12 @@ body {
 	margin-top: 0;
 }
 
-.staff .bio h3,
-.board .bio h3 {
+:not(.fellow) .bio h3 {
 	text-transform: uppercase;
 	line-height: 1;
 }
 
-.staff .bio h3:after,
-.board .bio h3:after {
+:not(.fellow) h3:after {
 	display: none;
 }
 
@@ -1573,22 +1578,34 @@ body {
 	display: none;
 }
 
-.staff .bio .excerpt,
-.board .bio .excerpt,
-.staff .bio .excerpt li,
-.board .bio .excerpt li {
+
+.instead-of-img {
+	display: table;
+	width: 100%;
+	height: 100%;
+}
+
+.instead-of-img h3 {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.bio .excerpt ul {
+	list-style: none;
+}
+
+.bio .excerpt,
+.bio .excerpt li {
 	font-stretch: condensed;
 	font-weight: normal;
 }
 
-.staff .bio .excerpt,
-.board .bio .excerpt {
-	font-size: 0.65em;
+.bio .excerpt {
+	font-size: 0.75em;
 	margin-top: 0.5em;
 }
 
-.staff .bio .excerpt li,
-.board .bio .excerpt li {
+.bio .excerpt li {
 	line-height: 1;
 	margin: 0;
 }
@@ -1621,21 +1638,17 @@ body {
 	height: auto;
 }
 
-.boxes h3,
-.boxes li,
-.boxes-left li {
-	font-size: 1.15em;
-	font-weight: bold;
-	margin-bottom: 0;
+.boxes h3 {
 	text-transform: uppercase;
 }
+
+/*
 
 .boxes-left li {
 	background: #F3F3F3;
 }
 
-.boxes ul,
-.boxes-left ul {
+.donororpartner ul {
 	list-style: none;
 	display: flex;
 	flex-direction: row;
@@ -1645,11 +1658,12 @@ body {
 	align-content: flex-start;
 }
 
-.boxes-left ul {
+.donororpartner.boxes-left ul {
 	justify-content: left;
 	align-items: stretch;
 	margin-left: 5vw;
 }
+
 .boxes li,
 .boxes-left li {
 	width: 20vw;
@@ -1657,6 +1671,7 @@ body {
 	padding: 1vw;
 	text-align: center;
 }
+*/
 
 .sub-boxes:not(.logos) .mosaic-element {
 	height: 30vw;
@@ -1692,6 +1707,12 @@ body {
 	width: 14vw;
 	padding: 0.1vw;
 	left: calc( 50% - 7vw );
+}
+
+
+.big-details .excerpt {
+	font-size: 1.5em;
+	text-transform: uppercase;
 }
 
 .selected-posts .mosaic-element {

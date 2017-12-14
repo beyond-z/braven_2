@@ -692,7 +692,7 @@ function bz_create_includesubpages_shortcode($atts, $content = null) {
 
 		// figure out if there would be any leftovers if we divide by 3:
 		$max = count($subboxes->posts);
-		$modulo = $max % $boxes_per_row;
+		if ($boxes_per_row) $modulo = $max % $boxes_per_row;
 
 		?>
 		<div data-bz-columns="<?php echo $boxes_per_row; ?>" data-bz-leftover="<?php echo $modulo; ?>" class="mosaic boxes sub-boxes <?php echo $boxes_class . ' ' . $donor; ?>">
@@ -724,7 +724,7 @@ add_shortcode( 'include-subpages-as-boxes', 'bz_create_includesubpages_shortcode
 
 // Create Shortcode to include posts from the blog by category
 // Use the shortcode in a post like so: 
-// [include-posts category="whatever,something" class="some-class another-class"]
+// [include-posts category="whatever,something" class="some-class another-class" limit="4"]
 function bz_create_includeposts_shortcode($atts, $content = null) {
 	
 	// pass $post data for function's internal use:
@@ -735,6 +735,7 @@ function bz_create_includeposts_shortcode($atts, $content = null) {
 		array(
 			'category' => '',
 			'class' => '',
+			'limit' => 3,
 		),
 		$atts,
 		'include-posts'
@@ -742,12 +743,13 @@ function bz_create_includeposts_shortcode($atts, $content = null) {
 
 	$boxes_class = $atts['class'];	
 	$category = $atts['category'];
+	$limit = $atts['limit'];
 
 	// Query Arguments
 	$pargs = array(
 		'post_type' => array('post'),
 		'post_status' => array('publish'),
-		'posts_per_page' => 3, 
+		'posts_per_page' => $limit, 
 		'nopaging' => false,
 		'paged' => 0,
 		'order' => 'DESC',

@@ -27,7 +27,14 @@ $('document').ready(function(){
 		$('.tab').hide();
 		var target = $(this).addClass('active').attr('href');
 		$(target).show();
+
+		// Add a hash to the URL in case someone wants to direct to the tab:
+		history.pushState(null,null,target);
 	});
+
+	// Switch tabs based on hash in url, so we can land directly on the target tab:
+	// [TBD]
+
 
 });
 })(jQuery);

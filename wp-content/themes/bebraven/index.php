@@ -68,7 +68,6 @@ get_header();
 
 						echo '<div id="' . $post->post_name . '" class="tab sub-page-tab ' . $post->post_name . '">';
 
-
 						$args = array(
 							'post_type' => 'page',
 							'post_parent' => $post->ID, 
