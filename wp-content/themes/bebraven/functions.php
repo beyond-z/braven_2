@@ -1019,6 +1019,9 @@ function bz_custom_breadcrumbs() {
                
             // 404 page
             echo '<li>' . 'Error 404' . '</li>';
+        } elseif ( is_home() ) {
+        	global $container_ID;
+        	echo '<li class="item-current item-' . $container_ID . '"><span class="bread-current bread-' . $container_ID . '"> ' . get_the_title($container_ID) . '</span></li>';
         }
        
         echo '</ul>';

@@ -48,6 +48,8 @@
 		global $container_ID;
 		if ( is_front_page() ) {
 			$container_ID = bz_get_id_by_slug('home-container');
+		} elseif ( is_home() ) {
+			$container_ID = bz_get_id_by_slug('blog');
 		} else {
 			$container_ID = $post->ID;
 		}
