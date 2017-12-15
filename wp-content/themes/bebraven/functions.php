@@ -102,8 +102,8 @@ add_filter('show_admin_bar', '__return_false');
 function bz_widgets_init() {
 	register_sidebar( array(
 		'name'          => __( 'Blog Sidebar', 'bz' ),
-		'id'            => 'sidebar-1',
-		'description'   => __( 'Add widgets here to appear in your sidebar on blog posts and archive pages.', 'bz' ),
+		'id'            => 'sidebar-blog',
+		'description'   => __( 'Add widgets here to appear in the sidebar on blog posts and archive pages.', 'bz' ),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</section>',
 		'before_title'  => '<h2 class="widget-title">',
@@ -111,24 +111,15 @@ function bz_widgets_init() {
 	) );
 
 	register_sidebar( array(
-		'name'          => __( 'Footer 1', 'bz' ),
-		'id'            => 'footer-1',
-		'description'   => __( 'Add widgets here to appear in your footer.', 'bz' ),
+		'name'          => __( 'Footer Search', 'bz' ),
+		'id'            => 'footer-search',
+		'description'   => __( 'This is what enables search in the footer.', 'bz' ),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</section>',
 		'before_title'  => '<h2 class="widget-title">',
 		'after_title'   => '</h2>',
 	) );
 
-	register_sidebar( array(
-		'name'          => __( 'Footer 2', 'bz' ),
-		'id'            => 'footer-2',
-		'description'   => __( 'Add widgets here to appear in your footer.', 'bz' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
 }
 add_action( 'widgets_init', 'bz_widgets_init' );
 
@@ -396,11 +387,10 @@ function bz_create_donorpartnercategory_tax() {
 		'labels' => $labels,
 		'description' => __( '', 'bz' ),
 		'hierarchical' => true,
-		'public' => false,
-		'publicly_queryable' => false,
+		'publicly_queryable' => true,
 		'show_ui' => true,
 		'show_in_menu' => true,
-		'show_in_nav_menus' => false,
+		'show_in_nav_menus' => true,
 		'show_in_rest' => false,
 		'show_tagcloud' => false,
 		'show_in_quick_edit' => true,
@@ -996,7 +986,7 @@ function bz_custom_breadcrumbs() {
                
         } else if ( is_author() ) {
                
-            // Auhor archive
+            // Author archive
                
             // Get the author information
             global $author;
@@ -1020,6 +1010,9 @@ function bz_custom_breadcrumbs() {
             // 404 page
             echo '<li>' . 'Error 404' . '</li>';
         } elseif ( is_home() ) {
+        	// Need to get the post ID from the header 
+        	// b/c the main query on the "home" (blog) page 
+        	// only contains blog posts...
         	global $container_ID;
         	echo '<li class="item-current item-' . $container_ID . '"><span class="bread-current bread-' . $container_ID . '"> ' . get_the_title($container_ID) . '</span></li>';
         }
@@ -1031,3 +1024,15 @@ function bz_custom_breadcrumbs() {
 }
 
 
+/**
+ * Get a nicely formatted string for the publication date.
+ */
+function bz_get_publish_date() {
+	$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time>';
+	$time_string = sprintf( $time_string,
+		get_the_date( DATE_W3C ),
+		get_the_date()
+	);
+	// Preface it with 'Posted on' for screen readers and return it.
+	return '<span class="screen-reader-text">' . _x( 'Posted on', 'post date', 'bz' ) . '</span>' . $time_string;
+}

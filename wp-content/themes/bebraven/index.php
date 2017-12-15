@@ -20,20 +20,17 @@ get_header();
 
 			<?php 
 
-			if(is_home()) {
+			if( is_home() ) {
 
-				/* 
-				 *Is this the blog page?
-				 *
-				 */
-				//print_r($wp_query);
+				$component_format = 'post';
+
 				if ( have_posts() ) {
 					
 					while ( have_posts() ) {
 
 						the_post();
+						include 'content.php';
 
-						the_title();
 
 					}
 
@@ -150,7 +147,10 @@ get_header();
 
 		</main><!-- #main -->
 	</div><!-- #primary -->
-	<?php get_sidebar(); ?>
+	<?php 
+	// Show the sidebar on the blog (which wordpress considers "home")
+	if ( is_home() ) get_sidebar(); 
+	?>
 </div><!-- .wrap -->
 
 <?php get_footer();

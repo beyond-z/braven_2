@@ -47,8 +47,10 @@
 		// Get page components based on the top-level page containing them:
 		global $container_ID;
 		if ( is_front_page() ) {
+			// The main home page:
 			$container_ID = bz_get_id_by_slug('home-container');
-		} elseif ( is_home() ) {
+		} elseif ( is_home() || is_single() ) {
+			// The blog (which wp calls "home") or a blog post:
 			$container_ID = bz_get_id_by_slug('blog');
 		} else {
 			$container_ID = $post->ID;

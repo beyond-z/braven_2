@@ -12,7 +12,7 @@ get_header(); ?>
 			<?php
 			/* Start the Loop */
 			while ( have_posts() ) : the_post();
-
+				$component_format = 'post';
 				include 'content.php';
 
 				/*
