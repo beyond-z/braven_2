@@ -16,27 +16,30 @@ get_header();
 	<?php bz_custom_breadcrumbs(); ?>
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
-
-
 			<?php 
 
 			if( is_home() ) {
 
-				$component_format = 'post';
+				// If it's the blog page (which wordpress considers "home")
 
+				// Show the sidebar:
+				get_sidebar();
+
+				// Now look for blog posts to show:
 				if ( have_posts() ) {
-					
+					// Set this var to pass down to the content template:
+					$component_format = 'post';
+					// For every post, set up the_post() object with all its data:
 					while ( have_posts() ) {
-
 						the_post();
+						// ...and dump it all into this template:
 						include 'content.php';
-
-
 					}
-
-				}
+				} // END if ( have_posts() )
 
 			} else {
+
+				// If it's not the blog page:
 
 				/* In order to accomodate tabbed sub-navigation (e.g. on region pages)
 				 * we collect all the content into the following vars and then print it.
@@ -143,14 +146,11 @@ get_header();
 				}
 
 			} // END if( is_home() ) ELSE
+
 			?>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->
-	<?php 
-	// Show the sidebar on the blog (which wordpress considers "home")
-	if ( is_home() ) get_sidebar(); 
-	?>
 </div><!-- .wrap -->
 
 <?php get_footer();
