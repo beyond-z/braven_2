@@ -34,6 +34,7 @@ Tags:
 	13.2 Component Formats
 	13.3 Mosaic/Bios
 	13.4 Blog and Posts
+14.0 Search and Results
 97.0 Footer
 98.0 Media Queries
 99.0 Print
@@ -1807,12 +1808,11 @@ body {
 
 
 /*--------------------------------------------------------------
-13.4 Blog and Posts
+13.4 Blog and Posts and Search
 --------------------------------------------------------------*/
 
 .component.post {
 	padding-right: 25vw;
-	padding-top: 3vw;
 	margin: 2em 5vw;
 }
 
@@ -1829,14 +1829,53 @@ body {
 	line-height: 1.5;
 }
 
+.current-cat a,
+#sidebar a:hover {
+	color: #6FE0DA;
+}
+
 .widget-title {
 	text-transform: uppercase;
 	margin-bottom: 0.5em;
 }
 
-.post {
-	padding-bottom: 1em;
-	border-top: solid 0.5vw #EB3B46;
+.post .component-content {
+	border-top: solid 0.6vw #EB3B46;
+	padding-top: 3vw;
+	margin-bottom: 2em;
+}
+
+.post:first-of-type {
+	border-top: solid 0.6vw #EB3B46;
+}
+
+.post:first-of-type .component-content {
+	border-top: none;
+}
+
+.post .component-heading {
+	margin-bottom: 0;
+	font-size: 1.75em;
+}
+
+.post .component-heading:after {
+	display: none;
+}
+
+.post .date {
+	text-transform: uppercase;
+	font-size: 0.85em;
+}
+
+.post-img {
+	overflow: hidden;
+	margin-top: 1em;
+}
+
+.post-img img,
+.post .size-full {
+	width: 100%;
+	height: auto;
 }
 
 .post .component-content p {
@@ -1847,14 +1886,23 @@ body {
 	margin: 2em 5vw;
 }
 
+.pagination {
+	margin: 0 30vw 2em 5vw;
+	text-align: center;
+}
+
 .post-navigation .nav-links div {
 	display: inline-block;
 	margin-right: 2vw;
 }
 
 .post-navigation .nav-links a,
+.pagination a,
+.page-numbers,
 .read-more {
+	display: inline-block;
 	padding: 0.5em 1em 0.5em;
+	margin-top: 1em;
 	background: #F3F3F3;
 	text-transform: uppercase;
 	font-size: 0.9em;
@@ -1863,9 +1911,16 @@ body {
 }
 
 .post-navigation .nav-links a:hover,
+.pagination a:hover,
 .read-more:hover {
 	background: #6FE0DA;
 	color: #FFF;
+}
+
+.result,
+.search-meta {
+	margin: 1em 5vw;
+	overflow: hidden;
 }
 
 /*--------------------------------------------------------------

@@ -46,20 +46,24 @@
 
 		// Get page components based on the top-level page containing them:
 		global $container_ID;
-		if ( is_front_page() ) {
+
+		if ( is_front_page() || is_404() || is_search() ) {
 			// The main home page:
 			$container_ID = bz_get_id_by_slug('home-container');
-		} elseif ( is_home() || is_single() ) {
+		} elseif ( is_home() || is_single() || is_archive() ) {
 			// The blog (which wp calls "home") or a blog post:
 			$container_ID = bz_get_id_by_slug('blog');
-		} else {
+		} elseif ( !empty($post->ID) ) {
 			$container_ID = $post->ID;
-		}
+		} 
 
-		if ( has_post_thumbnail($container_ID) ) {
+		
+		if (has_post_thumbnail($container_ID) ) {
 
 			// get the format so we can control where the h1 is positioned
+			if ( is_page() ) {
 			$marquee_format = (wp_get_post_terms($post->ID, 'format')) ? wp_get_post_terms($post->ID, 'format')[0]->slug : '';
+			}
 			?>
 			<section class="component marquee <?php echo $marquee_format; ?>">
 				<?php echo get_the_post_thumbnail( $container_ID, 'marquee' ); ?>

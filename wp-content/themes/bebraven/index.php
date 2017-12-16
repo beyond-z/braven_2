@@ -4,7 +4,6 @@
  *
  */
 
-
 get_header(); 
 
 
@@ -18,9 +17,10 @@ get_header();
 		<main id="main" class="site-main" role="main">
 			<?php 
 
-			if( is_home() ) {
+			if( is_home() || is_archive() ) {
 
 				// If it's the blog page (which wordpress considers "home")
+				// or a similar list view (archive) of posts:
 
 				// Show the sidebar:
 				get_sidebar();
@@ -34,12 +34,17 @@ get_header();
 						the_post();
 						// ...and dump it all into this template:
 						include 'content.php';
-					}
+					} // END while
+
+					// Add buttons for when the results list is longer than the page can show:
+
+					bz_show_pagination();
+
 				} // END if ( have_posts() )
 
-			} else {
+			} else if ( !empty($post) ) {
 
-				// If it's not the blog page:
+				// If it's not the blog page, but it has some data:
 
 				/* In order to accomodate tabbed sub-navigation (e.g. on region pages)
 				 * we collect all the content into the following vars and then print it.
@@ -141,11 +146,12 @@ get_header();
 
 					/* Restore original Post Data */
 					wp_reset_postdata();
-				} else {
-					// no posts found
 				}
 
-			} // END if( is_home() ) ELSE
+			} else {
+				// Not home or archive and post data is empty:
+				include 'content-search.php';
+			}
 
 			?>
 

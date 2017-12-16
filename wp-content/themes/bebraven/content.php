@@ -25,7 +25,7 @@ if ( is_home() ) {
 }
 
 ?>
-<section class="component <?php 
+<section id="<?php echo $post->post_name; ?>" class="component <?php 
 	echo $post->post_name . ' ' 
 		 . $component_format . ' '
 		 . $hasthumb;
@@ -56,7 +56,7 @@ if ( is_home() ) {
 			<div class="post-img"><?php echo $thumb;?></div>
 			<?php 
 			// and only an excerpt+link if it's one of the posts on a list:
-			if ( is_home() || is_archive() ) { 
+			if ( is_home() || is_archive() || is_search() || is_404() ) { 
 				the_excerpt(); 
 				?>
 				<a class="read-more" href="<?php the_permalink(); ?>">
