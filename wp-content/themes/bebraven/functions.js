@@ -33,7 +33,17 @@ $('document').ready(function(){
 	});
 
 	// Switch tabs based on hash in url, so we can land directly on the target tab:
-	// [TBD]
+	var hash = window.location.hash;
+	if ('/' == hash.slice(-1)) { 
+		hash = hash.slice(0, -1);
+	}
+	console.log(hash);
+	$('.tab'+hash).show().siblings('.tab').hide();
+	$('#tabs-menu a').removeClass('active').each(function(){
+		if (hash == $(this).attr('href')) {
+			$(this).addClass('active');
+		}
+	});
 
 
 });
