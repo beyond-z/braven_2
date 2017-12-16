@@ -538,17 +538,23 @@ q {
 	outline: none;
 }
 
-.default .component-content ul {
+.default .component-content ul,
+.half-left .component-content ul,
+.half-right .component-content ul {
   list-style: none;
 }
 
-.default .component-content li {
+.default .component-content li,
+.half-left .component-content li,
+.half-right .component-content li {
   padding-left: 0.75em; 
   margin-bottom: 0.5em;
   text-indent: -0.75em;
 }
 
-.default .component-content li::before {
+.default .component-content li::before,
+.half-left .component-content li::before,
+.half-right .component-content li::before {
   content: "• ";
   color: #00D8CB; /
 }
