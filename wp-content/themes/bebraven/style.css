@@ -819,11 +819,13 @@ a:active {
 	background: #FFF;
 }
 
-.component li a {
+.component li a,
+.component a.inline {
 	font-weight: inherit;
 	padding: 0;
 	background: none;
 	text-transform: inherit;
+	line-height: inherit;
 }
 
 .bio:hover {
