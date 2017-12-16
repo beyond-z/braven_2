@@ -40,4 +40,5 @@ $thumb = '';
 			<?php the_content();?>
 		</div>
 	</div>
+	<?php bz_show_edit_link(); ?>
 </div>

@@ -7,10 +7,19 @@
 global $post;
 
 
+// If the post has only a URL in the body content, let's make the "read more" link redirect to it instead of the single post view:
+if (filter_var($post->post_content, FILTER_VALIDATE_URL) !== false) {
+	$permalink = $post->post_content;
+	$external = ' target="_blank"';
+} else {
+	$permalink = get_the_permalink();
+	$external = '';
+}
+
 $post_title = get_the_title();
 
-// make the title a link in case of posts:
-$post_title = ('post' == $post->post_type) ? '<a href="'.get_the_permalink().'">'.$post_title.'</a>' : $post_title;
+// Make the title a link (only in case of posts):
+$post_title = ('post' == $post->post_type) ? '<a href="' . $permalink . '" '. $external . '>'.$post_title.'</a>' : $post_title;
 
 
 // Decide whether to display a logo or just the title of the post:
@@ -21,6 +30,7 @@ $box_title_or_image = (has_post_thumbnail() && 'post' != $post->post_type) ? get
 // Indicate when the box has body content so we can add a visual cue in case it's only visible on hover/click
 $content = get_the_content();
 $has_more = ($content) ? 'has-content' : 'no-content';
+
 
 ?>
 <article class="mosaic-element <?php echo $has_more; ?>">
@@ -44,4 +54,5 @@ $has_more = ($content) ? 'has-content' : 'no-content';
 			?>
 		</div>
 	</div>
+	<?php bz_show_edit_link(); ?>
 </article>

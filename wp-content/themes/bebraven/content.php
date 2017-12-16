@@ -24,6 +24,16 @@ if ( is_home() ) {
 	$title = '<a href="' . get_the_permalink() . '">' . $title . '</a>';
 }
 
+// If the post has only a URL in the body content, let's make the "read more" link redirect to it instead of the single post view:
+
+if (filter_var($post->content, FILTER_VALIDATE_URL) !== false) {
+	$permalink = $post->post_content;
+	$external = ' target="_blank"';
+} else {
+	$permalink = get_the_permalink();
+}
+
+
 ?>
 <section id="<?php echo $post->post_name; ?>" class="component <?php 
 	echo $post->post_name . ' ' 
@@ -59,7 +69,7 @@ if ( is_home() ) {
 			if ( is_home() || is_archive() || is_search() || is_404() ) { 
 				the_excerpt(); 
 				?>
-				<a class="read-more" href="<?php the_permalink(); ?>">
+				<a class="read-more" href="<?php echo $permalink; ?>" <?php echo $external;?>>
 					<?php echo __('Read the full story', 'bz');?>
 				</a>
 				<?php
@@ -71,6 +81,8 @@ if ( is_home() ) {
 			// If not a post:
 			the_content(); 
 		}
+
+		bz_show_edit_link();
 
 		?>
 	</div>
