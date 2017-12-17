@@ -58,8 +58,8 @@ $has_more = ($content) ? 'has-content' : 'no-content';
 				<?php 
 			}
 			
-			// If this is a sub-page (not a post or bio) and it has content:
-			if ( $content && 'page' == $post->post_type ) {
+			// If this is a sub-page or donor/partner (not a post or bio) and it has content:
+			if ( $content && ( 'page' == $post->post_type || 'donororpartner' == $post->post_type ) ) {
 				// show the formatted content:
 				?>
 					<div class="box-text">

@@ -840,7 +840,8 @@ a:active {
 
 .bio:after,
 .big-title .has-content:after,
-.big-picture .has-content:after {
+.big-picture .has-content:after,
+.donororpartner .has-content:after {
 	content: '';
 	position: absolute;
 	right: 0px;
@@ -858,28 +859,13 @@ a:active {
     transition: all 0.3s;
 }
 
-/*
-.bio .box:after,
-.big-title .has-content .box:after,
-.big-picture .has-content .box:after {
-	content: "+";
-	font-family: Arial, sans-serif;
-	line-height: 0;
-	font: 2vw bold;
-	color: #6FE0DA;
-	position: absolute;
-	right: -0.25vw;
-	bottom: -0.5vw;
-	z-index: 99;
-}
-*/
-
 .bio:hover:after {
 	border-width: 0 0 4vw 4vw;
 }
 
 .big-title .has-content:hover:after,
-.big-picture .has-content:hover:after {
+.big-picture .has-content:hover:after,
+.donororpartner .has-content:hover:after {
 	border-width: 0;
 }
 
@@ -889,6 +875,11 @@ a:active {
 	left:0;
 	top:0;
 	z-index: 2;
+}
+
+.component .box-text p a,
+.component .box-text a {
+	background: #FFF;
 }
 
 /*--------------------------------------------------------------
@@ -1263,7 +1254,6 @@ body {
 
 .default:not(.marquee),
 .boxes-left .force-margins,
-.boxes .component-content > p:first-of-type,
 .boxes-left .component-content > p:first-of-type,
 .boxes-left .component-content > h3 {
 	margin-right: 5vw;
@@ -1561,15 +1551,58 @@ body {
 .boxes[data-bz-columns='3'][data-bz-leftover='1']  .mosaic-element:last-child {
 	width: calc( (32vw * 3) + 4vw );
 }
+
+/* OMG I feel so dumb for doing it this way: */
+
+/* When there are 2 left over in a 3 column grid: */
 .boxes[data-bz-columns='3'][data-bz-leftover='2']  .mosaic-element:last-child,
-.boxes[data-bz-columns='3'][data-bz-leftover='2']  .mosaic-element:nth-last-child(2) {
+.boxes[data-bz-columns='3'][data-bz-leftover='2']  .mosaic-element:nth-last-child(2),
+
+/* When there are 3 left over in a 4 column grid: */
+.boxes[data-bz-columns='4'][data-bz-leftover='3'] .mosaic-element:last-child,
+.boxes[data-bz-columns='4'][data-bz-leftover='3'] .mosaic-element:nth-last-child(2),
+.boxes[data-bz-columns='4'][data-bz-leftover='3'] .mosaic-element:nth-last-child(3),
+
+/* When there are 2 left over in a 4 column grid: */
+.boxes[data-bz-columns='4'][data-bz-leftover='2'] .mosaic-element:last-child,
+.boxes[data-bz-columns='4'][data-bz-leftover='2'] .mosaic-element:nth-last-child(2),
+
+/* When there are 4 left over in a 5 column grid: */
+.boxes[data-bz-columns='5'][data-bz-leftover='4'] .mosaic-element:last-child,
+.boxes[data-bz-columns='5'][data-bz-leftover='4'] .mosaic-element:nth-last-child(2),
+.boxes[data-bz-columns='5'][data-bz-leftover='4'] .mosaic-element:nth-last-child(3),
+.boxes[data-bz-columns='5'][data-bz-leftover='4'] .mosaic-element:nth-last-child(4),
+
+/* When there are 3 left over in a 5 column grid: */
+.boxes[data-bz-columns='5'][data-bz-leftover='3'] .mosaic-element:last-child,
+.boxes[data-bz-columns='5'][data-bz-leftover='3'] .mosaic-element:nth-last-child(2),
+.boxes[data-bz-columns='5'][data-bz-leftover='3'] .mosaic-element:nth-last-child(3),
+
+/* When there are 2 left over in a 5 column grid: */
+.boxes[data-bz-columns='5'][data-bz-leftover='2'] .mosaic-element:last-child,
+.boxes[data-bz-columns='5'][data-bz-leftover='2'] .mosaic-element:nth-last-child(2) {
+
 	flex-grow: 1;
 }
 
-.boxes[data-bz-columns='3'][data-bz-leftover='2']  .mosaic-element:nth-last-child(2) {
+/* Bring back the margins */
+/* 3 col grid: */
+.boxes[data-bz-columns='3'][data-bz-leftover='2']  .mosaic-element:nth-last-child(2),
+
+/* 4 col grid: */
+.boxes[data-bz-columns='4'][data-bz-leftover='3'] .mosaic-element:nth-last-child(3),
+.boxes[data-bz-columns='4'][data-bz-leftover='3'] .mosaic-element:nth-last-child(2),
+.boxes[data-bz-columns='4'][data-bz-leftover='2'] .mosaic-element:nth-last-child(2),
+
+/* 5 col grid: */
+.boxes[data-bz-columns='5'][data-bz-leftover='4'] .mosaic-element:nth-last-child(4),
+.boxes[data-bz-columns='5'][data-bz-leftover='4'] .mosaic-element:nth-last-child(3),
+.boxes[data-bz-columns='5'][data-bz-leftover='4'] .mosaic-element:nth-last-child(2),
+.boxes[data-bz-columns='5'][data-bz-leftover='3'] .mosaic-element:nth-last-child(3),
+.boxes[data-bz-columns='5'][data-bz-leftover='3'] .mosaic-element:nth-last-child(2),
+.boxes[data-bz-columns='5'][data-bz-leftover='2'] .mosaic-element:nth-last-child(2) {
 	margin-right: 2vw;
 }
-
 
 .bios[data-bz-leftover='1'] .mosaic-element:last-child {
 	left: 22vw;
@@ -1842,6 +1875,33 @@ body {
 	width: 32vw;
 	height: 20vw;
 	padding: 2vw;
+}
+
+.donororpartner .excerpt {
+	display: none;
+}
+
+.donororpartner .box-text {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 0 2vw;
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+
+.donororpartner[data-bz-columns="1"] .box-text {
+	padding: 0 15vw;
+}
+
+.donororpartner .has-content:hover img,
+.donororpartner .has-content:hover h3 {
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+
+.donororpartner .has-content:hover .box-text {
+	opacity: 1;
 }
 
 
