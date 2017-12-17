@@ -542,6 +542,7 @@ function bz_create_includebios_shortcode($atts) {
 		array(
 			'biotype' => 'staff',
 			'category' => '',
+			'columns' => 3,
 			'class' => '',
 			'orderby' => 'menu_order post_title',
 			'limit' => -1 // no limit
@@ -552,7 +553,8 @@ function bz_create_includebios_shortcode($atts) {
 
 	// Attributes in var
 	$biotype = $atts['biotype'];
-	$category = $atts['category'];
+	$category = $atts['category'];	
+	$columns = $atts['columns'];
 	$class = $atts['class'];
 	$orderby = $atts['orderby'];
 	$query_limit = $atts['limit'];
@@ -584,18 +586,31 @@ function bz_create_includebios_shortcode($atts) {
 	if ( $bios->have_posts() ) { 
 		
 		// figure out if there would be any leftovers if we divide by 3:
-		$max = count($bios->posts);
-		$modulo = ($max % 3);
+		$count = count($bios->posts);
+		$modulo = ($count % 3);
+
 		?>
 
-		<div data-bz-count="<?php echo $max; ?>" data-bz-leftover="<?php echo $modulo; ?>" class="mosaic bios <?php echo $class . ' ' . $biotype . ' ' . $category;?>">
+		<div data-bz-columns="<?php echo $columns;?>" data-bz-count="<?php echo $count; ?>" data-bz-leftover="<?php echo $modulo; ?>" class="mosaic bios <?php echo $class . ' ' . $biotype . ' ' . $category;?>">
 			<?php
 
 			while ( $bios->have_posts() ) {
 				$bios->the_post();
 				include 'single-bio.php';
 			}
-			
+
+			// Add placeholder empty items to complete the last row if needed:
+
+			if($modulo && $columns) {
+				for($i = 0; $i < ($columns - $modulo); $i++) {
+					?>
+					<article class="mosaic-element bio placeholder">
+						&nbsp;
+					</article>
+					<?php
+				}
+			}
+
 			?>
 		</div>
 		<?php
@@ -638,11 +653,11 @@ function bz_create_includesubpages_shortcode($atts, $content = null) {
 	$type = $atts['type'];
 	$category = $atts['category'];
 	$boxes_class = $atts['class'];
-	$boxes_per_row = $atts['columns'];
+	$columns = $atts['columns'];
 	$donorcats = $atts['donorcats'];
 
 	$donor = ('donororpartner' == $atts['type']) ? 'donororpartner' : '';
-	if ($donor) {
+	if ($donor && !empty($donorcats)) {
 		$tax_query = array(
 			array(
 				'taxonomy' => 'donorpartnercategory',
@@ -655,8 +670,6 @@ function bz_create_includesubpages_shortcode($atts, $content = null) {
 		$tax_query = null;
 		$parent = $post->ID;
 	}
-
-
 
 	//buffer the following stuff so it doesn't just print it all on top:
 	ob_start();
@@ -682,11 +695,11 @@ function bz_create_includesubpages_shortcode($atts, $content = null) {
 	if ( $subboxes->have_posts() ) { 
 
 		// figure out if there would be any leftovers if we divide by 3:
-		$max = count($subboxes->posts);
-		if ($boxes_per_row) $modulo = $max % $boxes_per_row;
+		$count = count($subboxes->posts);
+		if ($columns) $modulo = $count % $columns;
 
 		?>
-		<div data-bz-columns="<?php echo $boxes_per_row; ?>" data-bz-leftover="<?php echo $modulo; ?>" class="mosaic boxes sub-boxes <?php echo $boxes_class . ' ' . $donor; ?>">
+		<div data-bz-columns="<?php echo $columns; ?>" data-bz-leftover="<?php echo $modulo; ?>" data-bz-count="<?php echo $count; ?>" class="mosaic boxes sub-boxes <?php echo $boxes_class . ' ' . $donor; ?>">
 			<?php
 
 			while ( $subboxes->have_posts() ) {
@@ -694,6 +707,18 @@ function bz_create_includesubpages_shortcode($atts, $content = null) {
 				include 'single-box.php';
 			}
 			
+			// Add placeholder empty items to complete the last row if needed:
+
+			if($modulo && $columns) {
+				for($i = 0; $i < ($columns - $modulo); $i++) {
+					?>
+					<article class="mosaic-element placeholder">
+						&nbsp;
+					</article>
+					<?php
+				}
+			}
+
 			?>
 		</div>
 		<?php

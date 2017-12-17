@@ -37,14 +37,17 @@ $('document').ready(function(){
 	if ('/' == hash.slice(-1)) { 
 		hash = hash.slice(0, -1);
 	}
-	console.log(hash);
-	$('.tab'+hash).show().siblings('.tab').hide();
-	$('#tabs-menu a').removeClass('active').each(function(){
-		if (hash == $(this).attr('href')) {
-			$(this).addClass('active');
-		}
-	});
+	if (hash) {
+		$('.tab'+hash).show().siblings('.tab').hide();
+		$('#tabs-menu a').removeClass('active').each(function(){
+			if (hash == $(this).attr('href')) {
+				$(this).addClass('active');
+			}
+		});
+	}
 
+	// Remove has-content from small boxes, since we can't read it anyway:
+	$('[data-bz-columns="5"] .has-content').removeClass('has-content');
 
 });
 })(jQuery);

@@ -18,20 +18,25 @@ if (has_post_thumbnail()) {
 	$hasthumb = 'no-thumb';
 }
 
-// If it's the blog page, we want to set the title so it link to the post:
-$title = get_the_title();
-if ( is_home() ) {
-	$title = '<a href="' . get_the_permalink() . '">' . $title . '</a>';
-}
 
 // If the post has only a URL in the body content, let's make the "read more" link redirect to it instead of the single post view:
 
-if (filter_var($post->content, FILTER_VALIDATE_URL) !== false) {
+if ('post' == $post->post_type && filter_var($post->post_content, FILTER_VALIDATE_URL) !== false) {
 	$permalink = $post->post_content;
 	$external = ' target="_blank"';
+	$link_text = __('Open external link', 'bz');
 } else {
 	$permalink = get_the_permalink();
+	$external = '';
+	$link_text = __('Read the full story', 'bz');
 }
+
+// If it's the blog page, we want to set the title so it link to the post:
+$title = get_the_title();
+if ( is_home() ) {
+	$title = '<a href="' . $permalink . '"' . $external . '>' . $title . '</a>';
+}
+
 
 
 ?>
@@ -39,7 +44,6 @@ if (filter_var($post->content, FILTER_VALIDATE_URL) !== false) {
 	echo $post->post_name . ' ' 
 		 . $component_format . ' '
 		 . $hasthumb;
-
 	?>">
 	<?php 
 
@@ -70,7 +74,7 @@ if (filter_var($post->content, FILTER_VALIDATE_URL) !== false) {
 				the_excerpt(); 
 				?>
 				<a class="read-more" href="<?php echo $permalink; ?>" <?php echo $external;?>>
-					<?php echo __('Read the full story', 'bz');?>
+					<?php echo $link_text;?>
 				</a>
 				<?php
 			} else {

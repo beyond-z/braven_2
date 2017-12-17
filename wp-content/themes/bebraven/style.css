@@ -544,17 +544,17 @@ q {
   list-style: none;
 }
 
-.default .component-content li,
-.half-left .component-content li,
-.half-right .component-content li {
+.default .component-content ul li,
+.half-left .component-content ul li,
+.half-right .component-content ul li {
   padding-left: 0.75em; 
   margin-bottom: 0.5em;
   text-indent: -0.75em;
 }
 
-.default .component-content li::before,
-.half-left .component-content li::before,
-.half-right .component-content li::before {
+.default .component-content ul li::before,
+.half-left .component-content ul li::before,
+.half-right .component-content ul li::before {
   content: "• ";
   color: #00D8CB; /
 }
@@ -804,12 +804,13 @@ td:last-child {
 a {
 	color: #EB3B46;
 	text-decoration: none;
+	transition: all 0.2s;
 }
 
 a:hover,
 a:focus,
 a:active {
-
+	color: #6FE0DA;
 }
 
 .component p a {
@@ -825,6 +826,11 @@ a:active {
 	background: #FFF;
 }
 
+.component p a:hover {
+	background: #6FE0DA;
+	color: #FFF;
+}
+
 .component li a,
 .component a.inline {
 	font-weight: inherit;
@@ -834,11 +840,11 @@ a:active {
 	line-height: inherit;
 }
 
-.bio:hover {
+.bio.has-content:hover {
 	cursor: pointer;
 }
 
-.bio:after,
+.bio.has-content:after,
 .big-title .has-content:after,
 .big-picture .has-content:after,
 .donororpartner .has-content:after {
@@ -1145,9 +1151,13 @@ body {
 
 .component {
 	position: relative;
-	overflow: hidden;
 	/* Prevent stupid Firefox from adding spaces between elements as if they were text: */
 	line-height: 0;
+}
+
+.half-left,
+.half-right {
+	overflow: hidden;
 }
 
 .component * {
@@ -1548,68 +1558,18 @@ body {
 	right: 0;
 }
 
-.boxes[data-bz-columns='3'][data-bz-leftover='1']  .mosaic-element:last-child {
-	width: calc( (32vw * 3) + 4vw );
+.boxes[data-bz-count='1'] .placeholder,
+.boxes[data-bz-count='2'] .placeholder {
+	display: none;
 }
 
-/* OMG I feel so dumb for doing it this way: */
-
-/* When there are 2 left over in a 3 column grid: */
-.boxes[data-bz-columns='3'][data-bz-leftover='2']  .mosaic-element:last-child,
-.boxes[data-bz-columns='3'][data-bz-leftover='2']  .mosaic-element:nth-last-child(2),
-
-/* When there are 3 left over in a 4 column grid: */
-.boxes[data-bz-columns='4'][data-bz-leftover='3'] .mosaic-element:last-child,
-.boxes[data-bz-columns='4'][data-bz-leftover='3'] .mosaic-element:nth-last-child(2),
-.boxes[data-bz-columns='4'][data-bz-leftover='3'] .mosaic-element:nth-last-child(3),
-
-/* When there are 2 left over in a 4 column grid: */
-.boxes[data-bz-columns='4'][data-bz-leftover='2'] .mosaic-element:last-child,
-.boxes[data-bz-columns='4'][data-bz-leftover='2'] .mosaic-element:nth-last-child(2),
-
-/* When there are 4 left over in a 5 column grid: */
-.boxes[data-bz-columns='5'][data-bz-leftover='4'] .mosaic-element:last-child,
-.boxes[data-bz-columns='5'][data-bz-leftover='4'] .mosaic-element:nth-last-child(2),
-.boxes[data-bz-columns='5'][data-bz-leftover='4'] .mosaic-element:nth-last-child(3),
-.boxes[data-bz-columns='5'][data-bz-leftover='4'] .mosaic-element:nth-last-child(4),
-
-/* When there are 3 left over in a 5 column grid: */
-.boxes[data-bz-columns='5'][data-bz-leftover='3'] .mosaic-element:last-child,
-.boxes[data-bz-columns='5'][data-bz-leftover='3'] .mosaic-element:nth-last-child(2),
-.boxes[data-bz-columns='5'][data-bz-leftover='3'] .mosaic-element:nth-last-child(3),
-
-/* When there are 2 left over in a 5 column grid: */
-.boxes[data-bz-columns='5'][data-bz-leftover='2'] .mosaic-element:last-child,
-.boxes[data-bz-columns='5'][data-bz-leftover='2'] .mosaic-element:nth-last-child(2) {
-
+.boxes[data-bz-count='1'] .mosaic-element,
+.boxes[data-bz-count='2'] .mosaic-element {
 	flex-grow: 1;
 }
 
-/* Bring back the margins */
-/* 3 col grid: */
-.boxes[data-bz-columns='3'][data-bz-leftover='2']  .mosaic-element:nth-last-child(2),
-
-/* 4 col grid: */
-.boxes[data-bz-columns='4'][data-bz-leftover='3'] .mosaic-element:nth-last-child(3),
-.boxes[data-bz-columns='4'][data-bz-leftover='3'] .mosaic-element:nth-last-child(2),
-.boxes[data-bz-columns='4'][data-bz-leftover='2'] .mosaic-element:nth-last-child(2),
-
-/* 5 col grid: */
-.boxes[data-bz-columns='5'][data-bz-leftover='4'] .mosaic-element:nth-last-child(4),
-.boxes[data-bz-columns='5'][data-bz-leftover='4'] .mosaic-element:nth-last-child(3),
-.boxes[data-bz-columns='5'][data-bz-leftover='4'] .mosaic-element:nth-last-child(2),
-.boxes[data-bz-columns='5'][data-bz-leftover='3'] .mosaic-element:nth-last-child(3),
-.boxes[data-bz-columns='5'][data-bz-leftover='3'] .mosaic-element:nth-last-child(2),
-.boxes[data-bz-columns='5'][data-bz-leftover='2'] .mosaic-element:nth-last-child(2) {
+.boxes[data-bz-count='2'] .mosaic-element:first-child {
 	margin-right: 2vw;
-}
-
-.bios[data-bz-leftover='1'] .mosaic-element:last-child {
-	left: 22vw;
-}
-
-.bios[data-bz-leftover='2'] .mosaic-element:last-child {
-	right: 22vw;
 }
 
 .bio:nth-child(1) .element-content,
@@ -1707,6 +1667,11 @@ body {
 .box-content img {
 	width: 25vw;
 	height: auto;
+}
+
+[data-bz-columns="4"] .box-content img,
+[data-bz-columns="5"] .box-content img {
+	width: 100%;
 }
 
 .boxes h3 {
@@ -1885,9 +1850,13 @@ body {
 	position: absolute;
 	top: 0;
 	left: 0;
-	padding: 0 2vw;
+	padding: 0 1vw;
 	opacity: 0;
 	transition: opacity 0.2s;
+}
+
+.donororpartner .box-text p {
+	margin: 0;
 }
 
 .donororpartner[data-bz-columns="1"] .box-text {
