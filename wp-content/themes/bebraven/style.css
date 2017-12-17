@@ -1376,7 +1376,6 @@ body {
 .picbkg img {
 	width: 100%;
 	height: auto;
-	filter: grayscale(30%) brightness(70%);
 }
 
 .picbkg .component-content {
