@@ -33,8 +33,8 @@ Tags:
 	13.1 Header and Breadcrumbs
 	13.2 Component Formats
 	13.3 Mosaic/Bios
-	13.4 Blog and Posts
-14.0 Search and Results
+	13.4 Model and Impact
+14.0 Blog and Posts and Search
 97.0 Footer
 98.0 Media Queries
 99.0 Print
@@ -540,13 +540,15 @@ q {
 
 .default .component-content ul,
 .half-left .component-content ul,
-.half-right .component-content ul {
+.half-right .component-content ul,
+#model-diagram ul {
   list-style: none;
 }
 
 .default .component-content ul li,
 .half-left .component-content ul li,
-.half-right .component-content ul li {
+.half-right .component-content ul li,
+#model-diagram ul li {
   padding-left: 0.75em; 
   margin-bottom: 0.5em;
   text-indent: -0.75em;
@@ -554,7 +556,8 @@ q {
 
 .default .component-content ul li::before,
 .half-left .component-content ul li::before,
-.half-right .component-content ul li::before {
+.half-right .component-content ul li::before,
+#model-diagram ul li::before {
   content: "• ";
   color: #00D8CB; /
 }
@@ -1097,6 +1100,7 @@ a:active {
 
 #tabs-menu a:not(.active):hover {
 	background: #6FE0DA;
+	color: #FFF;
 }
 
 #tabs-menu .active {
@@ -1287,8 +1291,7 @@ body {
 }
 
 .centered,
-.boxes,
-.full {
+.boxes {
 	text-align: center;
 }
 
@@ -1307,8 +1310,7 @@ body {
 .centered h2:after,
 .boxes h2:after,
 .picbkg h2:after,
-.mosaic-three h2:after,
-.full h2:after {
+.mosaic-three h2:after {
 	left: calc( 50% - 6vw );
 }
 
@@ -1593,6 +1595,7 @@ body {
 	height: 20vw;
 	margin-top: 2vw;
 	overflow-y: auto;
+	padding-right: 1.5vw;
 }
 
 .staff .bio .element-text p:first-child,
@@ -1872,9 +1875,112 @@ body {
 	opacity: 1;
 }
 
+/*--------------------------------------------------------------
+13.4 Model and Impact
+--------------------------------------------------------------*/
+
+#bravens-model {
+	text-align: left;
+}
+
+#model-diagram {
+	table-layout: fixed;
+	padding: 2vw;
+	font-weight: bold;
+	background: #6FE0DA;
+	color: #FFF;
+	position: relative;
+}
+
+#model-diagram .level-1 {
+	position: relative;
+	padding: 3vw;
+}
+
+#model-diagram td {
+	vertical-align: top;
+	width: 1%;
+	padding: 0.5vw 0;
+
+}
+
+#model-diagram td {
+	padding-right: 5vw;
+}
+
+#model-diagram #post-course {
+	background: #EB3B46;
+}
+
+#model-diagram #post-course h2::after {
+	background: #6FE0DA;
+}
+
+#model-diagram #partners {
+	background: #6FE0DA;
+}
+
+#model-diagram #course {
+	background: #DEAF3D;
+}
+
+/* Arrowheads: */
+#model-diagram #course::before,
+#model-diagram #course::after,
+#model-diagram #post-course::before,
+#model-diagram #post-course::after,
+#model-diagram #course-parts::after {
+	content: '';
+	position: absolute;
+	background: #6FE0DA;
+	width: 3vw;
+	height: 3vw;
+	display: block;
+	transform: rotate(45deg);
+	transform-origin: center center; 
+}
+
+#model-diagram #course::before,
+#model-diagram #post-course::before {
+	left: -1.5vw;
+	top: calc( 50% - 1.5vw );
+}
+
+#model-diagram #course::after,
+#model-diagram #post-course::after {
+	right: -1.5vw;
+	top: calc( 50% - 1.5vw );
+}
+
+#model-diagram #course-parts::after{
+	right: calc( 50% - 1.5vw );
+	bottom: -1.5vw;
+	z-index: 99;
+	background: #DEAF3D;
+}
+
+.xl,
+#our-impact .component-heading {
+	font-size: 2.5em;
+	margin: 0 0 2vw 5vw;
+}
+
+#our-impact .component-heading {
+	margin-left: 0; 
+}
+
+h2.xl:after,
+h2.plain:after,
+#our-impact h2:after {
+	display: none;
+}
+
+h2.plain {
+	margin-bottom: 0;
+}
 
 /*--------------------------------------------------------------
-13.4 Blog and Posts and Search
+14.0 Blog and Posts and Search
 --------------------------------------------------------------*/
 
 .component.post {

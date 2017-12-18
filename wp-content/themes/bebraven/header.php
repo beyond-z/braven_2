@@ -48,10 +48,10 @@
 		global $container_ID;
 
 		if ( is_front_page() || is_404() || is_search() ) {
-			// The main home page:
+			// The main home page or other "gloabl" pages like search and "page not found":
 			$container_ID = bz_get_id_by_slug('home-container');
 		} elseif ( is_home() || is_single() || is_archive() ) {
-			// The blog (which wp calls "home") or a blog post:
+			// The blog (which wp calls "home"), a list of posts ("archive"), or a single blog post:
 			$container_ID = bz_get_id_by_slug('blog');
 		} elseif ( !empty($post->ID) ) {
 			$container_ID = $post->ID;
@@ -60,7 +60,7 @@
 		
 		if (has_post_thumbnail($container_ID) ) {
 
-			// get the format so we can control where the h1 is positioned
+			// Get the format so we can control where the h1 is positioned
 			if ( is_page() ) {
 			$marquee_format = (wp_get_post_terms($post->ID, 'format')) ? wp_get_post_terms($post->ID, 'format')[0]->slug : '';
 			}

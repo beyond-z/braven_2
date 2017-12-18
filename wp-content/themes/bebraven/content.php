@@ -35,10 +35,10 @@ if ('post' == $post->post_type && filter_var($post->post_content, FILTER_VALIDAT
 $title = get_the_title();
 if ( is_home() ) {
 	$title = '<a href="' . $permalink . '"' . $external . '>' . $title . '</a>';
-}
+} 
 
 
-
+// Okay, let's build this already:
 ?>
 <section id="<?php echo $post->post_name; ?>" class="component <?php 
 	echo $post->post_name . ' ' 
@@ -56,8 +56,8 @@ if ( is_home() ) {
 	<div class="component-content">
 		<?php 
 		
-		// Omit the title from picbkg items:
-		if ( 'picbkg' != $component_format ) { 
+		// Omit the title from picbkg and full items:
+		if ( 'picbkg' != $component_format && 'full' != $component_format) { 
 			?>
 				<h2 class="component-heading"><?php echo $title; ?></h2>
 			<?php 

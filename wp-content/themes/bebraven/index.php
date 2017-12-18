@@ -7,7 +7,6 @@
 get_header(); 
 
 
-
 ?>
 
 <div class="wrap">
@@ -20,7 +19,9 @@ get_header();
 			if( is_home() || is_archive() ) {
 
 				// If it's the blog page (which wordpress considers "home")
-				// or a similar list view (archive) of posts:
+				// or a similar list view (archive) of posts*: 
+
+				// *(single post template is single.php)
 
 				// Show the sidebar:
 				get_sidebar();
@@ -140,15 +141,20 @@ get_header();
 							<?php echo $parent_content;?>
 						</div>
 						<?php echo $tabs_content;
+					
 					} else {
+						// If there are no tabs, just print the parent's components directly:
 						echo $parent_content;
+					
 					}
 
 					/* Restore original Post Data */
 					wp_reset_postdata();
-				}
+
+				} 
 
 			} else {
+
 				// Not home or archive and post data is empty:
 				include 'content-search.php';
 			}
