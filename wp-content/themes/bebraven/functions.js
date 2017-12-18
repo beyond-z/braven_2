@@ -33,8 +33,21 @@ $('document').ready(function(){
 	});
 
 	// Switch tabs based on hash in url, so we can land directly on the target tab:
-	// [TBD]
+	var hash = window.location.hash;
+	if ('/' == hash.slice(-1)) { 
+		hash = hash.slice(0, -1);
+	}
+	if (hash) {
+		$('.tab'+hash).show().siblings('.tab').hide();
+		$('#tabs-menu a').removeClass('active').each(function(){
+			if (hash == $(this).attr('href')) {
+				$(this).addClass('active');
+			}
+		});
+	}
 
+	// Remove has-content from small boxes, since we can't read it anyway:
+	$('[data-bz-columns="5"] .has-content').removeClass('has-content');
 
 });
 })(jQuery);

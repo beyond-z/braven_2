@@ -11,7 +11,7 @@ $thumb = '';
 
 
 ?>
-<div class="mosaic-element bio has-content">
+<article class="mosaic-element bio has-content">
 	<div class="element-img">
 		<?php 
 		if ( has_post_thumbnail() ) {
@@ -40,4 +40,5 @@ $thumb = '';
 			<?php the_content();?>
 		</div>
 	</div>
-</div>
+	<?php bz_show_edit_link(); ?>
+</article>

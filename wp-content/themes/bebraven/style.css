@@ -33,6 +33,8 @@ Tags:
 	13.1 Header and Breadcrumbs
 	13.2 Component Formats
 	13.3 Mosaic/Bios
+	13.4 Model and Impact
+14.0 Blog and Posts and Search
 97.0 Footer
 98.0 Media Queries
 99.0 Print
@@ -536,17 +538,26 @@ q {
 	outline: none;
 }
 
-.default .component-content ul {
+.default .component-content ul,
+.half-left .component-content ul,
+.half-right .component-content ul,
+#model-diagram ul {
   list-style: none;
 }
 
-.default .component-content li {
+.default .component-content ul li,
+.half-left .component-content ul li,
+.half-right .component-content ul li,
+#model-diagram ul li {
   padding-left: 0.75em; 
   margin-bottom: 0.5em;
   text-indent: -0.75em;
 }
 
-.default .component-content li::before {
+.default .component-content ul li::before,
+.half-left .component-content ul li::before,
+.half-right .component-content ul li::before,
+#model-diagram ul li::before {
   content: "• ";
   color: #00D8CB; /
 }
@@ -796,12 +807,13 @@ td:last-child {
 a {
 	color: #EB3B46;
 	text-decoration: none;
+	transition: all 0.2s;
 }
 
 a:hover,
 a:focus,
 a:active {
-
+	color: #6FE0DA;
 }
 
 .component p a {
@@ -817,30 +829,38 @@ a:active {
 	background: #FFF;
 }
 
-.component li a {
+.component p a:hover {
+	background: #6FE0DA;
+	color: #FFF;
+}
+
+.component li a,
+.component a.inline {
 	font-weight: inherit;
 	padding: 0;
 	background: none;
 	text-transform: inherit;
+	line-height: inherit;
 }
 
-.bio:hover {
+.bio.has-content:hover {
 	cursor: pointer;
 }
 
-.bio:after,
+.bio.has-content:after,
 .big-title .has-content:after,
-.big-picture .has-content:after {
-	opacity: 0.5;
+.big-picture .has-content:after,
+.donororpartner .has-content:after {
+	content: '';
 	position: absolute;
-	content: "...";
-	font-family: Arial, sans-serif;
-	letter-spacing: -3px;
-	line-height: 0;
-	font: 30px bold;
-	color: #FFF;
-	right: 5px;
+	right: 0px;
 	bottom: 0px;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0 0 2.5vw 2.5vw;
+	border-color: transparent transparent #ffffff transparent;
+
     -o-transition: all 0.3s;
     -ms-transition: all 0.3s;
     -moz-transition: all 0.3s;
@@ -848,16 +868,27 @@ a:active {
     transition: all 0.3s;
 }
 
-.bio:hover:after,
-.big-title .has-content:after,
-.big-picture .has-content:after {
-    opacity: 1;
+.bio:hover:after {
+	border-width: 0 0 4vw 4vw;
 }
 
-
 .big-title .has-content:hover:after,
-.big-picture .has-content:hover:after {
-	opacity: 0;
+.big-picture .has-content:hover:after,
+.donororpartner .has-content:hover:after {
+	border-width: 0;
+}
+
+.edit-link {
+	font-size: 0.5em;
+	position: absolute;
+	left:0;
+	top:0;
+	z-index: 2;
+}
+
+.component .box-text p a,
+.component .box-text a {
+	background: #FFF;
 }
 
 /*--------------------------------------------------------------
@@ -1069,6 +1100,7 @@ a:active {
 
 #tabs-menu a:not(.active):hover {
 	background: #6FE0DA;
+	color: #FFF;
 }
 
 #tabs-menu .active {
@@ -1111,6 +1143,10 @@ body {
 	width: 100%;
 }
 
+#main {
+	position: relative;
+}
+
 .wrap:after {
 	clear: both;
 	content: "";
@@ -1119,9 +1155,13 @@ body {
 
 .component {
 	position: relative;
-	overflow: hidden;
 	/* Prevent stupid Firefox from adding spaces between elements as if they were text: */
 	line-height: 0;
+}
+
+.half-left,
+.half-right {
+	overflow: hidden;
 }
 
 .component * {
@@ -1228,7 +1268,6 @@ body {
 
 .default:not(.marquee),
 .boxes-left .force-margins,
-.boxes .component-content > p:first-of-type,
 .boxes-left .component-content > p:first-of-type,
 .boxes-left .component-content > h3 {
 	margin-right: 5vw;
@@ -1252,8 +1291,7 @@ body {
 }
 
 .centered,
-.boxes,
-.full {
+.boxes {
 	text-align: center;
 }
 
@@ -1272,8 +1310,7 @@ body {
 .centered h2:after,
 .boxes h2:after,
 .picbkg h2:after,
-.mosaic-three h2:after,
-.full h2:after {
+.mosaic-three h2:after {
 	left: calc( 50% - 6vw );
 }
 
@@ -1341,7 +1378,6 @@ body {
 .picbkg img {
 	width: 100%;
 	height: auto;
-	filter: grayscale(30%) brightness(70%);
 }
 
 .picbkg .component-content {
@@ -1461,6 +1497,14 @@ body {
 	bottom: 0;
 }
 
+.bio blockquote {
+	margin: 0.5em auto;
+	font-size: 1.3em;
+	font-style: italic;
+	text-align: center;
+	quotes: "“" "”" "‘" "’";
+}
+
 .element-content-img {
 	width: 16vw;
 	height: 16vw;
@@ -1515,25 +1559,18 @@ body {
 	right: 0;
 }
 
-.boxes[data-bz-columns='3'][data-bz-leftover='1']  .mosaic-element:last-child {
-	width: calc( (32vw * 3) + 4vw );
+.boxes[data-bz-count='1'] .placeholder,
+.boxes[data-bz-count='2'] .placeholder {
+	display: none;
 }
-.boxes[data-bz-columns='3'][data-bz-leftover='2']  .mosaic-element:last-child,
-.boxes[data-bz-columns='3'][data-bz-leftover='2']  .mosaic-element:nth-last-child(2) {
+
+.boxes[data-bz-count='1'] .mosaic-element,
+.boxes[data-bz-count='2'] .mosaic-element {
 	flex-grow: 1;
 }
 
-.boxes[data-bz-columns='3'][data-bz-leftover='2']  .mosaic-element:nth-last-child(2) {
+.boxes[data-bz-count='2'] .mosaic-element:first-child {
 	margin-right: 2vw;
-}
-
-
-.bios[data-bz-leftover='1'] .mosaic-element:last-child {
-	left: 22vw;
-}
-
-.bios[data-bz-leftover='2'] .mosaic-element:last-child {
-	right: 22vw;
 }
 
 .bio:nth-child(1) .element-content,
@@ -1558,6 +1595,7 @@ body {
 	height: 20vw;
 	margin-top: 2vw;
 	overflow-y: auto;
+	padding-right: 1.5vw;
 }
 
 .staff .bio .element-text p:first-child,
@@ -1573,11 +1611,6 @@ body {
 :not(.fellow) h3:after {
 	display: none;
 }
-
-.fellow .excerpt {
-	display: none;
-}
-
 
 .instead-of-img {
 	display: table;
@@ -1638,6 +1671,11 @@ body {
 	height: auto;
 }
 
+[data-bz-columns="4"] .box-content img,
+[data-bz-columns="5"] .box-content img {
+	width: 100%;
+}
+
 .boxes h3 {
 	text-transform: uppercase;
 }
@@ -1681,6 +1719,12 @@ body {
 	background: #6FE0DA;
 	color: #FFF;
 	padding: 2vw;
+
+	-o-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
 }
 
 .logos .box {
@@ -1798,6 +1842,257 @@ body {
 	width: 32vw;
 	height: 20vw;
 	padding: 2vw;
+}
+
+.donororpartner .excerpt {
+	display: none;
+}
+
+.donororpartner .box-text {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 0 1vw;
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+
+.donororpartner .box-text p {
+	margin: 0;
+}
+
+.donororpartner[data-bz-columns="1"] .box-text {
+	padding: 0 15vw;
+}
+
+.donororpartner .has-content:hover img,
+.donororpartner .has-content:hover h3 {
+	opacity: 0;
+	transition: opacity 0.2s;
+}
+
+.donororpartner .has-content:hover .box-text {
+	opacity: 1;
+}
+
+/*--------------------------------------------------------------
+13.4 Model and Impact
+--------------------------------------------------------------*/
+
+#bravens-model {
+	text-align: left;
+}
+
+#model-diagram {
+	table-layout: fixed;
+	padding: 2vw;
+	font-weight: bold;
+	background: #6FE0DA;
+	color: #FFF;
+	position: relative;
+}
+
+#model-diagram .level-1 {
+	position: relative;
+	padding: 3vw;
+}
+
+#model-diagram td {
+	vertical-align: top;
+	width: 1%;
+	padding: 0.5vw 0;
+
+}
+
+#model-diagram td {
+	padding-right: 5vw;
+}
+
+#model-diagram #post-course {
+	background: #EB3B46;
+}
+
+#model-diagram #post-course h2::after {
+	background: #6FE0DA;
+}
+
+#model-diagram #partners {
+	background: #6FE0DA;
+}
+
+#model-diagram #course {
+	background: #DEAF3D;
+}
+
+/* Arrowheads: */
+#model-diagram #course::before,
+#model-diagram #course::after,
+#model-diagram #post-course::before,
+#model-diagram #post-course::after,
+#model-diagram #course-parts::after {
+	content: '';
+	position: absolute;
+	background: #6FE0DA;
+	width: 3vw;
+	height: 3vw;
+	display: block;
+	transform: rotate(45deg);
+	transform-origin: center center; 
+}
+
+#model-diagram #course::before,
+#model-diagram #post-course::before {
+	left: -1.5vw;
+	top: calc( 50% - 1.5vw );
+}
+
+#model-diagram #course::after,
+#model-diagram #post-course::after {
+	right: -1.5vw;
+	top: calc( 50% - 1.5vw );
+}
+
+#model-diagram #course-parts::after{
+	right: calc( 50% - 1.5vw );
+	bottom: -1.5vw;
+	z-index: 99;
+	background: #DEAF3D;
+}
+
+.xl,
+#our-impact .component-heading {
+	font-size: 2.5em;
+	margin: 0 0 2vw 5vw;
+}
+
+#our-impact .component-heading {
+	margin-left: 0; 
+}
+
+h2.xl:after,
+h2.plain:after,
+#our-impact h2:after {
+	display: none;
+}
+
+h2.plain {
+	margin-bottom: 0;
+}
+
+/*--------------------------------------------------------------
+14.0 Blog and Posts and Search
+--------------------------------------------------------------*/
+
+.component.post {
+	padding-right: 25vw;
+	margin: 2em 5vw;
+}
+
+#sidebar {
+	position: absolute;
+	width: 20vw;
+	right: 5vw;
+	top: 3vw;
+	z-index: 999;
+}
+
+#sidebar ul {
+	list-style: none;
+	line-height: 1.5;
+}
+
+.current-cat a,
+#sidebar a:hover {
+	color: #6FE0DA;
+}
+
+.widget-title {
+	text-transform: uppercase;
+	margin-bottom: 0.5em;
+}
+
+.post .component-content {
+	border-top: solid 0.6vw #EB3B46;
+	padding-top: 3vw;
+	margin-bottom: 2em;
+}
+
+.post:first-of-type {
+	border-top: solid 0.6vw #EB3B46;
+}
+
+.post:first-of-type .component-content {
+	border-top: none;
+}
+
+.post .component-heading {
+	margin-bottom: 0;
+	font-size: 1.75em;
+}
+
+.post .component-heading:after {
+	display: none;
+}
+
+.post .date {
+	text-transform: uppercase;
+	font-size: 0.85em;
+}
+
+.post-img {
+	overflow: hidden;
+	margin-top: 1em;
+}
+
+.post-img img,
+.post .size-full {
+	width: 100%;
+	height: auto;
+}
+
+.post .component-content p {
+	line-height: 1.25;
+}
+
+.post-navigation {
+	margin: 2em 5vw;
+}
+
+.pagination {
+	margin: 0 30vw 2em 5vw;
+	text-align: center;
+}
+
+.post-navigation .nav-links div {
+	display: inline-block;
+	margin-right: 2vw;
+}
+
+.post-navigation .nav-links a,
+.pagination a,
+.page-numbers,
+.read-more {
+	display: inline-block;
+	padding: 0.5em 1em 0.5em;
+	margin-top: 1em;
+	background: #F3F3F3;
+	text-transform: uppercase;
+	font-size: 0.9em;
+	font-weight: bold;
+	transition: all 0.2s;
+}
+
+.post-navigation .nav-links a:hover,
+.pagination a:hover,
+.read-more:hover {
+	background: #6FE0DA;
+	color: #FFF;
+}
+
+.result,
+.search-meta {
+	margin: 1em 5vw;
+	overflow: hidden;
 }
 
 /*--------------------------------------------------------------
