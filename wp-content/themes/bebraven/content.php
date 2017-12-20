@@ -5,6 +5,7 @@
  */
 
 global $component_format;
+global $is_press;
 
 // Get the thumbnail, if there is one.
 
@@ -31,9 +32,9 @@ if ('post' == $post->post_type && filter_var($post->post_content, FILTER_VALIDAT
 	$link_text = __('Read the full story', 'bz');
 }
 
-// If it's the blog page, we want to set the title so it link to the post:
+// If it's the blog or press page, we want to set the title so it link to the post:
 $title = get_the_title();
-if ( is_home() ) {
+if ( is_home() || $is_press ) {
 	$title = '<a href="' . $permalink . '"' . $external . '>' . $title . '</a>';
 } 
 
@@ -70,7 +71,7 @@ if ( is_home() ) {
 			<div class="post-img"><?php echo $thumb;?></div>
 			<?php 
 			// and only an excerpt+link if it's one of the posts on a list:
-			if ( is_home() || is_archive() || is_search() || is_404() ) { 
+			if ( is_home() || is_archive() || is_search() || is_404() || $is_press ) { 
 				the_excerpt(); 
 				?>
 				<a class="read-more" href="<?php echo $permalink; ?>" <?php echo $external;?>>
