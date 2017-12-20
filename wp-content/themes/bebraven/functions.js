@@ -59,8 +59,11 @@ $('document').ready(function(){
 
 
 	/* Trigger bar chart animation when in viewport:
+<<<<<<< HEAD
 
 	$('.statbar').addClass('dim');
+=======
+>>>>>>> 22ca2f97ce29113cb00d1a222b30e06b79296d22
 	function isElementInViewport(elem) {
 	    var $elem = $(elem);
 
@@ -94,7 +97,10 @@ $('document').ready(function(){
 	    checkAnimation();
 	});
 	*/
+<<<<<<< HEAD
 
+=======
+>>>>>>> 22ca2f97ce29113cb00d1a222b30e06b79296d22
 
 
 
