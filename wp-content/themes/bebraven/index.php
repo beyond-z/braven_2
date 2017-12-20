@@ -15,8 +15,57 @@ get_header();
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 			<?php 
+			if( 'press' == $post->post_name ) {
+				// On the Press page show whatever categories are listed in the content
 
-			if( is_home() || is_archive() ) {
+				// Show the sidebar:
+				get_sidebar();
+
+
+				// Get results page number so we can add results pagination:
+				$presspg = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
+				
+				// form the query based on categories listed in the content of Press page:
+				$presscats = $post->post_content;
+
+				$pressargs = array(
+					'post_type' => 'post',
+					'category_name' => $presscats,
+					'paged' => $presspg,
+				);
+				$press = new WP_Query($pressargs);
+
+				// Now in a bit of a radical move we'll replace the wp main query with our press query:
+				$main_query_backup = $wp_query;
+				$wp_query   = NULL;
+				$wp_query   = $press;
+
+
+				// Now look for blog posts to show:
+				if ( have_posts() ) {
+					// Set there vars to pass down to the content template:
+					$component_format = 'post';
+					$is_press = true;
+					// For every post, set up the_post() object with all its data:
+					while ( have_posts() ) {
+						the_post();
+						// ...and dump it all into this template:
+						include 'content.php';
+					} // END while
+
+					// Add buttons for when the results list is longer than the page can show:
+
+					bz_show_pagination();
+
+
+					// Now we can reset the main query:
+
+					$wp_query = NULL;
+					$wp_query = $main_query_backup;
+				}
+
+
+			} elseif( is_home() || is_archive() ) {
 
 				// If it's the blog page (which wordpress considers "home")
 				// or a similar list view (archive) of posts*: 
