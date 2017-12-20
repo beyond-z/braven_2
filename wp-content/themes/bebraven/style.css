@@ -441,15 +441,20 @@ h1 {
 	font-weight: bold;
 }
 
+.component h1 {
+	line-height: 90%;
+	display: inline;
+}
+
 h2 {
-	margin-bottom: 2em;
+	margin-bottom: 5vw;
 }
 
 h2:after,
 .boxes-left h3:after {
 	display: block;
 	position: absolute;
-	bottom: calc( -0.25vw - 1em );
+	bottom: calc( -0.25vw - 2.5vw );
 	left: 0;
 	content:'\A';
 	width: 12vw;
@@ -1189,10 +1194,14 @@ body {
 .marquee-title {
 	width: 60vw;
 	position: absolute;
-	bottom: 5vw;
+	bottom: 6vw;
 	left: 5vw;
 	margin: 0;
 	color: #FFF;
+}
+
+.marquee-meta {
+	padding-top: 1vw;
 }
 
 .marquee.centered {
@@ -1394,27 +1403,6 @@ body {
 .picbkg blockquote {
 	font-size: 1.25em;
 	font-style: italic;
-}
-
-.picbkg blockquote:before,
-.picbkg blockquote:after {
-	font-family: "Times New Roman", "Times", serif;
-   	position: absolute;
-   	font-size: 5em;
-   	opacity: 0.6;
-   	line-height: 1;
-}
-
-.picbkg blockquote:before {
-    content: open-quote;
-    left: -0.6em;
-    top: 0;
-}
-
-.picbkg blockquote:after {
-    content: close-quote;
-   	right: -0.5em;
-   	bottom: 0;
 }
 
 /*--------------------------------------------------------------
@@ -2046,7 +2034,8 @@ h2.plain {
 }
 
 .post-img img,
-.post .size-full {
+.post .size-full,
+.component-content .size-full {
 	width: 100%;
 	height: auto;
 }
@@ -2162,6 +2151,7 @@ h2.plain {
 #footer-cta {
 	background: #F3F3F3;
 	padding: 1em 5vw 0;
+	text-align: center;
 }
 
 #footer-cta > *,
@@ -2187,6 +2177,11 @@ h2.plain {
 	position: relative;
 	bottom: 7px;
 }
+
+#footer-email-sign-up {
+	display: none;
+}
+
 
 #footer-email-sign-up input {
 	width: 20vw;
@@ -2300,8 +2295,8 @@ textarea,
 }
 
 h2 {
-	font-size: 18px;
-	margin-bottom: 1.5em;
+	/*font-size: 18px;
+	margin-bottom: 1.5em;*/
 }
 
 
