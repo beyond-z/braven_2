@@ -71,13 +71,13 @@
 				
 				<div class="marquee-title">
 					<h1>
-						<?php echo apply_filters( 'the_content', get_the_excerpt($container_ID) ); ?>
+						<?php echo get_the_excerpt($container_ID); ?>
 					</h1>
 					<?php 
 						$caption = get_the_post_thumbnail_caption( $container_ID );
 						if ($caption) {
 							?>
-							<div>
+							<div class="marquee-meta">
 								<span class="caption-meta">
 									<?php echo __('[Real Futures, Real Fellows]');?>
 								</span>
