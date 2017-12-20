@@ -439,11 +439,14 @@ h1 {
 	font-size: 2.25em;
 	font-stretch: condensed;
 	font-weight: bold;
+	line-height: 95%;
 }
 
 .component h1 {
-	line-height: 90%;
-	display: inline;
+	line-height: 95%;
+	/* because it's the only way this works: */
+	display: inline-flex;
+	margin-bottom: 0;
 }
 
 h2 {
@@ -742,8 +745,7 @@ hr {
 8.0 Lists
 --------------------------------------------------------------*/
 
-ul,
-ol {
+ul {
 	margin: 0 0 1.5em;
 	padding: 0;
 }
@@ -754,6 +756,8 @@ ul {
 
 ol {
 	list-style: decimal;
+	padding: 0;
+	margin-left: 1.5em;
 }
 
 li > ul,
@@ -831,7 +835,7 @@ a:active {
 }
 
 .half-left p a,
-.half-right p a {
+.half-right p a:not(.inline) {
 	background: #FFF;
 }
 
@@ -841,7 +845,8 @@ a:active {
 }
 
 .component li a,
-.component a.inline {
+.component a.inline,
+.logos .box-content p a {
 	font-weight: inherit;
 	padding: 0;
 	background: none;
@@ -890,11 +895,6 @@ a:active {
 	left:0;
 	top:0;
 	z-index: 2;
-}
-
-.component .box-text p a,
-.component .box-text a {
-	background: #FFF;
 }
 
 /*--------------------------------------------------------------
@@ -1101,6 +1101,7 @@ a:active {
 	text-align: center;
 	background: #F3F3F3;
 	margin-right: 0.5em;
+	margin-bottom: 0.5em;
 	text-transform: uppercase;
 }
 
@@ -1250,13 +1251,14 @@ body {
 	content: '';
 }
 
-.logo {
+#logo {
 	position: absolute;
 	left: 5vw;
+	top: 2.5vw;
 	z-index: 999;
 }
 
-.logo img {
+#logo img {
 	width: 16vw;
 	height: auto;
 }
@@ -1960,7 +1962,7 @@ body {
 
 h2.xl:after,
 h2.plain:after,
-#our-impact h2:after {
+#our-impact .component-heading:after {
 	display: none;
 }
 

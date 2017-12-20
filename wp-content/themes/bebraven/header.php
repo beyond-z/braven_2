@@ -12,6 +12,7 @@
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/favicon.ico" />
 
 <?php wp_head(); ?>
 </head>
@@ -22,7 +23,7 @@
 
 	<header id="masthead" class="site-header" role="banner">
 
-		<a class="logo" href="<?php echo get_home_url();?>">
+		<a id="logo" href="<?php echo get_home_url();?>">
 			<img src="<?php echo get_template_directory_uri();?>/images/braven-logo.png" />
 		</a>
 
@@ -78,9 +79,6 @@
 						if ($caption) {
 							?>
 							<div class="marquee-meta">
-								<span class="caption-meta">
-									<?php echo __('[Real Futures, Real Fellows]');?>
-								</span>
 								<span class="caption">
 									<?php echo $caption;?>
 								</span>
