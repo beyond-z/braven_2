@@ -54,11 +54,11 @@ $('document').ready(function(){
 	$('.stats tr').each(function(){
 		// Exctract the percentage value:
 		var pct = $(this).children('td:nth-child(2)').text();
-		$(this).children('td:last-child').append('<div class="statbar dim" style="width:'+pct+';"></div>');
+		$(this).children('td:last-child').append('<div class="statbar" style="width:'+pct+';"></div>');
 	});
 
 
-	// Trigger bar chart animation when in viewport:
+	/* Trigger bar chart animation when in viewport:
 	function isElementInViewport(elem) {
 	    var $elem = $(elem);
 
@@ -91,7 +91,7 @@ $('document').ready(function(){
 	$(window).scroll(function(){
 	    checkAnimation();
 	});
-
+	*/
 
 
 
