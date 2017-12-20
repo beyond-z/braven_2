@@ -35,6 +35,7 @@ Tags:
 	13.3 Mosaic/Bios
 	13.4 Model and Impact
 14.0 Blog and Posts and Search
+15.0 Stats visualization
 97.0 Footer
 98.0 Media Queries
 99.0 Print
@@ -2093,6 +2094,61 @@ h2.plain {
 .search-meta {
 	margin: 1em 5vw;
 	overflow: hidden;
+}
+
+/*--------------------------------------------------------------
+15.0 Stats Visualization
+--------------------------------------------------------------*/
+
+.stats {
+	margin: 2em -5vw;
+	width: calc( 100% + 10vw) ;
+	text-align: right;
+}
+
+
+.stats tr {
+	border-top: 2.5vw solid #FFF;
+	border-bottom: 2.5vw solid #FFF;
+	background: #F3F3F3;
+}
+
+.stats td {
+	height: 8vw;
+	overflow: hidden;
+	position: relative;
+}
+
+.stats td:first-child {
+	width: 33vw;
+	padding: 1vw;
+}
+
+.stats td:nth-child(2) {
+	width: 12vw;
+	padding: 0 1vw;
+	font-size: 2.5em;
+	font-weight: bold;
+	background: #FFF;
+}
+
+.stats .statbar {
+	content: '';
+	background: #BBB;
+	height: 100%;
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	transition: width 3s;
+}
+
+.stats .statbar.dim {
+	width: 0 !important;
+}
+
+.stats .highlight .statbar {
+	background: #EB3B46;
 }
 
 /*--------------------------------------------------------------

@@ -24,7 +24,7 @@ if (has_post_thumbnail()) {
 if ('post' == $post->post_type && filter_var($post->post_content, FILTER_VALIDATE_URL) !== false) {
 	$permalink = $post->post_content;
 	$external = ' target="_blank"';
-	$link_text = __('Open external link', 'bz');
+	$link_text = __('Read More', 'bz');
 } else {
 	$permalink = get_the_permalink();
 	$external = '';
