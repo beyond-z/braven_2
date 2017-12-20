@@ -3,7 +3,7 @@ wp-config.php
 
 # Server specific files
 .htaccess
-# favicon.ico
+favicon.ico
 
 # This file is added on Mac's for the Finder app
 .DS_Store
