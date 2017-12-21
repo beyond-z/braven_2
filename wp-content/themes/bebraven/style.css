@@ -1766,11 +1766,6 @@ body {
 	text-align: left;
 }
 
-/*
-.big-title * {
-	transition: all 0.2s;
-} */
-
 .big-title .excerpt {
 	display: none;
 }
@@ -1878,6 +1873,31 @@ body {
 
 .donororpartner .has-content:hover .box-text {
 	opacity: 1;
+}
+
+.skills .box {
+	background: #EB3B46;
+	align-items: flex-start;
+	padding-top: 3vw;
+}
+
+.skills .mosaic-element {
+	overflow: visible;
+	margin-top: 4vw; 
+}
+
+.skills .box:before {
+	content: '';
+	width: 4vw;
+	height: 4vw;
+	transform: rotate(45deg);
+	position: absolute;
+	top: -2vw;
+	background: #EB3B46;
+}
+
+.skills .box-text {
+	display: none;
 }
 
 /*--------------------------------------------------------------
