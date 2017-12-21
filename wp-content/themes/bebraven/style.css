@@ -846,11 +846,11 @@ a:active {
 
 .component li a,
 .component a.inline,
-.logos .box-content p a {
+.component .logos p a {
 	font-weight: inherit;
 	padding: 0;
 	background: none;
-	text-transform: inherit;
+	text-transform: none;
 	line-height: inherit;
 }
 
@@ -1643,15 +1643,15 @@ body {
 }
 
 .box {
-	display: table;
+	display: flex;
 	height: 100%;
 	width: 100%;
+	align-items: center;
+	justify-content: center;
 	overflow: hidden;
 }
 
 .box-content {
-	display: table-cell;
-	vertical-align: middle;
 	text-align: center;
 	overflow: hidden;
 	position: relative;
@@ -1671,28 +1671,6 @@ body {
 	text-transform: uppercase;
 }
 
-/*
-
-.boxes-left li {
-	background: #F3F3F3;
-}
-
-.donororpartner ul {
-	list-style: none;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: center;
-	align-content: flex-start;
-}
-
-.donororpartner.boxes-left ul {
-	justify-content: left;
-	align-items: stretch;
-	margin-left: 5vw;
-}
-
 .boxes li,
 .boxes-left li {
 	width: 20vw;
@@ -1700,7 +1678,20 @@ body {
 	padding: 1vw;
 	text-align: center;
 }
-*/
+
+.bio .excerpt a:hover {
+	color: #FFF;
+
+}
+
+.boxes .bio li,
+.boxes-left .bio li {
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	width: inherit;
+}
+
 
 .sub-boxes:not(.logos) .mosaic-element {
 	height: 30vw;
@@ -1719,8 +1710,23 @@ body {
 }
 
 .logos .box {
-	background: #F3F3F3;
+	background: #FFF;
 	color: #222;
+}
+
+.logos .masked-container:after {
+	content: '';
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: #000;
+	opacity: 0.05;
+}
+
+.logos h3 {
+	margin: 0;
 }
 
 .big-number .box-content,
@@ -1759,11 +1765,6 @@ body {
 .selected-posts .box-content {
 	text-align: left;
 }
-
-/*
-.big-title * {
-	transition: all 0.2s;
-} */
 
 .big-title .excerpt {
 	display: none;
@@ -1835,17 +1836,25 @@ body {
 	padding: 2vw;
 }
 
-.donororpartner .excerpt {
-	display: none;
-}
-
 .donororpartner .box-text {
 	position: absolute;
 	top: 0;
 	left: 0;
+	height: 100%;
 	padding: 0 1vw;
 	opacity: 0;
 	transition: opacity 0.2s;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.donororpartner img {
+	width: 100%;
+}
+
+.donororpartner .box-text-inner {
+	padding: 1vw;
 }
 
 .donororpartner .box-text p {
@@ -1864,6 +1873,31 @@ body {
 
 .donororpartner .has-content:hover .box-text {
 	opacity: 1;
+}
+
+.skills .box {
+	background: #EB3B46;
+	align-items: flex-start;
+	padding-top: 3vw;
+}
+
+.skills .mosaic-element {
+	overflow: visible;
+	margin-top: 4vw; 
+}
+
+.skills .box:before {
+	content: '';
+	width: 4vw;
+	height: 4vw;
+	transform: rotate(45deg);
+	position: absolute;
+	top: -2vw;
+	background: #EB3B46;
+}
+
+.skills .box-text {
+	display: none;
 }
 
 /*--------------------------------------------------------------

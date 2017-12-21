@@ -631,8 +631,8 @@ add_shortcode( 'include-bios', 'bz_create_includebios_shortcode' );
 
 // Create Shortcode to include sub page or donors/partners as boxes
 // Use the shortcode in a post like so: 
-// [include-subpages-as-boxes class='some-class other-class' columns='3']
-function bz_create_includesubpages_shortcode($atts, $content = null) {
+// [include-boxes class='some-class other-class' columns='3']
+function bz_create_includeboxes_shortcode($atts, $content = null) {
 	
 	// pass $post data for function's internal use:
 	global $post;
@@ -647,7 +647,7 @@ function bz_create_includesubpages_shortcode($atts, $content = null) {
 			'category' => '',
 		),
 		$atts,
-		'include-subpages-as-boxes'
+		'include-boxes'
 	);
 
 	$type = $atts['type'];
@@ -704,7 +704,11 @@ function bz_create_includesubpages_shortcode($atts, $content = null) {
 
 			while ( $subboxes->have_posts() ) {
 				$subboxes->the_post();
-				include 'single-box.php';
+				if ($donor) {
+					include 'single-logo-box.php';
+				} else {
+					include 'single-box.php';
+				}
 			}
 			
 			// Add placeholder empty items to complete the last row if needed:
@@ -735,7 +739,7 @@ function bz_create_includesubpages_shortcode($atts, $content = null) {
 	
 }
 
-add_shortcode( 'include-subpages-as-boxes', 'bz_create_includesubpages_shortcode' );
+add_shortcode( 'include-boxes', 'bz_create_includeboxes_shortcode' );
 
 
 // Create Shortcode to include posts from the blog by category
@@ -770,15 +774,7 @@ function bz_create_includeposts_shortcode($atts, $content = null) {
 		'paged' => 0,
 		'order' => 'DESC',
 		'orderby' => 'date',
-		'category_name' => $category,
-		/*'tax_query' => array(
-			array(
-				'taxonomy' => 'biotype',
-				'field' => 'slug',
-				'terms' => array($biotype),
-			),
-		),*/
-		
+		'category_name' => $category,		
 	);
 
 	// The Query
