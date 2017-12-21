@@ -704,7 +704,11 @@ function bz_create_includesubpages_shortcode($atts, $content = null) {
 
 			while ( $subboxes->have_posts() ) {
 				$subboxes->the_post();
-				include 'single-box.php';
+				if ($donor) {
+					include 'single-logo-box.php';
+				} else {
+					include 'single-box.php';
+				}
 			}
 			
 			// Add placeholder empty items to complete the last row if needed:

@@ -31,35 +31,9 @@ $has_more = ($content) ? 'has-content' : 'no-content';
 			<div class="excerpt"><?php the_excerpt(); ?></div>
 			<?php
 
-
-			// If this is a post it should have a Read More button. 
-			// If it has only a URL in the body content, let's make the "read more" link redirect to it instead of the single post view:
-
-			// Check if there's a valid URL in there:
-			if (filter_var($post->post_content, FILTER_VALIDATE_URL) !== false) {
-				$permalink = $post->post_content;
-				$external = ' external';
-				$link_text = __('Open external link', 'bz');
-				$link_target = ' target="_blank"';
-			} else {
-				$permalink = get_the_permalink();
-				$link_text = __('Read the full story', 'bz');
-				$external = '';
-				$link_target = '';
-			}
-
-			if ( 'post' == $post->post_type ) {
-				?>
-
-				<a class="read-more <?php echo $external;?>" href="<?php echo $permalink; ?>" <?php echo $link_target;?>>
-					<?php echo $link_text;?>
-				</a>
-
-				<?php 
-			}
 			
-			// If this is a sub-page or donor/partner (not a post or bio) and it has content:
-			if ( $content && ( 'page' == $post->post_type || 'donororpartner' == $post->post_type ) ) {
+			// If this has content:
+			if ( $content ) {
 				// show the formatted content:
 				?>
 					<div class="box-text">
