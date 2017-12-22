@@ -250,6 +250,7 @@ function bz_populate_custom_formats() {
 		'picbkg' => 'Picture Background',
 		'full' => 'Full (no margin or header)',
 		'tab' => 'Tab on parent page',
+		'alt-color' => 'Alternative color links and caption',
 	);
 	foreach($formats_to_create as $slug => $title) {
 		wp_insert_term(
