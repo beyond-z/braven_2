@@ -1230,6 +1230,14 @@ body {
 	text-transform: uppercase;
 }
 
+.page-alt-color .caption,
+.page-alt-color #masthead a:hover, 
+.page-alt-color #masthead .current_page_item > a, 
+.page-alt-color #masthead .current-menu-ancestor > a, 
+.page-alt-color #masthead .current-page-parent > a {
+	color: #EB3B46;
+}
+
 #breadcrumbs {
 	margin-left: 5vw;
 	margin-top: 1.5em;
