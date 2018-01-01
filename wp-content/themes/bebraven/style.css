@@ -966,6 +966,16 @@ a:active {
 	margin-bottom: 0.75em;
 }
 
+.menu-primary-menu-container {
+	position: relative;
+	top: 1.75em;
+}
+
+.menu-secondary-menu-container {
+	position: relative;
+	top: -1.5em;
+}
+
 .menu li {
 	text-align: left;
 }
@@ -2295,20 +2305,45 @@ h2.plain {
 		position: relative;
 	}
 	.marquee img {
-		height: 100vw;
-		width: 200vw;
-		height: auto;
 		position: relative;
-		right: 100vw;
+	}
+
+	#logo {
+		top: 5vw;
+		left: 15vw;
+	}
+
+	#masthead nav {
+		display: block;
+		width: 90vw;
+		padding: 5vw;
+		background: rgba(0,0,0,0.85);
+		top: 0;
+		right: 0;
+	}
+
+	#masthead .menu > li {
+		display: block;
+	}
+
+	#masthead .sub-menu {
+		position: static;
 	}
 
 	.marquee-title,
 	.marquee-title * {
 		position: static;
 		width: 100%;
-		padding: 5vw;
 		background: #EB3B46;
+	}
 
+	.marquee-title {
+		padding: 5vw;
+	}
+
+	.marquee img {
+		width: 200vw;
+		left: -50vw;
 	}
 
 	.half-right,
