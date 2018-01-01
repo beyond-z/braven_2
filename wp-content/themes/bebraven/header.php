@@ -50,6 +50,11 @@ $body_class = ($container_format) ? 'page-'.$container_format : '';
 		if ( has_nav_menu( 'top-primary' ) ) { 
 			// Print the top menu if it exists:
 			?>
+			<div id="top-nav-btn">
+				<div class="bar1"></div>
+				<div class="bar2"></div>
+				<div class="bar3"></div>
+			</div>
 			<nav class="navigation-top">
 				<div class="wrap">
 

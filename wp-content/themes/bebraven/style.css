@@ -966,6 +966,10 @@ a:active {
 	margin-bottom: 0.75em;
 }
 
+#top-nav-btn {
+	display: none;
+}
+
 .menu-primary-menu-container {
 	position: relative;
 	top: 1.75em;
@@ -2311,14 +2315,19 @@ h2.plain {
 	#logo {
 		top: 5vw;
 		left: 15vw;
+		z-index: 9999;
 	}
 
 	#masthead nav {
-		display: block;
 		width: 90vw;
-		padding: 5vw;
+		right: -100vw;
+		padding: 5vw 0;
 		background: rgba(0,0,0,0.85);
 		top: 0;
+		transition: all 1s;
+	}
+
+	.mobile-nav-expanded #masthead nav {
 		right: 0;
 	}
 
@@ -2326,8 +2335,39 @@ h2.plain {
 		display: block;
 	}
 
-	#masthead .sub-menu {
+	#masthead .menu,
+	#masthead .social-nav {
+		border-top: solid 0.6vw #EB3B46;
+	}
+
+	#masthead .sub-menu,
+	#masthead .social-nav {
 		position: static;
+		display: block;
+		padding-top: 0;
+	}
+
+	#masthead .social-nav li {
+		display: inline-block;
+	}
+
+	#masthead .social-nav::before {
+		position: static;
+		display: block;
+		transform: none;
+		width: initial;
+		line-height: initial;
+		margin: 1em 0;
+	}
+
+	.menu-primary-menu-container,
+	.menu-secondary-menu-container {
+		top: 0;
+	}
+
+	.navigation-top .wrap {
+		padding: 0 7vw;
+		margin-top: 15vw;
 	}
 
 	.marquee-title,
@@ -2335,6 +2375,50 @@ h2.plain {
 		position: static;
 		width: 100%;
 		background: #EB3B46;
+	}
+
+	#masthead li {
+		margin: 0.5em 1em 0.5em 2em;
+		padding: 0;
+	}
+
+	#masthead .menu > li {
+		margin-left: 0;
+	}
+
+	#masthead .social-nav li {
+		margin: 0 1em 0 0;
+	}
+
+	#top-nav-btn {
+		display: block;
+		position: absolute;
+		right: 10vw;
+		top: 5vw;
+	    z-index: 9999;
+	    cursor: pointer;
+	}
+
+	#top-nav-btn .bar1, .bar2, .bar3 {
+	    width: 26px;
+	    height: 4px;
+	    background-color: #FFF;
+	    margin: 4px 0;
+	    transition: 0.4s;
+	}
+
+	.mobile-nav-expanded #top-nav-btn .bar1 {
+	    transform: rotate(-45deg) translate(-1px, 0);
+	    transform-origin: top right;
+	}
+
+	.mobile-nav-expanded #top-nav-btn .bar2 {
+		opacity: 0;
+	}
+
+	.mobile-nav-expanded #top-nav-btn .bar3 {
+	    transform: rotate(45deg) translate(1px, 2px);
+	    transform-origin: bottom right;
 	}
 
 	.marquee-title {

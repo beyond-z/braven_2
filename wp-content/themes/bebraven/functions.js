@@ -96,7 +96,54 @@ $('document').ready(function(){
 	});
 	*/
 
+	// Mobile class to assist in menu displays etc.:
+	$(window).resize(function(){
+		// Figure out whether we're in mobile mode based on a CSS rule, in order to avoid hard-coding a pixel width breakpoint here: 
+		if( $('#masthead .menu li').css('display') != 'inline' ) {
+			$('body').addClass('mobile');
 
-});
+			// Move social nav to top nav when in mobile menu mode:
+			$('.navigation-top .wrap').append( $('#masthead .social-nav').show() );
+			
+		} else {
+			$('body').removeClass('mobile');
+
+			// Move social nav back under the masthead:
+			$('#masthead').append( $('#masthead .social-nav') );
+		}
+	}).resize();
+
+	//// Make the top nav menu appear upon clicking the menu icon: 
+	$('#top-nav-btn').click(function(e){
+		e.preventDefault();
+		$('body').toggleClass('mobile-nav-expanded');
+	});
+
+
+	// Make a click outside the nav to close it:
+	/* Disabled for now because it only works once...
+	$(window).click(function(event){
+		var $box = $('#masthead nav');
+		if( $('body').hasClass('mobile-nav-expanded') 
+			&& !$('#top-nav-btn').is(event.target)
+			&& $box.has(event.target).length == 0 //checks if descendants were clicked
+			&& !$box.is(event.target) //checks if the $box itself was clicked
+		
+		) {
+			$('body').removeClass('mobile-nav-expanded');
+		}
+	});
+	*/
+
+	// Escape closes nav menu:
+	$(window).on('keydown', function(e){
+	if (e.which === 27) {
+		$('body').removeClass('mobile-nav-expanded');
+			e.preventDefault();
+		}
+	});
+
+}); // end document ready
+
 })(jQuery);
 
