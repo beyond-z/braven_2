@@ -1039,6 +1039,7 @@ a:active {
 	overflow: hidden;
 	background-image: url('images/social-icons.png');
 	background-repeat: no-repeat;
+	background-size: cover;
 	content: "\A";
 	display: block;
 	transition: all 0.1s;
@@ -1089,7 +1090,6 @@ a:active {
 	width: 10em;
 	font-stretch: condensed;
 	font-weight: bold;
-	font-size: 16px;
 	margin: 0;
 	line-height: 0;
 
@@ -2387,7 +2387,7 @@ h2.plain {
 	}
 
 	#masthead .social-nav li {
-		margin: 0 1em 0 0;
+		margin: 0 0.5em 0 0;
 	}
 
 	#top-nav-btn {
@@ -2421,6 +2421,14 @@ h2.plain {
 	    transform-origin: bottom right;
 	}
 
+	.mobile-nav-expanded .social-icon {
+		transform: scale(0.8, 0.8);
+	}
+
+	.mobile-nav-expanded .social-icon:hover {
+		transform: scale(1, 1);
+	}
+
 	.marquee-title {
 		padding: 5vw;
 	}
@@ -2442,7 +2450,7 @@ h2.plain {
 		float: none;
 	} 
 
-	#masthead .social-nav {
+	#masthead > .social-nav {
 		display: none;
 	}
 
@@ -2522,7 +2530,7 @@ p {
 
 #footer .social-nav:before,
 #footer-email-sign-up label {
-	font-size: 1.8vw;
+	font-size: 1.7vw;
 }
 
 }
