@@ -54,7 +54,6 @@ $('document').ready(function(){
 	$('.stats tr').each(function(){
 		// Exctract the percentage value:
 		var pct = $(this).children('td:nth-child(2)').text();
-		console.log('extracted '+pct);
 		$(this).children('td:last-child').append('<div class="statbar" style="width:'+pct+';"></div>');
 	});
 
