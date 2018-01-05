@@ -822,7 +822,8 @@ a {
 
 a:hover,
 a:focus,
-a:active {
+a:active,
+.component .logos p a:hover {
 	color: #6FE0DA;
 }
 
@@ -1520,8 +1521,8 @@ body {
 }
 
 .element-content-img {
-	width: 16vw;
-	height: 16vw;
+	width: 40%;
+	height: 40%;
 	overflow: hidden;
 	background: #F3F3F3;
 }
@@ -1533,13 +1534,17 @@ body {
 
 .element-header {
 	display: inline-block;
-	width: 15vw;
+	width: 45%;
 	margin-left: 2vw;
 	font-size: 1.5em;
 }
 
+.bio .element-header {
+	margin-left: 0;
+}
+
 .element-text {
-	height: 16vw;
+	height: 60%;
 	overflow: hidden;
 }
 
@@ -1596,20 +1601,20 @@ body {
 
 .bio .element-header {
 	position: absolute;
-	top: 2vw;
-	left: 18vw;
+	top: 5%;
+	left: 45%;
 }
 
 .bio .element-content {
-	padding: 2vw;
+	padding: 10%;
 }
 
 .staff .bio .element-text,
 .board .bio .element-text {
-	height: 20vw;
-	margin-top: 2vw;
+	height: 55%;
+	margin-top: 5%;
 	overflow-y: auto;
-	padding-right: 1.5vw;
+	padding-right: 5%;
 }
 
 .staff .bio .element-text p:first-child,
@@ -1841,6 +1846,10 @@ body {
 	bottom: calc( -0.25vw - 0.5em );
 }
 
+.no-sub-title .box:hover h3 {
+	display: none;
+}
+
 .big-picture .box {
 	padding: 0;
 }
@@ -1862,7 +1871,8 @@ body {
 .donororpartner .box-text {
 	position: absolute;
 	top: 0;
-	left: 0;
+	left: auto;
+	right: auto;
 	height: 100%;
 	padding: 0 1vw;
 	opacity: 0;
@@ -1878,6 +1888,8 @@ body {
 
 .donororpartner .box-text-inner {
 	padding: 1vw;
+	width: 100%;
+	text-align: center;
 }
 
 .donororpartner .box-text p {
@@ -2472,7 +2484,7 @@ h2.plain {
 	    height: 30vw;
 	}
 		
-	.mosaic:not(.bios) {
+	.mosaic {
 	    display: flex;
 	    flex-wrap: wrap;
 	    flex-direction: column;
@@ -2481,10 +2493,81 @@ h2.plain {
 	    justify-content: stretch;
 	}
 
+	.bios {
+		flex-direction: row;
+		width: 85vw;
+	}
+
 	.boxes .mosaic-element {
 		width: 100%;
 		height: 100vw !important;
 		margin-bottom: 5vw;
+	}
+
+	.bios .mosaic-element {
+		width: 40vw;
+		height: 40vw !important;
+		margin-right: 5vw;
+		margin-bottom: 5vw;
+	}
+
+	.bios .mosaic-element:nth-child(even) {
+		margin-right: 0;
+	}
+
+	.bio .element-img {
+		width: 40vw;
+		height: 40vw;
+	}
+
+	.bio .element-content {
+		width: 85vw;
+		height: 85vw;
+	}
+
+	.bio h3 {
+		font-size: 1em;
+	}
+
+	.bio .excerpt {
+		font-size: 0.7em;
+	}
+
+	.bio:nth-child(odd) .element-content {
+		left: 0;
+		right: auto;
+	}
+
+	.bio:nth-child(even) .element-content {
+		left: auto;
+		right: 0;
+	}
+
+	h2 {
+		margin-bottom: 30px;
+	}
+
+	h2::after, 
+	.boxes-left h3::after {
+		width: 120px;
+		height: 4px;
+		bottom: -17px;
+	}
+
+	.boxes .placeholder {
+		display: none;
+	}
+
+	.close-this {
+		font-size: 16px;
+	}
+
+	.big-number h3 {
+		font-size: 20vw;
+	}
+
+	.big-number .excerpt {
+		font-size: 5vw;
 	}
 
 	.picbkg img {
