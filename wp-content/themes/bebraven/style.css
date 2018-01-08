@@ -738,6 +738,10 @@ hr {
 	margin-bottom: 1.5em;
 }
 
+.mobile-only {
+	display: none;
+}
+
 /*--------------------------------------------------------------
 8.0 Lists
 --------------------------------------------------------------*/
@@ -2020,43 +2024,6 @@ body {
 	color: #FFF;
 }
 
-/* Arrowheads: 
-#model-diagram #course:before,
-#model-diagram #course:after,
-#model-diagram #post-course:before,
-#model-diagram #post-course:after,
-#model-diagram #course-parts:after {
-	content: '';
-	position: absolute;
-	background: #6FE0DA;
-	width: 3vw;
-	height: 3vw;
-	display: block;
-	transform: rotate(45deg);
-	transform-origin: center center; 
-}
-
-#model-diagram #course:before,
-#model-diagram #post-course:before {
-	left: -1.5vw;
-	top: calc( 50% - 1.5vw );
-}
-
-#model-diagram #course:after,
-#model-diagram #post-course:after {
-	right: -1.5vw;
-	top: calc( 50% - 1.5vw );
-}
-
-#model-diagram #course-parts:after{
-	right: calc( 50% - 1.5vw );
-	bottom: -1.5vw;
-	z-index: 99;
-	background: #DEAF3D;
-}
-
-*/
-
 .xl,
 #our-impact .component-heading {
 	font-size: 2.5em;
@@ -2392,6 +2359,8 @@ h2.plain {
 		font-size: 16px;
 	}
 
+	/* Header and Nav: */
+
 	.marquee {	
 		width: auto;
 		position: relative;
@@ -2538,21 +2507,11 @@ h2.plain {
 		left: -50vw;
 	}
 
-	.half-right,
-	.half-left,
-	.half-right img,
-	.half-left img, 
-	.half-left .component-content, 
-	.half-right .component-content {
-		width: 100vw;
-		height: inherit;
-		position: static;
-		float: none;
-	} 
-
 	#masthead > .social-nav {
 		display: none;
 	}
+
+	/* Half-pic story layout: */
 
 	.half-right img {
 		left: initial;
@@ -2566,6 +2525,20 @@ h2.plain {
 	.half-left .component-content {
 		float: none;
 	}
+
+	.half-right,
+	.half-left,
+	.half-right img,
+	.half-left img, 
+	.half-left .component-content, 
+	.half-right .component-content {
+		width: 100vw;
+		height: inherit;
+		position: static;
+		float: none;
+	} 
+
+	/* Boxes and bios */
 
 	.sub-boxes:not(.logos) .mosaic-element {
 	    height: 30vw;
@@ -2634,6 +2607,12 @@ h2.plain {
 		right: 0;
 	}
 
+	.boxes .placeholder {
+		display: none;
+	}
+
+	/* Line under h2 elements: */
+
 	h2 {
 		margin-bottom: 30px;
 	}
@@ -2653,9 +2632,7 @@ h2.plain {
 		left: calc( 50% - 60px );
 	}
 
-	.boxes .placeholder {
-		display: none;
-	}
+	/* Misc. items: */
 
 	.close-this {
 		font-size: 16px;
@@ -2669,6 +2646,47 @@ h2.plain {
 		font-size: 5vw;
 	}
 
+	.mobile-only {
+		display: initial;
+	}
+
+	/* Model and impact: */
+
+	.stats td:first-child {
+		font-size: 12px;
+	}
+
+	.stats td:nth-child(2) {
+		font-size: 2em;
+	}
+
+	.model-box {
+		width: 30vw !important;
+	}
+
+	#model-diagram h2 {
+		font-size: 14px;
+		margin: 0.5em 0;
+	}
+
+	#model-diagram h2:after {
+		display: none;
+	}
+
+	.model-box >*:not(h2) {
+		display: none;
+	}
+
+	.model-more {
+		text-align: left;
+		font-size: 12px;
+		padding: 10px;
+		bottom: auto;
+		top: -25%;
+	}
+
+	/* Picture background (e.g. quote on bottom of page): */
+
 	.picbkg img {
 		width: 240%;
 		position: relative;
@@ -2678,6 +2696,8 @@ h2.plain {
 	.picbkg .component-content {
 		top: 5vw;
 	}
+
+	/* Footer: */
 
 	#footer .wrap {
 		padding: 5vw 0 0;
