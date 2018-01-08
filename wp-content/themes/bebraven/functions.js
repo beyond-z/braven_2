@@ -14,8 +14,12 @@ $('document').ready(function(){
 		$(containingBio).addClass('reveal');
 	});
 
+	$('#email-sign-up-btn').click(function(e){
+		$('#email-sign-up-form').addClass('reveal');
+	});
+
 	$('.close-this').click(function(e) {
-		$(this).parents('.bio').removeClass('reveal');
+		$(this).parents('.bio, .overlay').removeClass('reveal');
 	});
 
 
