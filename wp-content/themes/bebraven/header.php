@@ -48,13 +48,22 @@ $body_class = ($container_format) ? 'page-'.$container_format : '';
 
 		<?php 
 		if ( has_nav_menu( 'top-primary' ) ) { 
+			// Print the top menu if it exists:
 			?>
+			<div id="top-nav-btn">
+				<div class="bar1"></div>
+				<div class="bar2"></div>
+				<div class="bar3"></div>
+			</div>
 			<nav class="navigation-top">
 				<div class="wrap">
 
 					<?php 
-					if ( has_nav_menu( 'top-secondary' ) ) wp_nav_menu( array( 'theme_location' => 'top-secondary' ) );
 					wp_nav_menu( array( 'theme_location' => 'top-primary' ) );
+					
+					// and if there's anything in the secondary menu, print it too:
+					if ( has_nav_menu( 'top-secondary' ) ) wp_nav_menu( array( 'theme_location' => 'top-secondary' ) );
+
 					?> 
 				</div><!-- .wrap -->
 			</nav><!-- .navigation-top -->
