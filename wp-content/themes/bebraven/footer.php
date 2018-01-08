@@ -19,9 +19,14 @@
 				<?php // social nav menu:
 				include 'nav-social.php';
 				?>
-				<form id="footer-email-sign-up">
-					<label>Sign up for emails</label>
-					<input type="email" />
+				<div id="email-sign-up-btn">Sign up for emails</div>
+				<form id="email-sign-up-form" class="centered overlay">
+					<div class="close-this">&#x2715;</div>
+					<h2>Sign up for emails</h2>
+					<input type="text" name="web_signup_first_name" placeholder="First Name" />
+					<input type="text" name="web_signup_last_name" placeholder="Last Name" />
+					<input type="email" name="web_signup_email" placeholder="e-Mail" />
+					<input type="submit" name="email-submit" value="submit"/>
 				</form>
 			</div>
 			<div id="nav-area" class="wrap">
