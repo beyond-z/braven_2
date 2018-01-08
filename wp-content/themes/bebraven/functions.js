@@ -18,6 +18,24 @@ $('document').ready(function(){
 		$('#email-sign-up-form').addClass('reveal');
 	});
 
+	$('.model-more').each(function(){
+		// Add a close button to overlays:
+		$(this).addClass('overlay').prepend('<div class="close-this">&#x2715;</div>');
+	});
+
+	$('.model-more-link').each(function(){
+		// Remember the target of this button:
+		var target = $(this).attr('href');
+
+		// Make the parent link to the target:
+		$(this).parents('.model-box').addClass('has-content').click(function(e){
+			$(target).addClass('reveal');
+		});
+
+		// Remove the original link button since the whole box is a link now:
+		$(this).remove();
+	});
+
 	$('.close-this').click(function(e) {
 		$(this).parents('.bio, .overlay').removeClass('reveal');
 	});
