@@ -72,17 +72,20 @@ get_header();
 
 				// *(single post template is single.php)
 
+				// NOTE: THERE'S A PRE-FILTER THAT EXCLUDES PRESS POSTS FROM THIS. Look for bz_exclude_press_from_blog under functions.php 
+
 				// Show the sidebar:
 				get_sidebar();
 
 				// Now look for blog posts to show:
 				if ( have_posts() ) {
-					// Set this var to pass down to the content template:
+					// Set this var to pass down to the content template so it knows what styling/formatting we want:
 					$component_format = 'post';
+
 					// For every post, set up the_post() object with all its data:
 					while ( have_posts() ) {
 						the_post();
-						// ...and dump it all into this template:
+
 						include 'content.php';
 					} // END while
 
