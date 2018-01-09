@@ -2727,13 +2727,8 @@ h2.plain {
 /* Tablet portrait: */
 @media screen and (min-width: 600px) and (max-width:900px) {
 
-	body,
-	button,
-	input,
-	select,
-	textarea,
-		#footer .social-nav:before,
-		#email-sign-up-btn {
+	#footer .social-nav:before,
+	#email-sign-up-btn {
 		font-size: 14px;
 	}
 

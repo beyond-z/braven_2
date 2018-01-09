@@ -1071,3 +1071,25 @@ function bz_show_edit_link() {
 		<?php
 	//}
 }
+
+
+/*
+ * Pre-filter to exclude Press posts from the Blog:
+ */
+
+function bz_exclude_press_from_blog( $wp_query ) {
+	// The category for Press is entered into the Press page's content. This is done to allow easy future re-catrgorization without the need to access the code. 
+	$press_page = get_page_by_title('Press');
+	// Now we use that content to get the category object:
+	$press_category = get_category_by_slug($press_page->post_content);
+	// And we exctract its ID to use for filtering:
+	$press_cat_id = $press_category->term_id;
+
+
+	// Let's filter some posts:
+	if( is_home() || is_feed() || ( is_archive() && !is_category() )) {
+		set_query_var('cat', '-' . $press_cat_id );
+	}
+}
+
+add_action('pre_get_posts', 'bz_exclude_press_from_blog' );
