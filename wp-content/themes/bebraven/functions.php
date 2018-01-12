@@ -1063,13 +1063,13 @@ add_filter('pre_get_posts','bz_setup_search_filter');
 
 function bz_show_edit_link() {
 	global $post;
-	//if ( current_user_can('editor') || current_user_can('administrator') ) {
+	if ( current_user_can('editor') || current_user_can('administrator') ) {
 		?>
 			<a class="edit-link" href="/wp-admin/post.php?post=<?php echo $post->ID;?>&action=edit">
 				<?php echo __('Edit','bz');?>
 			</a>
 		<?php
-	//}
+	}
 }
 
 
