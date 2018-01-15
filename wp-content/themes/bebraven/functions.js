@@ -135,12 +135,11 @@ $('document').ready(function(){
 		}
 	}).resize();
 
-	//// Make the top nav menu appear upon clicking the menu icon: 
+	// Make the top nav menu appear upon clicking the menu icon: 
 	$('#top-nav-btn').click(function(e){
 		e.preventDefault();
 		$('body').toggleClass('mobile-nav-expanded');
 	});
-
 
 	// Make a click outside the nav to close it:
 	/* Disabled for now because it only works once...
@@ -163,6 +162,11 @@ $('document').ready(function(){
 		$('body').removeClass('mobile-nav-expanded');
 			e.preventDefault();
 		}
+	});
+
+	// Replace hover with click on mobile (depends on a function above that assigns .mobile to <body>):
+	$('.mobile .has-content').click(function(e){
+		$(this).toggleClass('hover');
 	});
 
 }); // end document ready
