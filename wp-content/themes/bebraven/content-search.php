@@ -18,10 +18,10 @@
 				?>
 
 				<div class="results-container">
+					<span class="search-meta">
+						<?php echo $wp_query->found_posts . __(' results found'); ?>
+					</span>
 
-					<?php
-					/* <span class="search-meta"><?php echo $wp_query->found_posts . __(' results found'); ?></span>
-					*/ ?>
 					<?php
 					// Run the loop for the search to output the results:
 					while ( have_posts() ) {
@@ -73,7 +73,12 @@
 				<section class="component default not-found no-results">
 					<div class="component-content">
 
-						<p><?php _e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'bz' ); ?></p>
+						<p><?php 
+							// bring in the error message from a page (so staff can edit the message on their own):
+							$message = get_page_by_path('404-message');
+							echo apply_filters('the_content', $message->post_content);
+
+						//_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'bz' ); ?></p>
 
 					</div><!-- .page-content -->
 				</section><!-- .no-results -->
