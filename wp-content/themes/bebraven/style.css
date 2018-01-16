@@ -2255,7 +2255,7 @@ h2.plain {
 	position: relative;
 }
 
-#footer-cta > div {
+#footer-cta > div:not(#email-sign-up-form) {
 	display: inline-block;
 }
 
@@ -2312,8 +2312,9 @@ h2.plain {
 	color: #222;
 }
 
-#email-sign-up-form input {
+#email-sign-up-form input:not([type="submit"]) {
 	padding: 10px;
+	width: 302px;
 	text-align: center;
 	position: relative;
 	border: 0;
@@ -2321,8 +2322,16 @@ h2.plain {
 	margin: 1.5em 0;
 }
 
+.g-recaptcha,
+.rc-anchor-light,
+.rc-anchor-normal
+ {
+	border: none;
+	border-radius: 0;
+}
+
 #email-sign-up-form input[type="submit"] {
-	margin-top: 0;
+	margin-top: 1em;
 	background-color: #EB3B46;
 	text-transform: uppercase;
 }

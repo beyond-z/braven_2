@@ -20,14 +20,30 @@
 				include 'nav-social.php';
 				?>
 				<div id="email-sign-up-btn">Sign up for emails</div>
-				<form id="email-sign-up-form" class="centered overlay">
+				<div id="email-sign-up-form" class="centered overlay salesforce">
 					<div class="close-this">&#x2715;</div>
-					<h2>Sign up for emails</h2>
-					<input type="text" name="web_signup_first_name" placeholder="First Name" />
-					<input type="text" name="web_signup_last_name" placeholder="Last Name" />
-					<input type="email" name="web_signup_email" placeholder="e-Mail" />
-					<input type="submit" name="email-submit" value="submit"/>
-				</form>
+
+					<script src="https://www.google.com/recaptcha/api.js"></script>
+					<script>
+					 function timestamp() { var response = document.getElementById("g-recaptcha-response"); if (response == null || response.value.trim() == "") {var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);elems["ts"] = JSON.stringify(new Date().getTime());document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); } } setInterval(timestamp, 500); 
+					</script>
+					
+					<form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
+						<input type=hidden name='captcha_settings' value='{"keyname":"reCaptcha_API_bebraven","fallback":"true","orgId":"00Do0000000YIOc","ts":""}'>
+						<input type=hidden name="oid" value="00Do0000000YIOc">
+						<input type=hidden name="retURL" value="https://bebraven.org/thank-you">
+						<label class="screen-reader-text" for="first_name">First Name</label>
+						<input  id="first_name" placeholder="First Name" maxlength="40" name="first_name" type="text" />
+						<label class="screen-reader-text" for="last_name">Last Name</label>
+						<input  id="last_name" placeholder="Last Name" maxlength="80" name="last_name" type="text" />
+						<label class="screen-reader-text" for="email">Email</label><input id="email" placeholder="e-Mail" maxlength="80" name="email" type="email" />
+						<input id="lead_source" type=hidden name="lead_source" value="BeBraven.org <?php wp_title('-');?>">
+						<div class="g-recaptcha" data-sitekey="6LeE5kAUAAAAACDVkHhZVfECpiVrDu7r4eUOcsId"></div>
+						<input type="submit" name="submit" value="Submit">
+					</form>
+
+				</div>
+
 			</div>
 			<div id="nav-area" class="wrap">
 				<?php
