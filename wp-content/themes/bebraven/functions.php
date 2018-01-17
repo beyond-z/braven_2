@@ -1093,3 +1093,21 @@ function bz_exclude_press_from_blog( $wp_query ) {
 }
 
 add_action('pre_get_posts', 'bz_exclude_press_from_blog' );
+
+/*
+ * Wordpress's built-in responsive image size srcset generator messes with image cropping:
+ */
+
+/*
+function bz_customize_image_sizes($sizes) {
+	unset($sizes['half']); // 1000px
+	unset($sizes['thumbnail']);
+	unset($sizes['medium']);
+	unset($sizes['medium_large']);
+	unset($sizes['large']);
+	return $sizes;
+}
+add_filter('intermediate_image_sizes_advanced', 'bz_customize_image_sizes');
+*/
+add_filter('max_srcset_image_width', create_function('', 'return 1;'));
+
