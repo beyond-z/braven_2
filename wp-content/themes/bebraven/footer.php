@@ -37,7 +37,7 @@
 						<label class="screen-reader-text" for="last_name">Last Name</label>
 						<input  id="last_name" placeholder="Last Name" maxlength="80" name="last_name" type="text" />
 						<label class="screen-reader-text" for="email">Email</label><input id="email" placeholder="e-Mail" maxlength="80" name="email" type="email" />
-						<input id="lead_source" type=hidden name="lead_source" value="BeBraven.org <?php wp_title('-');?>">
+						<input id="lead_source" type=hidden name="lead_source" value="BeBraven.org">
 						<div class="g-recaptcha" data-sitekey="6LeE5kAUAAAAACDVkHhZVfECpiVrDu7r4eUOcsId"></div>
 						<input type="submit" name="submit" value="Submit">
 					</form>
