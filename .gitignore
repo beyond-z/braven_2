@@ -38,3 +38,6 @@ Thumbs.db
 
 # ignore DreamWeaver notes
 _notes
+
+# ignore test folder
+test
