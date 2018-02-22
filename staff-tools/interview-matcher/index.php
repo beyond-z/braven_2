@@ -2,19 +2,7 @@
 <html lang="en">
 <head>
 <title>Braven Mock Interview Matcher</title>
-<style>
-td, th {
-	border: 1px solid #CCC;
-	margin: 0;
-	padding: 5px;
-}
-table {
-	border-collapse: collapse;
-}
-.vip .name {
-	font-weight: bold;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
@@ -604,6 +592,7 @@ function bz_show_proposed_matches() {
 				?>
 			</tbody>
 		</table>
+		<br>
 		<?php
 		?>
 
