@@ -20,72 +20,9 @@ table {
 
 <?php
 
+include("db.php");
 
-$volunteers = array(
-
-	array(
-		'name' => 'BART',
-		'vip' => 'VIP',
-		'interests' => array( 'psychology', 'sociology' ),
-		'available' => false,
-		'virtual' => true,
-		'number' => '212-555-1234',
-	),
-	array(
-		'name' => 'HOMER',
-		'vip' => 'VIP',
-		'interests' => array( 'psychology', 'medicine' ),
-		'available' => false,
-		'virtual' => true,
-		'number' => '212-555-1234',
-	),
-	array(
-		'name' => 'LISA',
-		'vip' => 'VIP',
-		'interests' => array( 'sociology', 'medicine' ),
-		'available' => true,
-		'number' => 'Room 301',
-	),
-	array(
-		'name' => 'AL',
-		'vip' => '',
-		'interests' => array( 'psychology', 'sociology', 'medicine' ),
-		'available' => true,
-		'virtual' => true,
-		'number' => '212-555-1234',
-	),
-	array(
-		'name' => 'PEGGY',
-		'vip' => '',
-		'interests' => array( 'psychology', 'medicine' ),
-		'available' => true,
-		'number' => 'Room 123',
-	),
-	array(
-		'name' => 'BUD',
-		'vip' => '',
-		'interests' => array( 'sociology', 'medicine' ),
-		'available' => true,
-		'virtual' => true,
-		'number' => '212-555-1234',
-	),
-	array(
-		'name' => 'KELLY',
-		'vip' => '',
-		'interests' => array( 'junk science', 'spaceships' ),
-		'available' => true,
-		'number' => 'Lido Deck',
-	),
-	array(
-		'name' => 'MARGE',
-		'vip' => 'VIP',
-		'interests' => array( 'junk science', 'spaceships' ),
-		'available' => true,
-		'number' => 'Room 23',
-	),
-
-
-);
+$volunteers = load_volunteers_from_database(1);
 
 $fellows = array(
 	array(
