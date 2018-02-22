@@ -95,6 +95,90 @@ function save_volunteers_to_database($event_id, $volunteers) {
 	}
 }
 
+/**
+	Use this to load fellows into the $fellows array in the
+	format the other file expects.
+*/
+function load_fellows_from_database($event_id) {
+	global $pdo;
+
+	$statement = $pdo->prepare("
+		SELECT
+			fellows.id,
+			fellows.name,
+			fellows.score,
+			fellows.available,
+			fellows.match_count,
+			interests.interest
+		FROM
+			fellows
+		LEFT OUTER JOIN
+			fellow_interests ON fellow_interests.fellow_id = fellows.id
+		LEFT OUTER JOIN
+			interests ON fellow_interests.interest_id = interests.id
+		WHERE
+			fellows.event_id = ?
+	");
+
+	$fellows = array();
+
+	$statement->execute(array($event_id));
+	while($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+		if(isset($fellows[$row["id"]])) {
+			// the join will retrieve each interest as a new row
+			$fellows[$row["id"]]["interests"][] = $row["interest"];
+		} else {
+			// translate db format to what the rest of the code expects
+			$fellows[$row["id"]] = array(
+				'UUID' => $row["id"],
+				'name' => $row["name"],
+				'score' => $row["score"],
+				'interests' => $row["interest"] ? array( $row["interest"] ) : array(),
+				'available' => $row["available"],
+				'match_count' => $row["match_count"],
+			);
+		}
+	}
+
+	return $fellows;
+}
+
+function save_fellows_to_database($event_id, $fellows) {
+	global $pdo;
+
+	$statement = $pdo->prepare("
+		INSERT INTO
+			fellows
+			(event_id, name, score, available, match_count)
+		VALUES
+			(?, ?, ?, ?, ?)
+	");
+
+	$interest_statement = $pdo->prepare("
+		INSERT INTO
+			fellow_interests
+			(fellow_id, interest_id)
+		VALUES
+			(?, ?)
+	");
+
+	foreach($fellows as $fellow) {
+		$statement->execute(array(
+			$event_id,
+			$fellow["name"],
+			$fellow["score"],
+			$fellow["available"],
+			$fellow["match_count"]
+		));
+
+		$id = $pdo->lastInsertId();
+		foreach($fellow["interests"] as $interest) {
+			$interest_statement->execute(array($id, get_interest_id($interest)));
+		}
+	}
+}
+
+
 $interal_interest_cache = array();
 
 function get_interest_id($interest) {
