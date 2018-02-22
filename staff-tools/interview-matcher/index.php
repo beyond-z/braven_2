@@ -312,6 +312,9 @@ foreach ($match_history as $key => &$value) {
 	$value = explode(',', $value);
 	foreach ($value as $pair_key => &$pair) {
 		$pair = explode(':', $pair);
+		// not actually paired, skip it
+		if(!isset($pair[1]))
+			continue;
 		// pair[0] is the volunteer, [1] is the fellow:
 		$fellows_to_count[] = $pair[1];
 		// Make the volunteer into the key:
@@ -489,8 +492,9 @@ function bz_match_with_fellow($volunteer, $match_by = null) {
 		// Make it so each Fellow is matched at least N times beofre anyone gets to be matched N+1 times. 
 
 		// TODO: FIX THIS! If fellow was never matched, OR if fellow hasn't been matched to the max, OR if everyone has been matched the same number of times:
+		$not_over_max = false;
 
-			if ( null == $fellow_match_counts[$fellow['UUID']] || $fellow_match_counts[$fellow['UUID']] < max($available_fellow_match_counts) || min($available_fellow_match_counts) == max($available_fellow_match_counts) ) {
+			if ( !isset($fellow_match_counts[$fellow['UUID']]) || $fellow_match_counts[$fellow['UUID']] < max($available_fellow_match_counts) || min($available_fellow_match_counts) == max($available_fellow_match_counts) ) {
 				
 				$not_over_max = true;
 				
@@ -591,7 +595,7 @@ function bz_show_proposed_matches() {
 					$fellow_key = array_search($fellow_ID, array_column($fellows, 'UUID'));
 
 					?>
-					<tr class="<?php echo ($volunteers[$match_key]['vip']) ? 'vip' : ''; // Use VIP status to style the row ?>">
+					<tr class="<?php echo ($volunteers[$volunteer_key]['vip']) ? 'vip' : ''; // Use VIP status to style the row ?>">
 						<td><?php echo $volunteers[$volunteer_key]['number']; ?></td>
 						<td class="name"><?php echo $volunteers[$volunteer_key]['name']; ?></td>
 						<td><?php echo $fellows[$fellow_key]['name']; ?></td>
