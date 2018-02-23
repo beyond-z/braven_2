@@ -1,6 +1,6 @@
 <?php
 
-include("database_credentials.php");
+require_once("credentials.php");
 
 $pdo_opt = [
 	PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -8,7 +8,7 @@ $pdo_opt = [
 	PDO::ATTR_EMULATE_PREPARES   => false,
 ];
 
-$pdo = new PDO("mysql:host=$dbhost;dbname=$dbname;charset=utf8mb4", $dbuser, $dbpass, $pdo_opt);
+$pdo = new PDO("mysql:host={$WP_CONFIG["DB_HOST"]};dbname={$WP_CONFIG["DB_INTERVIEW_MATCHER_NAME"]};charset=utf8mb4", $WP_CONFIG["DB_USER"], $WP_CONFIG["DB_PASSWORD"], $pdo_opt);
 
 /**
 	Use this to load volunteers into the $volunteers array in the
