@@ -12,6 +12,7 @@
 	<p>In preparation for the event, we need to get some information.</p>
 
 	<p>First, let's give it a name so we can archive the results for later.</p>
+	<p>The name should include your region and other info so it is easy to recognize in a list, like maybe "Rutgers DYC Feb 2018"</p>
 
 	<label>
 		<span>Event name:</span><br />
