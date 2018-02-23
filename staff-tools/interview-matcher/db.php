@@ -209,6 +209,8 @@ function load_match_history($event_id) {
 			match_sets ON match_sets.id = match_sets_members.match_set_id
 		WHERE
 			match_sets.event_id = ?
+		ORDER BY
+			match_sets.when_created ASC
 	");
 	$statement->execute(array($event_id));
 	while($row = $statement->fetch(PDO::FETCH_ASSOC)) {
@@ -258,6 +260,7 @@ function save_matches($event_id, $matches) {
 	return $match_id;
 }
 
+///
 function create_event_in_database($name) {
 	global $pdo;
 
@@ -273,6 +276,15 @@ function create_event_in_database($name) {
 	$event_id = $pdo->lastInsertId();
 
 	return $event_id;
+}
+
+///
+function get_event_name($event_id) {
+	global $pdo;
+
+	$statement = $pdo->prepare("SELECT name FROM events WHERE id = ?");
+	$statement->execute(array($event_id));
+	return $statement->fetch()["name"];
 }
 
 
