@@ -32,7 +32,7 @@ CREATE TABLE volunteers (
 	name VARCHAR(255) NOT NULL,
 	vip BOOLEAN NOT NULL,
 	available BOOLEAN NOT NULL,
-	virtual BOOLEAN NOT NULL, -- doesn't seem to be used....
+	is_virtual BOOLEAN NOT NULL, -- doesn't seem to be used....
 	contact_number VARCHAR(255) NOT NULL,
 	-- interests are done in the following table
 	FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE,

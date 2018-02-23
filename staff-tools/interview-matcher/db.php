@@ -23,7 +23,7 @@ function load_volunteers_from_database($event_id) {
 			volunteers.name,
 			volunteers.vip,
 			volunteers.available,
-			volunteers.virtual,
+			volunteers.is_virtual,
 			volunteers.contact_number,
 			interests.interest
 		FROM
@@ -51,7 +51,7 @@ function load_volunteers_from_database($event_id) {
 				'vip' => $row["vip"],
 				'interests' => $row["interest"] ? array( $row["interest"] ) : array(),
 				'available' => $row["available"],
-				'virtual' => $row["virtual"],
+				'virtual' => $row["is_virtual"],
 				'number' => $row["contact_number"],
 			);
 		}
@@ -66,7 +66,7 @@ function save_volunteers_to_database($event_id, $volunteers) {
 	$statement = $pdo->prepare("
 		INSERT INTO
 			volunteers
-			(event_id, name, vip, available, virtual, contact_number)
+			(event_id, name, vip, available, is_virtual, contact_number)
 		VALUES
 			(?, ?, ?, ?, ?, ?)
 	");
