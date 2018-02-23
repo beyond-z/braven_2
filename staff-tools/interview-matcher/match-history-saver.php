@@ -1,6 +1,6 @@
 <?php 
 	include("db.php");
 
-	save_matches(1, $_POST['matches']);
+	save_matches($_POST["event_id"], $_POST['matches']);
 ?>
-<h2><a href="./">Match again</a></h2>
+<h2><a href="matcher.php?event_id=<?php echo htmlentities($_POST['event_id']); ?>">Match again</a></h2>

@@ -10,7 +10,7 @@
 
 include("db.php");
 
-$event_id = (int) $_GET["event_id"];
+$event_id = (int) $_REQUEST["event_id"];
 if($event_id == 0) {
 	echo "NO EVENT LOADED go to preparation.php";
 }
@@ -41,6 +41,7 @@ $most_matches_so_far = max($fellow_match_counts);
 ?>
 
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
+	<input type="hidden" name="event_id" value="<?php echo htmlentities($event_id); ?>" />
 	<?php
 	if(!empty($volunteers)) {
 		// sort volunteers alphabetically and display them so staff can quickly check who's there and who isn't, update station number, etc.:
@@ -314,6 +315,7 @@ function bz_show_proposed_matches() {
 		?>
 
 		<form action="match-history-saver.php" method="post">
+			<input type="hidden" name="event_id" value="<?php echo htmlentities($event_id); ?>" />
 			<?php
 			foreach ($matches as $volunteer_key => $fellow_ID) {
 				echo "<input type=\"hidden\" name=\"matches[$volunteer_key]\" value=\"{$fellow_ID}\" />";
