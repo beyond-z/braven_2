@@ -3,6 +3,8 @@
 // to use this: include it before anything else (including whitespace!) then call requireLogin(); before anything else too
 session_start();
 
+require_once("credentials.php");
+
 function bz_current_full_url() {
 	$url = "http";
 	if(isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on")
@@ -22,7 +24,7 @@ if(isset($_SESSION["sso_service"]) && isset($_SESSION["coming_from"]) && isset($
 	unset($_SESSION["sso_service"]);
 	unset($_SESSION["coming_from"]);
 
-	$content = file_get_contents("https://stagingsso.bebraven.org/serviceValidate?ticket=".urlencode($ticket)."&service=".urlencode($service));
+	$content = file_get_contents("https://{$WP_CONFIG["BRAVEN_SSO_DOMAIN"]}/serviceValidate?ticket=".urlencode($ticket)."&service=".urlencode($service));
 
 	$xml = new DOMDocument();
 	$xml->loadXML($content);
@@ -41,7 +43,7 @@ if(isset($_SESSION["sso_service"]) && isset($_SESSION["coming_from"]) && isset($
 } else if(isset($_SESSION["coming_from"]) && !isset($_SESSION["sso_service"])) {
 	$ssoService = bz_current_full_url();
 	$_SESSION["sso_service"] = $ssoService;
-	header("Location: https://stagingsso.bebraven.org/login?service=" . urlencode($ssoService));
+	header("Location: https://{$WP_CONFIG["BRAVEN_SSO_DOMAIN"]}/login?service=" . urlencode($ssoService));
 	exit;
 } // otherwise it is just an api thing for other uses
 
