@@ -51,7 +51,7 @@
 		save_volunteers_to_database($event_id, $volunteers);
 		$pdo->commit();
 
-		header("Location: index.php?event_id=$event_id");
+		header("Location: matcher.php?event_id=$event_id");
 	} catch (Exception $e) {
 		$pdo->rollBack();
 		echo "<h1>Error</h1>";
