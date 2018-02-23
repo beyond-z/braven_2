@@ -271,6 +271,7 @@ function bz_show_proposed_matches() {
 	global $matches;
 	global $volunteers;
 	global $fellows;
+	global $event_id;
 
 
 	if (!empty($matches)) {
@@ -318,7 +319,9 @@ function bz_show_proposed_matches() {
 			<input type="hidden" name="event_id" value="<?php echo htmlentities($event_id); ?>" />
 			<?php
 			foreach ($matches as $volunteer_key => $fellow_ID) {
-				echo "<input type=\"hidden\" name=\"matches[$volunteer_key]\" value=\"{$fellow_ID}\" />";
+				$volunteer_key = array_search($volunteer_key, array_column($volunteers, 'id'));
+				$vid = $volunteers[$volunteer_key]["id"];
+				echo "<input type=\"hidden\" name=\"matches[$vid]\" value=\"{$fellow_ID}\" />";
 			}
 			?>
 			<input type="submit" value="Finalize match!">
