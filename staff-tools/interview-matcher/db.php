@@ -103,13 +103,13 @@ function save_volunteers_to_database($event_id, $volunteers) {
 function load_fellows_from_database($event_id) {
 	global $pdo;
 
+	// FIXME: do we need match_count? COUNT() AS match_count
 	$statement = $pdo->prepare("
 		SELECT
 			fellows.id,
 			fellows.name,
 			fellows.score,
 			fellows.available,
-			fellows.match_count,
 			interests.interest
 		FROM
 			fellows
@@ -137,7 +137,7 @@ function load_fellows_from_database($event_id) {
 				'score' => $row["score"],
 				'interests' => $row["interest"] ? array( $row["interest"] ) : array(),
 				'available' => $row["available"],
-				'match_count' => $row["match_count"],
+				'match_count' => 0 // FIXME do we need this at all? or do we need it populated?
 			);
 		}
 	}
@@ -151,9 +151,9 @@ function save_fellows_to_database($event_id, $fellows) {
 	$statement = $pdo->prepare("
 		INSERT INTO
 			fellows
-			(event_id, name, score, available, match_count)
+			(event_id, name, score, available)
 		VALUES
-			(?, ?, ?, ?, ?)
+			(?, ?, ?, ?)
 	");
 
 	$interest_statement = $pdo->prepare("
@@ -169,8 +169,7 @@ function save_fellows_to_database($event_id, $fellows) {
 			$event_id,
 			$fellow["name"],
 			$fellow["score"],
-			$fellow["available"],
-			$fellow["match_count"]
+			$fellow["available"]
 		));
 
 		$id = $pdo->lastInsertId();
@@ -257,6 +256,23 @@ function save_matches($event_id, $matches) {
 	}
 
 	return $match_id;
+}
+
+function create_event_in_database($name) {
+	global $pdo;
+
+	$statement = $pdo->prepare("
+		INSERT INTO
+			events
+			(name, when_created)
+		VALUES
+			(?, NOW())
+	");
+
+	$statement->execute(array($name));
+	$event_id = $pdo->lastInsertId();
+
+	return $event_id;
 }
 
 

@@ -10,12 +10,16 @@
 
 include("db.php");
 
-$volunteers = load_volunteers_from_database(1);
-$fellows = load_fellows_from_database(1);
+$event_id = (int) $_GET["event_id"];
+if($event_id == 0) {
+	echo "NO EVENT LOADED go to preparation.php";
+}
+
+$volunteers = load_volunteers_from_database($event_id);
+$fellows = load_fellows_from_database($event_id);
+$match_history = load_match_history($event_id);
 
 $matches = array();
-
-$match_history = load_match_history(1);
 
 // We're also going to figure out who's had the most matches so far, so let's start collecting:
 // this can also be done by the db later but for now i am trying to edit as little code in here as i reasonably can

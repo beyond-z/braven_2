@@ -54,7 +54,6 @@ CREATE TABLE fellows (
 	name VARCHAR(255) NOT NULL,
 	score INTEGER NOT NULL,
 	available BOOLEAN NOT NULL,
-	match_count INTEGER NOT NULL, -- idk if this is ideal to be in here
 	-- interests are done in the following table
 	FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE,
 	PRIMARY KEY (id)
