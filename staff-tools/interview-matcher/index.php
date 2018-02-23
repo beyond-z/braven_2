@@ -38,9 +38,7 @@ foreach ($match_history as $key => &$value) {
 		$fellows_to_count[] = $pair[1];
 	}
 }
-echo "history";
-print_r($match_history);
-echo "/history";
+
 // Count how many times each fellow was matched and get the max number so far:
 $fellow_match_counts = array_count_values($fellows_to_count);
 $most_matches_so_far = max($fellow_match_counts);
