@@ -46,6 +46,7 @@ function load_volunteers_from_database($event_id) {
 		} else {
 			// translate db format to what the rest of the code expects
 			$volunteers[$row["id"]] = array(
+				'id' => $row["id"],
 				'name' => $row["name"],
 				'vip' => $row["vip"],
 				'interests' => $row["interest"] ? array( $row["interest"] ) : array(),
@@ -131,6 +132,7 @@ function load_fellows_from_database($event_id) {
 			// translate db format to what the rest of the code expects
 			$fellows[$row["id"]] = array(
 				'UUID' => $row["id"],
+				'id' => $row["id"],
 				'name' => $row["name"],
 				'score' => $row["score"],
 				'interests' => $row["interest"] ? array( $row["interest"] ) : array(),
@@ -176,6 +178,85 @@ function save_fellows_to_database($event_id, $fellows) {
 			$interest_statement->execute(array($id, get_interest_id($interest)));
 		}
 	}
+}
+
+/**
+	Loads the match history as an array:
+
+	array(
+		match_set_id => array (
+			array(volunteer_id => fellow_id),
+			array(volunteer_id => fellow_id),
+			array(volunteer_id => fellow_id)
+			// etc
+		)
+	)
+
+	The match_set_id is unique for each time you do a submit.
+*/
+function load_match_history($event_id) {
+	$match_history = array();
+
+	global $pdo;
+
+	$statement = $pdo->prepare("
+		SELECT
+			match_sets.id,
+			match_sets_members.volunteer_id,
+			match_sets_members.fellow_id
+		FROM
+			match_sets_members
+		INNER JOIN
+			match_sets ON match_sets.id = match_sets_members.match_set_id
+		WHERE
+			match_sets.event_id = ?
+	");
+	$statement->execute(array($event_id));
+	while($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+		if(!isset($match_history[$row["id"]]))
+			$match_history[$row["id"]] = array();
+		$match_history[$row["id"]][] = array($row["volunteer_id"] => $row["fellow_id"]);
+	}
+
+	return $match_history;
+}
+
+/**
+	matches is an array of (volunteer_id => fellow_id)
+
+	Returns: the new match ID
+*/
+function save_matches($event_id, $matches) {
+	global $pdo;
+
+	$statement = $pdo->prepare("
+		INSERT INTO
+			match_sets
+			(event_id, when_created)
+		VALUES
+			(?, NOW())
+	");
+
+	$statement->execute(array($event_id));
+	$match_id = $pdo->lastInsertId();
+
+	$statement = $pdo->prepare("
+		INSERT INTO
+			match_sets_members
+			(match_set_id, volunteer_id, fellow_id)
+		VALUES
+			(?, ?, ?)
+	");
+
+	foreach($matches as $volunteer_id => $fellow_id) {
+		$statement->execute(array(
+			$match_id,
+			$volunteer_id,
+			$fellow_id
+		));
+	}
+
+	return $match_id;
 }
 
 

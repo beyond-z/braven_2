@@ -1,9 +1,7 @@
 <?php 
+	include("db.php");
 
-$filename = 'matches.csv';
-$matches_file = fopen($filename, "a+") or die("Unable to open matches file!");
-$match_history = fwrite($matches_file,$_POST['matches'].',');
-fclose($matches_file);
-
+	print_r($_POST['matches']);
+	save_matches(1, $_POST['matches']);
 ?>
 <h2><a href="./">Match again</a></h2>

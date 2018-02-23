@@ -26,29 +26,21 @@ $volunteers = load_volunteers_from_database(1);
 $fellows = load_fellows_from_database(1);
 
 $matches = array();
-$filename = 'matches.csv';
 
-// Get history and parse it to an array that we can use to avoid re-matching identical pairs.
-// I know this is a dumb way to do it, but I still suck at this... :(
-$filename = 'matches.csv';
-$str = file_get_contents($filename);
-$match_history = explode('|', $str);
+$match_history = load_match_history(1);
+
 // We're also going to figure out who's had the most matches so far, so let's start collecting:
+// this can also be done by the db later but for now i am trying to edit as little code in here as i reasonably can
 $fellows_to_count = array();
 foreach ($match_history as $key => &$value) {
-	$value = explode(',', $value);
 	foreach ($value as $pair_key => &$pair) {
-		$pair = explode(':', $pair);
-		// not actually paired, skip it
-		if(!isset($pair[1]))
-			continue;
 		// pair[0] is the volunteer, [1] is the fellow:
 		$fellows_to_count[] = $pair[1];
-		// Make the volunteer into the key:
-		$pair = array($pair[0] => $pair[1]);
-	
 	}
 }
+echo "history";
+print_r($match_history);
+echo "/history";
 // Count how many times each fellow was matched and get the max number so far:
 $fellow_match_counts = array_count_values($fellows_to_count);
 $most_matches_so_far = max($fellow_match_counts);
@@ -75,7 +67,8 @@ $most_matches_so_far = max($fellow_match_counts);
 			<tbody>
 				<?php
 
-				foreach ($volunteers as $volunteer_key => &$volunteer) {
+				foreach ($volunteers as &$volunteer) {
+					$volunteer_key = $volunteer["id"];
 					?>
 					<tr id="vol-<?php echo $volunteer_key; ?>" class="<?php echo ($volunteer['vip']) ? 'vip' : ''; ?>">
 
@@ -148,11 +141,11 @@ function bz_match_volunteers() {
 
 	global $volunteers;
 	global $matches;
-	global $volunteer_key;
 	global $fellows;
 	global $match_history;
 
-	foreach ($volunteers as $volunteer_key => &$volunteer) {
+	foreach ($volunteers as &$volunteer) {
+		$volunteer_key = $volunteer["id"];
 		
 		if($volunteer['available']) {
 			bz_match_with_fellow($volunteer, 'interests');
@@ -165,8 +158,9 @@ function bz_match_volunteers() {
 
 	shuffle($fellows);
 
-	foreach ($volunteers as $volunteer_key => &$volunteer) {
-		
+	foreach ($volunteers as &$volunteer) {
+		$volunteer_key = $volunteer["id"];
+
 		if(!array_key_exists($volunteer_key, $matches) 
 			&& $volunteer['available']) {
 			bz_match_with_fellow($volunteer);
@@ -188,13 +182,14 @@ function bz_match_with_fellow($volunteer, $match_by = null) {
 	
 	// Find next available Fellow that matches criteria:
 
-	global $volunteer_key;
 	global $matches;
 	global $match_history;
 	global $fellows;
 	global $volunteers;
 	global $fellow_match_counts;
 	global $most_matches_so_far;
+
+	$volunteer_key = $volunteer["id"];
 
 	$available_fellows = array();
 	foreach ($fellows as $fk => &$fv) {
@@ -291,14 +286,6 @@ function bz_show_proposed_matches() {
 		echo '<h2>Matches:</h2>';
 		echo '<br>';
 
-		// Create a string we can save into the match history using the following loop.
-		// TODO: this is a crappy way to do it, of course... :)
-		$matches_str = '';
-		foreach ($matches as $volunteer_key => $fellow_ID) {
-			
-			
-		}
-		$matches_str .= '|';
 		?>
 		<table id="proposed-matches">
 			<thead>
@@ -314,12 +301,9 @@ function bz_show_proposed_matches() {
 			<tbody>
 				<?php
 				foreach ($matches as $volunteer_key => $fellow_ID) {
-
-					// Add this matched pair to the string we're going to save to history:
-					$matches_str .= $volunteer_key .':'.$fellow_ID.',';
-
 					// Figure out who the fellow is:
 					$fellow_key = array_search($fellow_ID, array_column($fellows, 'UUID'));
+					$volunteer_key = array_search($volunteer_key, array_column($volunteers, 'id'));
 
 					?>
 					<tr class="<?php echo ($volunteers[$volunteer_key]['vip']) ? 'vip' : ''; // Use VIP status to style the row ?>">
@@ -339,7 +323,11 @@ function bz_show_proposed_matches() {
 		?>
 
 		<form action="match-history-saver.php" method="post">
-			<input type="hidden" name="matches" value="<?php echo $matches_str;?>">
+			<?php
+			foreach ($matches as $volunteer_key => $fellow_ID) {
+				echo "<input type=\"hidden\" name=\"matches[$volunteer_key]\" value=\"{$fellow_ID}\" />";
+			}
+			?>
 			<input type="submit" value="Finalize match!">
 		</form>
 		<?php

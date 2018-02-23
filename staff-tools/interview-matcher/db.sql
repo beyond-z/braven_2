@@ -73,8 +73,10 @@ CREATE TABLE fellow_interests (
 -- when you run a match, it creates one of these...
 CREATE TABLE match_sets (
 	id INTEGER NOT NULL AUTO_INCREMENT,
+	event_id INTEGER NOT NULL,
 	when_created TIMESTAMP NOT NULL,
 
+	FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE,
 	PRIMARY KEY (id)
 ) DEFAULT CHARACTER SET=utf8mb4;
 
