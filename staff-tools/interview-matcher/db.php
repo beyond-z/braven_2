@@ -84,7 +84,7 @@ function save_volunteers_to_database($event_id, $volunteers) {
 			$event_id,
 			$volunteer["name"],
 			$volunteer["vip"],
-			$volunteer["available"],
+			$volunteer["available"] ? 1 : 0,
 			$volunteer["virtual"],
 			$volunteer["number"]
 		));
@@ -196,7 +196,7 @@ function save_fellows_to_database($event_id, $fellows) {
 			$event_id,
 			$fellow["name"],
 			$fellow["score"],
-			$fellow["available"]
+			$fellow["available"] ? 1 : 0
 		));
 
 		$id = $pdo->lastInsertId();
