@@ -33,9 +33,9 @@
 					continue; // skipping header
 				$volunteer = array(
 					"name" => trim($data[0]),
-					"vip" => trim($data[1]) == "true",
-					"available" => trim($data[2]) == "true",
-					"virtual" => trim($data[3]) == "true",
+					"vip" => (strtolower(trim($data[1])) == "true" || strtolower(trim($data[1])) == "vip"),
+					"available" => strtolower(trim($data[2])) == "true",
+					"virtual" => strtolower(trim($data[3])) == "true",
 					"number" => trim($data[4]),
 					"interests" => array_map("trim", explode(";", $data[5]))
 				);
