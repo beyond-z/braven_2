@@ -48,10 +48,10 @@ function load_volunteers_from_database($event_id) {
 			$volunteers[$row["id"]] = array(
 				'id' => $row["id"],
 				'name' => $row["name"],
-				'vip' => $row["vip"] ? 1 : 0,
+				'vip' => $row["vip"],
 				'interests' => $row["interest"] ? array( $row["interest"] ) : array(),
-				'available' => $row["available"] ? 1 : 0,
-				'virtual' => $row["is_virtual"] ? 1 : 0,
+				'available' => $row["available"],
+				'virtual' => $row["is_virtual"],
 				'number' => $row["contact_number"],
 			);
 		}
@@ -83,9 +83,9 @@ function save_volunteers_to_database($event_id, $volunteers) {
 		$statement->execute(array(
 			$event_id,
 			$volunteer["name"],
-			$volunteer["vip"],
+			$volunteer["vip"] ? 1 : 0,
 			$volunteer["available"] ? 1 : 0,
-			$volunteer["virtual"],
+			$volunteer["virtual"] ? 1 : 0,
 			$volunteer["number"]
 		));
 
