@@ -48,10 +48,10 @@ function load_volunteers_from_database($event_id) {
 			$volunteers[$row["id"]] = array(
 				'id' => $row["id"],
 				'name' => $row["name"],
-				'vip' => $row["vip"],
+				'vip' => $row["vip"] ? 1 : 0,
 				'interests' => $row["interest"] ? array( $row["interest"] ) : array(),
-				'available' => $row["available"],
-				'virtual' => $row["is_virtual"],
+				'available' => $row["available"] ? 1 : 0,
+				'virtual' => $row["is_virtual"] ? 1 : 0,
 				'number' => $row["contact_number"],
 			);
 		}
