@@ -97,6 +97,33 @@ function save_volunteers_to_database($event_id, $volunteers) {
 }
 
 /**
+	Updates the availability for an existing volunteer.
+*/
+function save_volunteer_availability_to_database($volunteer_id, $is_available) {
+	global $pdo;
+	$statement = $pdo->prepare("UPDATE volunteers SET available = ? WHERE id = ?");
+	$statement->execute(array($is_available ? 1 : 0, $volunteer_id));
+}
+
+/**
+	Updates the number field for an existing volunteer.
+*/
+function save_volunteer_number_to_database($volunteer_id, $number) {
+	global $pdo;
+	$statement = $pdo->prepare("UPDATE volunteers SET contact_number = ? WHERE id = ?");
+	$statement->execute(array($number, $volunteer_id));
+}
+
+/**
+	Updates the availability for an existing fellow.
+*/
+function save_fellow_availability_to_database($fellow_id, $is_available) {
+	global $pdo;
+	$statement = $pdo->prepare("UPDATE fellows SET available = ? WHERE id = ?");
+	$statement->execute(array($is_available ? 1 : 0, $fellow_id));
+}
+
+/**
 	Use this to load fellows into the $fellows array in the
 	format the other file expects.
 */

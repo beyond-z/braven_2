@@ -107,3 +107,14 @@ td.available {
 .vip .name {
 	font-weight: bold;
 }
+
+/* this doesn't look editable tho... */
+tbody tr input[type=text] {
+	border: none;
+	width: 100%;
+}
+
+tbody tr:nth-child(odd) input[type=text] {
+	background: transparent;
+}
+
