@@ -1,5 +1,6 @@
 # This has the database connection password and other secret keys
 wp-config.php
+staff-tools/interview-matcher/database_credentials.php
 
 # Server specific files
 .htaccess
@@ -38,3 +39,6 @@ Thumbs.db
 
 # ignore DreamWeaver notes
 _notes
+
+# ignore test folder
+test

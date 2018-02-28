@@ -1,0 +1,120 @@
+
+@font-face {
+    font-family: DIN;
+    font-weight: bolder;
+    font-style: normal;
+    src: url("fonts/DINBold.otf") format("opentype");
+}
+
+@font-face {
+    font-family: DIN;
+    font-weight: bold;
+    font-style: normal;
+    src: url("fonts/DINMedium.otf") format("opentype");
+}
+
+@font-face {
+    font-family: DIN;
+    font-weight: normal;
+    font-style: normal;
+    src: url("fonts/DINRegular.otf") format("opentype");
+}
+
+@font-face {
+    font-family: DIN;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: condensed;
+    src: url("fonts/DINCondensedRegular.otf") format("opentype");
+}
+
+@font-face {
+    font-family: DIN;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: condensed;
+    src: url("fonts/DINCondensedBold.otf") format("opentype");
+}
+
+body,
+button,
+input,
+select,
+textarea {
+	font-family: DIN, "Trade Gothic MT", Oswald, sans-serif;
+	font-weight: normal;
+	font-size: 18px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: bold;
+	position: relative;
+}
+
+h1 {
+	text-transform: uppercase;
+	font-size: 1.75em;
+}
+
+td, th {
+	border: 1px solid #CCC;
+	margin: 0;
+	padding: 2px 5px;
+}
+
+#page {
+	width: 92vw;
+	margin: 4vw auto;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 0 auto;
+}
+
+table ul {
+	margin: 0.5em;
+	padding: 0;
+}
+
+table li {
+	display: inline;
+	margin: 0 0.5em;
+	padding-right: 0.5em;
+	border-right: 1px solid #ccc;
+}
+
+table li:last-child {
+	padding-right: 0;
+	border-right: 0;
+}
+
+tbody tr:nth-child(odd) {
+	background: rgba(0,0,0,0.05)
+}
+
+td.available {
+	width: 5%;
+	text-align: center;
+}
+
+.vip .name {
+	font-weight: bold;
+}
+
+/* this doesn't look editable tho... */
+tbody tr input[type=text] {
+	border: none;
+	width: 100%;
+}
+
+tbody tr:nth-child(odd) input[type=text] {
+	background: transparent;
+}
+
