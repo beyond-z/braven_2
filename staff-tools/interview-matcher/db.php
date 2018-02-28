@@ -315,6 +315,16 @@ function get_event_name($event_id) {
 }
 
 
+///
+function get_events() {
+	global $pdo;
+
+	$statement = $pdo->prepare("SELECT id, name, when_created FROM events ORDER BY when_created");
+	$statement->execute();
+	return $statement->fetchAll();
+}
+
+
 $interal_interest_cache = array();
 
 function get_interest_id($interest) {

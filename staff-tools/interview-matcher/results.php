@@ -1,11 +1,13 @@
 <?php
-	include("db.php");
+	include_once("db.php");
 
 	$event_id = (int) $_REQUEST["event_id"];
 
 	if($event_id == 0) {
 		// need to choose an event
-		die("no event");
+		include_once("event_selection.php");
+		show_event_selection_page();
+		exit;
 	}
 
 	$round_number = (int) $_REQUEST["round_number"];

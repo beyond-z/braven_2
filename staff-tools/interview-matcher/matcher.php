@@ -1,6 +1,16 @@
 <?php
-	include("sso.php");
+	include_once("sso.php");
 	requireLogin();
+
+	include_once("db.php");
+
+	$event_id = (int) $_REQUEST["event_id"];
+	if($event_id == 0) {
+		include_once("event_selection.php");
+		show_event_selection_page();
+		exit;
+	}
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,13 +20,6 @@
 <body>
 
 <?php
-
-include("db.php");
-
-$event_id = (int) $_REQUEST["event_id"];
-if($event_id == 0) {
-	echo "NO EVENT LOADED go to preparation.php";
-}
 
 $volunteers = load_volunteers_from_database($event_id);
 $fellows = load_fellows_from_database($event_id);
@@ -39,12 +42,14 @@ foreach ($match_history as $round => $match_array) {
 $fellow_match_counts = array_count_values($fellows_to_count);
 $most_matches_so_far = max($fellow_match_counts);
 
+//echo "<pre>"; print_r($fellow_match_counts);
+
 
 // TODO: MAKE A SIMILAR AVAILABILITY FORM FOR FELLOWS AS WELL
 
 ?>
 
-<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
+<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?" . htmlspecialchars($_SERVER['QUERY_STRING']);?>" method="post">
 	<input type="hidden" name="event_id" value="<?php echo htmlentities($event_id); ?>" />
 	<?php
 	if(!empty($volunteers)) {
