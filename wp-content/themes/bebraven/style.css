@@ -1957,6 +1957,11 @@ body {
 	display: none;
 }
 
+.logos .placeholder,
+.bios .placeholder {
+	background: #F3F3F3 url('images/braven-watermark-117.png') no-repeat center center;
+}
+
 /*--------------------------------------------------------------
 13.4 Model and Impact
 --------------------------------------------------------------*/
