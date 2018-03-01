@@ -92,6 +92,10 @@
 		.interview-details col:nth-child(even) {
 			background: #f8f8f8;
 		}
+
+		.total {
+			background: #ddd !important;
+		}
 	</style>
 </head>
 <body>
@@ -106,6 +110,44 @@
 	echo "</pre>";
 	*/
 	echo "<h1>".htmlentities(get_event_name($event_id))." - Stats</h1>";
+
+	echo "<h2>Volunteer Matches</h2>";
+	echo "<dl>";
+	foreach($volunteers as $volunteer) {
+		echo "<dt>".htmlspecialchars($volunteer["name"])."</dt>";
+		echo "<dd>";
+		$first = true;
+		foreach($volunteer["round_matches"] as $fid) {
+			if(!$first)
+				echo ", ";
+			if($fid) {
+				echo htmlspecialchars($fellows[$fid]["name"]);
+				$first = false;
+			}
+		}
+		echo "</dd>";
+	}
+
+	echo "<h2>Fellow Matches</h2>";
+	echo "<dl>";
+	foreach($fellows as $fellow) {
+		echo "<dt>".htmlspecialchars($fellow["name"])."</dt>";
+		echo "<dd>";
+		$first = true;
+		foreach($fellow["round_matches"] as $fid) {
+			if(!$first)
+				echo ", ";
+			if($fid) {
+				echo htmlspecialchars($volunteers[$fid]["name"]);
+			} else {
+				echo "&lt;skipped&gt";
+			}
+			$first = false;
+		}
+		echo "</dd>";
+	}
+
+
 
 	echo "<h2>Match Matrix</h2>";
 
@@ -123,6 +165,7 @@
 	echo "<thead>";
 	echo "<tr>";
 	echo "<th></th>";
+	echo "<th>Total</th>";
 	foreach($volunteers as $key => $volunteer) {
 		echo "<th>".htmlentities($volunteer["name"])."</th>";
 	}
@@ -130,9 +173,16 @@
 	echo "</tr>";
 	echo "</thead>";
 	echo "<tbody>";
+	$total_totals = 0;
 	foreach($fellows as $fellow) {
 		echo "<tr>";
 		echo "<th>".htmlentities($fellow["name"])."</th>";
+
+		$total = 0;
+		foreach($fellow["round_matches"] as $r)
+			if($r) $total++;
+
+		echo "<td class=\"total\">$total</td>";
 
 		foreach($volunteers as $volunteer) {
 			echo "<td>";
@@ -151,12 +201,27 @@
 		echo "<th>".htmlentities($fellow["name"])."</th>";
 
 		echo "</tr>";
+
+		$total_totals += $total;
 	}
+
+	echo "<tr>";
+	echo "<th>Total</th>";
+	echo "<td class=\"total\">$total_totals</td>";
+	foreach($volunteers as $key => $volunteer) {
+		$total = 0;
+		foreach($volunteer["round_matches"] as $r)
+			if($r) $total++;
+		echo "<td class=\"total\">$total</td>";
+	}
+	echo "</tr>";
+
 	echo "</tbody>";
 
 	echo "<tfoot>";
 	echo "<tr>";
 	echo "<th></th>";
+	echo "<th>Total</th>";
 	foreach($volunteers as $volunteer) {
 		echo "<th>".htmlentities($volunteer["name"])."</th>";
 	}

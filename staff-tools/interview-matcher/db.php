@@ -90,7 +90,11 @@ function save_volunteers_to_database($event_id, $volunteers) {
 		));
 
 		$id = $pdo->lastInsertId();
+		$ints_done = array();
 		foreach($volunteer["interests"] as $interest) {
+			if(isset($ints_done[$interest]))
+				continue;
+			$ints_done[$interests] = true;
 			$interest_statement->execute(array($id, get_interest_id($interest)));
 		}
 	}
@@ -195,12 +199,16 @@ function save_fellows_to_database($event_id, $fellows) {
 		$statement->execute(array(
 			$event_id,
 			$fellow["name"],
-			$fellow["score"],
+			(int) $fellow["score"],
 			$fellow["available"] ? 1 : 0
 		));
 
 		$id = $pdo->lastInsertId();
+		$ints_done = array();
 		foreach($fellow["interests"] as $interest) {
+			if(isset($ints_done[$interest]))
+				continue;
+			$ints_done[$interests] = true;
 			$interest_statement->execute(array($id, get_interest_id($interest)));
 		}
 	}
