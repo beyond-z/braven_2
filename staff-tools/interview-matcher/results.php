@@ -66,6 +66,12 @@
 			echo "<a href=\"results.php?event_id=$event_id&round_number=$next_round\">Next Round</a>";
 	?>
 
+	<?php
+		if($looping_round == 0) {
+			echo "Matches coming soon... reloading in <span id=\"second-count\">30</span> secs...";
+		} else {
+	?>
+
 <?php
 
 $displays = array(
@@ -133,8 +139,25 @@ foreach ($displays as $display_key => $display) {
 			</tbody>
 		</table>
 	</div>
-	<?php }	?>
+<?php }	?>
+	<br /><br />
+	Checking for more in <span id="second-count">30</span> seconds...
+	<?php } /* if looping_round */ ?>
 </div>
+
+<script>
+	if(document.getElementById("second-count")) {
+		var secondCount = 30;
+		setInterval(function() {
+			secondCount--;
+			if(secondCount == 0) {
+				location.reload(false);
+			} else {
+				document.getElementById("second-count").textContent = secondCount;
+			}
+		}, 1000);
+	}
+</script>
 
 </body>
 </html>

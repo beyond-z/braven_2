@@ -63,11 +63,15 @@
 		.interview-details td {
 			border: solid 1px #ccc;
 		}
-		.interview-details tr:first-child th {
+		.interview-details tbody tr:last-child th,
+		.interview-details tbody tr:last-child td {
+			border-bottom: none;
+		}
+		.interview-details thead th {
 			border-bottom: solid 1px black;
 			text-align: center;
 		}
-		.interview-details tr:last-child th {
+		.interview-details tfoot th {
 			border-top: solid 1px black;
 			text-align: center;
 		}
@@ -101,6 +105,14 @@
 	print_r($volunteers);
 	echo "</pre>";
 	*/
+	echo "<h1>".htmlentities(get_event_name($event_id))." - Stats</h1>";
+
+	echo "<h2>Match Matrix</h2>";
+
+	echo "<p>This table shows who matched to whom and in which round. The number in the cell tells the round in which they paired up.</p>";
+
+	echo "<p>If any row or column has a repeated number, that indicates a problem! People can't be in two places at once.</p>";
+	echo "<p>Similarly, if any cell has two or more numbers, that is also a problem because it means they matched together more than once and thus wasted time.</p>";
 
 	echo "<table class=\"interview-details\">";
 	echo "<col />";
@@ -108,6 +120,7 @@
 		echo "<col />";
 	}
 
+	echo "<thead>";
 	echo "<tr>";
 	echo "<th></th>";
 	foreach($volunteers as $key => $volunteer) {
@@ -115,6 +128,8 @@
 	}
 	echo "<th></th>";
 	echo "</tr>";
+	echo "</thead>";
+	echo "<tbody>";
 	foreach($fellows as $fellow) {
 		echo "<tr>";
 		echo "<th>".htmlentities($fellow["name"])."</th>";
@@ -137,13 +152,17 @@
 
 		echo "</tr>";
 	}
+	echo "</tbody>";
 
+	echo "<tfoot>";
 	echo "<tr>";
 	echo "<th></th>";
 	foreach($volunteers as $volunteer) {
 		echo "<th>".htmlentities($volunteer["name"])."</th>";
 	}
+	echo "<th></th>";
 	echo "</tr>";
+	echo "</tfoot>";
 
 
 	echo "</table>";
