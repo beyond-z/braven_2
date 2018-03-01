@@ -18,6 +18,14 @@
 <head>
 <title>Braven Mock Interview Matcher</title>
 <link rel="stylesheet" type="text/css" href="style.css">
+<style>
+.inside-dragging {
+	border: dashed 2px black;
+}
+[draggable] {
+	cursor: pointer;
+}
+</style>
 </head>
 <body>
 
@@ -431,5 +439,76 @@ function bz_sort_desc_by($array, $criterion = 'vip', $direction = SORT_DESC) {
 	return $array;
 }
 ?>	
+
+
+<script>
+	function swapNodeChild(a, b) {
+		var c1 = a.firstChild;
+		var c2 = b.firstChild;
+		a.removeChild(c1);
+		b.removeChild(c2);
+		a.appendChild(c2);
+		b.appendChild(c1);
+	}
+
+	var pm = document.getElementById("proposed-matches");
+	if(pm) {
+		var fellows = pm.querySelectorAll("[data-fellow-id]");
+		var currentlyDragging;
+		for(var i = 0; i < fellows.length; i++) {
+			var f = fellows[i];
+			f.setAttribute("draggable", "true");
+
+			f.addEventListener("dragstart", function(event) {
+				event.dataTransfer.setData("Text", event.target.getAttribute("data-fellow-id"));
+				currentlyDragging = this;
+			});
+
+			f.parentNode.addEventListener("dragenter", function(event) {
+				event.preventDefault();
+				this.className += " inside-dragging";
+			});
+			f.parentNode.addEventListener("dragleave", function(event) {
+				this.className = this.className.replace(" inside-dragging", "");
+			});
+			f.parentNode.addEventListener("dragover", function(event) {
+				event.preventDefault();
+			});
+			f.parentNode.addEventListener("drop", function(event) {
+				event.preventDefault();
+				event.stopPropagation();
+				this.className = this.className.replace(" inside-dragging", "");
+
+				// change the form value (this is what counts!)
+				document.querySelector("input[data-vid=\"" + this.getAttribute("data-volunteer-id") + "\"]").
+					value = currentlyDragging.getAttribute("data-fellow-id");
+				document.querySelector("input[data-vid=\"" + currentlyDragging.parentNode.getAttribute("data-volunteer-id") + "\"]").
+					value = this.firstChild.getAttribute("data-fellow-id");
+
+				// and update the UI so people know what is going on
+
+				// the fellow name field
+				var toSwap = this.firstChild;
+				this.removeChild(this.firstChild);
+				var oldParent = currentlyDragging.parentNode;
+				currentlyDragging.parentNode.removeChild(currentlyDragging);
+				this.appendChild(currentlyDragging);
+				oldParent.appendChild(toSwap);
+
+				// the score field
+				var n = this.nextElementSibling;
+				var n2 = oldParent.nextElementSibling;
+				swapNodeChild(n, n2);
+
+				// the interests field
+				n = n.nextElementSibling;
+				n2 = n2.nextElementSibling;
+				swapNodeChild(n, n2);
+
+				currentlyDragging = null;
+			});
+		}
+	}
+</script>
 </body>
 </html>

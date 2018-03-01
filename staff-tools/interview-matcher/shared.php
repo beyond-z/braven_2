@@ -39,9 +39,9 @@ function bz_show_proposed_matches($show_button = true) {
 					<tr class="<?php echo ($volunteers[$volunteer_key]['vip']) ? 'vip' : ''; // Use VIP status to style the row ?>">
 						<td><?php echo $volunteers[$volunteer_key]['number']; ?></td>
 						<td class="name"><?php echo $volunteers[$volunteer_key]['name']; ?></td>
-						<td><?php echo $fellows[$fellow_key]['name']; ?></td>
-						<td><?php echo $fellows[$fellow_key]['score']; ?></td>
-						<td><?php bz_list_items($fellows[$fellow_key]['interests']); ?></td>
+						<td data-volunteer-id="<?php echo $volunteer_key; ?>"><div data-fellow-id="<?php echo $fellow_key;?>"><?php echo $fellows[$fellow_key]['name']; ?></div></td>
+						<td><div><?php echo $fellows[$fellow_key]['score']; ?></div></td>
+						<td><div><?php bz_list_items($fellows[$fellow_key]['interests']); ?></div></td>
 						<td><?php bz_list_items($volunteers[$volunteer_key]['interests']); ?></td>
 					</tr>
 					<?php
@@ -60,7 +60,7 @@ function bz_show_proposed_matches($show_button = true) {
 			foreach ($matches as $vid => $fellow_ID) {
 				//$volunteer_key = array_search($volunteer_key, array_column($volunteers, 'id'));
 				//$vid = $volunteers[$volunteer_key]["id"];
-				echo "<input type=\"hidden\" name=\"matches[$vid]\" value=\"{$fellow_ID}\" />";
+				echo "<input type=\"hidden\" data-vid=\"$vid\" name=\"matches[$vid]\" value=\"{$fellow_ID}\" />";
 			}
 			?>
 			<input type="submit" value="Finalize match!">
