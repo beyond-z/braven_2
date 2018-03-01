@@ -94,7 +94,7 @@ function save_volunteers_to_database($event_id, $volunteers) {
 		foreach($volunteer["interests"] as $interest) {
 			if(isset($ints_done[$interest]))
 				continue;
-			$ints_done[$interests] = true;
+			$ints_done[$interest] = true;
 			$interest_statement->execute(array($id, get_interest_id($interest)));
 		}
 	}
@@ -208,7 +208,7 @@ function save_fellows_to_database($event_id, $fellows) {
 		foreach($fellow["interests"] as $interest) {
 			if(isset($ints_done[$interest]))
 				continue;
-			$ints_done[$interests] = true;
+			$ints_done[$interest] = true;
 			$interest_statement->execute(array($id, get_interest_id($interest)));
 		}
 	}
