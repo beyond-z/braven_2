@@ -305,7 +305,7 @@ function bz_match_volunteers($fellows) {
 
 	$volunteers_sorted = bz_sort_desc_by($volunteers);
 
-	// vip first by score + interst
+	// vip first by score + interest
 	$priorized_fellows = get_fellows_by_matching_priority($fellows, true);
 
 	foreach ($volunteers_sorted as $volunteer) {
@@ -328,6 +328,18 @@ function bz_match_volunteers($fellows) {
 	/* Iteration 2: Run again for all unmatched volunteers, but first shuffle the fellows to avoid biasing toward stronger fellows: */
 	$priorized_fellows = get_fellows_by_matching_priority($fellows, false);
 
+	/*
+	// interests first
+	foreach ($volunteers_sorted as $volunteer) {
+		$volunteer_key = $volunteer["id"];
+
+		if(!array_key_exists($volunteer_key, $matches) 
+			&& $volunteer['available']) {
+			bz_match_with_fellow($priorized_fellows, $volunteer, 'interests');
+		} 
+	}*/
+
+	// then random to fall back on remaining
 	foreach ($volunteers_sorted as $volunteer) {
 		$volunteer_key = $volunteer["id"];
 
@@ -336,6 +348,7 @@ function bz_match_volunteers($fellows) {
 			bz_match_with_fellow($priorized_fellows, $volunteer);
 		} 
 	}
+
 
 	// Display the proposed matches:
 	bz_show_proposed_matches();
@@ -381,22 +394,24 @@ function bz_match_with_fellow($fellows_to_consider, $volunteer, $match_by = null
 
 		if ($match_by) {
 			// If we're matching by criterion, need to make sure the following applies as well:
-			if (array_intersect($volunteer[$match_by], $fellows[$fellow_id][$match_by])) {
+			if (!empty(array_intersect($volunteer[$match_by], $fellows[$fellow_id][$match_by]))) {
 				// if we can find an available fellow with matching interests, make the match:
 
 				$matches[$volunteer_key] = $fellow_id;
-				return;
+				return true;
 			} 
 		} else {
 			// if this is a free-for all (no criterion) then just match whatever:
 			$matches[$volunteer_key] = $fellow_id;
-			return;
+			return true;
 		}
 	}
 
 	// only option is a repeat, allow as last resort
 	//if($repeat_key)
 		//$matches[$volunteer_key] = $repeat_key;
+
+	return false;
 }
 
 function bz_sort_desc_by($array, $criterion = 'vip', $direction = SORT_DESC) {
