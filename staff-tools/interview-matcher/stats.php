@@ -127,6 +127,7 @@
 		}
 		echo "</dd>";
 	}
+	echo "</dl>";
 
 	echo "<h2>Fellow Matches</h2>";
 	echo "<dl>";
@@ -146,6 +147,7 @@
 		}
 		echo "</dd>";
 	}
+	echo "</dl>";
 
 
 

@@ -13,6 +13,8 @@
 				$rowNumber++;
 				if($rowNumber == 1)
 					continue; // skipping header
+				if(empty(trim($data[0])))
+					continue;
 				$fellow = array(
 					"name" => trim($data[0]),
 					"score" => trim($data[1]),
@@ -31,6 +33,8 @@
 				$rowNumber++;
 				if($rowNumber == 1)
 					continue; // skipping header
+				if(empty(trim($data[0])))
+					continue;
 				$volunteer = array(
 					"name" => trim($data[0]),
 					"vip" => (strtolower(trim($data[1])) == "true" || strtolower(trim($data[1])) == "vip"),
