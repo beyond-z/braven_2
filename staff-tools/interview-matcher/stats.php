@@ -127,6 +127,7 @@
 		}
 		echo "</dd>";
 	}
+	echo "</dl>";
 
 	echo "<h2>Fellow Matches</h2>";
 	echo "<dl>";
@@ -140,12 +141,13 @@
 			if($fid) {
 				echo htmlspecialchars($volunteers[$fid]["name"]);
 			} else {
-				echo "&lt;skipped&gt";
+				echo "&lt;bye&gt";
 			}
 			$first = false;
 		}
 		echo "</dd>";
 	}
+	echo "</dl>";
 
 
 
