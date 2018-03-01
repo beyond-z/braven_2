@@ -180,7 +180,7 @@ function get_fellows_by_matching_priority($fellows, $for_vips) {
 // and now display the info table
 ?>
 
-<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?" . htmlspecialchars($_SERVER['QUERY_STRING']);?>" method="post">
+<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "#matches?" . htmlspecialchars($_SERVER['QUERY_STRING']);?>" method="post">
 	<input type="hidden" name="event_id" value="<?php echo htmlentities($event_id); ?>" />
 	<?php
 	if(!empty($volunteers)) {
@@ -435,7 +435,7 @@ function bz_show_proposed_matches() {
 //echo "<pre>"; print_r($matches); echo "</pre>";
 
 	if (!empty($matches)) {
-		echo '<h2>Matches:</h2>';
+		echo '<h2 id="matches">Matches:</h2>';
 		echo '<br>';
 
 		?>
