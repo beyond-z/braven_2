@@ -76,21 +76,21 @@
 
 $displays = array(
 	array(
-		'display_name' => 'by-room',
-		'title' => 'By Room / Station / Number',
-		'columns'=> array(
-			'room' => 'Room / Station / Number',
-			'volunteer' => 'Volunteer',
-			'fellow' => 'Fellow',
-		),
-	),
-	array(
 		'display_name' => 'by-fellow',
 		'title' => 'By Fellow',
 		'columns'=> array(
 			'fellow' => 'Fellow',
 			'room' => 'Room / Station / Number',
 			'volunteer' => 'Volunteer',
+		),
+	),
+	array(
+		'display_name' => 'by-room',
+		'title' => 'By Room / Station / Number',
+		'columns'=> array(
+			'room' => 'Room / Station / Number',
+			'volunteer' => 'Volunteer',
+			'fellow' => 'Fellow',
 		),
 	),
 );
