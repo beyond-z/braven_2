@@ -1,5 +1,5 @@
 <?php
-	include("sso.php");
+	include_once("sso.php");
 	requireLogin();
 ?><!DOCTYPE html>
 <html>

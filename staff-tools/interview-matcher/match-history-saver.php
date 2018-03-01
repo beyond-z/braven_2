@@ -1,5 +1,5 @@
 <?php 
-	include("db.php");
+	include_once("db.php");
 
 	save_matches($_POST["event_id"], $_POST['matches']);
 ?>
