@@ -314,21 +314,9 @@ function bz_match_volunteers($fellows) {
 		} 
 	}
 
-	// vip by score
-	foreach ($volunteers_sorted as $volunteer) {
-		$volunteer_key = $volunteer["id"];
-		if($volunteer['available'] && $volunteer['vip']) {
-			if(!array_key_exists($volunteer_key, $matches))
-				bz_match_with_fellow($priorized_fellows, $volunteer);
-		} 
-	}
-
-
-
-	/* Iteration 2: Run again for all unmatched volunteers, but first shuffle the fellows to avoid biasing toward stronger fellows: */
 	$priorized_fellows = get_fellows_by_matching_priority($fellows, false);
 
-	// interests first
+	// non-vip by interests
 	foreach ($volunteers_sorted as $volunteer) {
 		$volunteer_key = $volunteer["id"];
 
@@ -337,6 +325,18 @@ function bz_match_volunteers($fellows) {
 			bz_match_with_fellow($priorized_fellows, $volunteer, 'interests');
 		} 
 	}
+
+	$priorized_fellows = get_fellows_by_matching_priority($fellows, true);
+	// vip by score, non-matching interests
+	foreach ($volunteers_sorted as $volunteer) {
+		$volunteer_key = $volunteer["id"];
+		if($volunteer['available'] && $volunteer['vip']) {
+			if(!array_key_exists($volunteer_key, $matches))
+				bz_match_with_fellow($priorized_fellows, $volunteer);
+		} 
+	}
+
+	$priorized_fellows = get_fellows_by_matching_priority($fellows, false);
 
 	// then random to fall back on remaining
 	foreach ($volunteers_sorted as $volunteer) {
