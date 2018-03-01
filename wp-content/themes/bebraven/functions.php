@@ -1058,12 +1058,12 @@ return $query;
 add_filter('pre_get_posts','bz_setup_search_filter');
 
 /*
- * Edit buttons on the front end for admin:
+ * Edit buttons on the front end, ONLY for those who are allowed to edit posts:
  */
 
 function bz_show_edit_link() {
 	global $post;
-	if ( current_user_can('editor') || current_user_can('administrator') ) {
+	if ( current_user_can('edit_others_pages') ) {
 		?>
 			<a class="edit-link" href="/wp-admin/post.php?post=<?php echo $post->ID;?>&action=edit">
 				<?php echo __('Edit','bz');?>

@@ -17,7 +17,7 @@ function bz_show_proposed_matches($show_button = true) {
 //echo "<pre>"; print_r($matches); echo "</pre>";
 
 	if (!empty($matches)) {
-		echo '<h2>Matches:</h2>';
+		echo '<h2 d="matches">Matches:</h2>';
 		echo '<br>';
 
 		?>
