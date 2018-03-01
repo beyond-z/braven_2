@@ -141,7 +141,7 @@
 			if($fid) {
 				echo htmlspecialchars($volunteers[$fid]["name"]);
 			} else {
-				echo "&lt;skipped&gt";
+				echo "&lt;bye&gt";
 			}
 			$first = false;
 		}

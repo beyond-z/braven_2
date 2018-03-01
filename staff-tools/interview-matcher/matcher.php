@@ -328,7 +328,6 @@ function bz_match_volunteers($fellows) {
 	/* Iteration 2: Run again for all unmatched volunteers, but first shuffle the fellows to avoid biasing toward stronger fellows: */
 	$priorized_fellows = get_fellows_by_matching_priority($fellows, false);
 
-	/*
 	// interests first
 	foreach ($volunteers_sorted as $volunteer) {
 		$volunteer_key = $volunteer["id"];
@@ -337,7 +336,7 @@ function bz_match_volunteers($fellows) {
 			&& $volunteer['available']) {
 			bz_match_with_fellow($priorized_fellows, $volunteer, 'interests');
 		} 
-	}*/
+	}
 
 	// then random to fall back on remaining
 	foreach ($volunteers_sorted as $volunteer) {
