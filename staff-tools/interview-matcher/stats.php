@@ -111,6 +111,44 @@
 	*/
 	echo "<h1>".htmlentities(get_event_name($event_id))." - Stats</h1>";
 
+	echo "<h2>Volunteer Matches</h2>";
+	echo "<dl>";
+	foreach($volunteers as $volunteer) {
+		echo "<dt>".htmlspecialchars($volunteer["name"])."</dt>";
+		echo "<dd>";
+		$first = true;
+		foreach($volunteer["round_matches"] as $fid) {
+			if(!$first)
+				echo ", ";
+			if($fid) {
+				echo htmlspecialchars($fellows[$fid]["name"]);
+				$first = false;
+			}
+		}
+		echo "</dd>";
+	}
+
+	echo "<h2>Fellow Matches</h2>";
+	echo "<dl>";
+	foreach($fellows as $fellow) {
+		echo "<dt>".htmlspecialchars($fellow["name"])."</dt>";
+		echo "<dd>";
+		$first = true;
+		foreach($fellow["round_matches"] as $fid) {
+			if(!$first)
+				echo ", ";
+			if($fid) {
+				echo htmlspecialchars($volunteers[$fid]["name"]);
+			} else {
+				echo "&lt;skipped&gt";
+			}
+			$first = false;
+		}
+		echo "</dd>";
+	}
+
+
+
 	echo "<h2>Match Matrix</h2>";
 
 	echo "<p>This table shows who matched to whom and in which round. The number in the cell tells the round in which they paired up.</p>";
