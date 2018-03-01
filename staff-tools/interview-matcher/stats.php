@@ -158,6 +158,8 @@
 		}
 		if($had_none)
 			echo " <span class=\"had-none\">NO MATCHES!</span>";
+		if(!$fellow["available"])
+			echo " <span>unavailable though</span>";
 		echo "</dd>";
 	}
 	echo "</dl>";
