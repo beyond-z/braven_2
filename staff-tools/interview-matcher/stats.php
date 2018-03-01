@@ -96,6 +96,11 @@
 		.total {
 			background: #ddd !important;
 		}
+
+		.had-none {
+			color: red;
+			font-weight: bold;
+		}
 	</style>
 </head>
 <body>
@@ -135,16 +140,24 @@
 		echo "<dt>".htmlspecialchars($fellow["name"])."</dt>";
 		echo "<dd>";
 		$first = true;
+		$had_none = true;
 		foreach($fellow["round_matches"] as $fid) {
 			if(!$first)
 				echo ", ";
 			if($fid) {
+				if($volunteers[$fid]["vip"])
+					echo "<b>";
 				echo htmlspecialchars($volunteers[$fid]["name"]);
+				if($volunteers[$fid]["vip"])
+					echo "</b>";
+				$had_none = false;
 			} else {
 				echo "&lt;bye&gt";
 			}
 			$first = false;
 		}
+		if($had_none)
+			echo " <span class=\"had-none\">NO MATCHES!</span>";
 		echo "</dd>";
 	}
 	echo "</dl>";

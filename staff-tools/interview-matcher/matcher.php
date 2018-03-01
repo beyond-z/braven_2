@@ -4,6 +4,8 @@
 
 	include_once("db.php");
 
+	include_once("shared.php");
+
 	$event_id = (int) $_REQUEST["event_id"];
 	if($event_id == 0) {
 		include_once("event_selection.php");
@@ -180,7 +182,7 @@ function get_fellows_by_matching_priority($fellows, $for_vips) {
 // and now display the info table
 ?>
 
-<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "#matches?" . htmlspecialchars($_SERVER['QUERY_STRING']);?>" method="post">
+<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?" . htmlspecialchars($_SERVER['QUERY_STRING']);?>#matches" method="post">
 	<input type="hidden" name="event_id" value="<?php echo htmlentities($event_id); ?>" />
 	<?php
 	if(!empty($volunteers)) {
@@ -314,21 +316,9 @@ function bz_match_volunteers($fellows) {
 		} 
 	}
 
-	// vip by score
-	foreach ($volunteers_sorted as $volunteer) {
-		$volunteer_key = $volunteer["id"];
-		if($volunteer['available'] && $volunteer['vip']) {
-			if(!array_key_exists($volunteer_key, $matches))
-				bz_match_with_fellow($priorized_fellows, $volunteer);
-		} 
-	}
-
-
-
-	/* Iteration 2: Run again for all unmatched volunteers, but first shuffle the fellows to avoid biasing toward stronger fellows: */
 	$priorized_fellows = get_fellows_by_matching_priority($fellows, false);
 
-	// interests first
+	// non-vip by interests
 	foreach ($volunteers_sorted as $volunteer) {
 		$volunteer_key = $volunteer["id"];
 
@@ -337,6 +327,18 @@ function bz_match_volunteers($fellows) {
 			bz_match_with_fellow($priorized_fellows, $volunteer, 'interests');
 		} 
 	}
+
+	$priorized_fellows = get_fellows_by_matching_priority($fellows, true);
+	// vip by score, non-matching interests
+	foreach ($volunteers_sorted as $volunteer) {
+		$volunteer_key = $volunteer["id"];
+		if($volunteer['available'] && $volunteer['vip']) {
+			if(!array_key_exists($volunteer_key, $matches))
+				bz_match_with_fellow($priorized_fellows, $volunteer);
+		} 
+	}
+
+	$priorized_fellows = get_fellows_by_matching_priority($fellows, false);
 
 	// then random to fall back on remaining
 	foreach ($volunteers_sorted as $volunteer) {
@@ -416,77 +418,6 @@ function bz_match_with_fellow($fellows_to_consider, $volunteer, $match_by = null
 function bz_sort_desc_by($array, $criterion = 'vip', $direction = SORT_DESC) {
 	array_multisort(array_column($array, $criterion), $direction, $array);
 	return $array;
-}
-	 
-function bz_list_items($array) {
-	echo '<ul>';
-	foreach ($array as $key => $value) {
-		echo '<li>'.$value.'</li>';
-	}
-	echo '</ul>';
-}
-
-function bz_show_proposed_matches() {
-	global $matches;
-	global $volunteers;
-	global $fellows;
-	global $event_id;
-
-//echo "<pre>"; print_r($matches); echo "</pre>";
-
-	if (!empty($matches)) {
-		echo '<h2 id="matches">Matches:</h2>';
-		echo '<br>';
-
-		?>
-		<table id="proposed-matches">
-			<thead>
-				<tr>
-					<th>Station/Number</th>
-					<th>Interviewer</th>
-					<th>Fellow</th>
-					<th>Fellow Score</th>
-					<th>Fellow Interests</th>
-					<th>Interviewer Fields</th>
-				</tr>
-			</thead>
-			<tbody>
-				<?php
-				foreach ($matches as $volunteer_key => $fellow_key) {
-					?>
-					<tr class="<?php echo ($volunteers[$volunteer_key]['vip']) ? 'vip' : ''; // Use VIP status to style the row ?>">
-						<td><?php echo $volunteers[$volunteer_key]['number']; ?></td>
-						<td class="name"><?php echo $volunteers[$volunteer_key]['name']; ?></td>
-						<td><?php echo $fellows[$fellow_key]['name']; ?></td>
-						<td><?php echo $fellows[$fellow_key]['score']; ?></td>
-						<td><?php bz_list_items($fellows[$fellow_key]['interests']); ?></td>
-						<td><?php bz_list_items($volunteers[$volunteer_key]['interests']); ?></td>
-					</tr>
-					<?php
-				}
-				?>
-			</tbody>
-		</table>
-		<br>
-		<?php
-		?>
-
-		<form action="match-history-saver.php" method="post">
-			<input type="hidden" name="event_id" value="<?php echo htmlentities($event_id); ?>" />
-			<?php
-			foreach ($matches as $vid => $fellow_ID) {
-				//$volunteer_key = array_search($volunteer_key, array_column($volunteers, 'id'));
-				//$vid = $volunteers[$volunteer_key]["id"];
-				echo "<input type=\"hidden\" name=\"matches[$vid]\" value=\"{$fellow_ID}\" />";
-			}
-			?>
-			<input type="submit" value="Finalize match!">
-		</form>
-		<?php
-
-	} else {
-		echo '<h2>No matches possible</h2>';
-	}
 }
 ?>	
 </body>
