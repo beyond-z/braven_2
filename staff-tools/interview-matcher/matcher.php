@@ -130,6 +130,8 @@ function get_fellows_by_matching_priority($fellows, $for_vips) {
 	$matched_in_previous_round = array();
 	$interview_count_buckets = array();
 	foreach($fellows as $fellow) {
+		if(!$fellow["available"])
+			continue;
 		$matched_this_round = in_array($fellow['id'], $matches);
 		if($matched_this_round)
 			continue;
@@ -357,7 +359,7 @@ function matched_any_round_historically($fellow_id_to_check, $volunteer_id_to_ch
 	return false;
 }
 
-function bz_match_with_fellow($fellow_to_consider, $volunteer, $match_by = null) {
+function bz_match_with_fellow($fellows_to_consider, $volunteer, $match_by = null) {
 	
 	// Find next available Fellow that matches criteria:
 
@@ -367,7 +369,7 @@ function bz_match_with_fellow($fellow_to_consider, $volunteer, $match_by = null)
 
 	$volunteer_key = $volunteer["id"];
 	$repeat_key = null;
-	foreach($fellow_to_consider as $fellow_id) {
+	foreach($fellows_to_consider as $fellow_id) {
 		$matched_this_round = in_array($fellow_id, $matches);
 		if($matched_this_round)
 			continue;
