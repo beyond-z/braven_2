@@ -199,7 +199,7 @@ function save_fellows_to_database($event_id, $fellows) {
 		$statement->execute(array(
 			$event_id,
 			$fellow["name"],
-			$fellow["score"],
+			(int) $fellow["score"],
 			$fellow["available"] ? 1 : 0
 		));
 
