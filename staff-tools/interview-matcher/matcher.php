@@ -479,6 +479,9 @@ function bz_sort_desc_by($array, $criterion = 'vip', $direction = SORT_DESC) {
 				event.stopPropagation();
 				this.className = this.className.replace(" inside-dragging", "");
 
+				if(this == currentlyDragging.parentNode)
+					return; // drop back in itself, no work needed
+
 				// change the form value (this is what counts!)
 				document.querySelector("input[data-vid=\"" + this.getAttribute("data-volunteer-id") + "\"]").
 					value = currentlyDragging.getAttribute("data-fellow-id");
