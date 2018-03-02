@@ -18,6 +18,14 @@
 <head>
 <title>Braven Mock Interview Matcher</title>
 <link rel="stylesheet" type="text/css" href="style.css">
+<style>
+.inside-dragging {
+	border: dashed 2px black;
+}
+[draggable] {
+	cursor: pointer;
+}
+</style>
 </head>
 <body>
 
@@ -106,9 +114,10 @@ function times_fellow_matched_historically($fellow_id_to_check) {
 
 function special_score_sort($a, $b) {
 	global $fellows;
-	return $fellows[$b]["score"] - $fellows[$a]["score"];
+	return $fellows[$b[0]]["score"] - $fellows[$a[0]]["score"];
 }
 
+/// returns array of array(id, score (lower is better))
 function get_fellows_by_matching_priority($fellows, $for_vips) {
 	global $matches;
 
@@ -120,7 +129,8 @@ function get_fellows_by_matching_priority($fellows, $for_vips) {
 		First are those who have had the least amount of interview opportunities so far.
 		Among them, the score is highest (if called for vips) or random shuffled (everyone else).
 
-		But if they were matched in the previous round, it always puts them at the bottom of the list.
+		But if they were matched in the previous round, it always puts them at the bottom of the list...
+		unless they are two behind. Then I'll allow it to catch up.
 
 		If they were already matched in this round, they are right out.
 
@@ -129,7 +139,7 @@ function get_fellows_by_matching_priority($fellows, $for_vips) {
 
 		Make sure people aren't matched to the same vol again.
 	*/
-	$matched_in_previous_round = array();
+	$lowest_thing = 9999;
 	$interview_count_buckets = array();
 	foreach($fellows as $fellow) {
 		if(!$fellow["available"])
@@ -137,16 +147,23 @@ function get_fellows_by_matching_priority($fellows, $for_vips) {
 		$matched_this_round = in_array($fellow['id'], $matches);
 		if($matched_this_round)
 			continue;
+		$penalty = 0;
 		if(fellow_was_matched_in_previous_round($fellow["id"])) {
-			// we want to avoid matching in two consecutive rounds, so they are done in a separate list for the bottom
-			$matched_in_previous_round[] = $fellow["id"];
-			continue;
+			// we want to avoid matching in two consecutive rounds, so they are given a sorting
+			// penalty, putting them a bit lower on the list to give other people a chance to
+			// catch up
+			$penalty = 1;
 		}
 
 		$c = times_fellow_matched_historically($fellow["id"]);
+		$c += $penalty;
+
+		if($c < $lowest_thing)
+			$lowest_thing = c;
+
 		if(!isset($interview_count_buckets[$c]))
 			$interview_count_buckets[$c] = array();
-		$interview_count_buckets[$c][] = $fellow["id"];
+		$interview_count_buckets[$c][] = array($fellow["id"], $c);
 	}
 
 	// I'm not sure if php arrays always come in numeric order or insertion
@@ -165,15 +182,11 @@ function get_fellows_by_matching_priority($fellows, $for_vips) {
 		$fellows_by_matching_priority = array_merge($fellows_by_matching_priority, $bucket);
 	}
 
-	// it only appends the last rounds ones if we had new unique ones for this round to avoid
-	// potential infinite recursion (this means someone was taken off the list at least)
-	// if everyone was matched in every round
-	if(!empty($fellows_by_matching_priority))
-		$fellows_by_matching_priority = array_merge($fellows_by_matching_priority, get_fellows_by_matching_priority($matched_in_previous_round, $for_vips));
-	else {
-		// no new matches; the event is prolly over. staff can improvise if need be to kill time or just dismiss
-		// shouldn't happen in practice cuz we have a lot more students than volunteers.
+	// normalize all so zero is lowest match count
+	foreach($fellows_by_matching_priority as &$f) {
+		$f[1] -= $lowest_thing;
 	}
+	unset($f);
 
 	return $fellows_by_matching_priority;
 }
@@ -383,7 +396,10 @@ function bz_match_with_fellow($fellows_to_consider, $volunteer, $match_by = null
 
 	$volunteer_key = $volunteer["id"];
 	$repeat_key = null;
-	foreach($fellows_to_consider as $fellow_id) {
+	foreach($fellows_to_consider as $fellow_info) {
+		$fellow_id = $fellow_info[0];
+		$fellow_matches = $fellow_info[1];
+
 		$matched_this_round = in_array($fellow_id, $matches);
 		if($matched_this_round)
 			continue;
@@ -398,8 +414,11 @@ function bz_match_with_fellow($fellows_to_consider, $volunteer, $match_by = null
 			if (!empty(array_intersect($volunteer[$match_by], $fellows[$fellow_id][$match_by]))) {
 				// if we can find an available fellow with matching interests, make the match:
 
-				$matches[$volunteer_key] = $fellow_id;
-				return true;
+				$fellow_matches -= 1; // bias toward interest matches
+				if($fellow_matches <= 0) {
+					$matches[$volunteer_key] = $fellow_id;
+					return true;
+				}
 			} 
 		} else {
 			// if this is a free-for all (no criterion) then just match whatever:
@@ -420,5 +439,76 @@ function bz_sort_desc_by($array, $criterion = 'vip', $direction = SORT_DESC) {
 	return $array;
 }
 ?>	
+
+
+<script>
+	function swapNodeChild(a, b) {
+		var c1 = a.firstChild;
+		var c2 = b.firstChild;
+		a.removeChild(c1);
+		b.removeChild(c2);
+		a.appendChild(c2);
+		b.appendChild(c1);
+	}
+
+	var pm = document.getElementById("proposed-matches");
+	if(pm) {
+		var fellows = pm.querySelectorAll("[data-fellow-id]");
+		var currentlyDragging;
+		for(var i = 0; i < fellows.length; i++) {
+			var f = fellows[i];
+			f.setAttribute("draggable", "true");
+
+			f.addEventListener("dragstart", function(event) {
+				event.dataTransfer.setData("Text", event.target.getAttribute("data-fellow-id"));
+				currentlyDragging = this;
+			});
+
+			f.parentNode.addEventListener("dragenter", function(event) {
+				event.preventDefault();
+				this.className += " inside-dragging";
+			});
+			f.parentNode.addEventListener("dragleave", function(event) {
+				this.className = this.className.replace(" inside-dragging", "");
+			});
+			f.parentNode.addEventListener("dragover", function(event) {
+				event.preventDefault();
+			});
+			f.parentNode.addEventListener("drop", function(event) {
+				event.preventDefault();
+				event.stopPropagation();
+				this.className = this.className.replace(" inside-dragging", "");
+
+				// change the form value (this is what counts!)
+				document.querySelector("input[data-vid=\"" + this.getAttribute("data-volunteer-id") + "\"]").
+					value = currentlyDragging.getAttribute("data-fellow-id");
+				document.querySelector("input[data-vid=\"" + currentlyDragging.parentNode.getAttribute("data-volunteer-id") + "\"]").
+					value = this.firstChild.getAttribute("data-fellow-id");
+
+				// and update the UI so people know what is going on
+
+				// the fellow name field
+				var toSwap = this.firstChild;
+				this.removeChild(this.firstChild);
+				var oldParent = currentlyDragging.parentNode;
+				currentlyDragging.parentNode.removeChild(currentlyDragging);
+				this.appendChild(currentlyDragging);
+				oldParent.appendChild(toSwap);
+
+				// the score field
+				var n = this.nextElementSibling;
+				var n2 = oldParent.nextElementSibling;
+				swapNodeChild(n, n2);
+
+				// the interests field
+				n = n.nextElementSibling;
+				n2 = n2.nextElementSibling;
+				swapNodeChild(n, n2);
+
+				currentlyDragging = null;
+			});
+		}
+	}
+</script>
 </body>
 </html>
