@@ -183,7 +183,7 @@
 	echo "<tr>";
 	echo "<th></th>";
 	echo "<th>Total</th>";
-	foreach($volunteers as $key => $volunteer) {
+	foreach($volunteers as $volunteer) {
 		echo "<th>".htmlentities($volunteer["name"])."</th>";
 	}
 	echo "<th></th>";
@@ -225,7 +225,7 @@
 	echo "<tr>";
 	echo "<th>Total</th>";
 	echo "<td class=\"total\">$total_totals</td>";
-	foreach($volunteers as $key => $volunteer) {
+	foreach($volunteers as $volunteer) {
 		$total = 0;
 		foreach($volunteer["round_matches"] as $r)
 			if($r) $total++;
