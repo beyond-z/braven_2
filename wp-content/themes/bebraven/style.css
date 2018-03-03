@@ -1975,6 +1975,10 @@ body {
 	margin: 2em 0;
 }
 
+#model-diagram h2 {
+	hyphens: auto;
+}
+
 .model-box {
 	width: 28vw;
 	padding: 3vw;
@@ -2016,7 +2020,6 @@ body {
 
 .model-inside h2:after,
 .model-more h2:after {
-	background: #FFF;
 	height: 0.4vw;
 }
 
@@ -2034,14 +2037,14 @@ body {
 	left: 5%;
 	bottom: 5%;
 	z-index: 999;
-	background: #EB3B46;
+	background: #F3F3F3;
 	padding: 3vw;
 	font-weight: bold;
-	color: #FFF;
 	text-align: center;
 }
 
-.model-more .close-this {
+.model-more p a {
+	background: #EB3B46;
 	color: #FFF;
 }
 
@@ -2708,8 +2711,12 @@ h2.plain {
 		width: 30vw !important;
 	}
 
+	.model-outside {
+		padding: 5vw 2vw;
+	}
+
 	#model-diagram h2 {
-		font-size: 14px;
+		font-size: 12px;
 		margin: 0.5em 0;
 	}
 
