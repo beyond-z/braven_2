@@ -98,6 +98,16 @@ function fellow_was_matched_in_previous_round($fellow_id_to_check) {
 	return false;
 }
 
+function current_round_number() {
+	global $match_history;
+	$count = 1;
+	foreach ($match_history as $match_array) {
+		$count++;
+	}
+
+	return $count;
+}
+
 function times_fellow_matched_historically($fellow_id_to_check) {
 	global $match_history;
 	$count = 0;
@@ -152,7 +162,10 @@ function get_fellows_by_matching_priority($fellows, $for_vips) {
 			// we want to avoid matching in two consecutive rounds, so they are given a sorting
 			// penalty, putting them a bit lower on the list to give other people a chance to
 			// catch up
-			$penalty = 1;
+			if(current_round_number() < 4)
+				$penalty = 2; // rounds 1,2,3 really don't try to do back-to-back
+			else
+				$penalty = 1; // but for the final rounds, give people an easier chance to catch up, allowing back-to-back more easily
 		}
 
 		$c = times_fellow_matched_historically($fellow["id"]);
@@ -304,6 +317,7 @@ foreach($volunteers as $v) if($v["available"]) $available_vols++;
 $available_fellows = 0;
 foreach($fellows as $v) if($v["available"]) $available_fellows++;
 echo "We have $available_vols volunteers and $available_fellows Fellows.<br>"; 
+echo "Proposing for round ".current_round_number()."...";
 
 ?>
 
@@ -336,6 +350,7 @@ function bz_match_volunteers($fellows) {
 		$volunteer_key = $volunteer["id"];
 
 		if(!array_key_exists($volunteer_key, $matches) 
+			&& !$volunteer['vip']
 			&& $volunteer['available']) {
 			bz_match_with_fellow($priorized_fellows, $volunteer, 'interests');
 		} 
@@ -394,6 +409,9 @@ function bz_match_with_fellow($fellows_to_consider, $volunteer, $match_by = null
 	global $fellows;
 	global $volunteers;
 
+	$best_match = 0;
+	$best_match_score = 999; // lower is better
+
 	$volunteer_key = $volunteer["id"];
 	$repeat_key = null;
 	foreach($fellows_to_consider as $fellow_info) {
@@ -414,17 +432,25 @@ function bz_match_with_fellow($fellows_to_consider, $volunteer, $match_by = null
 			if (!empty(array_intersect($volunteer[$match_by], $fellows[$fellow_id][$match_by]))) {
 				// if we can find an available fellow with matching interests, make the match:
 
-				$fellow_matches -= 1; // bias toward interest matches
-				if($fellow_matches <= 0) {
-					$matches[$volunteer_key] = $fellow_id;
-					return true;
+				$fellow_matches -= 0.5; // slightly bias toward interest matches
+				if($fellow_matches <= 0 && $fellow_matches < $best_match_score) {
+					$best_match = $fellow_id;
+					$best_match_score = $fellow_matches;
 				}
 			} 
 		} else {
 			// if this is a free-for all (no criterion) then just match whatever:
-			$matches[$volunteer_key] = $fellow_id;
-			return true;
+			if($fellow_matches < $best_match_score) {
+				// the point here is to make sure people get an opportunity to go
+				$best_match = $fellow_id;
+				$best_match_score = $fellow_matches;
+			}
 		}
+	}
+
+	if($best_match) {
+		$matches[$volunteer_key] = $best_match;
+		return true;
 	}
 
 	// only option is a repeat, allow as last resort
