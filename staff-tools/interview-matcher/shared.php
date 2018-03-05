@@ -13,6 +13,7 @@ function bz_show_proposed_matches($show_button = true) {
 	global $volunteers;
 	global $fellows;
 	global $event_id;
+	global $match_history;
 
 //echo "<pre>"; print_r($matches); echo "</pre>";
 
@@ -39,7 +40,18 @@ function bz_show_proposed_matches($show_button = true) {
 					<tr class="<?php echo ($volunteers[$volunteer_key]['vip']) ? 'vip' : ''; // Use VIP status to style the row ?>">
 						<td><?php echo $volunteers[$volunteer_key]['number']; ?></td>
 						<td class="name"><?php echo $volunteers[$volunteer_key]['name']; ?></td>
-						<td data-volunteer-id="<?php echo $volunteer_key; ?>"><div data-fellow-id="<?php echo $fellow_key;?>"><?php echo $fellows[$fellow_key]['name']; ?></div></td>
+						<td data-volunteer-matches="<?php
+							$first_written = true;
+							foreach($match_history as $match_array)
+							foreach($match_array as $match_pair)
+							foreach($match_pair as $lvid => $lfid)
+								if($lvid == $volunteer_key) {
+									if(!$first_written)
+										echo ",";
+									$first_written = false;
+									echo $lfid;
+								}
+						?>" data-volunteer-id="<?php echo $volunteer_key; ?>"><div data-fellow-id="<?php echo $fellow_key;?>"><?php echo $fellows[$fellow_key]['name']; ?></div></td>
 						<td><div><?php echo $fellows[$fellow_key]['score']; ?></div></td>
 						<td><div><?php bz_list_items($fellows[$fellow_key]['interests']); ?></div></td>
 						<td><?php bz_list_items($volunteers[$volunteer_key]['interests']); ?></td>
