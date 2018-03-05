@@ -90,7 +90,11 @@ function save_volunteers_to_database($event_id, $volunteers) {
 		));
 
 		$id = $pdo->lastInsertId();
+		$ints_done = array();
 		foreach($volunteer["interests"] as $interest) {
+			if(isset($ints_done[$interest]))
+				continue;
+			$ints_done[$interest] = true;
 			$interest_statement->execute(array($id, get_interest_id($interest)));
 		}
 	}
@@ -195,12 +199,16 @@ function save_fellows_to_database($event_id, $fellows) {
 		$statement->execute(array(
 			$event_id,
 			$fellow["name"],
-			$fellow["score"],
+			(int) $fellow["score"],
 			$fellow["available"] ? 1 : 0
 		));
 
 		$id = $pdo->lastInsertId();
+		$ints_done = array();
 		foreach($fellow["interests"] as $interest) {
+			if(isset($ints_done[$interest]))
+				continue;
+			$ints_done[$interest] = true;
 			$interest_statement->execute(array($id, get_interest_id($interest)));
 		}
 	}
@@ -312,6 +320,16 @@ function get_event_name($event_id) {
 	$statement = $pdo->prepare("SELECT name FROM events WHERE id = ?");
 	$statement->execute(array($event_id));
 	return $statement->fetch()["name"];
+}
+
+
+///
+function get_events() {
+	global $pdo;
+
+	$statement = $pdo->prepare("SELECT id, name, when_created FROM events ORDER BY when_created");
+	$statement->execute();
+	return $statement->fetchAll();
 }
 
 

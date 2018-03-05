@@ -1,55 +1,219 @@
 <?php
-	include("sso.php");
+	include_once("sso.php");
 	requireLogin();
+
+	include_once("db.php");
+
+	include_once("shared.php");
+
+	$event_id = (int) $_REQUEST["event_id"];
+	if($event_id == 0) {
+		include_once("event_selection.php");
+		show_event_selection_page();
+		exit;
+	}
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
 <title>Braven Mock Interview Matcher</title>
 <link rel="stylesheet" type="text/css" href="style.css">
+<style>
+.inside-dragging {
+	border: dashed 2px black;
+}
+[draggable] {
+	cursor: pointer;
+}
+</style>
 </head>
 <body>
 
 <?php
 
-include("db.php");
-
-$event_id = (int) $_REQUEST["event_id"];
-if($event_id == 0) {
-	echo "NO EVENT LOADED go to preparation.php";
-}
-
 $volunteers = load_volunteers_from_database($event_id);
 $fellows = load_fellows_from_database($event_id);
 $match_history = load_match_history($event_id);
 
-$matches = array();
-
-// We're also going to figure out who's had the most matches so far, so let's start collecting:
-// this can also be done by the db later but for now i am trying to edit as little code in here as i reasonably can
-$fellows_to_count = array();
-//echo "<pre>"; print_r($match_history); die;
-foreach ($match_history as $round => $match_array) {
-	foreach ($match_array as $pair)
-	foreach ($pair as $volunteer_id => $fellow_id) {
-		$fellows_to_count[] = $fellow_id;
+// update last-minute changes, if present
+foreach($volunteers as &$volunteer) {
+	$volunteer_key = $volunteer["id"];
+	if (isset($_POST['vol-'.$volunteer_key.'-available'])) {
+		// See if we have a manually configured availability setting from last time:
+		if ($_POST['vol-'.$volunteer_key.'-available']) {
+			if($volunteer['available'] != true)
+				save_volunteer_availability_to_database($volunteer_key, true);
+			$volunteer['available'] = true;
+		} else {
+			// if the box is unchecked 
+			if($volunteer['available'] != false)
+				save_volunteer_availability_to_database($volunteer_key, false);
+			$volunteer['available'] = false;
+		}
+	}
+	if (isset($_POST['vol-'.$volunteer_key.'-number'])) {
+		if($volunteer['number'] != $_POST['vol-'.$volunteer_key.'-number'])
+			save_volunteer_number_to_database($volunteer_key, $_POST['vol-'.$volunteer_key.'-number']);
+		$volunteer['number'] = $_POST['vol-'.$volunteer_key.'-number'];
 	}
 }
+unset($volunteer);
 
-// Count how many times each fellow was matched and get the max number so far:
-$fellow_match_counts = array_count_values($fellows_to_count);
-$most_matches_so_far = max($fellow_match_counts);
+foreach($fellows as &$fellow) {
+	$fellow_key = $fellow["id"];
+
+	if (isset($_POST['fellow-'.$fellow_key.'-available'])) {
+		// See if we have a manually configured availability setting from last time:
+		if ($_POST['fellow-'.$fellow_key.'-available']) {
+			save_fellow_availability_to_database($fellow_key, true);
+			$fellow['available'] = true;
+			$fellow_available = 'checked';
+		} else {
+			// if the box is unchecked 
+			save_fellow_availability_to_database($fellow_key, false);
+			$fellow['available'] = false;
+			$fellow_available = '';
+		}
+	}
+}
+unset($fellow);
+
+// calculate necessary stats
+
+$matches = array();
+
+function fellow_was_matched_in_previous_round($fellow_id_to_check) {
+	global $match_history;
+	$previous_round = 0;
+	foreach ($match_history as $round => $match_array) {
+		$previous_round = $round;
+	}
+
+	foreach ($match_history[$previous_round] as $pair)
+	foreach ($pair as $volunteer_id => $fellow_id) {
+		if($fellow_id == $fellow_id_to_check)
+			return true;
+	}
+
+	return false;
+}
+
+function current_round_number() {
+	global $match_history;
+	$count = 1;
+	foreach ($match_history as $match_array) {
+		$count++;
+	}
+
+	return $count;
+}
+
+function times_fellow_matched_historically($fellow_id_to_check) {
+	global $match_history;
+	$count = 0;
+	foreach ($match_history as $match_array) {
+		foreach ($match_array as $pair)
+		foreach ($pair as $volunteer_id => $fellow_id) {
+			if($fellow_id == $fellow_id_to_check)
+				$count++;
+		}
+	}
+
+	return $count;
+}
+
+function special_score_sort($a, $b) {
+	global $fellows;
+	return $fellows[$b[0]]["score"] - $fellows[$a[0]]["score"];
+}
+
+/// returns array of array(id, score (lower is better))
+function get_fellows_by_matching_priority($fellows, $for_vips) {
+	global $matches;
+
+	$fellows_by_matching_priority = array();
+
+	/*
+		The way this works is we make a list of fellows to match in this order.
+
+		First are those who have had the least amount of interview opportunities so far.
+		Among them, the score is highest (if called for vips) or random shuffled (everyone else).
+
+		But if they were matched in the previous round, it always puts them at the bottom of the list...
+		unless they are two behind. Then I'll allow it to catch up.
+
+		If they were already matched in this round, they are right out.
+
+		FIXME: virtual and in person opportunities should be evenly distributed, if possible
+			we prioritize live, fall back to virtual if they already had a live one
+
+		Make sure people aren't matched to the same vol again.
+	*/
+	$lowest_thing = 9999;
+	$interview_count_buckets = array();
+	foreach($fellows as $fellow) {
+		if(!$fellow["available"])
+			continue;
+		$matched_this_round = in_array($fellow['id'], $matches);
+		if($matched_this_round)
+			continue;
+		$penalty = 0;
+		if(fellow_was_matched_in_previous_round($fellow["id"])) {
+			// we want to avoid matching in two consecutive rounds, so they are given a sorting
+			// penalty, putting them a bit lower on the list to give other people a chance to
+			// catch up
+			if(current_round_number() < 4)
+				$penalty = 2; // rounds 1,2,3 really don't try to do back-to-back
+			else
+				$penalty = 1; // but for the final rounds, give people an easier chance to catch up, allowing back-to-back more easily
+		}
+
+		$c = times_fellow_matched_historically($fellow["id"]);
+		$c += $penalty;
+
+		if($c < $lowest_thing)
+			$lowest_thing = c;
+
+		if(!isset($interview_count_buckets[$c]))
+			$interview_count_buckets[$c] = array();
+		$interview_count_buckets[$c][] = array($fellow["id"], $c);
+	}
+
+	// I'm not sure if php arrays always come in numeric order or insertion
+	// order, so i am explicitly sorting now because this must happen to keep
+	// the low-opportunity people at the top
+	$keys = array_keys($interview_count_buckets);
+	sort($keys);
+	foreach($keys as $bucket_id) {
+		$bucket = $interview_count_buckets[$bucket_id];
+		// and the internal sort varies - vips are done by score, others are randomized.
+		if($for_vips) {
+			usort($bucket, 'special_score_sort');
+		} else {
+			shuffle($bucket);
+		}
+		$fellows_by_matching_priority = array_merge($fellows_by_matching_priority, $bucket);
+	}
+
+	// normalize all so zero is lowest match count
+	foreach($fellows_by_matching_priority as &$f) {
+		$f[1] -= $lowest_thing;
+	}
+	unset($f);
+
+	return $fellows_by_matching_priority;
+}
 
 
-// TODO: MAKE A SIMILAR AVAILABILITY FORM FOR FELLOWS AS WELL
-
+// and now display the info table
 ?>
 
-<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
+<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?" . htmlspecialchars($_SERVER['QUERY_STRING']);?>#matches" method="post">
 	<input type="hidden" name="event_id" value="<?php echo htmlentities($event_id); ?>" />
 	<?php
 	if(!empty($volunteers)) {
 		// sort volunteers alphabetically and display them so staff can quickly check who's there and who isn't, update station number, etc.:
-		$volunteers = bz_sort_desc_by($volunteers, 'name', SORT_ASC);
+		$volunteers_sorted = bz_sort_desc_by($volunteers, 'name', SORT_ASC);
 		?>
 		<table>
 			<caption>Volunteers</caption>
@@ -62,35 +226,14 @@ $most_matches_so_far = max($fellow_match_counts);
 			</thead>
 			<tbody>
 				<?php
-				foreach ($volunteers as &$volunteer) {
+				foreach ($volunteers_sorted as $volunteer)
+				{
 					$volunteer_key = $volunteer["id"];
-					?>
+				?>
 					<tr id="vol-<?php echo $volunteer_key; ?>" class="<?php echo ($volunteer['vip']) ? 'vip' : ''; ?>">
 
 						<?php
-
-						if (isset($_POST['vol-'.$volunteer_key.'-available'])) {
-							// See if we have a manually configured availability setting from last time:
-							if ($_POST['vol-'.$volunteer_key.'-available']) {
-									if($volunteer['available'] != true)
-										save_volunteer_availability_to_database($volunteer_key, true);
-									$volunteer['available'] = true;
-									$volunteer_available = 'checked';
-								} else {
-									// if the box is unchecked 
-									if($volunteer['available'] != false)
-										save_volunteer_availability_to_database($volunteer_key, false);
-									$volunteer['available'] = false;
-									$volunteer_available = '';
-								}
-						} else if (isset($volunteer['available'])) {
-							// Otherwise use what was originally set in the imported data:
 							$volunteer_available = ($volunteer['available']) ? 'checked' : '';
-						} else {
-							// And if that wasn't defined, just mark as unavailable:
-							$volunteer_available = '';
-						}						
-
 						?>
 
 						<td class="available">
@@ -98,29 +241,22 @@ $most_matches_so_far = max($fellow_match_counts);
 							<input type="checkbox" value="1" name="vol-<?php echo $volunteer_key; ?>-available" <?php echo ($volunteer_available);?>></td>
 						<td class="name"><?php echo $volunteer['name'];?></td>
 						<td class="number">
-							<?php
-							if (isset($_POST['vol-'.$volunteer_key.'-number'])) {
-								if($volunteer['number'] != $_POST['vol-'.$volunteer_key.'-number'])
-									save_volunteer_number_to_database($volunteer_key, $_POST['vol-'.$volunteer_key.'-number']);
-								$volunteer['number'] = $_POST['vol-'.$volunteer_key.'-number'];
-							}
-							?>
-							<input type="text" name="vol-<?php echo $volunteer_key; ?>-number" value="<?php echo $volunteer['number'];?>" />
+							<input type="text" name="vol-<?php echo $volunteer_key; ?>-number" value="<?php echo htmlspecialchars($volunteer['number']);?>" />
 						</td>
 						
 					</tr>
-					<?php
+				<?php
 				}
 				?>
 			</tbody>
 		</table>
-		<?php
+	<?php
 	}
 
 	if(!empty($fellows)) {
 		// sort fellows alphabetically and display them so staff can quickly check who's there and who isn't, update station number, etc.:
-		$fellows = bz_sort_desc_by($fellows, 'name', SORT_ASC);
-		?>
+		$fellows_sorted = bz_sort_desc_by($fellows, 'name', SORT_ASC);
+	?>
 		<table>
 			<caption>Fellows</caption>
 			<thead>
@@ -133,33 +269,13 @@ $most_matches_so_far = max($fellow_match_counts);
 			<tbody>
 				<?php
 
-				foreach ($fellows as &$fellow) {
+				foreach ($fellows_sorted as $fellow) {
 					$fellow_key = $fellow["id"];
-					?>
+				?>
 					<tr id="fellow-<?php echo $fellow_key; ?>">
 
 						<?php
-
-						if (isset($_POST['fellow-'.$fellow_key.'-available'])) {
-							// See if we have a manually configured availability setting from last time:
-							if ($_POST['fellow-'.$fellow_key.'-available']) {
-									save_fellow_availability_to_database($fellow_key, true);
-									$fellow['available'] = true;
-									$fellow_available = 'checked';
-								} else {
-									// if the box is unchecked 
-									save_fellow_availability_to_database($fellow_key, false);
-									$fellow['available'] = false;
-									$fellow_available = '';
-								}
-						} else if (isset($fellow['available'])) {
-							// Otherwise use what was originally set in the imported data:
-							$fellow_available = ($fellow['available']) ? 'checked' : '';
-						} else {
-							// And if that wasn't defined, just mark as unavailable:
-							$fellow_available = '';
-						}						
-
+						$fellow_available = ($fellow['available']) ? 'checked' : '';
 						?>
 
 						<td class="available">
@@ -169,17 +285,13 @@ $most_matches_so_far = max($fellow_match_counts);
 						<td class="score"><?php echo $fellow['score'];?></td>
 						
 					</tr>
-					<?php
+				<?php
 				}
 				?>
 			</tbody>
 		</table>
-		<?php
+	<?php
 	}
-
-
-
-
 	?>
 	<br>
 	<input type="submit" value="Match!">
@@ -187,239 +299,245 @@ $most_matches_so_far = max($fellow_match_counts);
 <br>
 
 <?php
+/* ************************************************* */
+/*  End availability tables */
+/* ************************************************* */
+?>
+
+<?php
+
+//echo "<pre>"; print_r($match_history); die;
 
 // Sort the fellows and volunteers by VIP status
 
-$volunteers = bz_sort_desc_by($volunteers);
-$fellows = bz_sort_desc_by($fellows, 'score');
-
 // Display some stats:
 $filter = array(true);
-$available_vols = array_filter($volunteers, function($e) use ($filter){
-    return in_array($e['available'], $filter);
-});
-echo 'We have '.count($available_vols).' volunteers and '.count($fellows).' Fellows.<br>'; 
+$available_vols = 0;
+foreach($volunteers as $v) if($v["available"]) $available_vols++;
+$available_fellows = 0;
+foreach($fellows as $v) if($v["available"]) $available_fellows++;
+echo "We have $available_vols volunteers and $available_fellows Fellows.<br>"; 
+echo "Proposing for round ".current_round_number()."...";
 
 ?>
 
 <?php
 
-bz_match_volunteers();
+bz_match_volunteers($fellows);
 
-function bz_match_volunteers() {
+function bz_match_volunteers($fellows) {
 	// Iteration 1: Run through volunteers and match each one with a fellow:
 
 	global $volunteers;
 	global $matches;
-	global $fellows;
 	global $match_history;
 
-	foreach ($volunteers as &$volunteer) {
-		$volunteer_key = $volunteer["id"];
-		
-		if($volunteer['available']) {
-			bz_match_with_fellow($volunteer, 'interests');
+	$volunteers_sorted = bz_sort_desc_by($volunteers);
+
+	// vip first by score + interest
+	$priorized_fellows = get_fellows_by_matching_priority($fellows, true);
+
+	foreach ($volunteers_sorted as $volunteer) {
+		if($volunteer['available'] && $volunteer['vip']) {
+			bz_match_with_fellow($priorized_fellows, $volunteer, 'interests');
 		} 
 	}
-	// Destroy the foreach reference: 
-	unset($volunteer);
 
-	/* Iteration 2: Run again for all unmatched volunteers, but first shuffle the fellows to avoid biasing toward stronger fellows: */
+	$priorized_fellows = get_fellows_by_matching_priority($fellows, false);
 
-	shuffle($fellows);
+	// non-vip by interests
+	foreach ($volunteers_sorted as $volunteer) {
+		$volunteer_key = $volunteer["id"];
 
-	foreach ($volunteers as &$volunteer) {
+		if(!array_key_exists($volunteer_key, $matches) 
+			&& !$volunteer['vip']
+			&& $volunteer['available']) {
+			bz_match_with_fellow($priorized_fellows, $volunteer, 'interests');
+		} 
+	}
+
+	$priorized_fellows = get_fellows_by_matching_priority($fellows, true);
+	// vip by score, non-matching interests
+	foreach ($volunteers_sorted as $volunteer) {
+		$volunteer_key = $volunteer["id"];
+		if($volunteer['available'] && $volunteer['vip']) {
+			if(!array_key_exists($volunteer_key, $matches))
+				bz_match_with_fellow($priorized_fellows, $volunteer);
+		} 
+	}
+
+	$priorized_fellows = get_fellows_by_matching_priority($fellows, false);
+
+	// then random to fall back on remaining
+	foreach ($volunteers_sorted as $volunteer) {
 		$volunteer_key = $volunteer["id"];
 
 		if(!array_key_exists($volunteer_key, $matches) 
 			&& $volunteer['available']) {
-			bz_match_with_fellow($volunteer);
+			bz_match_with_fellow($priorized_fellows, $volunteer);
 		} 
 	}
-	// Destroy the foreach reference: 
-	unset($volunteer);
+
 
 	// Display the proposed matches:
 	bz_show_proposed_matches();
 
 	// Restore the score-based sorting of the fellows (we shuffled them for iteration 2):
 	//$fellows = bz_sort_desc_by($fellows, 'score');
-
-
 }
 
-function bz_match_with_fellow($volunteer, $match_by = null) {
+function matched_any_round_historically($fellow_id_to_check, $volunteer_id_to_check) {
+	global $match_history;
+	foreach ($match_history as $match_array) {
+		foreach ($match_array as $pair)
+		foreach ($pair as $volunteer_id => $fellow_id) {
+			if($fellow_id == $fellow_id_to_check && $volunteer_id == $volunteer_id_to_check)
+				$count++;
+		}
+	}
+
+	return $count;
+
+	return false;
+}
+
+function bz_match_with_fellow($fellows_to_consider, $volunteer, $match_by = null) {
 	
 	// Find next available Fellow that matches criteria:
 
 	global $matches;
-	global $match_history;
 	global $fellows;
 	global $volunteers;
-	global $fellow_match_counts;
-	global $most_matches_so_far;
+
+	$best_match = 0;
+	$best_match_score = 999; // lower is better
 
 	$volunteer_key = $volunteer["id"];
+	$repeat_key = null;
+	foreach($fellows_to_consider as $fellow_info) {
+		$fellow_id = $fellow_info[0];
+		$fellow_matches = $fellow_info[1];
 
-	$available_fellows = array();
-	foreach ($fellows as $fk => &$fv) {
-		if ($fv['available'])
-			$available_fellows[$fv['UUID']] = $fv;
-	}
-	$available_fellow_match_counts = array_intersect_key($fellow_match_counts, $available_fellows);
-	// set the other available folks to zero to avoid the min skipping people who were not matched yet
-	foreach($available_fellows as $fellow)
-		if(!isset($available_fellow_match_counts[$fellow["id"]]))
-			$available_fellow_match_counts[$fellow["id"]] = 0;
+		$matched_this_round = in_array($fellow_id, $matches);
+		if($matched_this_round)
+			continue;
 
-	foreach($fellows as $fellow_key => &$fellow) {
-		// figure out whether Fellow has already been matched earlier this round:
-		$matched_this_round = in_array($fellow['UUID'], $matches);
-		// and whether this Fellow was matched to this volunteer before:
-		$matched_to_this_volunteer_before = false;
-		$this_pair = array($volunteer_key => $fellow['UUID']);
-		foreach ($match_history as $round_key => $round_matches) {
-			// Iterate through all past matches to find this pair:
-			if ( !empty( array_intersect_assoc( $round_matches[0], $this_pair ) ) ) {
-				$matched_to_this_volunteer_before = true;
-			}
+		if(matched_any_round_historically($fellow_id, $volunteer_key)) {
+			$repeat_key = $fellow_id;
+			continue;
 		}
 
-		// Make it so each Fellow is matched at least N times before anyone gets to be matched N+1 times. 
+		if ($match_by) {
+			// If we're matching by criterion, need to make sure the following applies as well:
+			if (!empty(array_intersect($volunteer[$match_by], $fellows[$fellow_id][$match_by]))) {
+				// if we can find an available fellow with matching interests, make the match:
 
-		$not_over_max = false;
-
-		if (
-			// not already matched
-			!isset($fellow_match_counts[$fellow['UUID']]) ||
-			// or matched less than the max
-			$fellow_match_counts[$fellow['UUID']] < max($available_fellow_match_counts) ||
-			// or everyone has been matched the same number
-			min($available_fellow_match_counts) == max($available_fellow_match_counts)
-		)
-		{
-				
-			$not_over_max = true;
-				
-		}
-
-		// and whether they're even available:
-		$fellow_available = $fellow['available'];
-
-		if (!$matched_this_round 
-			&& !$matched_to_this_volunteer_before 
-			&& $not_over_max
-			&& $fellow_available
-
-			// TODO: If optimization is needed, I'm sure we can cascade the above filters so we don't run through all fellows several times.
-
-			) {
-			// We already know the volunteer is available otherwise this function wouldn't have been called.
-
-			if ($match_by) {
-				// If we're matching by criterion, need to make sure the following applies as well:
-				if (array_intersect($volunteer[$match_by], $fellow[$match_by])) {
-					// if we can find an available fellow with matching interests, make the match:
-
-					$matches[$volunteer_key] = $fellow['UUID'];
-
-					// increment the match count so we can avoid over-/under-matching fellows
-					// TODO: This is a vestigial feature, should probably be merged with whatever we use to count match history, or renamed to avoid confusion.
-					$fellow['match_count'] ++;
-					break;
-				} 
-			} else {
-				// if this is a free-for all (no criterion) then just match whatever:
-				$matches[$volunteer_key] = $fellow['UUID'];
-				$fellow['match_count'] ++;
-				break;
-
+				$fellow_matches -= 0.5; // slightly bias toward interest matches
+				if($fellow_matches <= 0 && $fellow_matches < $best_match_score) {
+					$best_match = $fellow_id;
+					$best_match_score = $fellow_matches;
+				}
+			} 
+		} else {
+			// if this is a free-for all (no criterion) then just match whatever:
+			if($fellow_matches < $best_match_score) {
+				// the point here is to make sure people get an opportunity to go
+				$best_match = $fellow_id;
+				$best_match_score = $fellow_matches;
 			}
 		}
 	}
-	// Destroy the foreach reference:
-	unset($fellow);
 
+	if($best_match) {
+		$matches[$volunteer_key] = $best_match;
+		return true;
+	}
+
+	// only option is a repeat, allow as last resort
+	//if($repeat_key)
+		//$matches[$volunteer_key] = $repeat_key;
+
+	return false;
 }
 
 function bz_sort_desc_by($array, $criterion = 'vip', $direction = SORT_DESC) {
 	array_multisort(array_column($array, $criterion), $direction, $array);
 	return $array;
 }
-	 
-function bz_list_items($array) {
-	echo '<ul>';
-	foreach ($array as $key => $value) {
-		echo '<li>'.$value.'</li>';
-	}
-	echo '</ul>';
-}
-
-function bz_show_proposed_matches() {
-	global $matches;
-	global $volunteers;
-	global $fellows;
-	global $event_id;
-
-
-	if (!empty($matches)) {
-		echo '<h2>Matches:</h2>';
-		echo '<br>';
-
-		?>
-		<table id="proposed-matches">
-			<thead>
-				<tr>
-					<th>Station/Number</th>
-					<th>Interviewer</th>
-					<th>Fellow</th>
-					<th>Fellow Score</th>
-					<th>Fellow Interests</th>
-					<th>Interviewer Fields</th>
-				</tr>
-			</thead>
-			<tbody>
-				<?php
-				foreach ($matches as $volunteer_key => $fellow_ID) {
-					// Figure out who the fellow is:
-					$fellow_key = array_search($fellow_ID, array_column($fellows, 'UUID'));
-					$volunteer_key = array_search($volunteer_key, array_column($volunteers, 'id'));
-
-					?>
-					<tr class="<?php echo ($volunteers[$volunteer_key]['vip']) ? 'vip' : ''; // Use VIP status to style the row ?>">
-						<td><?php echo $volunteers[$volunteer_key]['number']; ?></td>
-						<td class="name"><?php echo $volunteers[$volunteer_key]['name']; ?></td>
-						<td><?php echo $fellows[$fellow_key]['name']; ?></td>
-						<td><?php echo $fellows[$fellow_key]['score']; ?></td>
-						<td><?php bz_list_items($fellows[$fellow_key]['interests']); ?></td>
-						<td><?php bz_list_items($volunteers[$volunteer_key]['interests']); ?></td>
-					</tr>
-					<?php
-				}
-				?>
-			</tbody>
-		</table>
-		<br>
-		<?php
-		?>
-
-		<form action="match-history-saver.php" method="post">
-			<input type="hidden" name="event_id" value="<?php echo htmlentities($event_id); ?>" />
-			<?php
-			foreach ($matches as $volunteer_key => $fellow_ID) {
-				$volunteer_key = array_search($volunteer_key, array_column($volunteers, 'id'));
-				$vid = $volunteers[$volunteer_key]["id"];
-				echo "<input type=\"hidden\" name=\"matches[$vid]\" value=\"{$fellow_ID}\" />";
-			}
-			?>
-			<input type="submit" value="Finalize match!">
-		</form>
-		<?php
-
-	} else {
-		echo '<h2>No matches possible</h2>';
-	}
-}
 ?>	
+
+
+<script>
+	function swapNodeChild(a, b) {
+		var c1 = a.firstChild;
+		var c2 = b.firstChild;
+		a.removeChild(c1);
+		b.removeChild(c2);
+		a.appendChild(c2);
+		b.appendChild(c1);
+	}
+
+	var pm = document.getElementById("proposed-matches");
+	if(pm) {
+		var fellows = pm.querySelectorAll("[data-fellow-id]");
+		var currentlyDragging;
+		for(var i = 0; i < fellows.length; i++) {
+			var f = fellows[i];
+			f.setAttribute("draggable", "true");
+
+			f.addEventListener("dragstart", function(event) {
+				event.dataTransfer.setData("Text", event.target.getAttribute("data-fellow-id"));
+				currentlyDragging = this;
+			});
+
+			f.parentNode.addEventListener("dragenter", function(event) {
+				event.preventDefault();
+				this.className += " inside-dragging";
+			});
+			f.parentNode.addEventListener("dragleave", function(event) {
+				this.className = this.className.replace(" inside-dragging", "");
+			});
+			f.parentNode.addEventListener("dragover", function(event) {
+				event.preventDefault();
+			});
+			f.parentNode.addEventListener("drop", function(event) {
+				event.preventDefault();
+				event.stopPropagation();
+				this.className = this.className.replace(" inside-dragging", "");
+
+				if(this == currentlyDragging.parentNode)
+					return; // drop back in itself, no work needed
+
+				// change the form value (this is what counts!)
+				document.querySelector("input[data-vid=\"" + this.getAttribute("data-volunteer-id") + "\"]").
+					value = currentlyDragging.getAttribute("data-fellow-id");
+				document.querySelector("input[data-vid=\"" + currentlyDragging.parentNode.getAttribute("data-volunteer-id") + "\"]").
+					value = this.firstChild.getAttribute("data-fellow-id");
+
+				// and update the UI so people know what is going on
+
+				// the fellow name field
+				var toSwap = this.firstChild;
+				this.removeChild(this.firstChild);
+				var oldParent = currentlyDragging.parentNode;
+				currentlyDragging.parentNode.removeChild(currentlyDragging);
+				this.appendChild(currentlyDragging);
+				oldParent.appendChild(toSwap);
+
+				// the score field
+				var n = this.nextElementSibling;
+				var n2 = oldParent.nextElementSibling;
+				swapNodeChild(n, n2);
+
+				// the interests field
+				n = n.nextElementSibling;
+				n2 = n2.nextElementSibling;
+				swapNodeChild(n, n2);
+
+				currentlyDragging = null;
+			});
+		}
+	}
+</script>
 </body>
 </html>
