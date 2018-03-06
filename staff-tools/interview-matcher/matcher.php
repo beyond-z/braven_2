@@ -25,6 +25,9 @@
 [draggable] {
 	cursor: pointer;
 }
+.double-interview {
+	color: red !important;
+}
 </style>
 </head>
 <body>
@@ -165,7 +168,7 @@ function get_fellows_by_matching_priority($fellows, $for_vips) {
 			if(current_round_number() < 4)
 				$penalty = 2; // rounds 1,2,3 really don't try to do back-to-back
 			else
-				$penalty = 1; // but for the final rounds, give people an easier chance to catch up, allowing back-to-back more easily
+				$penalty = 0; // but for the final rounds, give people an easier chance to catch up, allowing back-to-back more easily
 		}
 
 		$c = times_fellow_matched_historically($fellow["id"]);
@@ -477,6 +480,31 @@ function bz_sort_desc_by($array, $criterion = 'vip', $direction = SORT_DESC) {
 		b.appendChild(c1);
 	}
 
+	function warnOnDoubled(p) {
+		var c = p.firstChild;
+		var existingMatches = p.getAttribute("data-volunteer-matches");
+		if(existingMatches != null && existingMatches != "")
+			existingMatches = existingMatches.split(",");
+		else
+			existingMatches = [];
+
+		var hadMatch = false;
+		for(var i = 0; i < existingMatches.length; i++) {
+			if(existingMatches[i] == c.getAttribute("data-fellow-id")) {
+				hadMatch = true;
+				alert(existingMatches[i]+ " == "+ c.getAttribute("data-fellow-id"));
+				break;
+			}
+		}
+
+		if(hadMatch)
+			p.parentNode.classList.add("double-interview");
+		else
+			p.parentNode.classList.remove("double-interview");
+	}
+
+
+
 	var pm = document.getElementById("proposed-matches");
 	if(pm) {
 		var fellows = pm.querySelectorAll("[data-fellow-id]");
@@ -533,6 +561,9 @@ function bz_sort_desc_by($array, $criterion = 'vip', $direction = SORT_DESC) {
 				n = n.nextElementSibling;
 				n2 = n2.nextElementSibling;
 				swapNodeChild(n, n2);
+
+				warnOnDoubled(this);
+				warnOnDoubled(oldParent);
 
 				currentlyDragging = null;
 			});
