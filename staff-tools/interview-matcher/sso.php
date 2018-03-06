@@ -12,6 +12,8 @@ function bz_current_full_url() {
 	$url .= "://";
 	$url .= $_SERVER["HTTP_HOST"];
 	$url .= $_SERVER["PHP_SELF"];
+	$url .= "?";
+	$url .= $_SERVER["QUERY_STRING"];
 	return $url;
 }
 

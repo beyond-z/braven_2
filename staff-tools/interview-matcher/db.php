@@ -83,17 +83,49 @@ function save_volunteers_to_database($event_id, $volunteers) {
 		$statement->execute(array(
 			$event_id,
 			$volunteer["name"],
-			$volunteer["vip"],
-			$volunteer["available"],
-			$volunteer["virtual"],
+			$volunteer["vip"] ? 1 : 0,
+			$volunteer["available"] ? 1 : 0,
+			$volunteer["virtual"] ? 1 : 0,
 			$volunteer["number"]
 		));
 
 		$id = $pdo->lastInsertId();
+		$ints_done = array();
 		foreach($volunteer["interests"] as $interest) {
+			$interest = trim(strtolower($interest));
+			if($interest == "" || isset($ints_done[$interest]))
+				continue;
+			$ints_done[$interest] = true;
 			$interest_statement->execute(array($id, get_interest_id($interest)));
 		}
 	}
+}
+
+/**
+	Updates the availability for an existing volunteer.
+*/
+function save_volunteer_availability_to_database($volunteer_id, $is_available) {
+	global $pdo;
+	$statement = $pdo->prepare("UPDATE volunteers SET available = ? WHERE id = ?");
+	$statement->execute(array($is_available ? 1 : 0, $volunteer_id));
+}
+
+/**
+	Updates the number field for an existing volunteer.
+*/
+function save_volunteer_number_to_database($volunteer_id, $number) {
+	global $pdo;
+	$statement = $pdo->prepare("UPDATE volunteers SET contact_number = ? WHERE id = ?");
+	$statement->execute(array($number, $volunteer_id));
+}
+
+/**
+	Updates the availability for an existing fellow.
+*/
+function save_fellow_availability_to_database($fellow_id, $is_available) {
+	global $pdo;
+	$statement = $pdo->prepare("UPDATE fellows SET available = ? WHERE id = ?");
+	$statement->execute(array($is_available ? 1 : 0, $fellow_id));
 }
 
 /**
@@ -168,12 +200,18 @@ function save_fellows_to_database($event_id, $fellows) {
 		$statement->execute(array(
 			$event_id,
 			$fellow["name"],
-			$fellow["score"],
-			$fellow["available"]
+			(int) $fellow["score"],
+			$fellow["available"] ? 1 : 0
 		));
 
 		$id = $pdo->lastInsertId();
+		$ints_done = array();
 		foreach($fellow["interests"] as $interest) {
+			$interest = trim(strtolower($interest));
+			if($interest == "" || isset($ints_done[$interest]))
+				continue;
+			$ints_done[$interest] = true;
+
 			$interest_statement->execute(array($id, get_interest_id($interest)));
 		}
 	}
@@ -285,6 +323,16 @@ function get_event_name($event_id) {
 	$statement = $pdo->prepare("SELECT name FROM events WHERE id = ?");
 	$statement->execute(array($event_id));
 	return $statement->fetch()["name"];
+}
+
+
+///
+function get_events() {
+	global $pdo;
+
+	$statement = $pdo->prepare("SELECT id, name, when_created FROM events ORDER BY when_created");
+	$statement->execute();
+	return $statement->fetchAll();
 }
 
 

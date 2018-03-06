@@ -1,8 +1,8 @@
 <?php
-	include("sso.php");
+	include_once("sso.php");
 	requireLogin();
 
-	include("db.php");
+	include_once("db.php");
 
 	try {
 		$fellows = array();
@@ -13,10 +13,12 @@
 				$rowNumber++;
 				if($rowNumber == 1)
 					continue; // skipping header
+				if(empty(trim($data[0])))
+					continue;
 				$fellow = array(
 					"name" => trim($data[0]),
 					"score" => trim($data[1]),
-					"available" => trim($data[2]) == "true",
+					"available" => strtolower(trim($data[2])) == "true",
 					"interests" => array_map("trim", explode(";", $data[3]))
 				);
 
@@ -31,11 +33,13 @@
 				$rowNumber++;
 				if($rowNumber == 1)
 					continue; // skipping header
+				if(empty(trim($data[0])))
+					continue;
 				$volunteer = array(
 					"name" => trim($data[0]),
-					"vip" => trim($data[1]) == "true",
-					"available" => trim($data[2]) == "true",
-					"virtual" => trim($data[3]) == "true",
+					"vip" => (strtolower(trim($data[1])) == "true" || strtolower(trim($data[1])) == "vip"),
+					"available" => strtolower(trim($data[2])) == "true",
+					"virtual" => strtolower(trim($data[3])) == "true",
 					"number" => trim($data[4]),
 					"interests" => array_map("trim", explode(";", $data[5]))
 				);
