@@ -23,7 +23,7 @@
 		}
 ?>
 	<br />
-	<a href="event-preparation.php">Prepare a New Event</a>
+	<a href="preparation.php">Prepare a New Event</a>
 </body>
 </html><?php
 	}
