@@ -35,7 +35,8 @@
 					$results[] = array (
 						"room" => $volunteers[$volunteer_id]["number"],
 						"volunteer" => $volunteers[$volunteer_id]["name"],
-						"fellow" => $fellows[$fellow_id]["name"]
+						"fellow" => $fellows[$fellow_id]["name"],
+						"interests" => join($fellows[$fellow_id]["interests"], ", ")
 					);
 				}
 			}
@@ -82,6 +83,7 @@ $displays = array(
 			'fellow' => 'Fellow',
 			'room' => 'Room / Station / Number',
 			'volunteer' => 'Volunteer',
+			'interests' => 'Fellow Career Interests'
 		),
 	),
 	array(
@@ -91,6 +93,7 @@ $displays = array(
 			'room' => 'Room / Station / Number',
 			'volunteer' => 'Volunteer',
 			'fellow' => 'Fellow',
+			'interests' => 'Fellow Career Interests'
 		),
 	),
 );
@@ -102,7 +105,7 @@ foreach ($displays as $display_key => $display) {
 	foreach ($columns as $column_key => $column) {
 		usort($results, function ($item1, $item2) {
 			global $column_key;
-		    return strcmp($item1["$column_key"], $item2["$column_key"]);
+		    return strnatcasecmp($item1["$column_key"], $item2["$column_key"]);
 		});
 	}
 
