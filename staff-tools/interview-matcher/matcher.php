@@ -395,13 +395,26 @@ function matched_any_round_historically($fellow_id_to_check, $volunteer_id_to_ch
 		foreach ($match_array as $pair)
 		foreach ($pair as $volunteer_id => $fellow_id) {
 			if($fellow_id == $fellow_id_to_check && $volunteer_id == $volunteer_id_to_check)
+				return true;
+		}
+	}
+
+	return false;
+}
+
+function fellow_matched_virtual_count_historically($fellow_id_to_check) {
+	global $match_history;
+	global $volunteers;
+	$count = 0;
+	foreach ($match_history as $match_array) {
+		foreach ($match_array as $pair)
+		foreach ($pair as $volunteer_id => $fellow_id) {
+			if($fellow_id == $fellow_id_to_check && $volunteers[$volunteer_id]["virtual"])
 				$count++;
 		}
 	}
 
 	return $count;
-
-	return false;
 }
 
 function bz_match_with_fellow($fellows_to_consider, $volunteer, $match_by = null) {
@@ -429,6 +442,11 @@ function bz_match_with_fellow($fellows_to_consider, $volunteer, $match_by = null
 			$repeat_key = $fellow_id;
 			continue;
 		}
+
+		// if this is a virtual interview, we want to bias against it to up the odds of
+		// getting an in-person slot if the fellow has been virtual before
+		if ($volunteer["virtual"])
+			$fellow_matches += 0.2 * fellow_matched_virtual_count_historically($fellow_id);
 
 		if ($match_by) {
 			// If we're matching by criterion, need to make sure the following applies as well:

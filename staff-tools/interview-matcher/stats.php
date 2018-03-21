@@ -135,6 +135,7 @@
 	echo "</dl>";
 
 	echo "<h2>Fellow Matches</h2>";
+	echo "<p>Bold indicates VIP. Italics indicate virtual.</p>";
 	echo "<dl>";
 	foreach($fellows as $fellow) {
 		echo "<dt>".htmlspecialchars($fellow["name"])."</dt>";
@@ -147,7 +148,11 @@
 			if($fid) {
 				if($volunteers[$fid]["vip"])
 					echo "<b>";
+				if($volunteers[$fid]["virtual"])
+					echo "<i>";
 				echo htmlspecialchars($volunteers[$fid]["name"]);
+				if($volunteers[$fid]["virtual"])
+					echo "</i>";
 				if($volunteers[$fid]["vip"])
 					echo "</b>";
 				$had_none = false;

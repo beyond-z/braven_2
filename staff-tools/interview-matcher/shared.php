@@ -31,6 +31,7 @@ function bz_show_proposed_matches($show_button = true) {
 					<th>Fellow Score</th>
 					<th>Fellow Interests</th>
 					<th>Interviewer Fields</th>
+					<th>Virtual</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -55,6 +56,7 @@ function bz_show_proposed_matches($show_button = true) {
 						<td><div><?php echo $fellows[$fellow_key]['score']; ?></div></td>
 						<td><div><?php bz_list_items($fellows[$fellow_key]['interests']); ?></div></td>
 						<td><?php bz_list_items($volunteers[$volunteer_key]['interests']); ?></td>
+						<td><?php echo $volunteers[$volunteer_key]['virtual'] ? "virtual" : "in-person"; ?></td>
 					</tr>
 					<?php
 				}
