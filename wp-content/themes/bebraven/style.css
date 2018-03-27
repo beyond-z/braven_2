@@ -1557,7 +1557,7 @@ body {
 
 .element-text {
 	height: 60%;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 .element-content h3,
@@ -2302,9 +2302,9 @@ h2.plain {
 }
 
 #email-sign-up-form {
-	width: 40vw;
-	height: 40vw;
-	padding: 2.5vw 5vw;
+	width: 45vw;
+	height: 45vw;
+	padding: 2.5vw 2.5vw;
 	background: #6FE0DA;
 	color: #FFF;
 	position: absolute;
@@ -2334,6 +2334,11 @@ h2.plain {
 	border: 0;
 	border-radius: 0;
 	margin: 1.5em auto;
+}
+
+.g-recaptcha,
+.g-recaptcha > div {
+	margin: 0 auto;
 }
 
 .g-recaptcha,
