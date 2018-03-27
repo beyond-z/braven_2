@@ -12,7 +12,7 @@ $thumb = '';
 
 ?>
 <article class="mosaic-element bio has-content">
-	<div class="element-img">
+	<div class="element-img" title="<?php echo get_the_title();?>">
 		<?php 
 		if ( has_post_thumbnail() ) {
 			$thumbatts = array(
@@ -20,10 +20,9 @@ $thumb = '';
 			);
 			$thumb = get_the_post_thumbnail($post->ID, 'headshot', $thumbatts);
 			echo $thumb;
-		} else {
-			echo '<div class="instead-of-img"><h3>'.$post->post_title.'</h3></div>';
-		}
+		} 
 		?>
+		<div class="bio-name-overlay"><h3><?php echo $post->post_title;?></h3></div>
 	</div>
 	<div class="element-content hover-toggle">
 		<div class="close-this">&#x2715;</div>
