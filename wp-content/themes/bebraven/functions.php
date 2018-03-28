@@ -597,7 +597,7 @@ function bz_create_includebios_shortcode($atts) {
 
 			while ( $bios->have_posts() ) {
 				$bios->the_post();
-				include 'single-bio.php';
+				include 'box-bio.php';
 			}
 
 			// Add placeholder empty items to complete the last row if needed:
