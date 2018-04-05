@@ -1690,6 +1690,7 @@ body {
 .bio-name-overlay h3 {
 	display: table-cell;
 	vertical-align: bottom;
+	font-size: 0.8em;
 }
 
 .bio .excerpt ul {
@@ -2115,11 +2116,12 @@ h2.plain {
 }
 
 .single-bio .bio img {
-	width: 50vw;
+	width: 40vw;
 	height: auto;
 	position: absolute;
-	left: 0;
-	top: 0;
+	left: 5vw;
+	top: 2.5vw;
+	border-radius: 25em;
 }
 
 .single-bio .component-content {
@@ -2580,8 +2582,9 @@ h2.plain {
 	}
 	
 	.single-bio .bio img {
-		width: 100%;
+		width: 80%;
 		position: static;
+		margin: 2em 10% 0;
 	} 
 
 	.single-bio .bio .component-content {
@@ -2741,7 +2744,7 @@ h2.plain {
 	}
 
 	.bio h3 {
-		font-size: 1em;
+		font-size: 0.8em;
 	}
 
 	.bio .excerpt {
@@ -2761,6 +2764,8 @@ h2.plain {
 	.boxes .placeholder {
 		display: none;
 	}
+
+
 
 	/* Line under h2 elements: */
 
