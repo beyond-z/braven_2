@@ -34,6 +34,7 @@ Tags:
 	13.2 Component Formats
 	13.3 Mosaic/Bios
 	13.4 Model and Impact
+	13.5 Single Bio
 14.0 Blog and Posts and Search
 15.0 Stats visualization
 97.0 Footer
@@ -873,7 +874,7 @@ a:active,
 	width: 0;
 	height: 0;
 	border-style: solid;
-	border-width: 0 0 2.5vw 2.5vw;
+	border-width: 0 0 1em 1em;
 	border-color: transparent transparent #ffffff transparent;
 
     -o-transition: all 0.3s;
@@ -1236,6 +1237,16 @@ body {
 	margin: 0 auto;
 }
 
+.bio-marquee {
+	height: 20em;
+	background: #222;
+}
+
+.bio-marquee .marquee-title {
+	bottom: 0;
+	left: 4.8vw;
+}
+
 .centered .marquee-title {
 	width: 90vw;
 	left: calc( 50% - 45vw );
@@ -1255,6 +1266,29 @@ body {
 .caption {
 	color: #3BE7DD;
 	text-transform: uppercase;
+}
+
+.bio-marquee .caption {
+	color: #FFF;
+	text-transform: none;
+}
+
+.bio-marquee .caption ul {
+	list-style: none;
+}
+
+.bio-marquee .caption li {
+	margin-left: 0;
+	margin-bottom: 0.25em;
+}
+
+#masthead .bio-marquee .caption a:link,
+#masthead .bio-marquee .caption a:visited {
+	color: #3BE7DD;
+}
+
+#masthead .bio-marquee .caption a:hover {
+	color: #FFF;
 }
 
 .page-alt-color .caption,
@@ -1557,7 +1591,7 @@ body {
 
 .element-text {
 	height: 60%;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 .element-content h3,
@@ -1643,15 +1677,20 @@ body {
 	display: none;
 }
 
-.instead-of-img {
+.bio-name-overlay {
 	display: table;
+	position: absolute;
+	left: 0;
+	bottom: 0;
 	width: 100%;
-	height: 100%;
+	padding: 0.5em 0;
+	background: rgba(243,243,243,0.6);
 }
 
-.instead-of-img h3 {
+.bio-name-overlay h3 {
 	display: table-cell;
-	vertical-align: middle;
+	vertical-align: bottom;
+	font-size: 0.8em;
 }
 
 .bio .excerpt ul {
@@ -2069,6 +2108,36 @@ h2.plain {
 }
 
 /*--------------------------------------------------------------
+13.5 Single Bio
+--------------------------------------------------------------*/
+
+.single-bio .bio {
+	margin-top: 0;
+}
+
+.single-bio .bio img {
+	width: 40vw;
+	height: auto;
+	position: absolute;
+	left: 5vw;
+	top: 2.5vw;
+	border-radius: 25em;
+}
+
+.single-bio .component-content {
+	width: 50vw;
+	position: relative;
+	left: 50vw;
+	padding: 1.5em 5vw 1.5em 1.5em;
+	min-height: 50vw;
+}
+
+.single-bio .component-content p {
+	margin-bottom: 0.5em;
+	line-height: 1.5;
+}
+
+/*--------------------------------------------------------------
 14.0 Blog and Posts and Search
 --------------------------------------------------------------*/
 
@@ -2298,9 +2367,9 @@ h2.plain {
 }
 
 #email-sign-up-form {
-	width: 40vw;
-	height: 40vw;
-	padding: 2.5vw 5vw;
+	width: 45vw;
+	height: 45vw;
+	padding: 2.5vw 2.5vw;
 	background: #6FE0DA;
 	color: #FFF;
 	position: absolute;
@@ -2330,6 +2399,11 @@ h2.plain {
 	border: 0;
 	border-radius: 0;
 	margin: 1.5em auto;
+}
+
+.g-recaptcha,
+.g-recaptcha > div {
+	margin: 0 auto;
 }
 
 .g-recaptcha,
@@ -2493,6 +2567,31 @@ h2.plain {
 		background: #EB3B46;
 	}
 
+	.bio-marquee {
+		padding-top: 7em;
+		height: auto;
+	}
+	
+	.bio-marquee .marquee-title,
+	.bio-marquee .marquee-title * { 
+		background: none;
+	}
+
+	.single-bio .bio {
+		width: 100%;
+	}
+	
+	.single-bio .bio img {
+		width: 80%;
+		position: static;
+		margin: 2em 10% 0;
+	} 
+
+	.single-bio .bio .component-content {
+		width: 100%;
+		position: static;
+	}
+
 	#masthead li {
 		margin: 0.5em 1em 0.5em 2em;
 		padding: 0;
@@ -2513,6 +2612,14 @@ h2.plain {
 		top: 5vw;
 	    z-index: 9999;
 	    cursor: pointer;
+	}
+
+	.bio-marquee ul {
+		margin: 0;
+	}
+
+	#masthead .bio-marquee li {
+		margin: 0.25em 0;
 	}
 
 	#top-nav-btn .bar1, .bar2, .bar3 {
@@ -2637,7 +2744,7 @@ h2.plain {
 	}
 
 	.bio h3 {
-		font-size: 1em;
+		font-size: 0.8em;
 	}
 
 	.bio .excerpt {
@@ -2657,6 +2764,8 @@ h2.plain {
 	.boxes .placeholder {
 		display: none;
 	}
+
+
 
 	/* Line under h2 elements: */
 

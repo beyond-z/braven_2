@@ -128,8 +128,7 @@ get_header();
 						$components_query->the_post();
 						$component_format = (wp_get_post_terms($post->ID, 'format')) ? wp_get_post_terms($post->ID, 'format')[0]->slug : '';
 
-						// NOTE: If you're looking for how the bios are generated, search 
-						// for include-bios in functions.php and for a file called single-bio.php
+						// NOTE: If you're looking for how the bios are generated, search for include-bios in functions.php
 
 
 						// If this sub-page is supposed to show up as a tab with its own components:
