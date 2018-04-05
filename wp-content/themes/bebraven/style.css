@@ -1690,6 +1690,7 @@ body {
 .bio-name-overlay h3 {
 	display: table-cell;
 	vertical-align: bottom;
+	font-size: 0.8em;
 }
 
 .bio .excerpt ul {
