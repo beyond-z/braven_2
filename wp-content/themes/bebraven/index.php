@@ -97,7 +97,7 @@ get_header();
 
 			} else if ( !empty($post) ) {
 
-				if ( $post->post_type == 'page' && $post->post_parent == 0) {
+				if ( $post->post_type == 'page' && $post->post_parent == 0 && !is_home() && !is_front_page() && !is_archive() ) {
 					// If it's some random page like a job posting
 					?>
 					<!-- orphan page -->
