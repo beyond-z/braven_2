@@ -510,7 +510,8 @@ function bz_sort_desc_by($array, $criterion = 'vip', $direction = SORT_DESC) {
 		for(var i = 0; i < existingMatches.length; i++) {
 			if(existingMatches[i] == c.getAttribute("data-fellow-id")) {
 				hadMatch = true;
-				alert(existingMatches[i]+ " == "+ c.getAttribute("data-fellow-id"));
+				//alert(existingMatches[i]+ " == "+ c.getAttribute("data-fellow-id"));
+				alert("This match would put a fellow with the same interviewer twice.");
 				break;
 			}
 		}
