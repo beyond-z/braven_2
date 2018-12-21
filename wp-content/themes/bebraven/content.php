@@ -51,7 +51,7 @@ if ( is_home() || $is_press ) {
 	// Display the image above the content, unless it's a blog post:
 	if ( 'post' != $component_format ) {
 		echo $thumb;
-	} 
+	}
 
 	?>
 	<div class="component-content">
@@ -68,8 +68,12 @@ if ( is_home() || $is_press ) {
 		if ( 'post' == $component_format ) { 
 			?>
 			<span class="date"><?php echo bz_get_publish_date(); ?></span>
-			<div class="post-img"><?php echo $thumb;?></div>
-			<?php 
+			<?php // Show the featured image unless we're in single post view (b/c it will be shown in the header instead):
+			if ( !is_single() && has_post_thumbnail() ){ 
+				?>
+				<div class="post-img"><?php echo $thumb; ?></div>
+				<?php 
+			}
 			// and only an excerpt+link if it's one of the posts on a list:
 			if ( is_home() || is_archive() || is_search() || is_404() || $is_press ) { 
 				the_excerpt(); 

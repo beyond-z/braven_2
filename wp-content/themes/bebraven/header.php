@@ -93,7 +93,19 @@ $is_bio = ('bio' == $component_format);
 				?>
 
 				<section class="component marquee <?php echo $marquee_format; ?>">
-					<?php echo get_the_post_thumbnail( $container_ID, 'marquee' ); ?>
+
+					<?php 
+					if ( is_single() && has_post_thumbnail() ) {
+						// Blog posts with a featured image, but not the blog page that lists them:
+
+						echo get_the_post_thumbnail( $post->ID, 'marquee' );
+
+					} else {
+						// not a blog post with featured image:
+						echo get_the_post_thumbnail( $container_ID, 'marquee' ); 
+					}
+
+					?>
 
 					
 					<div class="marquee-title">
