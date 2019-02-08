@@ -41,7 +41,8 @@
 					"available" => strtolower(trim($data[2])) == "true",
 					"virtual" => strtolower(trim($data[3])) == "true",
 					"number" => trim($data[4]),
-					"interests" => array_map("trim", explode(";", $data[5]))
+					"interests" => array_map("trim", explode(";", $data[5])),
+					"feedback_nag_address", trim($data[6])
 				);
 
 				$volunteers[] = $volunteer;
@@ -50,7 +51,7 @@
 		}
 
 		$pdo->beginTransaction();
-		$event_id = create_event_in_database($_POST["event_name"]);
+		$event_id = create_event_in_database($_POST["event_name"], $_POST["university"]);
 		save_fellows_to_database($event_id, $fellows);
 		save_volunteers_to_database($event_id, $volunteers);
 		$pdo->commit();
