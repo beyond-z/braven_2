@@ -445,8 +445,11 @@ function bz_match_with_fellow($fellows_to_consider, $volunteer, $match_by = null
 
 		// if this is a virtual interview, we want to bias against it to up the odds of
 		// getting an in-person slot if the fellow has been virtual before
-		if ($volunteer["virtual"])
-			$fellow_matches += 0.2 * fellow_matched_virtual_count_historically($fellow_id);
+		if ($volunteer["virtual"]) {
+			// in Feb 2019, this changed to be an enormous score - we'd rather match
+			// fellows with at least one in-person interview, even if interests don't match.
+			$fellow_matches += 0.6 * fellow_matched_virtual_count_historically($fellow_id);
+		}
 
 		if ($match_by) {
 			// If we're matching by criterion, need to make sure the following applies as well:
