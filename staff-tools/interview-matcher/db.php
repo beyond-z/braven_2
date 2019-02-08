@@ -66,9 +66,9 @@ function save_volunteers_to_database($event_id, $volunteers) {
 	$statement = $pdo->prepare("
 		INSERT INTO
 			volunteers
-			(event_id, name, vip, available, is_virtual, contact_number)
+			(event_id, name, vip, available, is_virtual, contact_number, feedback_nag_address)
 		VALUES
-			(?, ?, ?, ?, ?, ?)
+			(?, ?, ?, ?, ?, ?, ?)
 	");
 
 	$interest_statement = $pdo->prepare("
@@ -86,7 +86,8 @@ function save_volunteers_to_database($event_id, $volunteers) {
 			$volunteer["vip"] ? 1 : 0,
 			$volunteer["available"] ? 1 : 0,
 			$volunteer["virtual"] ? 1 : 0,
-			$volunteer["number"]
+			$volunteer["number"],
+			$volunteer["feedback_nag_address"]
 		));
 
 		$id = $pdo->lastInsertId();
@@ -282,9 +283,9 @@ function save_matches($event_id, $matches) {
 	$statement = $pdo->prepare("
 		INSERT INTO
 			match_sets_members
-			(match_set_id, volunteer_id, fellow_id)
+			(match_set_id, volunteer_id, fellow_id, link_nonce)
 		VALUES
-			(?, ?, ?)
+			(?, ?, ?, FLOOR(RAND() * 2000000000))
 	");
 
 	foreach($matches as $volunteer_id => $fellow_id) {
@@ -299,18 +300,18 @@ function save_matches($event_id, $matches) {
 }
 
 ///
-function create_event_in_database($name) {
+function create_event_in_database($name, $university) {
 	global $pdo;
 
 	$statement = $pdo->prepare("
 		INSERT INTO
 			events
-			(name, when_created)
+			(name, when_created, university)
 		VALUES
-			(?, NOW())
+			(?, NOW(), ?)
 	");
 
-	$statement->execute(array($name));
+	$statement->execute(array($name, $university));
 	$event_id = $pdo->lastInsertId();
 
 	return $event_id;
@@ -362,3 +363,43 @@ function get_interest_id($interest) {
 	return $id;
 }
 
+/**
+	Loads information about a specific match. Intended for use by the feedback page.
+
+	Returns an array with keys:
+		fellow_name
+		fellow_university
+		volunteer_name
+		virtual_meeting
+		msmid
+		link_nonce
+
+	Returns FALSE if no such thing.
+*/
+function loadMatch($msmid) {
+	global $pdo;
+
+	$statement = $pdo->prepare("
+		SELECT
+			fellows.name AS fellow_name,
+			volunteers.name AS volunteer_name,
+			volunteers.is_virtual AS virtual_meeting,
+			events.university AS fellow_university,
+			msm.link_nonce AS link_nonce,
+			msm.match_member_id AS msmid
+		FROM
+			match_sets_members msm
+		INNER JOIN
+			match_sets ON msm.match_set_id = match_sets.id
+		INNER JOIN
+			events ON match_sets.event_id = events.id
+		INNER JOIN
+			fellows ON fellows.id = msm.fellow_id
+		INNER JOIN
+			volunteers ON volunteers.id = msm.volunteer_id
+		WHERE
+			msm.match_member_id = ?
+	");
+	$statement->execute(array($msmid));
+	return $statement->fetch();
+}

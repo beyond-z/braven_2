@@ -30,6 +30,7 @@ DROP TABLE IF EXISTS `events`;
 CREATE TABLE events (
 	id INTEGER NOT NULL AUTO_INCREMENT,
 	name VARCHAR(255) NOT NULL,
+	university VARCHAR(255) NOT NULL,
 	when_created TIMESTAMP NOT NULL,
 	PRIMARY KEY (id)
 ) DEFAULT CHARACTER SET=utf8mb4;
@@ -44,6 +45,7 @@ CREATE TABLE volunteers (
 	available BOOLEAN NOT NULL,
 	is_virtual BOOLEAN NOT NULL, -- doesn't seem to be used....
 	contact_number VARCHAR(255) NOT NULL,
+	feedback_nag_address VARCHAR(80) NOT NULL,
 	-- interests are done in the following table
 	FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE,
 	PRIMARY KEY (id)
@@ -102,10 +104,39 @@ CREATE TABLE match_sets_members (
 	volunteer_id INTEGER NOT NULL,
 	fellow_id INTEGER NOT NULL,
 
+	link_nonce INTEGER NOT NULL,
+
 	FOREIGN KEY (match_set_id) REFERENCES match_sets(id) ON DELETE CASCADE,
 	FOREIGN KEY (volunteer_id) REFERENCES volunteers(id) ON DELETE CASCADE,
 	FOREIGN KEY (fellow_id) REFERENCES fellows(id) ON DELETE CASCADE,
 	PRIMARY KEY (match_member_id)
+) DEFAULT CHARACTER SET=utf8mb4;
+
+DROP TABLE IF EXISTS `feedback_for_fellow`;
+CREATE TABLE feedback_for_fellow (
+	id INTEGER NOT NULL AUTO_INCREMENT,
+
+	msm_id INTEGER NOT NULL,
+
+	fellow_name VARCHAR(80) NOT NULL,
+	fellow_university VARCHAR(80) NOT NULL,
+	interviewer_name VARCHAR(80) NOT NULL,
+
+	q1 VARCHAR(20) NOT NULL,
+	q2 VARCHAR(20) NOT NULL,
+	q3 VARCHAR(20) NOT NULL,
+	q4 VARCHAR(20) NOT NULL,
+	q5 VARCHAR(20) NOT NULL,
+	q6 VARCHAR(20) NOT NULL,
+	q7 VARCHAR(20) NOT NULL,
+	q8 VARCHAR(20) NOT NULL,
+	q9 VARCHAR(20) NOT NULL,
+	q10 VARCHAR(20) NOT NULL,
+
+	comments TEXT NOT NULL,
+
+	FOREIGN KEY (msm_id) REFERENCES match_sets_members(match_member_id) ON DELETE CASCADE,
+	PRIMARY KEY (id)
 ) DEFAULT CHARACTER SET=utf8mb4;
 
 COMMIT;
