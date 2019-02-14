@@ -1,4 +1,5 @@
 <?php
+	include_once("sso.php");
 	include_once("db.php");
 
 	$event_id = (int) $_REQUEST["event_id"];
@@ -16,7 +17,7 @@
 		$round_number = 1;
 	}
 
-	$matches = load_match_history($event_id);
+	$matches = load_match_history_details($event_id);
 	$fellows = load_fellows_from_database($event_id);
 	$volunteers = load_volunteers_from_database($event_id);
 
@@ -30,15 +31,17 @@
 	foreach($matches as $match_set) {
 		$looping_round++;
 		if($looping_round == $round_number) {
-			foreach($match_set as $match_pair) {
-				foreach($match_pair as $volunteer_id => $fellow_id) {
-					$results[] = array (
-						"room" => $volunteers[$volunteer_id]["number"],
-						"volunteer" => $volunteers[$volunteer_id]["name"],
-						"fellow" => $fellows[$fellow_id]["name"],
-						"interests" => join($fellows[$fellow_id]["interests"], ", ")
-					);
-				}
+			foreach($match_set as $match_details) {
+				$volunteer_id = $match_details["volunteer_id"];
+				$fellow_id = $match_details["fellow_id"];
+				$link = "interview-feedback.php?msmid={$match_details["msmid"]}&link_nonce={$match_details["nonce"]}";
+				$results[] = array (
+					"room" => $volunteers[$volunteer_id]["number"],
+					"volunteer" => $volunteers[$volunteer_id]["name"],
+					"fellow" => $fellows[$fellow_id]["name"],
+					"interests" => join($fellows[$fellow_id]["interests"], ", "),
+					"feedback_link" => $link
+				);
 			}
 		}
 		if($looping_round == $round_number - 1)
@@ -117,6 +120,7 @@ foreach ($displays as $display_key => $display) {
 		<table>
 			<thead>
 				<tr>
+					<th>&nbsp;</th>
 					<?php foreach ($display['columns'] as $column_key => $column) { ?>
 						<th><?php echo $column;?></th>
 					<?php } ?>
@@ -129,6 +133,11 @@ foreach ($displays as $display_key => $display) {
 				foreach ($results as $key => $result) {
 					?>
 					<tr>
+						<?php if(isAdmin()) { ?>
+							<td><a href="<?php echo $result["feedback_link"]; ?>">Form</a></td>
+						<?php } else { ?>
+							<td>&nbsp;</td>
+						<?php } ?>
 						<?php foreach ($display['columns'] as $column_key => $column) { ?>
 						<td><?php echo $result[$column_key];?></td>
 						<?php } ?>

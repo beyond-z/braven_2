@@ -261,6 +261,42 @@ function load_match_history($event_id) {
 	return $match_history;
 }
 
+function load_match_history_details($event_id) {
+	$match_history = array();
+
+	global $pdo;
+
+	$statement = $pdo->prepare("
+		SELECT
+			match_sets.id,
+			match_sets_members.match_member_id as msmid,
+			match_sets_members.link_nonce,
+			match_sets_members.volunteer_id,
+			match_sets_members.fellow_id
+		FROM
+			match_sets_members
+		INNER JOIN
+			match_sets ON match_sets.id = match_sets_members.match_set_id
+		WHERE
+			match_sets.event_id = ?
+		ORDER BY
+			match_sets.when_created ASC
+	");
+	$statement->execute(array($event_id));
+	while($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+		if(!isset($match_history[$row["id"]]))
+			$match_history[$row["id"]] = array();
+		$match_history[$row["id"]][] = array(
+			"volunteer_id" => $row["volunteer_id"],
+			"fellow_id" => $row["fellow_id"],
+			"nonce" => $row["link_nonce"],
+			"msmid" => $row["msmid"]
+		);
+	}
+
+	return $match_history;
+}
+
 /**
 	matches is an array of (volunteer_id => fellow_id)
 
