@@ -77,6 +77,9 @@ function bz_show_proposed_matches($show_button = true) {
 				echo "<input type=\"hidden\" data-vid=\"$vid\" name=\"matches[$vid]\" value=\"{$fellow_ID}\" />";
 			}
 			?>
+
+			<label><input name="nag" type="checkbox" checked="checked" /> Text rubrics to interviewers</label>
+			<br /><br />
 			<input type="submit" value="Finalize match!">
 		</form>
 		<?php

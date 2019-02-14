@@ -25,6 +25,7 @@ function load_volunteers_from_database($event_id) {
 			volunteers.available,
 			volunteers.is_virtual,
 			volunteers.contact_number,
+			volunteers.feedback_nag_address,
 			interests.interest
 		FROM
 			volunteers
@@ -53,6 +54,7 @@ function load_volunteers_from_database($event_id) {
 				'available' => $row["available"],
 				'virtual' => $row["is_virtual"],
 				'number' => $row["contact_number"],
+				'feedback_nag_address' => $row['feedback_nag_address']
 			);
 		}
 	}
@@ -261,7 +263,7 @@ function load_match_history($event_id) {
 	return $match_history;
 }
 
-function load_match_history_details($event_id) {
+function load_match_history_details($event_id, $match_set_id = null) {
 	$match_history = array();
 
 	global $pdo;
@@ -290,6 +292,9 @@ function load_match_history_details($event_id) {
 			match_sets ON match_sets.id = match_sets_members.match_set_id
 		WHERE
 			match_sets.event_id = ?
+		".
+		($match_set_id === null ? "" : "AND match_sets.id = '".((int)($match_set_id) . "'"))
+		."
 		ORDER BY
 			match_sets.when_created ASC
 	");
@@ -345,6 +350,69 @@ function save_matches($event_id, $matches) {
 	}
 
 	return $match_id;
+}
+
+function send_sms($to, $message) {
+	global $WP_CONFIG;
+
+	$to = preg_replace('/[^0-9]/', '', $to);
+	if(strlen($to) == 10)
+		$to = "1" . $to;
+	$to = "+" . $to;
+
+	if(strlen($to) != 12)
+		throw new Exception("bad phone number $to");
+
+	$ch = curl_init();
+	$url = "https://api.twilio.com/2010-04-01/Accounts/".$WP_CONFIG["TWILIO_SID"]."/Messages.json";
+	$auth = $WP_CONFIG["TWILIO_SID"] . ":" . $WP_CONFIG["TWILIO_TOKEN"];
+
+	$post  = "From=".urlencode($WP_CONFIG['TWILIO_FROM'])."&";
+	$post .= "To=".urlencode($to)."&";
+	$post .= "Body=".urlencode($message);
+
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+	curl_setopt($ch, CURLOPT_POST, true);
+	curl_setopt($ch, CURLOPT_USERPWD, $auth);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+
+	$answer = curl_exec($ch);
+	curl_close($ch);
+
+	return "Twilio responded: $answer \n";
+}
+
+
+
+function send_nags($event_id, $match_id) {
+	$matches = load_match_history_details($event_id, $match_id);
+	$volunteers = load_volunteers_from_database($event_id);
+
+	$match_set = $matches[$match_id];
+
+	foreach($match_set as $match_details) {
+		$volunteer_id = $match_details["volunteer_id"];
+		$fellow_id = $match_details["fellow_id"];
+
+		$volunteer = $volunteers[$volunteer_id];
+
+		$msg = "Please fill in this survey about your mock interview:\n" . $match_details["link"];
+
+		$cn = $volunteer["feedback_nag_address"];
+		if($cn !== null && $cn != "") {
+			if(strpos($cn, "@") !== FALSE) {
+				mail($cn, "Braven - Please record feedback about your interview", $msg);
+			} else {
+				$answer = send_sms($cn, $msg);
+
+				$fp = fopen("logs/sms.txt", "a");
+				fwrite($fp, $answer);
+				fclose($fp);
+			}
+		}
+	}
 }
 
 ///
