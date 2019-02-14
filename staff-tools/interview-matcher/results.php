@@ -34,13 +34,12 @@
 			foreach($match_set as $match_details) {
 				$volunteer_id = $match_details["volunteer_id"];
 				$fellow_id = $match_details["fellow_id"];
-				$link = "interview-feedback.php?msmid={$match_details["msmid"]}&link_nonce={$match_details["nonce"]}";
 				$results[] = array (
 					"room" => $volunteers[$volunteer_id]["number"],
 					"volunteer" => $volunteers[$volunteer_id]["name"],
 					"fellow" => $fellows[$fellow_id]["name"],
 					"interests" => join($fellows[$fellow_id]["interests"], ", "),
-					"feedback_link" => $link
+					"feedback_link" => $match_details["link"]
 				);
 			}
 		}
@@ -134,7 +133,7 @@ foreach ($displays as $display_key => $display) {
 					?>
 					<tr>
 						<?php if(isAdmin()) { ?>
-							<td><a href="<?php echo $result["feedback_link"]; ?>">Form</a></td>
+							<td><a href="<?php echo $result["feedback_link"]; ?>">Rubric</a></td>
 						<?php } else { ?>
 							<td>&nbsp;</td>
 						<?php } ?>

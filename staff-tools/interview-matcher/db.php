@@ -266,6 +266,17 @@ function load_match_history_details($event_id) {
 
 	global $pdo;
 
+	$feedbackUrl = "http";
+	if(isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on")
+		$feedbackUrl .= "s";
+	$feedbackUrl .= "://";
+	$feedbackUrl .= $_SERVER["HTTP_HOST"];
+	$link = $_SERVER["PHP_SELF"];
+	$slashPos = strrpos($link, "/");
+	if($slashPos !== FALSE)
+		$link = substr($link, 0, $slashPos);
+	$feedbackUrl .= "/" . $link . "/interview-feedback.php";
+
 	$statement = $pdo->prepare("
 		SELECT
 			match_sets.id,
@@ -290,7 +301,8 @@ function load_match_history_details($event_id) {
 			"volunteer_id" => $row["volunteer_id"],
 			"fellow_id" => $row["fellow_id"],
 			"nonce" => $row["link_nonce"],
-			"msmid" => $row["msmid"]
+			"msmid" => $row["msmid"],
+			"link" => $feedbackUrl . "?msmid={$row["msmid"]}&link_nonce={$row["link_nonce"]}"
 		);
 	}
 
