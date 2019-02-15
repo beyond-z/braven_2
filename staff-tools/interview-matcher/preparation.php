@@ -19,6 +19,18 @@
 		<input type="text" name="event_name" />
 	</label>
 
+	<br /><br />
+
+	<label>
+		<span>University:</span><br />
+		<select name="university">
+			<option value="(none)"></option>
+			<option value="National Louis University">National Louis University</option>
+			<option value="Rutgers University - Newark">Rutgers University - Newark</option>
+			<option value="San Jose State University">San Jose State University</option>
+		</select>
+	</label>
+
 	<hr />
 
 	<p>Then, we need to know who is participating. The volunteers spreadsheet you create should look like this:</p>
@@ -32,6 +44,7 @@
 			<th>Virtual</th>
 			<th>Number</th>
 			<th>Interests</th>
+			<th>Feedback Nag Address</th>
 		</tr>
 		<tr>
 			<td>Bart</td>
@@ -40,6 +53,7 @@
 			<td>false</td>
 			<td>212-555-1234</td>
 			<td>psychology; sociology</td>
+			<td>212-555-1234</td>
 		</tr>
 		<tr>
 			<td>Peggy</td>
@@ -48,8 +62,11 @@
 			<td>false</td>
 			<td>Room 123</td>
 			<td>psychology; medicine</td>
+			<td>212-555-9876</td>
 		</tr>
 	</table>
+
+	<p>The feedback nag address is <b>new in 2019</b>. It should be the volunteer's cell number, not necessarily the number from which they will conduct the interview. The system will text that number a link to the rubric for all their fellow matches.</p>
 
 	<p>Note that the interests are separated by semicolons in the cell.</p>
 

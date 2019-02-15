@@ -1,7 +1,10 @@
 <?php 
 	include_once("db.php");
 
-	save_matches($_POST["event_id"], $_POST['matches']);
+	$match_id = save_matches($_POST["event_id"], $_POST['matches']);
+
+	if(isset($_POST["nag"]))
+		send_nags($_POST["event_id"], $match_id);
 ?>
 <!DOCTYPE html>
 <html lang="en">
