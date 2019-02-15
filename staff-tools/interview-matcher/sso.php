@@ -54,7 +54,7 @@ function requireLogin() {
 	if(!isset($_SESSION["user"])) {
 		$_SESSION["coming_from"] = bz_current_full_url();
 		unset($_SESSION["sso_service"]);
-		header("Location: sso.php");
+		header("Location: ../interview-matcher/sso.php"); // FIXME: I actually want to move this stuff to a shared directory eventually instead of referring right in there.
 		exit;
 	}
 	return $_SESSION["user"];
