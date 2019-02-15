@@ -42,7 +42,7 @@
 					"virtual" => strtolower(trim($data[3])) == "true",
 					"number" => trim($data[4]),
 					"interests" => array_map("trim", explode(";", $data[5])),
-					"feedback_nag_address", trim($data[6])
+					"feedback_nag_address" => trim($data[6])
 				);
 
 				$volunteers[] = $volunteer;
