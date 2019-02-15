@@ -90,14 +90,14 @@
 			if($pmNumber === null)
 				continue;
 
-			echo "<label><input checked=\"checked\" type=\"checkbox\" name=\"nag_number\" value=\"$pmNumber\" /> PM for $fellowName via $pmNumber</label>";
+			echo "<label><input checked=\"checked\" type=\"checkbox\" name=\"nag_number[]\" value=\"$pmNumber\" /> PM for $fellowName via $pmNumber</label>";
 			echo "<br />";
 		}
 		foreach($fellowsToContact as $fellowName => $fellowNumber) {
 			if($fellowNumber === null)
 				continue;
 
-			echo "<label><input checked=\"checked\" type=\"checkbox\" name=\"nag_number\" value=\"$fellowNumber\" />$fellowName via $fellowNumber</label>";
+			echo "<label><input checked=\"checked\" type=\"checkbox\" name=\"nag_number[]\" value=\"$fellowNumber\" />$fellowName via $fellowNumber</label>";
 			echo "<br />";
 		}
 	?>

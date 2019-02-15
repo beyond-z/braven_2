@@ -2,7 +2,7 @@
 	include_once("sso.php");
 	include_once("db.php");
 
-	$event_id = (int) $_REQUEST["event_id"];
+	$event_id = isset($_REQUEST["event_id"]) ? ((int) $_REQUEST["event_id"]) : 0;
 
 	if($event_id == 0) {
 		// need to choose an event
@@ -11,7 +11,7 @@
 		exit;
 	}
 
-	$round_number = (int) $_REQUEST["round_number"];
+	$round_number = isset($_REQUEST["round_number"]) ? ((int) $_REQUEST["round_number"]) : 0;
 
 	if($round_number == 0) {
 		$round_number = 1;
