@@ -59,3 +59,17 @@ function requireLogin() {
 	}
 	return $_SESSION["user"];
 }
+
+function isAdmin() {
+	if(!isset($_SESSION["user"])) {
+		return false;
+	}
+
+	$user = $_SESSION["user"];
+
+	if($user == "admin@beyondz.org" || strpos($user, "@bebraven.org") !== FALSE) {
+		return true;
+	}
+
+	return false;
+}

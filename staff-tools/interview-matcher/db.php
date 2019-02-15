@@ -25,6 +25,7 @@ function load_volunteers_from_database($event_id) {
 			volunteers.available,
 			volunteers.is_virtual,
 			volunteers.contact_number,
+			volunteers.feedback_nag_address,
 			interests.interest
 		FROM
 			volunteers
@@ -53,6 +54,7 @@ function load_volunteers_from_database($event_id) {
 				'available' => $row["available"],
 				'virtual' => $row["is_virtual"],
 				'number' => $row["contact_number"],
+				'feedback_nag_address' => $row['feedback_nag_address']
 			);
 		}
 	}
@@ -261,6 +263,57 @@ function load_match_history($event_id) {
 	return $match_history;
 }
 
+function load_match_history_details($event_id, $match_set_id = null) {
+	$match_history = array();
+
+	global $pdo;
+
+	$feedbackUrl = "http";
+	if(isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on")
+		$feedbackUrl .= "s";
+	$feedbackUrl .= "://";
+	$feedbackUrl .= $_SERVER["HTTP_HOST"];
+	$link = $_SERVER["PHP_SELF"];
+	$slashPos = strrpos($link, "/");
+	if($slashPos !== FALSE)
+		$link = substr($link, 0, $slashPos);
+	$feedbackUrl .= "/" . $link . "/interview-feedback.php";
+
+	$statement = $pdo->prepare("
+		SELECT
+			match_sets.id,
+			match_sets_members.match_member_id as msmid,
+			match_sets_members.link_nonce,
+			match_sets_members.volunteer_id,
+			match_sets_members.fellow_id
+		FROM
+			match_sets_members
+		INNER JOIN
+			match_sets ON match_sets.id = match_sets_members.match_set_id
+		WHERE
+			match_sets.event_id = ?
+		".
+		($match_set_id === null ? "" : "AND match_sets.id = '".((int)($match_set_id) . "'"))
+		."
+		ORDER BY
+			match_sets.when_created ASC
+	");
+	$statement->execute(array($event_id));
+	while($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+		if(!isset($match_history[$row["id"]]))
+			$match_history[$row["id"]] = array();
+		$match_history[$row["id"]][] = array(
+			"volunteer_id" => $row["volunteer_id"],
+			"fellow_id" => $row["fellow_id"],
+			"nonce" => $row["link_nonce"],
+			"msmid" => $row["msmid"],
+			"link" => $feedbackUrl . "?msmid={$row["msmid"]}&link_nonce={$row["link_nonce"]}"
+		);
+	}
+
+	return $match_history;
+}
+
 /**
 	matches is an array of (volunteer_id => fellow_id)
 
@@ -297,6 +350,69 @@ function save_matches($event_id, $matches) {
 	}
 
 	return $match_id;
+}
+
+function send_sms($to, $message) {
+	global $WP_CONFIG;
+
+	$to = preg_replace('/[^0-9]/', '', $to);
+	if(strlen($to) == 10)
+		$to = "1" . $to;
+	$to = "+" . $to;
+
+	if(strlen($to) != 12)
+		throw new Exception("bad phone number $to");
+
+	$ch = curl_init();
+	$url = "https://api.twilio.com/2010-04-01/Accounts/".$WP_CONFIG["TWILIO_SID"]."/Messages.json";
+	$auth = $WP_CONFIG["TWILIO_SID"] . ":" . $WP_CONFIG["TWILIO_TOKEN"];
+
+	$post  = "From=".urlencode($WP_CONFIG['TWILIO_FROM'])."&";
+	$post .= "To=".urlencode($to)."&";
+	$post .= "Body=".urlencode($message);
+
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+	curl_setopt($ch, CURLOPT_POST, true);
+	curl_setopt($ch, CURLOPT_USERPWD, $auth);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+
+	$answer = curl_exec($ch);
+	curl_close($ch);
+
+	return "Twilio responded: $answer \n";
+}
+
+
+
+function send_nags($event_id, $match_id) {
+	$matches = load_match_history_details($event_id, $match_id);
+	$volunteers = load_volunteers_from_database($event_id);
+
+	$match_set = $matches[$match_id];
+
+	foreach($match_set as $match_details) {
+		$volunteer_id = $match_details["volunteer_id"];
+		$fellow_id = $match_details["fellow_id"];
+
+		$volunteer = $volunteers[$volunteer_id];
+
+		$msg = "Please fill in this survey about your mock interview:\n" . $match_details["link"];
+
+		$cn = $volunteer["feedback_nag_address"];
+		if($cn !== null && $cn != "") {
+			if(strpos($cn, "@") !== FALSE) {
+				mail($cn, "Braven - Please record feedback about your interview", $msg);
+			} else {
+				$answer = send_sms($cn, $msg);
+
+				$fp = fopen("logs/sms.txt", "a");
+				fwrite($fp, $answer);
+				fclose($fp);
+			}
+		}
+	}
 }
 
 ///
