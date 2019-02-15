@@ -407,7 +407,7 @@ function send_nags($event_id, $match_id) {
 			} else {
 				$answer = send_sms($cn, $msg);
 
-				$fp = fopen("logs/sms.txt", "a");
+				$fp = fopen("log/sms.txt", "a");
 				fwrite($fp, $answer);
 				fclose($fp);
 			}
