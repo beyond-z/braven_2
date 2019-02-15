@@ -10,9 +10,16 @@
 
 		$message = $_POST["message"];
 
+		echo "Sending messages, please wait...<br />";
+		flush();
+
 		foreach($_POST["nag_number"] as $to) {
 			send_sms($to, $message);
+			echo ".";
+			flush();
 		}
+
+		echo "<br />Messages sent!";
 
 		exit;
 	}
