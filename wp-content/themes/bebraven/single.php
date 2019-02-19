@@ -4,7 +4,7 @@
  */
 
 get_header(); ?>
-<!-- single -->
+
 <div class="wrap template-single">
 	<?php bz_custom_breadcrumbs(); ?>
 	<div id="primary" class="content-area">
