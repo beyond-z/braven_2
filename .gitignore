@@ -42,3 +42,6 @@ _notes
 
 # ignore test folder
 test
+
+# don't ignore sql files in db/migrate
+!db/migrate/*.sql
