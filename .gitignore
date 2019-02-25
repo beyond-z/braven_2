@@ -45,3 +45,6 @@ test
 
 # don't ignore sql files in db/migrate
 !db/migrate/*.sql
+
+# ignore files from JetBrains IDEs
+.idea/
