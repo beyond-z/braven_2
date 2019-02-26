@@ -55,9 +55,11 @@ DROP TABLE IF EXISTS `volunteer_interests`;
 CREATE TABLE volunteer_interests (
 	volunteer_id INTEGER NOT NULL,
 	interest_id INTEGER NOT NULL,
+	dummy_id INTEGER NOT NULL AUTO_INCREMENT,
+	PRIMARY KEY (dummy_id),
+	UNIQUE KEY unique_index (volunteer_id,interest_id),
 	FOREIGN KEY (volunteer_id) REFERENCES volunteers(id) ON DELETE CASCADE,
-	FOREIGN KEY (interest_id) REFERENCES interests(id) ON DELETE CASCADE,
-	PRIMARY KEY (volunteer_id, interest_id)
+	FOREIGN KEY (interest_id) REFERENCES interests(id) ON DELETE CASCADE
 ) DEFAULT CHARACTER SET=utf8mb4;
 
 -- ******************
@@ -77,9 +79,11 @@ DROP TABLE IF EXISTS `fellow_interests`;
 CREATE TABLE fellow_interests (
 	fellow_id INTEGER NOT NULL,
 	interest_id INTEGER NOT NULL,
+	dummy_id INTEGER NOT NULL AUTO_INCREMENT,
+	PRIMARY KEY (dummy_id),
+	UNIQUE KEY unique_index (fellow_id,interest_id)
 	FOREIGN KEY (fellow_id) REFERENCES fellows(id) ON DELETE CASCADE,
-	FOREIGN KEY (interest_id) REFERENCES interests(id) ON DELETE CASCADE,
-	PRIMARY KEY (fellow_id, interest_id)
+	FOREIGN KEY (interest_id) REFERENCES interests(id) ON DELETE CASCADE
 ) DEFAULT CHARACTER SET=utf8mb4;
 
 
