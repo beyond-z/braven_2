@@ -533,3 +533,19 @@ function loadMatch($msmid) {
 
 	return $result;
 }
+
+function loadExistingRubric($msmid) {
+	global $pdo;
+	$statement = $pdo->prepare("
+		SELECT
+			*
+		FROM
+			feedback_for_fellow
+		WHERE
+			msm_id = ?
+	");
+	$statement->execute(array($msmid));
+	$result = $statement->fetch();
+
+	return $result;
+}

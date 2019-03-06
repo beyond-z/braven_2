@@ -116,7 +116,7 @@ DROP TABLE IF EXISTS `feedback_for_fellow`;
 CREATE TABLE feedback_for_fellow (
 	id INTEGER NOT NULL AUTO_INCREMENT,
 
-	msm_id INTEGER NOT NULL,
+	msm_id INTEGER NOT NULL, -- this should probably be indexed tbh, since it is what really gets selected on for updates.
 
 	fellow_name VARCHAR(80) NOT NULL,
 	fellow_university VARCHAR(80) NOT NULL,
