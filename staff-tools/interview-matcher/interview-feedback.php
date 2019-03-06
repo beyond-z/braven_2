@@ -136,6 +136,8 @@ All fields are required.
 <input type="hidden" name="msmid" value="<?php echo htmlentities($match["msmid"]); ?>" />
 <input type="hidden" name="link_nonce" value="<?php echo htmlentities($match["link_nonce"]); ?>" />
 
+<p>Rubric for interview round <?php echo $match["round_number"]; ?></p>
+
 <div class="field">
 	<label><span class="question">Interviewer Name (first and last):</span>
 		<input required="required" type="text" name="interviewer_name" value="<?php echo htmlentities($match["volunteer_name"]); ?>" /></label>
