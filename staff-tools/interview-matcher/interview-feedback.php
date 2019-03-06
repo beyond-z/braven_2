@@ -21,7 +21,7 @@
 
 		$statement = $pdo->prepare("
 			SELECT
-				id
+				id, when_submitted
 			FROM
 				feedback_for_fellow
 			WHERE
@@ -50,7 +50,10 @@
 					q9 = ?,
 					q10 = ?,
 
-					comments = ?
+					comments = ?,
+
+					when_last_changed = NOW()
+					".((isset($_POST["submitted"]) && $result["when_submitted"] == null) ? ", when_submitted = NOW()" : ""). "
 				WHERE
 					id = ?
 			");
@@ -97,14 +100,23 @@
 						q9,
 						q10,
 
-						comments
+						comments,
+
+						when_created,
+						when_last_changed
+						".(isset($_POST["submitted"]) ? ", when_submitted" : "")."
 					)
 				VALUES
 					(
 					?,
 					?,?,?,
 					?,?,? ,?,?,?, ?,?,?, ?,
+					?,
+					?,
+
+					?,
 					?
+					".(isset($_POST["submitted"]) ? ", NOW()" : "")."
 					)
 			");
 
@@ -291,7 +303,7 @@ All fields are required.
 		<textarea name="comments"><?php if($existing_data) echo htmlentities($existing_data["comments"]); ?></textarea></label>
 </div>
 
-	<input type="submit" value="Submit Feedback" />
+	<input name="submitted" type="submit" value="Submit Feedback" />
 
 </form>
 

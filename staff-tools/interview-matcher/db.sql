@@ -139,6 +139,10 @@ CREATE TABLE feedback_for_fellow (
 
 	comments TEXT NOT NULL,
 
+	when_started TIMESTAMP NULL,
+	when_submitted TIMESTAMP NULL,
+	when_last_changed TIMESTAMP NULL,
+
 	FOREIGN KEY (msm_id) REFERENCES match_sets_members(match_member_id) ON DELETE CASCADE,
 	PRIMARY KEY (id)
 ) DEFAULT CHARACTER SET=utf8mb4;
