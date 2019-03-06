@@ -1,0 +1,8 @@
+USE braven_interview_matcher;
+ALTER TABLE fellow_interests DROP COLUMN dummy_id, ADD PRIMARY KEY(fellow_id, interest_id), DROP INDEX unique_index;
+
+USE braven_interview_matcher;
+ALTER TABLE volunteer_interests DROP COLUMN dummy_id, ADD PRIMARY KEY(volunteer_id, interest_id), DROP INDEX unique_index;
+
+USE wordpress;
+ALTER TABLE bz_term_relationships DROP COLUMN dummy_id, ADD PRIMARY KEY(object_id, term_taxonomy_id), DROP INDEX unique_index;
