@@ -297,5 +297,19 @@ All fields are required.
 
 </div>
 
+<script>
+	// enable auto-save as they go...
+	function backgroundSubmit() {
+		var formElement = document.querySelector("form");
+		var request = new XMLHttpRequest();
+		request.open("POST", "interview-feedback.php");
+		request.send(new FormData(formElement));
+	}
+
+	var formElement = document.querySelector("form");
+	formElement.addEventListener("change", backgroundSubmit);
+</script>
+
+
 </body>
 </html>
