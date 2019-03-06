@@ -186,9 +186,9 @@ function save_fellows_to_database($event_id, $fellows) {
 	$statement = $pdo->prepare("
 		INSERT INTO
 			fellows
-			(event_id, name, score, available)
+			(event_id, name, score, available, email_address)
 		VALUES
-			(?, ?, ?, ?)
+			(?, ?, ?, ?, ?)
 	");
 
 	$interest_statement = $pdo->prepare("
@@ -204,7 +204,8 @@ function save_fellows_to_database($event_id, $fellows) {
 			$event_id,
 			$fellow["name"],
 			(int) $fellow["score"],
-			$fellow["available"] ? 1 : 0
+			$fellow["available"] ? 1 : 0,
+			$fellow["email_address"]
 		));
 
 		$id = $pdo->lastInsertId();

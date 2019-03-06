@@ -39,6 +39,7 @@
 		SELECT
 			fellows.name AS supposed_fellow_name,
 			volunteers.name AS supposed_volunteer_name,
+			fellows.email_address AS fellow_email_address,
 
 			match_sets.id AS round_number,
 

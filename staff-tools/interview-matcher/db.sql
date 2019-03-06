@@ -68,6 +68,7 @@ CREATE TABLE fellows (
 	id INTEGER NOT NULL AUTO_INCREMENT,
 	event_id INTEGER NOT NULL,
 	name VARCHAR(255) NOT NULL,
+	email_address VARCHAR(80) NULL,
 	score INTEGER NOT NULL,
 	available BOOLEAN NOT NULL,
 	-- interests are done in the following table
