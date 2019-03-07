@@ -81,7 +81,7 @@
 
 			function coalesce($f) {
 				if($f === null)
-					return "";
+					return "incomplete";
 				return $f;
 			}
 
