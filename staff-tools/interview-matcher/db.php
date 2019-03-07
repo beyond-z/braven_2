@@ -186,9 +186,9 @@ function save_fellows_to_database($event_id, $fellows) {
 	$statement = $pdo->prepare("
 		INSERT INTO
 			fellows
-			(event_id, name, score, available)
+			(event_id, name, score, available, email_address)
 		VALUES
-			(?, ?, ?, ?)
+			(?, ?, ?, ?, ?)
 	");
 
 	$interest_statement = $pdo->prepare("
@@ -204,7 +204,8 @@ function save_fellows_to_database($event_id, $fellows) {
 			$event_id,
 			$fellow["name"],
 			(int) $fellow["score"],
-			$fellow["available"] ? 1 : 0
+			$fellow["available"] ? 1 : 0,
+			$fellow["email_address"]
 		));
 
 		$id = $pdo->lastInsertId();
@@ -502,7 +503,10 @@ function loadMatch($msmid) {
 			volunteers.is_virtual AS virtual_meeting,
 			events.university AS fellow_university,
 			msm.link_nonce AS link_nonce,
-			msm.match_member_id AS msmid
+			msm.match_member_id AS msmid,
+
+			events.id AS event_id,
+			match_sets.when_created AS round_scheduled_at
 		FROM
 			match_sets_members msm
 		INNER JOIN
@@ -517,5 +521,32 @@ function loadMatch($msmid) {
 			msm.match_member_id = ?
 	");
 	$statement->execute(array($msmid));
-	return $statement->fetch();
+	$result = $statement->fetch();
+
+	$statement = $pdo->prepare("
+		SELECT count(*) + 1 AS round_number
+		FROM match_sets
+		WHERE event_id = ? AND when_created < ?
+	");
+	$statement->execute(array($result["event_id"], $result["round_scheduled_at"]));
+	$r2 = $statement->fetch();
+	$result["round_number"] = $r2["round_number"];
+
+	return $result;
+}
+
+function loadExistingRubric($msmid) {
+	global $pdo;
+	$statement = $pdo->prepare("
+		SELECT
+			*
+		FROM
+			feedback_for_fellow
+		WHERE
+			msm_id = ?
+	");
+	$statement->execute(array($msmid));
+	$result = $statement->fetch();
+
+	return $result;
 }

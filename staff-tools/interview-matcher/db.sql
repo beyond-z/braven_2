@@ -68,6 +68,7 @@ CREATE TABLE fellows (
 	id INTEGER NOT NULL AUTO_INCREMENT,
 	event_id INTEGER NOT NULL,
 	name VARCHAR(255) NOT NULL,
+	email_address VARCHAR(80) NULL,
 	score INTEGER NOT NULL,
 	available BOOLEAN NOT NULL,
 	-- interests are done in the following table
@@ -120,7 +121,7 @@ DROP TABLE IF EXISTS `feedback_for_fellow`;
 CREATE TABLE feedback_for_fellow (
 	id INTEGER NOT NULL AUTO_INCREMENT,
 
-	msm_id INTEGER NOT NULL,
+	msm_id INTEGER NOT NULL, -- this should probably be indexed tbh, since it is what really gets selected on for updates.
 
 	fellow_name VARCHAR(80) NOT NULL,
 	fellow_university VARCHAR(80) NOT NULL,
@@ -138,6 +139,10 @@ CREATE TABLE feedback_for_fellow (
 	q10 VARCHAR(20) NOT NULL,
 
 	comments TEXT NOT NULL,
+
+	when_started TIMESTAMP NULL,
+	when_submitted TIMESTAMP NULL,
+	when_last_changed TIMESTAMP NULL,
 
 	FOREIGN KEY (msm_id) REFERENCES match_sets_members(match_member_id) ON DELETE CASCADE,
 	PRIMARY KEY (id)

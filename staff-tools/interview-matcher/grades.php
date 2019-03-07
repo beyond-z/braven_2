@@ -13,11 +13,35 @@
 		exit;
 	}
 
+	// I need to map match_sets to round numbers for the export,
+	// and since our version of mysql doesn't support the necessary
+	// function to do it inline, i will have to do it here separately.
+	$round_number_mapping = array();
+	$statement = $pdo->prepare("
+		SELECT
+			id
+		FROM
+			match_sets
+		WHERE
+			event_id = ?
+		ORDER BY
+			when_created
+	");
+	$statement->execute(array($event_id));
+	$rn = 0;
+	while($row = $statement->fetch()) {
+		$rn++;
+		$round_number_mapping[$row["id"]] = $rn;
+	}
+
 
 	$statement = $pdo->prepare("
 		SELECT
 			fellows.name AS supposed_fellow_name,
 			volunteers.name AS supposed_volunteer_name,
+			fellows.email_address AS fellow_email_address,
+
+			match_sets.id AS round_number,
 
 			feedback_for_fellow.fellow_name,
 			feedback_for_fellow.fellow_university,
@@ -34,7 +58,11 @@
 			feedback_for_fellow.q9,
 			feedback_for_fellow.q10,
 
-			feedback_for_fellow.comments
+			feedback_for_fellow.comments,
+
+			feedback_for_fellow.when_started,
+			feedback_for_fellow.when_submitted,
+			feedback_for_fellow.when_last_changed
 		FROM
 			feedback_for_fellow
 		INNER JOIN
@@ -48,7 +76,7 @@
 		WHERE
 			match_sets.event_id = ?
 		ORDER BY
-			fellow_name
+			fellow_name, match_sets.when_created
 	");
 
 	$statement->execute(array($event_id));
@@ -66,6 +94,9 @@
 			$headers = array_keys($row);
 			fputcsv($fp, $headers);
 			$first = false;
+		} else {
+			// translate sorted IDs into human-readable round numbers
+			$row["round_number"] = $round_number_mapping[$row["round_number"]];
 		}
 
 		$data = $row;

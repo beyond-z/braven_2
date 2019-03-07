@@ -90,22 +90,27 @@
 			<th>Score</th>
 			<th>Available</th>
 			<th>Interests</th>
+			<th>E-mail Address</th>
 		</tr>
 		<tr>
 			<td>Anne</td>
 			<td>45</td>
 			<td>true</td>
 			<td>psychology; pride; prejudice</td>
+			<td>anne@sjsu.edu</td>
 		</tr>
 		<tr>
 			<td>Bert</td>
 			<td>25</td>
 			<td>true</td>
 			<td>theology; spaceships</td>
+			<td>bert@sjsu.edu</td>
 		</tr>
 	</table>
 
 	<p>Note that the interests are separated by semicolons in the cell.</p>
+
+	<p><b>New in 2019</b>: you should now add fellow email addresses to the import. This is ideally the same address they use in Portal. It is here so the data team can automate grades import back into the gradebook for you.</p>
 
 	<p>And make sure it is in <b>.csv</b> format, comma-separated values.</p>
 
