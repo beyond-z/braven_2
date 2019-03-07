@@ -102,7 +102,7 @@
 
 						comments,
 
-						when_created,
+						when_started,
 						when_last_changed
 						".(isset($_POST["submitted"]) ? ", when_submitted" : "")."
 					)
