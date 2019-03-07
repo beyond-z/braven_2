@@ -114,8 +114,8 @@
 
 					?,
 
-					?,
-					?
+					NOW(),
+					NOW()
 					".(isset($_POST["submitted"]) ? ", NOW()" : "")."
 					)
 			");
