@@ -17,6 +17,13 @@
 	}
 
 	if(isset($_POST["msmid"])) {
+
+		function coalesce($f) {
+			if($f === null)
+				return "incomplete";
+			return $f;
+		}
+
 		global $pdo;
 
 		$statement = $pdo->prepare("
@@ -61,29 +68,23 @@
 			$statement->execute(array(
 				$_POST["fellow_name"], $_POST["fellow_university"], $_POST["interviewer_name"],
 
-				$_POST["q1"],
-				$_POST["q2"],
-				$_POST["q3"],
-				$_POST["q4"],
-				$_POST["q5"],
-				$_POST["q6"],
-				$_POST["q7"],
-				$_POST["q8"],
-				$_POST["q9"],
-				$_POST["q10"],
+				coalesce($_POST["q1"]),
+				coalesce($_POST["q2"]),
+				coalesce($_POST["q3"]),
+				coalesce($_POST["q4"]),
+				coalesce($_POST["q5"]),
+				coalesce($_POST["q6"]),
+				coalesce($_POST["q7"]),
+				coalesce($_POST["q8"]),
+				coalesce($_POST["q9"]),
+				coalesce($_POST["q10"]),
 
-				$_POST["comments"],
+				coalesce($_POST["comments"]),
 
 				$result["id"]
 			));
 		} else {
 			// not exist, create
-
-			function coalesce($f) {
-				if($f === null)
-					return "incomplete";
-				return $f;
-			}
 
 			$statement = $pdo->prepare("
 				INSERT INTO
