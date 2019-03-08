@@ -5,6 +5,9 @@
 
 	requireLogin();
 
+	// so csvs from Macs work as well as from Linux or Windows boxes
+	ini_set('auto_detect_line_endings', true);
+
 	if(isset($_POST["send_nag"])) {
 		require_once("db.php");
 
@@ -49,6 +52,16 @@
 			if(!$fp) exit("zip failed...");
 
 			while($data = fgetcsv($fp)) {
+
+				// the results include last week too, so
+				// we only want to consider those submitted
+				// this week
+				$timestamp = strtotime($data[0]);
+				$max = strtotime("last Sunday");
+				if($timestamp < $max) {
+					continue;
+				}
+
 				switch($data[1]) {
 					case "Fellow":
 						$fellowsToContact[$data[2]] = null;
