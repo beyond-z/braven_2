@@ -385,7 +385,7 @@ function send_sms($to, $message) {
 	return "Twilio responded: $answer \n";
 }
 
-
+require("../libs/email.php");
 
 function send_nags($event_id, $match_id) {
 	$matches = load_match_history_details($event_id, $match_id);
@@ -404,7 +404,7 @@ function send_nags($event_id, $match_id) {
 		$cn = $volunteer["feedback_nag_address"];
 		if($cn !== null && $cn != "") {
 			if(strpos($cn, "@") !== FALSE) {
-				mail($cn, "Braven - Please record feedback about your interview", $msg);
+				sendEmail($cn, "Please record feedback about your interview", $msg);
 			} else {
 				$answer = send_sms($cn, $msg);
 

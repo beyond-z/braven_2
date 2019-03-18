@@ -62,11 +62,11 @@
 			<td>false</td>
 			<td>Room 123</td>
 			<td>psychology; medicine</td>
-			<td>212-555-9876</td>
+			<td>peggy@example.com</td>
 		</tr>
 	</table>
 
-	<p>The feedback nag address is <b>new in 2019</b>. It should be the volunteer's cell number, not necessarily the number from which they will conduct the interview. The system will text that number a link to the rubric for all their fellow matches.</p>
+	<p>The feedback nag address is <b>new in 2019</b>. It should be the volunteer's cell number or email address, not necessarily the number from which they will conduct the interview. The system will text that number or email that address a link to the rubric for all their fellow matches.</p>
 
 	<p>Note that the interests are separated by semicolons in the cell.</p>
 
