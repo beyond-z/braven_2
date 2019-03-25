@@ -151,6 +151,9 @@
 		}
 	?>
 		Thank you. Your feedback has been recorded and is appreciated!
+
+		<?php if($next_link) ?>
+			<a href="<?php echo $next_link;?>">Record feedback for next round</a>
 	<?php
 
 		exit;
