@@ -506,7 +506,8 @@ function loadMatch($msmid) {
 			msm.match_member_id AS msmid,
 
 			events.id AS event_id,
-			match_sets.when_created AS round_scheduled_at
+			match_sets.when_created AS round_scheduled_at,
+			msm.volunteer_id AS volunteer_id
 		FROM
 			match_sets_members msm
 		INNER JOIN
@@ -523,14 +524,52 @@ function loadMatch($msmid) {
 	$statement->execute(array($msmid));
 	$result = $statement->fetch();
 
+	// this is inefficient but the data sets are small enough that it is ok
+	// at least until we get new mysql with window function support <3
+	$round_number = 0;
 	$statement = $pdo->prepare("
-		SELECT count(*) + 1 AS round_number
-		FROM match_sets
-		WHERE event_id = ? AND when_created < ?
+		SELECT
+			msm.link_nonce AS link_nonce,
+			msm.match_member_id AS msmid,
+			msm.volunteer_id AS volunteer_id,
+			match_sets.id AS match_set_id
+		FROM
+			match_sets_members msm
+		INNER JOIN
+			match_sets ON msm.match_set_id = match_sets.id
+		WHERE
+			event_id = ?
+		ORDER BY
+			when_created
 	");
-	$statement->execute(array($result["event_id"], $result["round_scheduled_at"]));
-	$r2 = $statement->fetch();
-	$result["round_number"] = $r2["round_number"];
+	$statement->execute(array($result["event_id"]));
+	$prev = null;
+	$next_on_deck = false;
+	$previous_match_set_id = null;
+	while($r2 = $statement->fetch()) {
+		if($previous_match_set_id != $r2["match_set_id"]) {
+			$round_number++;
+			$previous_match_set_id = $r2["match_set_id"];
+		}
+
+		if($r2["volunteer_id"] != $result["volunteer_id"])
+			continue;
+
+		$this_link = "interview-feedback.php?msmid={$r2["msmid"]}&link_nonce={$r2["link_nonce"]}";
+
+		if($next_on_deck) {
+			$result["next_link"] = $this_link;
+			break;
+		}
+
+		if($r2["msmid"] == $msmid) {
+			$result["round_number"] = $round_number;
+			$result["previous_link"] = $prev;
+			$next_on_deck = true;
+		}
+
+		$prev = $this_link;
+	}
 
 	return $result;
 }
