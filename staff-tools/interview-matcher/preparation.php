@@ -1,6 +1,6 @@
 <?php
 	include_once("sso.php");
-	requireLogin();
+	requireAdmin();
 ?><!DOCTYPE html>
 <html>
 <head>

@@ -3,7 +3,7 @@
 
 	require_once("sso.php");
 
-	requireLogin();
+	requireAdmin();
 
 	// so csvs from Macs work as well as from Linux or Windows boxes
 	ini_set('auto_detect_line_endings', true);
