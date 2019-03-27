@@ -20,7 +20,8 @@
 					"score" => trim($data[1]),
 					"available" => strtolower(trim($data[2])) == "true",
 					"interests" => array_map("trim", explode(";", $data[3])),
-					"email_address" => trim($data[4])
+					"email_address" => trim($data[4]),
+					"phone_number" => trim($data[5])
 				);
 
 				$fellows[] = $fellow;
