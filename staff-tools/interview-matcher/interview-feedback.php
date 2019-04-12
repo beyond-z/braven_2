@@ -16,6 +16,9 @@
 		exit;
 	}
 
+	$previous_link = $match["previous_link"];
+	$next_link = $match["next_link"];
+
 	if(isset($_POST["msmid"])) {
 
 		function coalesce($f) {
@@ -148,6 +151,9 @@
 		}
 	?>
 		Thank you. Your feedback has been recorded and is appreciated!
+
+		<?php if($next_link) ?>
+			<a href="<?php echo $next_link;?>">Record feedback for next round</a>
 	<?php
 
 		exit;
@@ -218,6 +224,18 @@ All fields are required.
 <input type="hidden" name="link_nonce" value="<?php echo htmlentities($match["link_nonce"]); ?>" />
 
 <h2>Round <?php echo $match["round_number"]; ?></h2>
+<div style="margin-top: -12px; margin-bottom: 18px;">
+	<?php if($previous_link) { ?>
+		<a href="<?php echo $previous_link; ?>">Previous</a>
+	<?php } ?>
+	<?php if($previous_link && $next_link) { ?>
+		|
+	<?php } ?>
+	<?php if($next_link) { ?>
+		<a href="<?php echo $next_link; ?>">Next</a>
+	<?php } ?>
+	&nbsp;
+</div>
 
 <div class="field">
 	<label><span class="question">Interviewer Name (first and last):</span>
