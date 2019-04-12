@@ -5,19 +5,41 @@
 
 	requireLogin();
 
+	require_once("db.php");
+
 	// so csvs from Macs work as well as from Linux or Windows boxes
 	ini_set('auto_detect_line_endings', true);
 
 	if(isset($_POST["send_nag"])) {
-		require_once("db.php");
+		$pm_nag_group_id = $_POST["pm_nag_group_id"];
+
+		$statement = $pdo->prepare("INSERT INTO pm_nag_group_member_nag_batch
+			(created_by, created_at) VALUES (?, now())");
+		$statement->execute(array($_SESSION["user"]));
+
+		$id = $pdo->lastInsertId();
+
+		$statement = $pdo->prepare("INSERT INTO
+			pm_nag_group_member_nag
+				(pm_nag_group_member_nag_batch_id, pm_nag_group_member_id, reply)
+			VALUES
+				(?, ?, ?)
+		");
 
 		$message = $_POST["message"];
 
 		echo "Sending messages, please wait...<br />";
 		flush();
 
-		foreach($_POST["nag_number"] as $to) {
-			send_sms($to, $message);
+		foreach($_POST["nag_number"] as $to_combined) {
+			// it goes id_number
+			$idx = strpos($to_combined, "_");
+
+			$mid = substr($to_combined, 0, $idx);
+			$to = substr($to_combined, $idx + 1);
+
+			$reply = send_sms($to, $message);
+			$statement->execute(array($id, $mid, $reply));
 			echo ".";
 			flush();
 		}
@@ -27,24 +49,73 @@
 		exit;
 	}
 
-	if(isset($_FILES["pmmapping"])) {
+	if(isset($_POST["pmmapping_name"])) {
 		$fellowsToContact = array();
 		$pmsToContact = array();
 
-		$fp = fopen($_FILES["pmmapping"]["tmp_name"], "r");
-		$first = true;
-		while($data = fgetcsv($fp)) {
-			// to skip the header
-			if($first) {
-				$first = false;
-				continue;
-			}
+		$id = (int) $_POST["pm_nag_group_id"];
+		if($id == 0) {
+			// load from a file
+			$fp = fopen($_FILES["pmmapping"]["tmp_name"], "r");
+			$first = true;
 
-			$fellowsToContact[$data[0]] = $data[2];
-			// not a typo there - the survey responses are always keyed by fellow name
-			$pmsToContact[$data[0]] = $data[3];
+			$pdo->beginTransaction();
+
+			$statement = $pdo->prepare("INSERT INTO pm_nag_group (name, created_by, default_message) VALUES (?, ?, ?)");
+			$statement->execute(array($_POST["pmmapping_name"], $_SESSION["user"], $_POST["default_message"]));
+			$id = $pdo->lastInsertId();
+
+			$statement = $pdo->prepare("
+				INSERT INTO
+					pm_nag_group_member
+					(
+						pm_nag_group_id,
+						fellow_name,
+						pm_name,
+						fellow_number,
+						pm_number
+					)
+					VALUES
+					(?, ?, ?, ?, ?)
+			");
+
+			while($data = fgetcsv($fp)) {
+				// to skip the header
+				if($first) {
+					$first = false;
+					continue;
+				}
+
+				$statement->execute(array($id, $data[0], $data[1], $data[2], $data[3]));
+			}
+			fclose($fp);
+
+			$pdo->commit();
 		}
-		fclose($fp);
+
+		$statement = $pdo->prepare("SELECT default_message FROM pm_nag_group WHERE id = ?");
+		$statement->execute(array($id));
+		$row = $statement->fetch(PDO::FETCH_ASSOC);
+		$default_message = $row["default_message"];
+
+		$statement = $pdo->prepare("
+			SELECT
+				fellow_name,
+				pm_name,
+				fellow_number,
+				pm_number,
+				id
+			FROM
+				pm_nag_group_member
+			WHERE
+				pm_nag_group_id = ?
+		");
+		$statement->execute(array($id));
+		while($row = $statement->fetch(PDO::FETCH_NUM)) {
+			$fellowsToContact[$row[0]] = array($row[2], $row[4]);
+			// not a typo there - the survey responses are always keyed by fellow name
+			$pmsToContact[$row[0]] = array($row[3], $row[4]);
+		}
 
 		$zip = new ZipArchive();
 		if($zip->open($_FILES["sheet"]["tmp_name"])) {
@@ -102,22 +173,23 @@
 	Suggested messages:<br /><br /><br />
 
 	<form method="POST">
+		<input type="hidden" name="pm_nag_group_id" value="<?php echo $id; ?>" />
 		<label>Message to send:<br />
-		<textarea name="message" maxlength="140">Please complete your the survey for your Braven PM experience.</textarea></label>
+		<textarea name="message" maxlength="140"><?php echo htmlentities($default_message); ?></textarea></label>
 		<br /><br />
 	<?php
-		foreach($pmsToContact as $fellowName => $pmNumber) {
-			if($pmNumber === null)
+		foreach($pmsToContact as $fellowName => $info) {
+			if($info === null)
 				continue;
 
-			echo "<label><input checked=\"checked\" type=\"checkbox\" name=\"nag_number[]\" value=\"$pmNumber\" /> PM for $fellowName via $pmNumber</label>";
+			echo "<label><input checked=\"checked\" type=\"checkbox\" name=\"nag_number[]\" value=\"{$info[1]}_".htmlentities($info[0])."\" /> PM for $fellowName via {$info[0]}</label>";
 			echo "<br />";
 		}
-		foreach($fellowsToContact as $fellowName => $fellowNumber) {
-			if($fellowNumber === null)
+		foreach($fellowsToContact as $fellowName => $info) {
+			if($info === null)
 				continue;
 
-			echo "<label><input checked=\"checked\" type=\"checkbox\" name=\"nag_number[]\" value=\"$fellowNumber\" />$fellowName via $fellowNumber</label>";
+			echo "<label><input checked=\"checked\" type=\"checkbox\" name=\"nag_number[]\" value=\"{$info[1]}_".htmlentities($info[0])."\" />$fellowName via {$info[0]}</label>";
 			echo "<br />";
 		}
 	?>
@@ -150,27 +222,87 @@
 			font-size: 120%;
 			font-weight: bold;
 		}
+		textarea {
+			width: 30em;
+			height: 5em;
+		}
+
+		.using-preset,
+		.using-preset * {
+			background-color: #666;
+		}
 	</style>
 </head>
 <body>
 
 <form method="POST" enctype="multipart/form-data">
 
+<h1>Step one: identify participants</h1>
+
 <p>First, you need to upload a participants sheet. This should show the Fellow/PM pairs for your region who are supposed to fill out the survey, along with their phone numbers.</p>
 
-<p>Note that the names should be identical to the options on the Google Form, since it matches up by name, exactly.</p>
+<fieldset>
+	<legend>Reuse saved sheet</legend>
 
-<table class="sample">
-<caption>Sample Spreadsheet</caption>
-<tr><th>Fellow Name</th><th>PM Name</th><th>Fellow Number</th><th>PM Number</th></tr>
-<tr><td>Alice Example</td><td>Emily Post</td><td>800-555-3456</td><td>800-555-1234</td></tr>
-<tr><td>Bobby Tables</td><td>Sample Mentor</td><td>800-555-3456</td><td>800-555-1234</td></tr>
-</table>
+	<label>Reuse saved file:
 
-<p>Upload that here each time in csv format:</p>
-	<label>Participants sheet:
-		<input required="required" type="file" name="pmmapping" /></label>
+	<select name="pm_nag_group_id" onchange="
+		var fs = document.getElementById('upload-new-sheet');
+		fs.classList[this.value == '0' ? 'remove' : 'add']('using-preset');
+	">
+		<option value="0">-- Upload New File --</option>
+	<?php
+		$statement = $pdo->query("SELECT id, name, created_by FROM pm_nag_group");
+		$statement->execute();
+		$found_any = false;
+		$preset = false;
+		while($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+			$found_any = true;
+			$preset = $row["created_by"] == $_SESSION["user"];
+			echo "<option value=\"{$row["id"]}\"".(($preset) ? " selected" : "").">".htmlentities($row["name"])."</option>";
+		}
+	?>
+	</select>
+	</label>
+</fieldset>
 
+	<br />
+	<br />
+	- OR - 
+	<br />
+	<br />
+
+<fieldset id="upload-new-sheet"
+<?php
+	if($preset)
+		echo "class='using-preset'";
+?>
+>
+	<legend>Upload new sheet</legend>
+
+	<p>Note that the names should be identical to the options on the Google Form, since it matches up by name, exactly.</p>
+
+	<table class="sample">
+	<caption>Sample Spreadsheet</caption>
+	<tr><th>Fellow Name</th><th>PM Name</th><th>Fellow Number</th><th>PM Number</th></tr>
+	<tr><td>Alice Example</td><td>Emily Post</td><td>800-555-3456</td><td>800-555-1234</td></tr>
+	<tr><td>Bobby Tables</td><td>Sample Mentor</td><td>800-555-3456</td><td>800-555-1234</td></tr>
+	</table>
+
+	<p>Upload that here in csv format and give it a name so you can reuse it next time (remember this tool is shared across regions, so be sure to give it a distinct name):</p>
+		<label>New name:
+			<input type="text" name="pmmapping_name" /></label>
+		<br />
+		<label>Upload new file:
+			<input type="file" name="pmmapping" /></label>
+
+		<br />
+		<label>Message to pre-fill (saves time later, but optional)
+			<textarea maxlength="140" name="default_message">Please fill our the survey for your Braven PM experience.</textarea>
+		</label>
+</fieldset>
+
+<h1>Step two: get updated responses</h1>
 
 <p>Next, you need to get the responses file out of Google.</p>
 
