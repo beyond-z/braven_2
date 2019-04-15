@@ -78,7 +78,9 @@ function bz_show_proposed_matches($show_button = true) {
 			}
 			?>
 
-			<label><input name="nag" type="checkbox" checked="checked" /> Text rubrics to interviewers</label>
+			<label><input name="nag" type="checkbox" checked="checked" /> Text/email rubrics to interviewers</label>
+			<br /><br />
+			<label><input name="nag_fellows" type="checkbox" checked="checked" /> Text stations to fellows</label>
 			<br /><br />
 			<input type="submit" value="Finalize match!">
 		</form>

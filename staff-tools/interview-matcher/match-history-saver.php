@@ -5,6 +5,8 @@
 
 	if(isset($_POST["nag"]))
 		send_nags($_POST["event_id"], $match_id);
+	if(isset($_POST["nag_fellows"]))
+		send_stations($_POST["event_id"], $match_id);
 ?>
 <!DOCTYPE html>
 <html lang="en">

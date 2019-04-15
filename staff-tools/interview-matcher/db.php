@@ -62,6 +62,32 @@ function load_volunteers_from_database($event_id) {
 	return $volunteers;
 }
 
+function update_volunteer_in_database($id, $volunteer) {
+	global $pdo;
+
+	$statement = $pdo->prepare("
+		UPDATE volunteers SET
+			name = ?, vip = ?, available = ?, is_virtual = ?, contact_number = ?, feedback_nag_address = ?
+		WHERE
+			id = ?
+	");
+
+	$statement->execute(array(
+		$volunteer["name"],
+		$volunteer["vip"] ? 1 : 0,
+		$volunteer["available"] ? 1 : 0,
+		$volunteer["virtual"] ? 1 : 0,
+		$volunteer["number"],
+		$volunteer["feedback_nag_address"],
+		$id
+	));
+
+	$s = $pdo->prepare("DELETE FROM volunteer_interests WHERE volunteer_id = ?");
+	$s->execute(array($id));
+
+	saveVolunteerInterests($id, array_map("trim", explode(";", $volunteer["interests"])));
+}
+
 function save_volunteers_to_database($event_id, $volunteers) {
 	global $pdo;
 
@@ -71,14 +97,6 @@ function save_volunteers_to_database($event_id, $volunteers) {
 			(event_id, name, vip, available, is_virtual, contact_number, feedback_nag_address)
 		VALUES
 			(?, ?, ?, ?, ?, ?, ?)
-	");
-
-	$interest_statement = $pdo->prepare("
-		INSERT INTO
-			volunteer_interests
-			(volunteer_id, interest_id)
-		VALUES
-			(?, ?)
 	");
 
 	foreach($volunteers as $volunteer) {
@@ -93,14 +111,28 @@ function save_volunteers_to_database($event_id, $volunteers) {
 		));
 
 		$id = $pdo->lastInsertId();
-		$ints_done = array();
-		foreach($volunteer["interests"] as $interest) {
-			$interest = trim(strtolower($interest));
-			if($interest == "" || isset($ints_done[$interest]))
-				continue;
-			$ints_done[$interest] = true;
-			$interest_statement->execute(array($id, get_interest_id($interest)));
-		}
+		saveVolunteerInterests($id, $volunteer["interests"]);
+	}
+}
+
+function saveVolunteerInterests($id, $interests) {
+	global $pdo;
+
+	$interest_statement = $pdo->prepare("
+		INSERT INTO
+			volunteer_interests
+			(volunteer_id, interest_id)
+		VALUES
+			(?, ?)
+	");
+
+	$ints_done = array();
+	foreach($interests as $interest) {
+		$interest = trim(strtolower($interest));
+		if($interest == "" || isset($ints_done[$interest]))
+			continue;
+		$ints_done[$interest] = true;
+		$interest_statement->execute(array($id, get_interest_id($interest)));
 	}
 }
 
@@ -174,12 +206,39 @@ function load_fellows_from_database($event_id) {
 				'score' => $row["score"],
 				'interests' => $row["interest"] ? array( $row["interest"] ) : array(),
 				'available' => $row["available"],
+				'email_address' => $row["email_address"],
+				'phone_number' => $row["phone_number"],
 				'match_count' => 0 // FIXME do we need this at all? or do we need it populated?
 			);
 		}
 	}
 
 	return $fellows;
+}
+
+function update_fellow_in_database($id, $fellow) {
+	global $pdo;
+
+	$statement = $pdo->prepare("
+		UPDATE fellows SET
+			name = ?, score = ?, available = ?, email_address = ?, phone_number = ?
+		WHERE
+			id = ?
+	");
+
+	$statement->execute(array(
+		$fellow["name"],
+		(int) $fellow["score"],
+		$fellow["available"] ? 1 : 0,
+		$fellow["email_address"],
+		$fellow["phone_number"],
+		$id
+	));
+
+	$s = $pdo->prepare("DELETE FROM fellow_interests WHERE fellow_id = ?");
+	$s->execute(array($id));
+
+	saveFellowInterests($id, array_map("trim", explode(";", $fellow["interests"])));
 }
 
 function save_fellows_to_database($event_id, $fellows) {
@@ -193,14 +252,6 @@ function save_fellows_to_database($event_id, $fellows) {
 			(?, ?, ?, ?, ?, ?)
 	");
 
-	$interest_statement = $pdo->prepare("
-		INSERT INTO
-			fellow_interests
-			(fellow_id, interest_id)
-		VALUES
-			(?, ?)
-	");
-
 	foreach($fellows as $fellow) {
 		$statement->execute(array(
 			$event_id,
@@ -212,15 +263,29 @@ function save_fellows_to_database($event_id, $fellows) {
 		));
 
 		$id = $pdo->lastInsertId();
-		$ints_done = array();
-		foreach($fellow["interests"] as $interest) {
-			$interest = trim(strtolower($interest));
-			if($interest == "" || isset($ints_done[$interest]))
-				continue;
-			$ints_done[$interest] = true;
+		saveFellowInterests($id, $fellow["interests"]);
+	}
+}
 
-			$interest_statement->execute(array($id, get_interest_id($interest)));
-		}
+function saveFellowInterests($id, $interests) {
+	global $pdo;
+
+	$interest_statement = $pdo->prepare("
+		INSERT INTO
+			fellow_interests
+			(fellow_id, interest_id)
+		VALUES
+			(?, ?)
+	");
+
+	$ints_done = array();
+	foreach($interests as $interest) {
+		$interest = trim(strtolower($interest));
+		if($interest == "" || isset($ints_done[$interest]))
+			continue;
+		$ints_done[$interest] = true;
+
+		$interest_statement->execute(array($id, get_interest_id($interest)));
 	}
 }
 
@@ -390,6 +455,35 @@ function send_sms($to, $message) {
 
 require("../libs/email.php");
 
+function send_stations($event_id, $match_id) {
+	$matches = load_match_history_details($event_id, $match_id);
+	$volunteers = load_volunteers_from_database($event_id);
+	$fellows = load_fellows_from_database($event_id);
+
+	$match_set = $matches[$match_id];
+
+	foreach($match_set as $match_details) {
+		$fellow_id = $match_details["fellow_id"];
+		$volunteer_id = $match_details["volunteer_id"];
+		$volunteer = $volunteers[$volunteer_id];
+
+		$in_person = !$volunteer["virtual"];
+		$station  = $volunteer["number"];
+
+		$in_person_text = $in_person ? "" : "(virtual)";
+
+		$fellow = $fellows[$fellow_id];
+		if($fellow["phone_number"] != null && $fellow["phone_number"] != "") {
+			$msg = "You have been assigned to $in_person_text $station for the next interview round!";
+			$answer = send_sms($fellow["phone_number"], $msg);
+
+			$fp = fopen("log/sms.txt", "a");
+			fwrite($fp, $answer);
+			fclose($fp);
+		}
+	}
+}
+
 function send_nags($event_id, $match_id) {
 	$matches = load_match_history_details($event_id, $match_id);
 	$volunteers = load_volunteers_from_database($event_id);
@@ -416,28 +510,6 @@ function send_nags($event_id, $match_id) {
 				fwrite($fp, $answer);
 				fclose($fp);
 			}
-		}
-	}
-
-	// and also tell the fellows which station they are assigned to
-	foreach($match_set as $match_details) {
-		$fellow_id = $match_details["fellow_id"];
-		$volunteer_id = $match_details["volunteer_id"];
-		$volunteer = $volunteers[$volunteer_id];
-
-		$in_person = !$volunteer["virtual"];
-		$station  = $volunteer["number"];
-
-		$in_person_text = $in_person ? "" : "(virtual)";
-
-		$fellow = $fellows[$fellow_id];
-		if($fellow["phone_number"] != null && $fellow["phone_number"] != "") {
-			$msg = "You have been assigned to $in_person_text $station for the next interview round!";
-			$answer = send_sms($fellow["phone_number"], $msg);
-
-			$fp = fopen("log/sms.txt", "a");
-			fwrite($fp, $answer);
-			fclose($fp);
 		}
 	}
 }

@@ -3,3 +3,4 @@
 <a href="results.php">See Matches for an event</a><br />
 <a href="stats.php">Event matching stats</a><br />
 <a href="grades.php">Event grades / feedback</a><br />
+<a href="edit-sheet.php">Last-minute edit to existing event roster</a><br />

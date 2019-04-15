@@ -17,7 +17,7 @@ function getMailer() {
 	$mail->Password = $WP_CONFIG["BRAVEN_SMTP_PASSWORD"];
 	$mail->SMTPSecure = "tls";
 	$mail->Port = 587;
-	$mail->setFrom("no-reply@beyondz.org", "Braven Team");
+	$mail->setFrom("no-reply@bebraven.org", "Braven Team");
 
 	return $mail;
 }
