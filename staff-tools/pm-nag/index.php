@@ -3,7 +3,7 @@
 
 	require_once("sso.php");
 
-	requireLogin();
+	requireAdmin();
 
 	require_once("db.php");
 

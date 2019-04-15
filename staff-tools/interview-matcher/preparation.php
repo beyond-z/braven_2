@@ -1,6 +1,6 @@
 <?php
 	include_once("sso.php");
-	requireLogin();
+	requireAdmin();
 ?><!DOCTYPE html>
 <html>
 <head>
@@ -91,6 +91,7 @@
 			<th>Available</th>
 			<th>Interests</th>
 			<th>E-mail Address</th>
+			<th>Phone Number</th>
 		</tr>
 		<tr>
 			<td>Anne</td>
@@ -98,6 +99,7 @@
 			<td>true</td>
 			<td>psychology; pride; prejudice</td>
 			<td>anne@sjsu.edu</td>
+			<td>123-555-1234</td>
 		</tr>
 		<tr>
 			<td>Bert</td>
@@ -105,12 +107,15 @@
 			<td>true</td>
 			<td>theology; spaceships</td>
 			<td>bert@sjsu.edu</td>
+			<td>123-555-5678</td>
 		</tr>
 	</table>
 
 	<p>Note that the interests are separated by semicolons in the cell.</p>
 
 	<p><b>New in 2019</b>: you should now add fellow email addresses to the import. This is ideally the same address they use in Portal. It is here so the data team can automate grades import back into the gradebook for you.</p>
+
+	<p>You can also add the fellow's phone number, which will enable texting them their station assignments during the event as you finalize matches.</p>
 
 	<p>And make sure it is in <b>.csv</b> format, comma-separated values.</p>
 

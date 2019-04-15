@@ -145,7 +145,9 @@ function load_fellows_from_database($event_id) {
 			fellows.name,
 			fellows.score,
 			fellows.available,
-			interests.interest
+			interests.interest,
+			fellows.email_address,
+			fellows.phone_number
 		FROM
 			fellows
 		LEFT OUTER JOIN
@@ -186,9 +188,9 @@ function save_fellows_to_database($event_id, $fellows) {
 	$statement = $pdo->prepare("
 		INSERT INTO
 			fellows
-			(event_id, name, score, available, email_address)
+			(event_id, name, score, available, email_address, phone_number)
 		VALUES
-			(?, ?, ?, ?, ?)
+			(?, ?, ?, ?, ?, ?)
 	");
 
 	$interest_statement = $pdo->prepare("
@@ -205,7 +207,8 @@ function save_fellows_to_database($event_id, $fellows) {
 			$fellow["name"],
 			(int) $fellow["score"],
 			$fellow["available"] ? 1 : 0,
-			$fellow["email_address"]
+			$fellow["email_address"],
+			$fellow["phone_number"]
 		));
 
 		$id = $pdo->lastInsertId();
@@ -390,6 +393,7 @@ require("../libs/email.php");
 function send_nags($event_id, $match_id) {
 	$matches = load_match_history_details($event_id, $match_id);
 	$volunteers = load_volunteers_from_database($event_id);
+	$fellows = load_fellows_from_database($event_id);
 
 	$match_set = $matches[$match_id];
 
@@ -412,6 +416,28 @@ function send_nags($event_id, $match_id) {
 				fwrite($fp, $answer);
 				fclose($fp);
 			}
+		}
+	}
+
+	// and also tell the fellows which station they are assigned to
+	foreach($match_set as $match_details) {
+		$fellow_id = $match_details["fellow_id"];
+		$volunteer_id = $match_details["volunteer_id"];
+		$volunteer = $volunteers[$volunteer_id];
+
+		$in_person = !$volunteer["virtual"];
+		$station  = $volunteer["number"];
+
+		$in_person_text = $in_person ? "" : "(virtual)";
+
+		$fellow = $fellows[$fellow_id];
+		if($fellow["phone_number"] != null && $fellow["phone_number"] != "") {
+			$msg = "You have been assigned to $in_person_text $station for the next interview round!";
+			$answer = send_sms($fellow["phone_number"], $msg);
+
+			$fp = fopen("log/sms.txt", "a");
+			fwrite($fp, $answer);
+			fclose($fp);
 		}
 	}
 }
