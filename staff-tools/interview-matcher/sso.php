@@ -32,13 +32,8 @@ if(isset($_SESSION["sso_service"]) && isset($_SESSION["coming_from"]) && isset($
 	$xml->loadXML($content);
 	$user = $xml->getElementsByTagNameNS("*", "user")->item(0)->textContent;
 
-	if($user == "admin@beyondz.org" || strpos($user, "@bebraven.org") !== FALSE) {
-		// login successful
-		$_SESSION["user"] = $user;
-	} else {
-		echo "User " . htmlentities($user) . " is not authorized. Try logging out of SSO first.";
-		exit;
-	}
+	// login successful
+	$_SESSION["user"] = $user;
 
 	header("Location: " . $coming_from);
 	exit;
@@ -67,9 +62,19 @@ function isAdmin() {
 
 	$user = $_SESSION["user"];
 
-	if($user == "admin@beyondz.org" || strpos($user, "@bebraven.org") !== FALSE) {
+	// the second thing is basically $user.endsWith(@bebraven.org); a simple check for a staff email
+	// doesn't use the old strpos anymore because it could be a subdomain of another domain!
+	if($user == "admin@beyondz.org" || (substr($user, -strlen("@bebraven.org")) == "@bebraven.org")) {
 		return true;
 	}
 
 	return false;
+}
+
+function requireAdmin() {
+	requireLogin();
+	if(!isAdmin()) {
+		session_unset();
+		die("Log out of SSO, then return here and log back in with your Braven account to continue.");
+	}
 }

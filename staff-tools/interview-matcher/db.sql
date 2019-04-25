@@ -71,6 +71,7 @@ CREATE TABLE fellows (
 	email_address VARCHAR(80) NULL,
 	score INTEGER NOT NULL,
 	available BOOLEAN NOT NULL,
+	phone_number VARCHAR(40) NULL,
 	-- interests are done in the following table
 	FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE,
 	PRIMARY KEY (id)
