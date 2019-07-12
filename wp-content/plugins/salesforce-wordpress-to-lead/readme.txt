@@ -2,8 +2,8 @@
 Contributors: brilliantplugins, nickciske, stuporglue, jrfoell
 Tags: crm, contact form, contactform, web to lead, case to lead, salesforce.com, salesforce, salesforce crm, contact form plugin, contact form builder
 Requires at least: 4.0
-Tested up to: 4.8
-Stable tag: 2.7.3.2
+Tested up to: 5.1
+Stable tag: 2.7.3.4
 License: GPLv2
 Donate link: https://donate.charitywater.org/donate
 
@@ -52,6 +52,12 @@ To turn on in browser debugging, add a hidden field (enabled) named `debug` and 
 To turn on debugging via email,  add a hidden field (enabled) named `debugEmail` and set the value to `you@yourdomain.com` (your email address).
 
 Also check for debug logs at SalesForce to see if a validation rule is the culprit: `Administration Setup | Monitoring | Debug Logs`.
+
+= I'm not receiving new submission emails  =
+
+99% of the time the plugin is sendign these... and the issue is at the WordPress or server level.
+
+The Give team has an excellent article on [diagnosing and troubleshooting email issues](https://givewp.com/documentation/core/settings/emails/troubleshooting-common-email-problems/).
 
 = What are the built in field names? Not all the fields are working when I use the Field Label in the lead edit screen? =
 
@@ -524,7 +530,11 @@ _Note: Leading & trailing whitespace is trimmed when names and values are displa
 
 Choose it from the dropdown, that's all you *have* to do.
 
-If you want to customize the date format or display/functionality of the datepicker UI, you can set the options by entering a list of options in the Options box of the field editor, one per line. Note that you must end each option with a comma, or you'll end up with a javascript error instead of a datepicker.
+If you want to customize the date format or display/functionality of the datepicker UI, you can set the options by entering a list of options in the Options box of the field editor, one per line.
+
+Note that you must end each option with a comma, or you'll end up with a javascript error instead of a datepicker.
+
+Note that any options you specify will *override* the default options.
 
 e.g.
 
@@ -1081,6 +1091,17 @@ function salesforce_w2l_after_submit_example( $post, $form_id, $form_type ){
 `
 
 == Changelog ==
+
+= 2.7.3.4 =
+* Restore missing assets in WordPress.org repository
+
+= 2.7.3.3 =
+* Add support for showing year in datepicker
+* Update tested up to version
+
+= 2.7.3.2 =
+* Fix PHP notice
+* Update tested up to version
 
 = 2.7.3.1 =
 * Use compact recaptcha in sidebar forms
