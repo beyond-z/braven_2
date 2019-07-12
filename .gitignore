@@ -36,6 +36,7 @@ Thumbs.db
 *.rar
 *.tar
 *.zip
+*.tar.gz*
 
 # ignore DreamWeaver notes
 _notes

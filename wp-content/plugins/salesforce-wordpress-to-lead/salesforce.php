@@ -4,7 +4,7 @@ Plugin Name: Brilliant Web-to-Lead for Salesforce
 Plugin URI: http://wordpress.org/plugins/salesforce-wordpress-to-lead/
 Description: Easily embed a contact form into your posts, pages or your sidebar, and capture the entries straight into Salesforce CRM. Also supports Web to Case and Comments to leads.
 Author: BrilliantPlugins
-Version: 2.7.3.2
+Version: 2.7.3.4
 Author URI: https://brilliantplugins.com/
 License: GPL2
 */
@@ -64,6 +64,14 @@ function salesforce_default_settings() {
 
 	$options['usecss']				= true;
 	$options['wpcf7css']			= false;
+
+	$options['captcha_type']		= null;
+	$options['wpcf7jsfix']			= null;
+	$options['sslverify']		= null;
+
+	$options['layout']		= null;
+	$options['donotautoaddcolontolabels']		= null;
+
 	//$options['hide_salesforce_link']= true;
 
 	$options['forms'][1] = Salesforce_Admin::default_form();
@@ -432,7 +440,7 @@ function salesforce_form($options, $is_sidebar = false, $errors = null, $form_id
 
 			$content .= '<div class="sf_field sf_field_recaptcha sf_type_recaptcha">';
 				$content .= '<br>';
-				
+
 				if( $sidebar ){
 					$content .= '<div class="g-recaptcha" data-size="compact" data-sitekey="' . esc_attr( salesforce_get_option('recaptcha_site_key', $form_id, $options ) ) . '"></div>';
 				}else{
@@ -550,7 +558,7 @@ function salesforce_form($options, $is_sidebar = false, $errors = null, $form_id
 
 	if( $date_fields ){
 		wp_enqueue_script('jquery-ui-datepicker');
-		wp_enqueue_style('jquery-style', '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
+		wp_enqueue_style('jquery-style', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
 
 		$content .= "<script>jQuery(document).ready(function( $ ) {";
 
@@ -559,7 +567,8 @@ function salesforce_form($options, $is_sidebar = false, $errors = null, $form_id
 			$options = trim( stripslashes( $date_field['opts'] ) );
 
 			if( !$options ){
-				$options = "dateFormat : 'yy-mm-dd',";
+				$options = "dateFormat : 'yy-mm-dd',
+				changeYear: true";
 			}
 
 			$content .= "
@@ -799,6 +808,12 @@ function salesforce_maybe_implode( $delimiter, $data ){
 
 function salesforce_cc_admin( $post, $options, $form_id = 1, $subject = '', $append = '' ){
 
+	if( $options['forms'][$form_id]['type'] == 'case' ){
+		$form_type = __( 'Case', 'salesforce' );
+	}else{
+		$form_type = __( 'Lead', 'salesforce' );
+	}
+
 	if( !$subject )
 		$subject = '[' . __( 'Salesforce Web to %%type%% Submission', 'salesforce' ) . ']';
 
@@ -826,12 +841,6 @@ function salesforce_cc_admin( $post, $options, $form_id = 1, $subject = '', $app
 
 	if( $replyto_email && is_email( $replyto_email ) ){
 		$headers .= 'Reply-to: ' . $replyto_email . "\r\n";
-	}
-
-	if( $options['forms'][$form_id]['type'] == 'case' ){
-		$form_type = __( 'Case', 'salesforce' );
-	}else{
-		$form_type = __( 'Lead', 'salesforce' );
 	}
 
 	$message = '';
