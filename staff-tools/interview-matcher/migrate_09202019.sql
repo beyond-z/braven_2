@@ -1,0 +1,3 @@
+ALTER TABLE feedback_for_fellow
+	ADD q11 VARCHAR(20) NOT NULL,
+	ADD q12 VARCHAR(20) NOT NULL;

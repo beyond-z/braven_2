@@ -59,6 +59,8 @@
 					q8 = ?,
 					q9 = ?,
 					q10 = ?,
+					q11 = ?,
+					q12 = ?,
 
 					comments = ?,
 
@@ -81,6 +83,8 @@
 				coalesce($_POST["q8"]),
 				coalesce($_POST["q9"]),
 				coalesce($_POST["q10"]),
+				coalesce($_POST["q11"]),
+				coalesce($_POST["q12"]),
 
 				coalesce($_POST["comments"]),
 
@@ -109,6 +113,8 @@
 						q8,
 						q9,
 						q10,
+						q11,
+						q12,
 
 						comments,
 
@@ -120,7 +126,7 @@
 					(
 					?,
 					?,?,?,
-					?,?,? ,?,?,?, ?,?,?, ?,
+					?,?,? ,?,?,?, ?,?,?, ?,?,?,
 
 					?,
 
@@ -145,6 +151,8 @@
 				coalesce($_POST["q8"]),
 				coalesce($_POST["q9"]),
 				coalesce($_POST["q10"]),
+				coalesce($_POST["q11"]),
+				coalesce($_POST["q12"]),
 
 				coalesce($_POST["comments"])
 			));
@@ -276,6 +284,13 @@ All fields are required.
 	<label><input <?php if($existing_data && $existing_data["q3"] === '') echo 'checked="checked"'; ?> required="required" type="radio" name="q3" value="" /> N/A</label>
 </div>
 <div class="field">
+	<span class="question">11 (FIXME). The Fellow uses professional body language (e.g. sitting up straight, not fidgeting with hands).</span>
+	<label><input <?php if($existing_data && $existing_data["q11"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q11" value="10" /> Exceeds or meets expectation</label>
+	<label><input <?php if($existing_data && $existing_data["q11"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q11" value="8" /> Somewhat meets expectation</label>
+	<label><input <?php if($existing_data && $existing_data["q11"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q11" value="6" /> Still developing the skill</label>
+	<label><input <?php if($existing_data && $existing_data["q11"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q11" value="0" /> Does not meet expectation</label>
+</div>
+<div class="field">
 	<span class="question">4. The Fellow uses specific and relevant examples of experiences that demonstrate required skills.</span>
 	<label><input <?php if($existing_data && $existing_data["q4"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q4" value="10" /> Exceeds or meets expectation</label>
 	<label><input <?php if($existing_data && $existing_data["q4"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q4" value="8" /> Somewhat meets expectation</label>
@@ -323,6 +338,13 @@ All fields are required.
 	<label><input <?php if($existing_data && $existing_data["q10"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q10" value="8" /> Somewhat meets expectation</label>
 	<label><input <?php if($existing_data && $existing_data["q10"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q10" value="6" /> Still developing the skill</label>
 	<label><input <?php if($existing_data && $existing_data["q10"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q10" value="0" /> Does not meet expectation</label>
+</div>
+<div class="field">
+	<span class="question">12. The Fellow is prepared with 2-4 strong questions for the interviewer demonstrating their interest in and research on the company and role.</span>
+	<label><input <?php if($existing_data && $existing_data["q12"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q12" value="10" /> Exceeds or meets expectation</label>
+	<label><input <?php if($existing_data && $existing_data["q12"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q12" value="8" /> Somewhat meets expectation</label>
+	<label><input <?php if($existing_data && $existing_data["q12"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q12" value="6" /> Still developing the skill</label>
+	<label><input <?php if($existing_data && $existing_data["q12"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q12" value="0" /> Does not meet expectation</label>
 </div>
 <div class="field">
 	<label><span class="question">Comments for Fellow:</span>

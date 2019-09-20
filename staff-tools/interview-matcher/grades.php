@@ -57,6 +57,8 @@
 			feedback_for_fellow.q8,
 			feedback_for_fellow.q9,
 			feedback_for_fellow.q10,
+			feedback_for_fellow.q11,
+			feedback_for_fellow.q12,
 
 			feedback_for_fellow.comments,
 
