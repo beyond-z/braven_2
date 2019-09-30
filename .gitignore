@@ -15,6 +15,7 @@ favicon.ico
 
 wp-content/updraft
 wp-content/uploads
+wp-content/themes/bebraven/backup
 
 log
 *.log
