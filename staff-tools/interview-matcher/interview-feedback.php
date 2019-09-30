@@ -256,7 +256,7 @@ All fields are required.
 </div>
 
 <div class="field">
-	<label><span class="question">Fellow's university:</span>
+	<label><span class="question">Fellow's University:</span>
 		<input required="required" type="text" name="fellow_university" value="<?php echo htmlentities($existing_data ? $existing_data["fellow_university"] : $match["fellow_university"]); ?>" /></label>
 </div>
 
@@ -270,7 +270,7 @@ All fields are required.
 	<label><input <?php if($existing_data && $existing_data["q_speaks_professionally"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q_speaks_professionally" value="0" /> Does not meet expectations</label>
 </div>
 <div class="field">
-	<span class="question">1.2. The Fellow makes eye contact (if in-person).</span>
+	<span class="question">1.2. The Fellow makes eye contact.</span>
 	<label><input <?php if($existing_data && $existing_data["q_eye_contact"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q_eye_contact" value="10" /> Exceeds or meets expectations</label>
 	<label><input <?php if($existing_data && $existing_data["q_eye_contact"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q_eye_contact" value="8" /> Somewhat meets expectations</label>
 	<label><input <?php if($existing_data && $existing_data["q_eye_contact"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q_eye_contact" value="6" /> Still developing the skill</label>
@@ -278,7 +278,7 @@ All fields are required.
 	<label><input <?php if($existing_data && $existing_data["q_eye_contact"] === '') echo 'checked="checked"'; ?> required="required" type="radio" name="q_eye_contact" value="" /> N/A</label>
 </div>
 <div class="field">
-	<span class="question">1.3. The Fellow has a solid handshake (if in-person).</span>
+	<span class="question">1.3. The Fellow has a solid handshake.</span>
 	<label><input <?php if($existing_data && $existing_data["q_solid_handshake"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q_solid_handshake" value="10" /> Exceeds or meets expectations</label>
 	<label><input <?php if($existing_data && $existing_data["q_solid_handshake"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q_solid_handshake" value="8" /> Somewhat meets expectations</label>
 	<label><input <?php if($existing_data && $existing_data["q_solid_handshake"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q_solid_handshake" value="6" /> Still developing the skill</label>
