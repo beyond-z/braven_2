@@ -49,18 +49,18 @@
 					fellow_university = ?,
 					interviewer_name = ?,
 
-					q1 = ?,
-					q2 = ?,
-					q3 = ?,
-					q4 = ?,
-					q5 = ?,
-					q6 = ?,
-					q7 = ?,
-					q8 = ?,
-					q9 = ?,
-					q10 = ?,
-					q11 = ?,
-					q12 = ?,
+					q_speaks_professionally = ?,
+					q_eye_contact = ?,
+					q_solid_handshake = ?,
+					q_body_language = ?,
+					q_specific_examples = ?,
+					q_transferable_skills = ?,
+					q_clear_concise = ?,
+					q_compelling_storytelling = ?,
+					q_confidently_persists = ?,
+					q_personal_connection = ?,
+					q_continue_connection = ?,
+					q_prepared_questions = ?,
 
 					comments = ?,
 
@@ -73,18 +73,18 @@
 			$statement->execute(array(
 				$_POST["fellow_name"], $_POST["fellow_university"], $_POST["interviewer_name"],
 
-				coalesce($_POST["q1"]),
-				coalesce($_POST["q2"]),
-				coalesce($_POST["q3"]),
-				coalesce($_POST["q4"]),
-				coalesce($_POST["q5"]),
-				coalesce($_POST["q6"]),
-				coalesce($_POST["q7"]),
-				coalesce($_POST["q8"]),
-				coalesce($_POST["q9"]),
-				coalesce($_POST["q10"]),
-				coalesce($_POST["q11"]),
-				coalesce($_POST["q12"]),
+				coalesce($_POST["q_speaks_professionally"]),
+				coalesce($_POST["q_eye_contact"]),
+				coalesce($_POST["q_solid_handshake"]),
+				coalesce($_POST["q_body_language"]),
+				coalesce($_POST["q_specific_examples"]),
+				coalesce($_POST["q_transferable_skills"]),
+				coalesce($_POST["q_clear_concise"]),
+				coalesce($_POST["q_compelling_storytelling"]),
+				coalesce($_POST["q_confidently_persists"]),
+				coalesce($_POST["q_personal_connection"]),
+				coalesce($_POST["q_continue_connection"]),
+				coalesce($_POST["q_prepared_questions"]),
 
 				coalesce($_POST["comments"]),
 
@@ -103,18 +103,18 @@
 						fellow_university,
 						interviewer_name,
 
-						q1,
-						q2,
-						q3,
-						q4,
-						q5,
-						q6,
-						q7,
-						q8,
-						q9,
-						q10,
-						q11,
-						q12,
+						q_speaks_professionally,
+						q_eye_contact,
+						q_solid_handshake,
+						q_body_language,
+						q_specific_examples,
+						q_transferable_skills,
+						q_clear_concise,
+						q_compelling_storytelling,
+						q_confidently_persists,
+						q_personal_connection,
+						q_continue_connection,
+						q_prepared_questions,
 
 						comments,
 
@@ -141,18 +141,18 @@
 				$_POST["fellow_name"], $_POST["fellow_university"], $_POST["interviewer_name"],
 
 				// I do this so it will allow a partial save...
-				coalesce($_POST["q1"]),
-				coalesce($_POST["q2"]),
-				coalesce($_POST["q3"]),
-				coalesce($_POST["q4"]),
-				coalesce($_POST["q5"]),
-				coalesce($_POST["q6"]),
-				coalesce($_POST["q7"]),
-				coalesce($_POST["q8"]),
-				coalesce($_POST["q9"]),
-				coalesce($_POST["q10"]),
-				coalesce($_POST["q11"]),
-				coalesce($_POST["q12"]),
+				coalesce($_POST["q_speaks_professionally"]),
+				coalesce($_POST["q_eye_contact"]),
+				coalesce($_POST["q_solid_handshake"]),
+				coalesce($_POST["q_body_language"]),
+				coalesce($_POST["q_specific_examples"]),
+				coalesce($_POST["q_transferable_skills"]),
+				coalesce($_POST["q_clear_concise"]),
+				coalesce($_POST["q_compelling_storytelling"]),
+				coalesce($_POST["q_confidently_persists"]),
+				coalesce($_POST["q_personal_connection"]),
+				coalesce($_POST["q_continue_connection"]),
+				coalesce($_POST["q_prepared_questions"]),
 
 				coalesce($_POST["comments"])
 			));
@@ -264,98 +264,98 @@ All fields are required.
 
 <div class="field">
 	<span class="question">1.1. The Fellow speaks professionally.</span>
-	<label><input <?php if($existing_data && $existing_data["q1"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q1" value="10" /> Exceeds or meets expectations</label>
-	<label><input <?php if($existing_data && $existing_data["q1"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q1" value="8" /> Somewhat meets expectations</label>
-	<label><input <?php if($existing_data && $existing_data["q1"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q1" value="6" /> Still developing the skill</label>
-	<label><input <?php if($existing_data && $existing_data["q1"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q1" value="0" /> Does not meet expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_speaks_professionally"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q_speaks_professionally" value="10" /> Exceeds or meets expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_speaks_professionally"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q_speaks_professionally" value="8" /> Somewhat meets expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_speaks_professionally"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q_speaks_professionally" value="6" /> Still developing the skill</label>
+	<label><input <?php if($existing_data && $existing_data["q_speaks_professionally"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q_speaks_professionally" value="0" /> Does not meet expectations</label>
 </div>
 <div class="field">
 	<span class="question">1.2. The Fellow makes eye contact (if in-person).</span>
-	<label><input <?php if($existing_data && $existing_data["q2"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q2" value="10" /> Exceeds or meets expectations</label>
-	<label><input <?php if($existing_data && $existing_data["q2"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q2" value="8" /> Somewhat meets expectations</label>
-	<label><input <?php if($existing_data && $existing_data["q2"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q2" value="6" /> Still developing the skill</label>
-	<label><input <?php if($existing_data && $existing_data["q2"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q2" value="0" /> Does not meet expectations</label>
-	<label><input <?php if($existing_data && $existing_data["q2"] === '') echo 'checked="checked"'; ?> required="required" type="radio" name="q2" value="" /> N/A</label>
+	<label><input <?php if($existing_data && $existing_data["q_eye_contact"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q_eye_contact" value="10" /> Exceeds or meets expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_eye_contact"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q_eye_contact" value="8" /> Somewhat meets expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_eye_contact"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q_eye_contact" value="6" /> Still developing the skill</label>
+	<label><input <?php if($existing_data && $existing_data["q_eye_contact"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q_eye_contact" value="0" /> Does not meet expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_eye_contact"] === '') echo 'checked="checked"'; ?> required="required" type="radio" name="q_eye_contact" value="" /> N/A</label>
 </div>
 <div class="field">
 	<span class="question">1.3. The Fellow has a solid handshake (if in-person).</span>
-	<label><input <?php if($existing_data && $existing_data["q3"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q3" value="10" /> Exceeds or meets expectations</label>
-	<label><input <?php if($existing_data && $existing_data["q3"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q3" value="8" /> Somewhat meets expectations</label>
-	<label><input <?php if($existing_data && $existing_data["q3"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q3" value="6" /> Still developing the skill</label>
-	<label><input <?php if($existing_data && $existing_data["q3"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q3" value="0" /> Does not meet expectations</label>
-	<label><input <?php if($existing_data && $existing_data["q3"] === '') echo 'checked="checked"'; ?> required="required" type="radio" name="q3" value="" /> N/A</label>
+	<label><input <?php if($existing_data && $existing_data["q_solid_handshake"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q_solid_handshake" value="10" /> Exceeds or meets expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_solid_handshake"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q_solid_handshake" value="8" /> Somewhat meets expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_solid_handshake"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q_solid_handshake" value="6" /> Still developing the skill</label>
+	<label><input <?php if($existing_data && $existing_data["q_solid_handshake"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q_solid_handshake" value="0" /> Does not meet expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_solid_handshake"] === '') echo 'checked="checked"'; ?> required="required" type="radio" name="q_solid_handshake" value="" /> N/A</label>
 </div>
 <div class="field">
 	<span class="question">1.4. The Fellow uses professional body language (e.g. sitting up straight, not fidgeting with hands).</span>
-	<label><input <?php if($existing_data && $existing_data["q11"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q11" value="10" /> Exceeds or meets expectations</label>
-	<label><input <?php if($existing_data && $existing_data["q11"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q11" value="8" /> Somewhat meets expectations</label>
-	<label><input <?php if($existing_data && $existing_data["q11"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q11" value="6" /> Still developing the skill</label>
-	<label><input <?php if($existing_data && $existing_data["q11"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q11" value="0" /> Does not meet expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_body_language"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q_body_language" value="10" /> Exceeds or meets expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_body_language"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q_body_language" value="8" /> Somewhat meets expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_body_language"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q_body_language" value="6" /> Still developing the skill</label>
+	<label><input <?php if($existing_data && $existing_data["q_body_language"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q_body_language" value="0" /> Does not meet expectations</label>
 </div>
 
 <h2>2. FIT: FELLOW DEMONSTRATES NECESSARY SKILLS & EXPERIENCES</h2>
 
 <div class="field">
 	<span class="question">2.1. The Fellow uses specific and relevant examples of experiences that demonstrate required skills.</span>
-	<label><input <?php if($existing_data && $existing_data["q4"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q4" value="10" /> Exceeds or meets expectations</label>
-	<label><input <?php if($existing_data && $existing_data["q4"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q4" value="8" /> Somewhat meets expectations</label>
-	<label><input <?php if($existing_data && $existing_data["q4"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q4" value="6" /> Still developing the skill</label>
-	<label><input <?php if($existing_data && $existing_data["q4"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q4" value="0" /> Does not meet expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_specific_examples"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q_specific_examples" value="10" /> Exceeds or meets expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_specific_examples"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q_specific_examples" value="8" /> Somewhat meets expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_specific_examples"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q_specific_examples" value="6" /> Still developing the skill</label>
+	<label><input <?php if($existing_data && $existing_data["q_specific_examples"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q_specific_examples" value="0" /> Does not meet expectations</label>
 </div>
 <div class="field">
 	<span class="question">2.2. The Fellow explains how their skills are transferable to future roles.</span>
-	<label><input <?php if($existing_data && $existing_data["q5"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q5" value="10" /> Exceeds or meets expectations</label>
-	<label><input <?php if($existing_data && $existing_data["q5"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q5" value="8" /> Somewhat meets expectations</label>
-	<label><input <?php if($existing_data && $existing_data["q5"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q5" value="6" /> Still developing the skill</label>
-	<label><input <?php if($existing_data && $existing_data["q5"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q5" value="0" /> Does not meet expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_transferable_skills"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q_transferable_skills" value="10" /> Exceeds or meets expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_transferable_skills"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q_transferable_skills" value="8" /> Somewhat meets expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_transferable_skills"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q_transferable_skills" value="6" /> Still developing the skill</label>
+	<label><input <?php if($existing_data && $existing_data["q_transferable_skills"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q_transferable_skills" value="0" /> Does not meet expectations</label>
 </div>
 
 <h2>3. PRESENTATION SKILLS: FELLOW ANSWERS QUESTIONS IN A COMPELLING WAY</h2>
 
 <div class="field">
 	<span class="question">3.1. The Fellow is clear and concise.</span>
-	<label><input <?php if($existing_data && $existing_data["q6"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q6" value="10" /> Exceeds or meets expectations</label>
-	<label><input <?php if($existing_data && $existing_data["q6"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q6" value="8" /> Somewhat meets expectations</label>
-	<label><input <?php if($existing_data && $existing_data["q6"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q6" value="6" /> Still developing the skill</label>
-	<label><input <?php if($existing_data && $existing_data["q6"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q6" value="0" /> Does not meet expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_clear_concise"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q_clear_concise" value="10" /> Exceeds or meets expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_clear_concise"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q_clear_concise" value="8" /> Somewhat meets expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_clear_concise"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q_clear_concise" value="6" /> Still developing the skill</label>
+	<label><input <?php if($existing_data && $existing_data["q_clear_concise"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q_clear_concise" value="0" /> Does not meet expectations</label>
 </div>
 <div class="field">
 	<span class="question">3.2. The Fellow reinforces connections through compelling storytelling.</span>
-	<label><input <?php if($existing_data && $existing_data["q7"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q7" value="10" /> Exceeds or meets expectations</label>
-	<label><input <?php if($existing_data && $existing_data["q7"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q7" value="8" /> Somewhat meets expectations</label>
-	<label><input <?php if($existing_data && $existing_data["q7"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q7" value="6" /> Still developing the skill</label>
-	<label><input <?php if($existing_data && $existing_data["q7"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q7" value="0" /> Does not meet expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_compelling_storytelling"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q_compelling_storytelling" value="10" /> Exceeds or meets expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_compelling_storytelling"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q_compelling_storytelling" value="8" /> Somewhat meets expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_compelling_storytelling"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q_compelling_storytelling" value="6" /> Still developing the skill</label>
+	<label><input <?php if($existing_data && $existing_data["q_compelling_storytelling"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q_compelling_storytelling" value="0" /> Does not meet expectations</label>
 </div>
 <div class="field">
 	<span class="question">3.3. The Fellow confidently persists in answering a question even if it is a difficult question.</span>
-	<label><input <?php if($existing_data && $existing_data["q8"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q8" value="10" /> Exceeds or meets expectations</label>
-	<label><input <?php if($existing_data && $existing_data["q8"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q8" value="8" /> Somewhat meets expectations</label>
-	<label><input <?php if($existing_data && $existing_data["q8"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q8" value="6" /> Still developing the skill</label>
-	<label><input <?php if($existing_data && $existing_data["q8"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q8" value="0" /> Does not meet expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_confidently_persists"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q_confidently_persists" value="10" /> Exceeds or meets expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_confidently_persists"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q_confidently_persists" value="8" /> Somewhat meets expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_confidently_persists"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q_confidently_persists" value="6" /> Still developing the skill</label>
+	<label><input <?php if($existing_data && $existing_data["q_confidently_persists"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q_confidently_persists" value="0" /> Does not meet expectations</label>
 </div>
 
 <h2>4. INTERPERSONAL SKILLS: FELLOW ESTABLISHES AN INTERPERSONAL CONNECTION WITH THE INTERVIEWER</h2>
 
 <div class="field">
 	<span class="question">4.1. The Fellow creates a personal connection with the interviewer (e.g. relates on personal background or a hobby).</span>
-	<label><input <?php if($existing_data && $existing_data["q9"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q9" value="10" /> Exceeds or meets expectations</label>
-	<label><input <?php if($existing_data && $existing_data["q9"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q9" value="8" /> Somewhat meets expectations</label>
-	<label><input <?php if($existing_data && $existing_data["q9"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q9" value="6" /> Still developing the skill</label>
-	<label><input <?php if($existing_data && $existing_data["q9"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q9" value="0" /> Does not meet expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_personal_connection"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q_personal_connection" value="10" /> Exceeds or meets expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_personal_connection"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q_personal_connection" value="8" /> Somewhat meets expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_personal_connection"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q_personal_connection" value="6" /> Still developing the skill</label>
+	<label><input <?php if($existing_data && $existing_data["q_personal_connection"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q_personal_connection" value="0" /> Does not meet expectations</label>
 </div>
 <div class="field">
 	<span class="question">4.2. The Fellow offers to continue the connection past the interview.</span>
-	<label><input <?php if($existing_data && $existing_data["q10"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q10" value="10" /> Exceeds or meets expectations</label>
-	<label><input <?php if($existing_data && $existing_data["q10"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q10" value="8" /> Somewhat meets expectations</label>
-	<label><input <?php if($existing_data && $existing_data["q10"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q10" value="6" /> Still developing the skill</label>
-	<label><input <?php if($existing_data && $existing_data["q10"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q10" value="0" /> Does not meet expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_continue_connection"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q_continue_connection" value="10" /> Exceeds or meets expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_continue_connection"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q_continue_connection" value="8" /> Somewhat meets expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_continue_connection"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q_continue_connection" value="6" /> Still developing the skill</label>
+	<label><input <?php if($existing_data && $existing_data["q_continue_connection"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q_continue_connection" value="0" /> Does not meet expectations</label>
 </div>
 <div class="field">
 	<span class="question">4.3. The Fellow is prepared with 2-4 strong questions for the interviewer demonstrating their interest in and research on the company and role.</span>
-	<label><input <?php if($existing_data && $existing_data["q12"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q12" value="10" /> Exceeds or meets expectations</label>
-	<label><input <?php if($existing_data && $existing_data["q12"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q12" value="8" /> Somewhat meets expectations</label>
-	<label><input <?php if($existing_data && $existing_data["q12"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q12" value="6" /> Still developing the skill</label>
-	<label><input <?php if($existing_data && $existing_data["q12"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q12" value="0" /> Does not meet expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_prepared_questions"] === "10") echo 'checked="checked"'; ?> required="required" type="radio" name="q_prepared_questions" value="10" /> Exceeds or meets expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_prepared_questions"] === "8") echo 'checked="checked"'; ?> required="required" type="radio" name="q_prepared_questions" value="8" /> Somewhat meets expectations</label>
+	<label><input <?php if($existing_data && $existing_data["q_prepared_questions"] === "6") echo 'checked="checked"'; ?> required="required" type="radio" name="q_prepared_questions" value="6" /> Still developing the skill</label>
+	<label><input <?php if($existing_data && $existing_data["q_prepared_questions"] === "0") echo 'checked="checked"'; ?> required="required" type="radio" name="q_prepared_questions" value="0" /> Does not meet expectations</label>
 </div>
 <div class="field">
 	<label><span class="question">Comments for Fellow:</span>
