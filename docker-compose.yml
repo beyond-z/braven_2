@@ -1,0 +1,56 @@
+version: '3.5'
+
+services:
+
+  bravendb:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    # I kind of want to see when it goes down and solve it rather than always just restarting it.
+    #restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+      # Note that the mysql image automatically creates the database and user using the ENV vars below.
+      # See: https://hub.docker.com/_/mysql
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    networks:
+      - bravendev
+
+  bravenweb:
+    build:
+        context: .
+    command: /var/www/html/docker-compose/scripts/docker_compose_run.sh apache2-foreground
+    depends_on:
+      - bravendb
+    ports:
+      - "3007:3007"
+    # I kind of want to see when it goes down and solve it rather than always just restarting it.
+    #restart: always
+    environment:
+      SERVERNAME: bravenweb
+      SERVERPORT: 3007
+      WORDPRESS_DB_HOST: bravendb:3306
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      MYSQL_ROOT_PASSWORD: pass
+      WORDPRESS_DEBUG: 1
+      WORDPRESS_TABLE_PREFIX: bz_
+      WORDPRESS_FORCE_SSL_ADMIN: 0
+      DB_INTERVIEW_MATCHER_NAME: braven_interview_matcher
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html/
+    networks:
+      - bravendev
+      
+# Note all Braven web app docker dev envs use this same network so they can talk to each other.
+# E.g. the hostname joinweb will resolve inside the ssoweb container if they are on the same docker network.
+networks:
+  bravendev:
+    name: braven_dev_network
+
+volumes:
+  db_data:
