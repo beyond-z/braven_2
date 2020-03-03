@@ -1,5 +1,5 @@
 # This matches the staging and prod env.
-FROM php:7.0.8-apache
+FROM php:7.0.33-apache
 
 # Required for Docker heroku.yml builds to change it..
 # See: https://devcenter.heroku.com/articles/build-docker-images-heroku-yml#setting-build-time-environment-variables
