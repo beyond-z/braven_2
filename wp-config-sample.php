@@ -37,6 +37,9 @@ define( 'DB_CHARSET', 'utf8' );
 /** The Database Collate type. Don't change this if in doubt. */
 define( 'DB_COLLATE', '' );
 
+/** The name of the database for the Interview Matcher Tool */
+define( 'DB_INTERVIEW_MATCHER_NAME', 'your_mock_iv_database_here' );
+
 /**#@+
  * Authentication Unique Keys and Salts.
  *
@@ -78,6 +81,7 @@ $table_prefix = 'wp_';
  * @link https://codex.wordpress.org/Debugging_in_WordPress
  */
 define( 'WP_DEBUG', false );
+define( 'WP_DEBUG_LOG', false);
 
 /* That's all, stop editing! Happy publishing. */
 
