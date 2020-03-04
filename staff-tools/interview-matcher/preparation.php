@@ -25,6 +25,7 @@
 		<span>University:</span><br />
 		<select name="university">
 			<option value="(none)"></option>
+			<option value="Lehman College">Lehman College</option>
 			<option value="National Louis University">National Louis University</option>
 			<option value="Rutgers University - Newark">Rutgers University - Newark</option>
 			<option value="San Jose State University">San Jose State University</option>
